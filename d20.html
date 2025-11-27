@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>D20 ROLLER ♡ mkb0020</title>
+  <meta name="description" content="Physics-based D20 dice roller – Press SPACE to roll!" />
+
+  <style>
+    :root {
+      --bg: #0d0a12;
+      --text: #e0d8f0;
+      --accent: #C99CE6;        /* LavenderFloral */
+      --accent2: #F0BFFF;       /* PaleIris */
+      --accent3: #8B3D80;       /* deep Plum shadow */
+      --plum: #8B3D80;
+      --glow: 0 0 20px rgba(201,156,230,0.5);
+      --card-bg: rgba(139,61,128,0.15);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      padding-top: 60px;  
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Courier New', monospace;
+      min-height: 100vh;
+      overflow: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(139,61,128,0.25) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(162,121,205,0.25) 0%, transparent 20%);
+    }
+
+    /* ====== NAVBAR ====== */
+    .simple-navbar {
+      width: 100%;
+      height: 60px;
+      background-color: rgba(162, 121, 205, 0);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid rgba(162,121,205, 0.7);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .nav-home-icon {
+      width: 35px;
+      height: 35px;
+      transition: transform 0.3s;
+    }
+
+    .nav-home-link:hover .nav-home-icon {
+      transform: scale(1.1);
+    }
+
+    .scanline {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+      opacity: 0.3;
+      animation: scan 9s linear infinite;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    @keyframes scan { 0% { transform:translateY(-100vh); } 100% { transform:translateY(100vh); } }
+
+    /* ================== LAYOUT ================== */
+    .JS-page {
+      display: flex;
+      height: calc(100vh - 60px);
+      position: relative;
+    }
+
+    .JS-controls {
+      width: 380px;
+      background: rgba(20,10,35,0.6);
+      backdrop-filter: blur(12px);
+      border-right: 2px solid var(--accent);
+      padding: 2rem 1.5rem;
+      overflow-y: auto;
+      box-shadow: var(--glow);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .JS-container {
+      flex: 1;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #dice-canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    /* ================== TYPOGRAPHY & CONTROLS ================== */
+    h1 {
+      font-size: 3.5rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: var(--glow);
+      animation: glitch 4s infinite;
+    }
+
+    h4 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: var(--glow);
+    }
+
+    @keyframes glitch {
+      0%,100% { text-shadow: 0.05em 0 0 #F0BFFF, -0.05em -0.025em 0 #730132; }
+      15%     { text-shadow: 0.03em 0.03em 0 #C99CE6, -0.04em 0 0 #F0BFFF; }
+      50%     { text-shadow: -0.05em 0 0 #F0BFFF, 0.025em 0.03em 0 #8B3D80; }
+    }
+
+    .JS-control-section h3 {
+      color: var(--accent2);
+      margin-bottom: 2rem;
+      font-size: 1.4rem;
+    }
+
+    .JS-result-display {
+      background: rgba(139,61,128,0.3);
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--glow);
+      transition: all 0.4s;
+    }
+
+    .JS-result-display:hover {
+      box-shadow: 0 0 30px rgba(240,191,255,0.6);
+      transform: scale(1.02);
+    }
+
+    .JS-result-display h3 {
+      color: var(--accent2);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .JS-result-number {
+      font-size: 6rem;
+      font-weight: bold;
+      color: var(--accent2);
+      text-shadow: var(--glow);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.1em;
+    }
+
+    .JS-Note {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(201,156,230,0.1);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .about-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .btn-neon-portal {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--text);
+      padding: 0.8rem 2rem;
+      border-radius: 12px;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-neon-portal::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(201,156,230,0.3), transparent);
+      transition: 0.7s;
+    }
+
+    .btn-neon-portal:hover::before { left: 100%; }
+    .btn-neon-portal:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--glow), 0 10px 30px rgba(139,61,128,0.4);
+      border-color: var(--accent2);
+    }
+
+    /* ================== MODALS ================== */
+    .d20-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,5,25,0.8);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .d20-modal-content {
+      background: linear-gradient(135deg, rgba(30,15,60,0.9), rgba(15,8,40,0.9));
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 0 40px rgba(201,156,230,0.6);
+      color: var(--text);
+    }
+
+    .d20-modal-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(139,61,128,0.3);
+    }
+
+    .d20-modal-header h2 {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2rem;
+    }
+
+    .d20-modal-close {
+      background: none;
+      border: none;
+      color: #F0BFFF;
+      font-size: 2.5rem;
+      cursor: pointer;
+    }
+
+    .d20-modal-body {
+      padding: 2rem;
+      line-height: 1.7;
+    }
+
+    .d20-modal-footer {
+      padding: 1rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--accent);
+    }
+
+    @media (max-width: 900px) {
+      .JS-page { flex-direction: column; }
+      .JS-controls { width: 100%; height: auto; border-right: none; border-bottom: 2px solid var(--accent); }
+      .JS-result-number { font-size: 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="simple-navbar">
+    <a class="nav-home-link" href="https://mkb0020.github.io">
+      <img src="home.png" alt="Home" class="nav-home-icon">
+    </a>
+  </nav>
+
+  <div class="scanline"></div>
+
+  <div class="JS-page">
+    <!-- CONTROLS -->
+    <div class="JS-controls">
+      <h1>D20</h1>
+      <h4>ROLLER</h4>
+      
+      <div class="about-buttons">
+        <button class="btn-neon-portal" onclick="openAboutModal()">About</button>
+        <button class="btn-neon-portal" onclick="openControlsModal()">How to Play</button>
+      </div>
+
+      <div class="JS-control-section">
+        <h3>Press SPACE to roll!</h3>
+      </div>
+
+      <div class="JS-result-display">
+        <h3>Last Roll</h3>
+        <div class="JS-result-number" id="resultDisplay">--</div>
+      </div>
+
+      <div class="JS-Note">
+        🎲 The D20 (20-sided die) is the most iconic die in tabletop gaming, used for everything from attack rolls to skill checks in games like Dungeons & Dragons.
+      </div>
+    </div>
+
+    <!-- CANVAS -->
+    <div class="JS-container">
+      <div id="dice-canvas"></div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- D20 JS  -->
+  <script>
+    console.log('D20 Roller – FINAL PERFECTION LOADED');
+
+    let scene, camera, renderer, controls;
+    let world;
+    let diceMesh, diceBody;
+    let diceGeometry, diceVertices = [], diceFaces = [];
+    let isRolling = false;
+    let calmTimer = 0;
+
+    document.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+      const container = document.getElementById('dice-canvas');
+      if (!container) return console.error('dice-canvas not found!');
+
+      scene = new THREE.Scene();
+
+      { // GRADIENT BG
+        const gradientShader = {
+          uniforms: {},
+          vertexShader: `
+            varying vec2 vUv;
+            void main() {
+              vUv = uv;
+              gl_Position = vec4(position, 1.0);
+            }
+          `,
+          fragmentShader: `
+            varying vec2 vUv;
+            void main() {
+              vec3 topColor = vec3(0.12, 0.01, 0.19);
+              vec3 bottomColor = vec3(0.02, 0.0, 0.07);
+              gl_FragColor = vec4(mix(bottomColor, topColor, vUv.y), 1.0);
+            }
+          `
+        };
+
+        const bgMaterial = new THREE.ShaderMaterial({
+          vertexShader: gradientShader.vertexShader,
+          fragmentShader: gradientShader.fragmentShader,
+          uniforms: gradientShader.uniforms,
+          depthWrite: false,
+          depthTest: false,
+          side: THREE.DoubleSide
+        });
+
+        const bgPlane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), bgMaterial);
+        bgPlane.frustumCulled = false;
+
+        const bgScene = new THREE.Scene();
+        const bgCamera = new THREE.Camera();
+        bgScene.add(bgCamera);
+        bgScene.add(bgPlane);
+
+        window._bgScene = bgScene;
+        window._bgCamera = bgCamera;
+      }
+
+      camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera.position.set(16, 7, 13);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+
+      function addStars() {
+        const starGeo = new THREE.BufferGeometry();
+        const starCount = 1000;
+        const positions = new Float32Array(starCount * 3);
+
+        for (let i = 0; i < starCount; i++) {
+          positions[i * 3 + 0] = (Math.random() - 0.5) * 80;
+          positions[i * 3 + 1] = (Math.random() - 0.5) * 80;
+          positions[i * 3 + 2] = -20 - Math.random() * 40;
+        }
+
+        starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const starMat = new THREE.PointsMaterial({
+          color: 0xffffff,
+          size: 0.3,
+          transparent: true,
+          opacity: 0.7,
+        });
+
+        const stars = new THREE.Points(starGeo, starMat);
+        scene.add(stars);
+        return stars;
+      }
+
+      const backgroundStars = addStars();
+
+      scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
+      dirLight.position.set(5, 12, 5);
+      scene.add(dirLight);
+
+      world = new CANNON.World();
+      world.gravity.set(0, -9.82, 0);
+      world.broadphase = new CANNON.NaiveBroadphase();
+      world.solver.iterations = 25;
+
+      const floorMat = new CANNON.Material('floor');
+      const diceMat = new CANNON.Material('dice');
+
+      const floorBody = new CANNON.Body({
+        mass: 0,
+        type: CANNON.Body.STATIC,
+        material: floorMat,
+        collisionFilterGroup: 1,
+        collisionFilterMask: 1
+      });
+      floorBody.addShape(new CANNON.Plane());
+      floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI / 2);
+      world.addBody(floorBody);
+
+      const floorMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(20, 20),
+        new THREE.MeshStandardMaterial({ 
+          color: 0x474752,
+          transparent: true,
+          opacity: 0.9,
+        })
+      );
+      floorMesh.rotation.x = -Math.PI / 2;
+      scene.add(floorMesh);
+
+      world.addContactMaterial(new CANNON.ContactMaterial(floorMat, diceMat, {
+        friction: 0.2,
+        restitution: 0.55,
+        contactEquationStiffness: 1e8,
+        contactEquationRelaxation: 4
+      }));
+
+      const wallThickness = 0.2;
+      const halfSize = 10;
+      const wallMat = new CANNON.Material("wall");
+      function addWall(x, y, z, hx, hy, hz) {
+        const body = new CANNON.Body({
+          mass: 0,
+          shape: new CANNON.Box(new CANNON.Vec3(hx, hy, hz)),
+          position: new CANNON.Vec3(x, y, z),
+          material: wallMat
+        });
+        world.addBody(body);
+      }
+
+      addWall(0, 2, -halfSize, halfSize, 2, wallThickness);
+      addWall(0, 2, halfSize, halfSize, 2, wallThickness);
+      addWall(-halfSize, 2, 0, wallThickness, 2, halfSize);
+      addWall(halfSize, 2, 0, wallThickness, 2, halfSize);
+
+      const radius = 1;
+      diceGeometry = new THREE.IcosahedronGeometry(radius, 0);
+      const pos = diceGeometry.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        diceVertices.push(new CANNON.Vec3(pos.getX(i), pos.getY(i), pos.getZ(i)));
+      }
+      diceFaces = [
+        [0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],
+        [1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],
+        [3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],
+        [4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]
+      ];
+
+      const diceShape = new CANNON.ConvexPolyhedron(diceVertices, diceFaces);
+
+      diceBody = new CANNON.Body({
+        mass: 0.5,
+        material: diceMat,
+        linearDamping: 0.5,
+        angularDamping: 0.8,
+        sleepTimeLimit: 0.4,
+        collisionFilterGroup: 1,
+        collisionFilterMask: 1
+      });
+      diceBody.addShape(diceShape);
+      diceBody.position.set(0, 1, 0);
+      world.addBody(diceBody);
+
+      diceMesh = new THREE.Mesh(
+        diceGeometry,
+        new THREE.MeshNormalMaterial({
+          flatShading: false,
+          wireframe: false,
+          transparent: true,
+          opacity: 0.95,
+        }));
+      scene.add(diceMesh); 
+
+      window.rollDice = function () {
+        if (isRolling) return;
+        isRolling = true;
+        calmTimer = 0;
+        document.getElementById('resultDisplay').textContent = 'Rolling';
+
+        diceBody.position.set(
+          (Math.random() - 0.5) * 1,
+          5,
+          (Math.random() - 0.5) * 1
+        );
+        diceBody.velocity.set(
+          (Math.random() - 0.5) * 12,
+          12 + Math.random() * 4,
+          (Math.random() - 0.5) * 12
+        );
+        diceBody.angularVelocity.set(
+          (Math.random() - 0.5) * 90,
+          (Math.random() - 0.5) * 90,
+          (Math.random() - 0.5) * 90
+        );
+      };
+
+      function getResult() {
+        diceMesh.updateMatrixWorld();
+        const m = diceMesh.matrixWorld;
+        const pos = diceGeometry.attributes.position;
+        let lowest = Infinity, faceIdx = 0;
+        for (let f = 0; f < diceFaces.length; f++) {
+          const verts = diceFaces[f].map(i => new THREE.Vector3().fromBufferAttribute(pos, i));
+          const center = verts.reduce((a,b) => a.add(b)).multiplyScalar(1/3).applyMatrix4(m);
+          if (center.y < lowest) {
+            lowest = center.y;
+            faceIdx = f;
+          }
+        }
+        return (faceIdx % 20) + 1;
+      }
+
+      function checkSettled() {
+        if (!isRolling) return;
+        const vel = diceBody.velocity.length();
+        const ang = diceBody.angularVelocity.length();
+
+        if (vel < 0.5 && ang < 0.5) {
+          calmTimer += clock.getDelta();
+          if (calmTimer > 1.5) {
+            diceBody.velocity.scale(0.1, diceBody.velocity);
+            diceBody.angularVelocity.scale(0.1, diceBody.angularVelocity);
+            calmTimer = 0;
+          }
+        } else {
+          calmTimer = 0;
+        }
+
+        if (vel < 0.02 && ang < 0.02) {
+          document.getElementById('resultDisplay').textContent = getResult();
+          isRolling = false;
+        }
+      }
+
+      const clock = new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        const delta = clock.getDelta();
+        world.step(1/60, delta, 3);
+
+        diceMesh.position.copy(diceBody.position);
+        diceMesh.quaternion.copy(diceBody.quaternion);
+
+        if (backgroundStars) {
+          const t = Date.now() * 0.001;
+          const pos = backgroundStars.geometry.attributes.position;
+          for (let i = 0; i < pos.count; i++) {
+            const zOriginal = pos.getZ(i);
+            pos.setZ(i, zOriginal + Math.sin(t + i) * 0.003);
+          }
+          pos.needsUpdate = true;
+        }
+
+        checkSettled();
+        controls.update();
+        renderer.autoClear = false;
+        renderer.clear();
+        renderer.render(_bgScene, _bgCamera);
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.code === 'Space' && !e.repeat) {
+          e.preventDefault();
+          window.rollDice();
+        }
+      });
+    }
+  </script>
+
+  <!-- ABOUT MODAL -->
+  <div id="AboutModal" class="d20-modal" onclick="closeAboutModal(event)">
+    <div class="d20-modal-content" onclick="event.stopPropagation()">
+      <div class="d20-modal-header">
+        <h2>🎲 D20 Roller</h2>
+        <button class="d20-modal-close" onclick="closeAboutModal(event)">×</button>
+      </div>
+      <div class="d20-modal-body">
+        <p><strong>Real physics simulation</strong> using Three.js + Cannon.js</p>
+        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+          <li>✅ Authentic 20-sided icosahedron geometry</li>
+          <li>✅ Accurate collision detection & bouncing</li>
+          <li>✅ Face detection for true random results</li>
+          <li>✅ Orbit controls to inspect from any angle</li>
+          <li>✅ <strong>SPACEBAR</strong> to roll instantly</li>
+        </ul>
+      </div>
+      <div class="d20-modal-footer">
+        <button class="btn-neon-portal" onclick="openControlsModal(event)">How to Play</button>
+        <button class="btn-neon-portal" onclick="closeAboutModal(event)">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTROLS MODAL -->
+  <div id="ControlsModal" class="d20-modal" onclick="closeControlsModal(event)">
+    <div class="d20-modal-content" onclick="event.stopPropagation()">
+      <div class="d20-modal-header">
+        <h2>How to Play</h2>
+        <button class="d20-modal-close" onclick="closeControlsModal(event)">×</button>
+      </div>
+      <div class="d20-modal-body">
+        <ul>
+          <li><strong>SPACEBAR</strong> – Roll the dice</li>
+          <li><strong>MOUSE DRAG</strong> – Rotate camera view</li>
+          <li><strong>MOUSE WHEEL</strong> – Zoom in/out</li>
+          <li><strong>Result</strong> – Shows automatically when settled</li>
+        </ul>
+        <p style="margin-top: 1.5rem; opacity: 0.8;">
+          Perfect for D&D sessions, solo campaigns, or just rolling for fun! 🎲
+        </p>
+      </div>
+      <div class="d20-modal-footer">
+        <button class="btn-neon-portal" onclick="closeControlsModal(event)">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SCRIPTS -->
+  <script>
+    function openAboutModal() {
+      document.getElementById('AboutModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAboutModal(event) {
+      if (event) event.stopPropagation();
+      document.getElementById('AboutModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function openControlsModal() {
+      document.getElementById('ControlsModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      closeAboutModal(); // Close about if open
+    }
+
+    function closeControlsModal(event) {
+      if (event) event.stopPropagation();
+      document.getElementById('ControlsModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeAboutModal(event);
+        closeControlsModal(event);
+      }
+    });
+  </script>
+
+</body>
+</html>
