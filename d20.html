@@ -410,7 +410,7 @@
       function addStars() {
         const starGeo = new THREE.BufferGeometry();
         const starCount = 1000;
-        const positions = new Float32Array(starCount * 3);
+        const positions = new Float32Array(starCount * 10);
 
         for (let i = 0; i < starCount; i++) {
           positions[i * 3 + 0] = (Math.random() - 0.5) * 80;
@@ -418,7 +418,7 @@
           positions[i * 3 + 2] = -20 - Math.random() * 40;
         }
 
-        starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 4));
 
         const starMat = new THREE.PointsMaterial({
           color: 0xffffff,
