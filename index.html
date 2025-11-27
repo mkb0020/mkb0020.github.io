@@ -215,6 +215,92 @@
       }
 
 
+
+
+
+/* ========== GRID */
+.holo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 28px;
+    margin: 25px 0;
+}
+
+.holo-card {
+    background: linear-gradient(135deg, 
+        rgba(30, 10, 60, 0.6), 
+        rgba(80, 40, 120, 0.4));
+    border: 1px solid rgba(152, 116, 211, 0.5);
+    border-radius: 18px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.4),
+        inset 0 0 20px rgba(152, 116, 211, 0.1);
+}
+
+.holo-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, 
+        rgba(0, 255, 255, 0.15) 0%, 
+        transparent 70%);
+    opacity: 0;
+    transition: opacity 0.6s;
+    pointer-events: none;
+}
+
+.holo-card:hover {
+    transform: translateY(-8px);
+    border-color: #00ffff;
+    box-shadow: 
+        0 20px 50px rgba(0, 255, 255, 0.3),
+        0 0 40px rgba(152, 116, 211, 0.4);
+}
+
+.holo-card:hover::before {
+    opacity: 1;
+    animation: hologramPulse 3s infinite;
+}
+
+.holo-card h4 {
+    color: #FFFFFF;
+    margin: 0 0 20px 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    /*text-shadow: 0 0 5px #00ffff;*/
+    border-bottom: 2px solid rgba(217, 189, 248, 0.25);
+    padding-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.holo-card h3 {
+    color: #FFFFFF;
+    margin: 0 0 20px 0;
+    font-size: 1rem;
+    font-weight: 700;
+    /*text-shadow: 0 0 5px #00ffff;*/
+    border-bottom: 2px solid rgba(217, 189, 248, 0.25);
+    padding-bottom: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+}
+
+
+
+
+
+
 /* ================== CIRCUIT BOARD =================*/
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -293,43 +379,43 @@
 
     <div class="container">
       <h1>♡</h1>
-      <p class="subtitle"> JAVASCRIPT PROJECTS & EXPERIMENTS</p>
+      <div class="holo-card"><p class="subtitle"> JAVASCRIPT PROJECTS & EXPERIMENTS</p></div>
+      <div class="holo-grid">
+        
+          <a href="https://mkb0020.github.io/CATastrophe2.html" class="holo-card" target="_blank">
+            <h3>CATastrophe2</h3>
+            <p>COMING SOON!</p>
+          </a>
 
-      <div class="links">
-        <a href="https://mkb0020.github.io/CATastrophe2.html" class="card" target="_blank">
-          <h3>CATastrophe2</h3>
-          <p>COMING SOON!</p>
-        </a>
+          <a href="https://mkb0020.github.io/manifold.html" class="holo-card" target="_blank">
+            <h3>Calibi-Yau Manifold</h3>
+            <p>6-dimensional Visualizer - Three.js experiments</p>
+          </a>
 
-        <a href="https://mkb0020.github.io/manifold.html" class="card" target="_blank">
-          <h3>Calibi-Yau Manifold</h3>
-          <p>6-dimensional Visualizer - Three.js experiments</p>
-        </a>
+          <a href="https://mkb0020.github.io/fractals.html" class="holo-grid" target="_blank">
+            <h3>Fractal Visualizer</h3>
+            <p>Get lost in Fractals - Three.js experiments</p>
+          </a>
 
-        <a href="https://mkb0020.github.io/fractals.html" class="card" target="_blank">
-          <h3>Fractal Visualizer</h3>
-          <p>Get lost in Fractals - Three.js experiments</p>
-        </a>
+          <a href="https://mkb0020.github.io/blobs.html" class="holo-card" target="_blank">
+            <h3>Blobs</h3>
+            <p>Play with blobs - Three.js experiments</p>
+          </a>
 
-        <a href="https://mkb0020.github.io/blobs.html" class="card" target="_blank">
-          <h3>Blobs</h3>
-          <p>Play with blobs - Three.js experiments</p>
-        </a>
+          <a href="https://mkb0020.github.io/d20.html" class="holo-card" target="_blank">
+            <h3>D20 Roller</h3>
+            <p>Roll for Initiative... but make it pretty - Three.js experiments</p>
+          </a>
 
-        <a href="https://mkb0020.github.io/d20.html" class="card" target="_blank">
-          <h3>D20 Roller</h3>
-          <p>Roll for Initiative... but make it pretty - Three.js experiments</p>
-        </a>
+          <a href="https://mkb0020.github.io/resume.html" class="holo-card" target="_blank">
+            <h3>Resume</h3>
+            <p>View my professional background & experience</p>
+          </a>
 
-        <a href="https://mkb0020.github.io/resume.html" class="card" target="_blank">
-          <h3>Resume</h3>
-          <p>View my professional background & experience</p>
-        </a>
-
-        <a href="https://github.com/mkb0020" class="card" target="_blank">
-          <h3>GitHub</h3>
-          <p></p>
-        </a>
+          <a href="https://github.com/mkb0020" class="holo-card" target="_blank">
+            <h3>GitHub</h3>
+            <p></p>
+          </a>
         
       </div>
 
