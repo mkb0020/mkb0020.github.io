@@ -213,10 +213,71 @@
         0%   { transform: translateY(-100vh); }
         100% { transform: translateY(100vh); }
       }
+
+
+/* ================== CIRCUIT BOARD =================*/
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #e0e0e0;
+        overflow-x: hidden;
+        background: #0d0a1a; /* dark purple-black */
+    }
+
+    #circuit-container {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    svg { width: 100%; height: 100%; }
+
+    /* Base trace styles with subtle variations */
+    .circuit-trace { 
+        fill: none; 
+        stroke-width: 1.8;
+        opacity: 0.55;
+        stroke-linecap: round;
+    }
+    .t-pale { stroke: #b794f6; }   /* soft lavender */
+    .t-med  { stroke: #9b77e6; }   /* medium mauve */
+    .t-deep { stroke: #7c5bc7; }   /* deeper violet */
+
+    /* Default to medium if no class (your original traces) */
+    .circuit-trace { stroke: #8b5cf6; }
+
+    .spark {
+        fill: #e0c3fc;
+        filter: drop-shadow(0 0 6px #c19aff) drop-shadow(0 0 12px #a070ff);
+        opacity: 0.9;
+    }
+
+    .node {
+        fill: #4c2b7a;
+        stroke: #8b5cf6;
+        stroke-width: 1.5;
+        opacity: 0.8;
+    }
+    .n-glow {
+        filter: drop-shadow(0 0 6px #b794f6);
+    }
+
+    #circuit-container, #circuit-container svg {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+
     </style>
   </head>
 
   <body>
+
+  <!-- ========== CIRCUIT BOARD BG =============-->
+    <div id="circuit-container"></div>
 
     <!-- ====== NAVBAR  ====== -->
     <nav class="simple-navbar">
@@ -235,29 +296,34 @@
       <p class="subtitle"> JAVASCRIPT PROJECTS & EXPERIMENTS</p>
 
       <div class="links">
-        <a href="https://mkb0020.github.io/CATastrophe" class="card" target="_blank">
+        <a href="https://mkb0020.github.io/CATastrophe2.html" class="card" target="_blank">
           <h3>CATastrophe2</h3>
-          <p>Save Schrödinger’s Cat Café!</p>
+          <p>COMING SOON!</p>
         </a>
 
-        <a href="https://mkb0020.github.io/CalabiYau" class="card" target="_blank">
+        <a href="https://mkb0020.github.io/manifold.html" class="card" target="_blank">
           <h3>Calibi-Yau Manifold</h3>
           <p>6-dimensional Visualizer - Three.js experiments</p>
         </a>
 
-        <a href="https://mkb0020.github.io/Fractals" class="card" target="_blank">
+        <a href="https://mkb0020.github.io/fractals.html" class="card" target="_blank">
           <h3>Fractal Visualizer</h3>
           <p>Get lost in Fractals - Three.js experiments</p>
         </a>
 
-        <a href="https://mkb0020.github.io/Blobs" class="card" target="_blank">
+        <a href="https://mkb0020.github.io/blobs.html" class="card" target="_blank">
           <h3>Blobs</h3>
           <p>Play with blobs - Three.js experiments</p>
         </a>
 
-        <a href="https://mkb0020.github.io/D20" class="card" target="_blank">
+        <a href="https://mkb0020.github.io/d20.html" class="card" target="_blank">
           <h3>D20 Roller</h3>
           <p>Roll for Initiative... but make it pretty - Three.js experiments</p>
+        </a>
+
+        <a href="https://mkb0020.github.io/resume.html" class="card" target="_blank">
+          <h3>Resume</h3>
+          <p>View my professional background & experience</p>
         </a>
 
         <a href="https://github.com/mkb0020" class="card" target="_blank">
@@ -270,5 +336,7 @@
       <!-- <footer></footer>-->
     </div>
     </main>
+
+    <script src="js/circuit-sparks.js"></script>
   </body>
 </html>
