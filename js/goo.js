@@ -41,7 +41,7 @@
                 this.radius = sizeOverride || (b + Math.random() * b * 0.6);
                 this.vy = 0; this.grounded = false;
                 this.squish = 1; this.squishVel = 0; this.targetSquish = 1;
-                this.color = window.goo.rainbow ? this.rainbow() : "rgba(184,121,226, 0.9)"; // BLOB MAIN COLOR
+                this.color = window.goo.rainbow ? this.rainbow() : "rgba(0, 255, 98, 0.82)"; // BLOB MAIN COLOR
                 this.trail = []; this.age = 0;
             }
             rainbow() { return `hsla(${(Date.now()/40 + this.x)%360},90%,65%,0.9)`; }
