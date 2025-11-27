@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RESUME ♡ mkb0020</title>
+  <meta name="description" content="MK Barriault - Operations Specialist & Self-Taught Developer" />
+
+  <style>
+    :root {
+      --bg: #0d0a12;
+      --text: #e0d8f0;
+      --accent: #C99CE6;
+      --accent2: #F0BFFF;
+      --accent3: #8B3D80;
+      --plum: #8B3D80;
+      --glow: 0 0 20px rgba(201,156,230,0.5);
+      --card-bg: rgba(139,61,128,0.15);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      padding-top: 60px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Courier New', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(139,61,128,0.25) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(162,121,205,0.25) 0%, transparent 20%);
+    }
+
+    /* ====== NAVBAR ====== */
+    .simple-navbar {
+      width: 100%;
+      height: 60px;
+      background-color: rgba(162, 121, 205, 0);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid rgba(162,121,205, 0.7);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .nav-home-icon {
+      width: 35px;
+      height: 35px;
+      transition: transform 0.3s;
+    }
+
+    .nav-home-link:hover .nav-home-icon {
+      transform: scale(1.1);
+    }
+
+    .scanline {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+      opacity: 0.3;
+      animation: scan 9s linear infinite;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    @keyframes scan { 0% { transform:translateY(-100vh); } 100% { transform:translateY(100vh); } }
+
+    /* ================== LAYOUT ================== */
+    .resume-container {
+      height: calc(100vh - 60px);
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    h1 {
+      font-size: 5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: var(--glow);
+      animation: glitch 4s infinite;
+    }
+
+    @keyframes glitch {
+      0%,100% { text-shadow: 0.05em 0 0 #F0BFFF, -0.05em -0.025em 0 #730132; }
+      15%     { text-shadow: 0.03em 0.03em 0 #C99CE6, -0.04em 0 0 #F0BFFF; }
+      50%     { text-shadow: -0.05em 0 0 #F0BFFF, 0.025em 0.03em 0 #8B3D80; }
+    }
+
+    h4 {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: var(--glow);
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ================== SUMMARY ================== */
+    .summary-section {
+      background: rgba(20,10,35,0.6);
+      backdrop-filter: blur(12px);
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: var(--glow);
+      line-height: 1.7;
+    }
+
+    .summary-section p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .btn-neon-portal {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--text);
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      display: inline-block;
+      margin: 1rem;
+    }
+
+    .btn-neon-portal::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(201,156,230,0.3), transparent);
+      transition: 0.7s;
+    }
+
+    .btn-neon-portal:hover::before { left: 100%; }
+    .btn-neon-portal:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--glow), 0 10px 30px rgba(139,61,128,0.4);
+      border-color: var(--accent2);
+    }
+
+    /* ================== RESUME GRID ================== */
+    .resume-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .btn-holographic-glass {
+      background: linear-gradient(135deg, rgba(30,15,60,0.8), rgba(15,8,40,0.8));
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 2rem;
+      cursor: pointer;
+      transition: all 0.4s;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--glow);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-holographic-glass::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(201,156,230,0.2), transparent);
+      transition: 0.7s;
+    }
+
+    .btn-holographic-glass:hover::before { left: 100%; }
+    .btn-holographic-glass:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(201,156,230,0.3);
+      border-color: var(--accent2);
+    }
+
+    .btn-holographic-glass h4 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-holographic-glass p {
+      color: rgba(240,191,255,0.8);
+      font-size: 0.95rem;
+    }
+
+    /* ================== MODALS ================== */
+    .resume-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,5,25,0.8);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .resume-modal-content {
+      background: linear-gradient(135deg, rgba(30,15,60,0.95), rgba(15,8,40,0.95));
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      max-width: 1000px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 0 40px rgba(201,156,230,0.6);
+      color: var(--text);
+    }
+
+    .resume-modal-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(139,61,128,0.3);
+    }
+
+    .resume-modal-header h2 {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2rem;
+    }
+
+    .resume-modal-close {
+      background: none;
+      border: none;
+      color: #F0BFFF;
+      font-size: 2.5rem;
+      cursor: pointer;
+    }
+
+    .resume-modal-body {
+      padding: 2rem;
+      line-height: 1.7;
+    }
+
+        /* ========== GLASS TILE ===========*/
+    .modal-glass-tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .modal-glass-tile, .modal-glass-tile-auburn {
+      background: rgba(139,61,128,0.2);
+      border: 1px solid rgba(201,156,230,0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+
+    .modal-glass-tile:hover {
+      background: rgba(201,156,230,0.15);
+      box-shadow: 0 0 20px rgba(240,191,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .modal-glass-tile h4, .modal-glass-tile-auburn h4 {
+      color: var(--accent2);
+      margin-bottom: 0.8rem;
+    }
+
+    .modal-holographic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .modal-holographic-card {
+      background: rgba(20,10,35,0.6);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-holographic-card h4 {
+      color: var(--accent2);
+      margin-bottom: 1rem;
+    }
+
+    .modal-holographic-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .modal-holographic-card li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      opacity: 0.9;
+    }
+
+    .modal-holographic-card li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .mk-modal-note-mauve {
+      background: rgba(201,156,230,0.15);
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    .aubie-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 1rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .aubie-img:hover {
+      transform: scale(1.15) rotate(10deg);
+    }
+
+    .resume-modal-footer {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--accent);
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      .resume-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      h1 { font-size: 3.5rem; }
+      .modal-glass-tiles { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="simple-navbar">
+    <a class="nav-home-link" href="https://mkb0020.github.io">
+      <img src="home.png" alt="Home" class="nav-home-icon">
+    </a>
+  </nav>
+
+  <div class="scanline"></div>
+
+  <div class="resume-container">
+    <h1>RESUME</h1>
+
+    <div style="text-align: center;">
+      <a href="ResumeDownload.pdf" download="MK_Barriault_Resume.pdf" class="btn-neon-portal">
+        📄 Download PDF
+      </a>
+    </div>
+
+    <div class="summary-section">
+      <h4>Summary</h4>
+      <p>
+        I'm super passionate about <strong>process improvement, problem solving, coding, and creating</strong> 
+        elegant, usable solutions that make complex operations run effortlessly. I love transforming real-world 
+        challenges into smart, scalable tools — blending technical creativity with operational precision.
+        <br><br>
+        With deep hands-on experience managing <strong>Cisco XaaS and SMARTnet lifecycles</strong> across both 
+        distributor and reseller environments, I bridge the gap between complex subscription programs and 
+        day-to-day execution. I've led <strong>onboarding, renewals, true-ups, deal registration, and partner 
+        enablement</strong> at scale—coordinating OEMs, distributors, vendors, partners, and end customers to 
+        keep everything aligned and efficient.
+        <br><br>
+        <strong>Self-taught in coding,</strong> I've translated my operational background into 
+        <strong>automation and analytics</strong> — building Python and Excel solutions that make quoting, 
+        reporting, and fulfillment faster, more accurate, and easier to scale.
+      </p>
+    </div>
+
+    <div class="resume-grid">
+      <div class="btn-holographic-glass" data-modal="Highlights">
+        <h4>Highlights</h4>
+      </div>
+      
+      <div class="btn-holographic-glass" data-modal="Education">
+        <h4>Education</h4>
+      </div>
+
+      <div class="btn-holographic-glass" data-modal="Certificates">
+        <h4>Certificates</h4>
+      </div>
+      
+      <div class="btn-holographic-glass" data-modal="Skills">
+        <h4>Skills</h4>
+      </div>
+    </div>
+
+    <div class="summary-section">
+      <h4>💻 Work Experience</h4>
+    </div>
+
+    <div class="resume-grid">
+      <div class="btn-holographic-glass" data-modal="Cisco">
+        <h4>SMARTnet and Subscriptions Senior Specialist</h4>
+        <p>D&H Distributing • Aug 2022 – Jun 2025</p>
+      </div>
+
+      <div class="btn-holographic-glass" data-modal="SCW">
+        <h4>Corporate / Healthcare Account Manager</h4>
+        <p>Southern Computer Warehouse • Mar 2016 – Aug 2022</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <div id="HighlightsModal" class="resume-modal" onclick="closeModal(event)">
+    <div class="resume-modal-content" onclick="event.stopPropagation()">
+      <div class="resume-modal-header">
+        <h2>What I bring to the table</h2>
+        <button class="resume-modal-close" onclick="closeModal(event)">×</button>
+      </div>
+      <div class="resume-modal-body" id="HighlightsContent"></div>
+    </div>
+  </div>
+
+  <div id="EducationModal" class="resume-modal" onclick="closeModal(event)">
+    <div class="resume-modal-content" onclick="event.stopPropagation()">
+      <div class="resume-modal-header">
+        <h2>Education</h2>
+        <button class="resume-modal-close" onclick="closeModal(event)">×</button>
+      </div>
+      <div class="resume-modal-body" id="EducationContent"></div>
+    </div>
+  </div>
+
+  <div id="CertificatesModal" class="resume-modal" onclick="closeModal(event)">
+    <div class="resume-modal-content" onclick="event.stopPropagation()">
+      <div class="resume-modal-header">
+        <h2>Certificates</h2>
+        <button class="resume-modal-close" onclick="closeModal(event)">×</button>
+      </div>
+      <div class="resume-modal-body" id="CertificatesContent"></div>
+    </div>
+  </div>
+
+  <div id="SkillsModal" class="resume-modal" onclick="closeModal(event)">
+    <div class="resume-modal-content" onclick="event.stopPropagation()">
+      <div class="resume-modal-header">
+        <h2>Skills & Capabilities</h2>
+        <button class="resume-modal-close" onclick="closeModal(event)">×</button>
+      </div>
+      <div class="resume-modal-body" id="SkillsContent"></div>
+    </div>
+  </div>
+
+  <div id="CiscoModal" class="resume-modal" onclick="closeModal(event)">
+    <div class="resume-modal-content" onclick="event.stopPropagation()">
+      <div class="resume-modal-header">
+        <h2>Senior Specialist</h2>
+        <button class="resume-modal-close" onclick="closeModal(event)">×</button>
+      </div>
+      <div class="resume-modal-body" id="CiscoContent"></div>
+    </div>
+  </div>
+
+  <div id="SCWModal" class="resume-modal" onclick="closeModal(event)">
+    <div class="resume-modal-content" onclick="event.stopPropagation()">
+      <div class="resume-modal-header">
+        <h2>Account Manager</h2>
+        <button class="resume-modal-close" onclick="closeModal(event)">×</button>
+      </div>
+      <div class="resume-modal-body" id="SCWContent"></div>
+    </div>
+  </div>
+
+  <!-- MODAL JAVASCRIPT -->
+  <script>
+    // MODAL CONTENT
+    const modalContent = {
+      Highlights: {
+        content: `
+          <div class="modal-glass-tiles">
+            <div class="modal-glass-tile">
+              <h4>Subscription and XaaS Operations</h4>
+              <p>Practical lifecycle management for Cisco portfolios across distributor and VAR channels.</p>
+            </div>
+            <div class="modal-glass-tile">
+              <h4>Cross Functional Collaboration</h4>
+              <p>Extensive experience partnering with Sales, IT, Finance, Engineering, distributors, OEMs, and end customers</p>
+            </div>
+            <div class="modal-glass-tile">
+              <h4>Pre Sales Technical Support</h4>
+              <p>Quoting, deal registration, RFQ response, and partner enablement for complex technical programs</p>
+            </div>
+            <div class="modal-glass-tile">
+              <h4>Customer Lifecycle Management and Leadership</h4>
+              <p>Renewals, onboarding, true ups, and leading enablement efforts for internal teams and external partners</p>
+            </div>
+            <div class="modal-glass-tile">
+              <h4>Automation & Data Work</h4>
+              <p>Self taught coding projects to build data analysis tools and prototype ML models for forecasting and risk detection / Web Development and hobbyist game development projects for creative practice and rapid prototyping</p>
+            </div>
+            <div class="modal-glass-tile">
+              <h4>Training and Enablement</h4>
+              <p>Designed internal / partner-facing self serve guides and recurring trainings that enable others to succeed</p>
+            </div>
+          </div>
+        `
+      },
+      Education: {
+        content: `
+          <div class="modal-glass-tiles">
+            <div class="modal-glass-tile-auburn">
+              <p style="text-align: center;">
+                <img src="Aubie.gif" alt="War Eagle!" class="aubie-img" id="aubie">
+              </p>
+              <p style="text-align: center;"><h4>Auburn University</h4></p>
+              <h5>Bachelor of Science: Industrial and Systems Engineering</h5>
+              <p style="text-align: center;">2011 – 2015</p>
+            </div>
+          </div>
+        `
+      },
+      Certificates: {
+        content: `
+          <div class="modal-glass-tiles">
+            <div class="modal-glass-tile">
+              <h4>Cisco CX Stage 1</h4>
+              <p>Distributors Badge</p>
+            </div>
+            <div class="modal-glass-tile">
+              <h4>Cisco Black Belt</h4>
+              <p>Cloud Operations Stage 1</p>
+            </div>
+            <div class="modal-glass-tile">
+              <h4>Cisco Black Belt</h4>
+              <p>Distribution Success Stage 1</p>
+            </div>
+            <div class="modal-glass-tile">
+              <h4>D&H LEAN Change Agent</h4>
+              <p>Green Belt</p>
+            </div>
+          </div>
+        `
+      },
+      Skills: {
+        content: `
+          <div class="modal-holographic-grid">
+            <div class="modal-holographic-card">
+              <h4>Operations & Process</h4>
+              <ul>
+                <li>Process Development, Documentation, and Improvement</li>
+                <li>Operational Process Improvement</li>
+                <li>Cross-Functional Ops</li>
+                <li>Enablement & Training</li>
+                <li>Customer Experience Lifecycle Management</li>
+              </ul>
+            </div>
+            <div class="modal-holographic-card">
+              <h4>Technical Skills</h4>
+              <ul>
+                <li>Python (pandas, Matplotlib, scikit-learn, tkinter, numpy, seaborn)</li>
+                <li>Visual Basic (Microsoft Excel)</li>
+                <li>Web Development (Python, Flask, Javascript, Bootstrap, HTML, CSS)</li>
+                <li>API Integration</li>
+                <li>PostgreSQL</li>
+                <li>Web Dev (HTML/CSS/JS)</li>
+              </ul>
+            </div>
+            <div class="modal-holographic-card">
+              <h4>Data & Analytics</h4>
+              <ul>
+                <li>Data Analysis & Visualization</li>
+                <li>Subscription Management (Renewals, Modifications, True-Ups)</li>
+                <li>Cisco Enterprise Agreement Support and Management</li>
+              </ul>
+            </div>
+            <div class="modal-holographic-card">
+              <h4>Tools & Platforms</h4>
+              <ul>
+                <li>Cisco Channel Sales Tools: CCW, PXP, DPV, Smart Accounts, Software Central, DevNet</li>
+                <li>SEWP V/GSA workflows</li>
+                <li>Microsoft Office Suite, CRM, ERP, and channel quoting tools</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      Cisco: {
+        content: `
+          <h4>Cisco SMARTnet and Subscriptions</h4>
+          <div class="mk-modal-note-mauve">
+            <h4>D&H Distributing</h4>
+            <br>📍 Harrisburg, PA
+            <br>📅 August 2022 - June 2025
+          </div>
+          <div class="mk-modal-section">
+            <h4>Key Responsibilities:</h4>
+            <div class="mk-modal-list">
+              <ul>
+                <li>Managed full Cisco subscription lifecycle, including onboarding, upsells, renewals, term changes, and True Forward/Value Shift events.</li>
+                <li>Led partner-facing support and internal training across government, military, corporate, and healthcare accounts.</li>
+                <li>Supported API integration of Cisco quoting tools by collaborating with IT and translating Cisco concepts into actionable technical requirements using DevNet resources.</li>
+                <li>Authored self-serve enablement guides and delivered internal training to Sales, Operations, and Engineering teams.</li>
+                <li>Contributed to LEAN-driven improvements to streamline quoting and lifecycle support across departments.</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      SCW: {
+        content: `
+          <h4>Corporate / Healthcare</h4>
+          <div class="mk-modal-note-mauve">
+            <h4>Southern Computer Warehouse</h4>
+            <br>📍 Marietta, GA
+            <br>📅 March 2016 - August 2022
+          </div>
+          <div class="mk-modal-section">
+            <h4>Key Responsibilities:</h4>
+            <div class="mk-modal-list">
+              <ul>
+                <li>Managed long-term sales relationships with corporate and healthcare clients across the U.S., driving consistent account growth.</li>
+                <li>Assessed customer IT environments to identify technology gaps and opportunities, coordinating with distribution and OEM partners to build proposals.</li>
+                <li>Provided ongoing product knowledge and procurement guidance, positioning tailored solutions to meet business needs.</li>
+              </ul>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    // MODALS
+    function openModal(key) {
+      const modal = document.getElementById(key + 'Modal');
+      const contentEl = document.getElementById(key + 'Content');
+      if (modal && contentEl && modalContent[key]) {
+        contentEl.innerHTML = modalContent[key].content;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal(event) {
+      if (event) event.stopPropagation();
+      document.querySelectorAll('.resume-modal').forEach(modal => {
+        modal.style.display = 'none';
+      });
+      document.body.style.overflow = 'auto';
+    }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-modal]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.dataset.modal;
+          openModal(key);
+        });
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeModal(event);
+        }
+      });
+
+      // AUBIE
+      const aubie = document.getElementById('aubie');
+      if (aubie) {
+        aubie.addEventListener('click', () => {
+          aubie.style.transform = 'scale(1.3) rotate(15deg)';
+          setTimeout(() => {
+            aubie.style.transform = 'scale(1.15) rotate(10deg)';
+          }, 200);
+        });
+      }
+    });
+
+    document.querySelectorAll('.resume-modal').forEach(modal => {
+      modal.addEventListener('click', closeModal);
+    });
+  </script>
+
+</body>
+</html>
