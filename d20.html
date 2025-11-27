@@ -289,6 +289,95 @@
       .JS-controls { width: 100%; height: auto; border-right: none; border-bottom: 2px solid var(--accent); }
       .JS-result-number { font-size: 4rem; }
     }
+
+
+    /* MOBILE DEVICE VIEWING FIX */
+ 
+@media (max-width: 900px) {
+  body {
+    overflow: auto !important; 
+    padding-top: 70px;
+    -webkit-overflow-scrolling: touch; 
+  }
+  
+  .JS-page, .manifold-page {
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: calc(100vh - 70px);
+  }
+  
+  .JS-controls, .manifold-controls {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1.5rem !important;
+    border-right: none !important;
+    border-bottom: 2px solid var(--accent) !important;
+    overflow-y: visible !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  
+  .JS-container, .manifold-container {
+    flex: none !important;
+    width: 100% !important;
+    height: 60vh !important; 
+    min-height: 400px !important;
+  }
+  
+  #dice-canvas, #manifold-canvas {
+    width: 100vw !important;
+    height: 60vh !important;
+    position: relative !important;
+  }
+  
+  h1 { font-size: 2.5rem !important; }
+  h4 { font-size: 1.5rem !important; }
+  .JS-result-number { font-size: 3rem !important; }
+  
+  .about-buttons, .zoom-controls {
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+  
+  .btn-neon-portal, .btn-quantum-pulse {
+    padding: 0.7rem 1rem !important;
+    font-size: 1rem !important;
+    min-height: 44px !important; 
+  }
+  
+  .slider-control input[type="range"] {
+    height: 8px !important;
+  }
+  
+  .slider-control input[type="range"]::-webkit-slider-thumb {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+  
+  .simple-navbar {
+    padding-bottom: env(safe-area-inset-top) !important;
+  }
+}
+
+
+input[type="range"] {
+  font-size: 16px; 
+  touch-action: manipulation;
+}
+
+
+canvas, .JS-container, .manifold-container {
+  touch-action: manipulation;
+}
+
+
+
   </style>
 </head>
 <body>
@@ -406,6 +495,59 @@
       container.appendChild(renderer.domElement);
       controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
+
+
+      // ===== MOBILE TOUCH CONTROLS =====
+      let touchStart = { x: 0, y: 0 };
+      let isTouchDragging = false;
+
+      function handleTouchStart(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        touchStart = { x: touch.clientX, y: touch.clientY };
+        isTouchDragging = true;
+      }
+
+      function handleTouchMove(e) {
+        if (!isTouchDragging) return;
+        e.preventDefault();
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - touchStart.x;
+        const deltaY = touch.clientY - touchStart.y;
+        
+
+        controls.rotateLeft(deltaX * 0.005);
+        controls.rotateUp(deltaY * 0.005);
+        
+        touchStart = { x: touch.clientX, y: touch.clientY };
+      }
+
+      function handleTouchEnd(e) {
+        e.preventDefault();
+        isTouchDragging = false;
+      }
+
+
+      container.addEventListener('touchstart', handleTouchStart, { passive: false });
+      container.addEventListener('touchmove', handleTouchMove, { passive: false });
+      container.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+      
+      container.addEventListener('touchstart', function(e) {
+        if (e.target === container || e.target.closest('.JS-container')) {
+          e.preventDefault();
+          if (!isRolling) window.rollDice();
+        }
+      }, { passive: false });
+
+    
+      document.addEventListener('keydown', e => {
+        if (e.code === 'Space' && !e.repeat) {
+          e.preventDefault();
+          window.rollDice();
+        }
+      });
+
 
       function addStars() {
         const starGeo = new THREE.BufferGeometry();
@@ -717,5 +859,7 @@
     });
   </script>
 
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 </body>
 </html>
