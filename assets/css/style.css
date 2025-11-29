@@ -114,7 +114,6 @@
 
 html, body { 
   height: 100%; 
-  overflow: hidden; 
 }
 
 body {
@@ -122,7 +121,6 @@ body {
   background: url('../images/BG.png') center/cover fixed;
   color: var(--text);
 }
-
 
 /* ============================================= NAV BAR  ============================================= */
 .navbar {
@@ -278,7 +276,6 @@ select#Dropdown {
       cursor: pointer;
       transition: all 0.3s;
     }
-
 
 
 .coming-soon {
@@ -1622,5 +1619,63 @@ select#Dropdown {
 }
 
 /* ============================================= FRACTALS ============================================= */
+    .fractal-container {
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
 
+    #fractal-canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    select {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid var(--VortexViolet);
+      border-radius: 12px;
+      background: rgba(23, 0, 50, 0.8);
+      color: var(--ParticlePink);
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    select:hover, select:focus {
+      border-color: var(--NuclearFuscia);
+      box-shadow: 0 0 20px var(--PlasmaGlow2);
+      outline: none;
+    }
+
+    .zoom-controls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+
+    @media (max-width: 992px) {
+      .fractal-page {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto 1fr;
+        height: auto !important;
+      }
+
+      .fractal-controls {
+        border-right: none;
+        border-bottom: 2px solid var(--PlasmaPurple);
+        padding: 1.5rem;
+        height: auto;
+        overflow-y: visible;
+      }
+
+      .fractal-container {
+        height: 60vh;
+        min-height: 400px;
+      }
+    }
+    
 /* ============================================= MANIFOLD ============================================= */
