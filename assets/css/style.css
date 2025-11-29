@@ -109,6 +109,22 @@
         15% { text-shadow: 0.03em 0.03em 0 var(--PlasmaPurple), -0.04em 0 0 var(--ParticlePink); }
         50% { text-shadow: -0.05em 0 0 var(--ParticlePink), 0.025em 0.03em 0 var(--VortexViolet); }
         }
+
+
+    @keyframes neonPulse {
+        from { 
+            text-shadow: 
+            0 0 10px var(--ParticleGlow2),
+            0 0 20px var(--ParticleGlow3),
+            0 0 30px var(--ParticleGlow3);
+        }
+        to { 
+            text-shadow: 
+            0 0 20px var(--ParticleGlow3),
+            0 0 30px var(--NuclearFuscia),
+            0 0 40px var(--NuclearFuscia);
+        }
+        }
 /* ============================================= PAGE  ============================================= */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -133,15 +149,24 @@ body {
   border-bottom: 1px solid var(--PlasmaGlow2);
   box-shadow: 0 0 30px var(--PlasmaGlow2);
   z-index: 1000;
-  padding: 0.6rem 0;
+  padding: 0.8rem 0; /* 🔥 PERFECT VERTICAL CENTERING 🔥 */
 }
 
 .nav-container {
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 0.5rem;
+  height: 50px; 
+}
+
+.home-link {
+  display: flex;
   align-items: center;
-  padding: 0 1.7rem;
+  justify-content: flex-start;
+  flex-shrink: 0; 
 }
 
 .home-icon {
@@ -152,6 +177,7 @@ body {
   -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>') no-repeat center;
   mask-size: contain;
   transition: all 0.3s ease;
+  flex-shrink: 0; /* DON'T SHRINK! */
 }
 
 .home-icon:hover {
@@ -159,23 +185,38 @@ body {
   box-shadow: 0 0 20px var(--AquaAura);
 }
 
+
 .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 0 30px var(--ParticleGlow3);
-      animation: neonPulse 2s ease-in-out infinite alternate;
-    }
+  position: absolute; 
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); 
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px var(--ParticleGlow3);
+  animation: neonPulse 2s ease-in-out infinite alternate;
+  z-index: 2; 
+  flex-shrink: 0; 
+}
+
+
+.nav-spacer {
+  width: 40px; 
+  height: 40px;
+  flex-shrink: 0; 
+}
+
 
 /* ============================================= TYPOGRAPHY  ============================================= */
 h1 {
   font-size: 2rem;
   font-family: 'Orbitron', Arial, Helvetica, sans-serif;;
   text-align: center;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.1rem;
   background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -201,7 +242,7 @@ h2 {
 h4 {
   font-size: 1.5rem;
   text-align: center;
-  margin-bottom: 0 .6rem;
+  margin-bottom: 0.3rem;
   color: #ffffff;
   text-shadow: 0 0 15px var(--ParticleGlow2);
   font-weight: bold;
@@ -303,24 +344,26 @@ select#Dropdown {
 /* BASIC BUTTON */
 .cyber-btn {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.1rem;
   border-radius: 20px;
   font-family: inherit;
   font-weight: bold;
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: var(--PlasmaPurple);
-  border: 2px solid var(--VortexViolet);
+  background: var(--ProtonShadow);
+  border: 3px solid var(--NuclearGlow2);
   color: white;
-  box-shadow: 0 0 20px var(--PlasmaGlow2);
+  box-shadow: 0 0 20px var(--NuclearGlow1);
   text-transform: uppercase;
   letter-spacing: 1px;
+  margin-top: 5px;
 }
 
 .cyber-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 30px var(--PlasmaGlow3);
+  box-shadow: 0 0 30px var(--NuclearGlow3);
+  border: 3px solid var(--NuclearFuscia);
 }
 /* BUTTON WITH SWEEPING SHIMMER */
 .btn-quantum-pulse {
@@ -1633,7 +1676,7 @@ select#Dropdown {
 
     select {
       width: 100%;
-      padding: 1rem;
+      padding: 0.7rem;
       border: 2px solid var(--VortexViolet);
       border-radius: 12px;
       background: rgba(23, 0, 50, 0.8);
@@ -1677,5 +1720,5 @@ select#Dropdown {
         min-height: 400px;
       }
     }
-    
+
 /* ============================================= MANIFOLD ============================================= */
