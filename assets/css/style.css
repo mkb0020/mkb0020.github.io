@@ -210,7 +210,6 @@ body {
   flex-shrink: 0; 
 }
 
-
 /* ============================================= TYPOGRAPHY  ============================================= */
 h1 {
   font-size: 2rem;
@@ -595,8 +594,6 @@ select#Dropdown {
       box-shadow: 0 8px 32px var(--VortexGlow2), inset 0 1px 0 var(--PlasmaGlow2);
     }
 
-
-
     /* PROJECT GRID */
 .project-grid {
       display: grid;
@@ -637,8 +634,6 @@ select#Dropdown {
       z-index: 0;
     }
 
-
-
     .project-card:hover {
       transform: translateY(-12px) scale(1.02);
       box-shadow: 0 20px 40px var(--PlasmaGlow2), 0 0 60px var(--NuclearGlow3);
@@ -661,7 +656,6 @@ select#Dropdown {
       position: relative;
       z-index: 1;
     }
-
 
 
 
@@ -772,7 +766,6 @@ select#Dropdown {
         font-size: 1.3em;
     }
 
-
 /* ============================================= CYBER CARDS  ============================================= */
 .cyber-card {
   background: var(--VortexGlow3);
@@ -794,22 +787,23 @@ select#Dropdown {
 /* ============================================= GRID TILES — GLASS ORBS  ============================================= */
     .glass-tiles {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(1fr));
         gap: 24px;
         margin: 20px 0;
         padding: 10px;
+        max-width: 200px;
     }
 
     .glass-tile {
-        background: rgba(138, 43, 226, 0.15);
+        background: var(--VortexGlow1);
         backdrop-filter: blur(12px);
-        border: 1px solid var(--VortexGlow2);
         border-radius: 20px;
         padding: 28px 24px;
         transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         position: relative;
         overflow: hidden;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        max-width: 50%;
     }
 
     .glass-tile::before {
@@ -828,6 +822,7 @@ select#Dropdown {
     .glass-tile:hover {
         transform: translateY(-12px) scale(1.03);
         border-color: var(--VortexViolet);
+        background: var(--VortexGlow2);
         box-shadow: 
             0 20px 40px var(--VortexGlow2),
             0 0 40px var(--AuraGlow2);
@@ -838,13 +833,15 @@ select#Dropdown {
     }
 
     .glass-tile h4 {
-        color: var(--VortexViolet);
+        color: var(--ParticlePink);
         margin: 0 0 16px 0;
-        font-size: 1.35rem;
+        font-size: 2rem;
+        font-family: 'Orbitron', 'Courier New', monospace;
         font-weight: 700;
         text-shadow: 0 0 10px rgba(3, 3, 3, 0.5);
         display: flex;
         align-items: center;
+        text-align: center;
         gap: 12px;
     }
 
@@ -855,6 +852,7 @@ select#Dropdown {
         font-weight: 700;
         /*text-shadow: 0 0 5px var(--AquaAura));*/
         border-bottom: 2px solid var(--ParticleGlow1);
+        font-family: 'Orbitron', 'Courier New', monospace;
         padding-bottom: 12px;
         display: flex;
         align-items: center;
@@ -863,10 +861,10 @@ select#Dropdown {
     }
 
     .glass-tile p {
-        color: #e6d9ff;
+        color: #FFFFFF;
         line-height: 1.8;
         margin: 0;
-        font-size: 1.05rem;
+        font-size: 1rem;
     }
 
 /* ============================================= NEON BOXES ============================================= */
@@ -892,7 +890,6 @@ select#Dropdown {
         box-shadow: 0 0 20px rgba(205,198,255, 0.6);
         border-image: linear-gradient(45deg, var(--NuclearFuscia), var(--AquaAura)) 1;
     }
-
 
     .neon-card {
         position: relative;
@@ -1423,6 +1420,7 @@ select#Dropdown {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      z-index:10;
     }
 
     .hero-section {
@@ -1573,8 +1571,51 @@ select#Dropdown {
       drop-shadow(0 0 24px hsl(calc(var(--glow-color) + 360), 100%, 40%));
   }
 }
-
 /* ============================================= BLOBS ============================================= */
+
+/* ============================================= CIRCUIT BOARD ============================================= */
+#circuit-container {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+svg { width: 100%; height: 100%; }
+
+.circuit-trace { 
+        fill: none; 
+        stroke-width: 1.8;
+        opacity: 0.55;
+        stroke-linecap: round;
+    }
+    .t-pale { stroke: var(--VortexViolet); }   /* soft lavender */
+    .t-med  { stroke: var(--PlasmaPurple); }   /* medium mauve */
+    .t-deep { stroke: var(--NuclearFuscia); }   /* deeper violet */
+
+.circuit-trace { stroke: var(--PlasmaPurple); }
+
+.spark {
+        fill: var(--NuclearFuscia);
+        filter: drop-shadow(0 0 6px var(--ParticleGlow2)) drop-shadow(0 0 12px var(--ParticleGlow1));
+        opacity: 0.9;
+    }
+
+.node {
+        fill: var(--NuclearFuscia);
+        stroke: var(--NuclearGlow2);
+        stroke-width: 1.5;
+        opacity: 0.8;
+    }
+.n-glow {
+        filter: drop-shadow(0 0 6px var(--NuclearGlow3));
+    } 
+
+#circuit-container, #circuit-container svg {
+    width: 100vw !important;
+    height: 100vh !important;
+}
 
 /* ============================================= D20 ============================================= */
 .d20-page {
