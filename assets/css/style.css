@@ -191,7 +191,7 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%); 
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
   -webkit-background-clip: text;
