@@ -1,4 +1,4 @@
-// FRACTALS
+// FRACTALS - MOBILE OPTIMIZED
 let scene, camera, renderer, uniforms;
 let container;
 let currentFractal = "mandelbrot";
@@ -144,15 +144,16 @@ function animate(t) {
     requestAnimationFrame(animate);
 }
 
-// Wait for DOM to be ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         init();
         animate(0);
+        setupControls();
     });
 } else {
     init();
     animate(0);
+    setupControls();
 }
 
 // ======================== FRACTAL DROPDOWN ========================
@@ -171,62 +172,120 @@ window.addEventListener("resize", resizeRendererToContainer);
 let zoomLevel = 1.0;
 const zoomFactor = 1.5;
 
-const zoomInBtn = document.getElementById("zoomInBtn");
-const zoomOutBtn = document.getElementById("zoomOutBtn");
-const resetZoomBtn = document.getElementById("resetZoomBtn");
+function setupControls() {
+    const zoomInBtn = document.getElementById("zoomInBtn");
+    const zoomOutBtn = document.getElementById("zoomOutBtn");
+    const resetZoomBtn = document.getElementById("resetZoomBtn");
 
-if (zoomInBtn) {
-    zoomInBtn.addEventListener("click", () => {
-        zoomLevel *= zoomFactor;
-        uniforms.u_zoom.value = zoomLevel;
-    });
+    if (zoomInBtn) {
+        zoomInBtn.addEventListener("click", () => {
+            zoomLevel *= zoomFactor;
+            uniforms.u_zoom.value = zoomLevel;
+        });
+    }
+
+    if (zoomOutBtn) {
+        zoomOutBtn.addEventListener("click", () => {
+            zoomLevel /= zoomFactor;
+            uniforms.u_zoom.value = zoomLevel;
+        });
+    }
+
+    if (resetZoomBtn) {
+        resetZoomBtn.addEventListener("click", () => {
+            zoomLevel = 1.0;
+            uniforms.u_zoom.value = 1.0;
+            uniforms.u_offset.value.set(-0.5, 0);
+        });
+    }
 }
 
-if (zoomOutBtn) {
-    zoomOutBtn.addEventListener("click", () => {
-        zoomLevel /= zoomFactor;
-        uniforms.u_zoom.value = zoomLevel;
-    });
-}
-
-if (resetZoomBtn) {
-    resetZoomBtn.addEventListener("click", () => {
-        zoomLevel = 1.0;
-        uniforms.u_zoom.value = 1.0;
-        uniforms.u_offset.value.set(-0.5, 0);
-    });
-}
-
-// ======================== PAN / DRAG ========================
+// ======================== MOBILE & DESKTOP CONTROLS ========================
 let isDragging = false;
 let lastMouse = { x: 0, y: 0 };
+let touchStartPos = null;
+let pinchDistance = 0;
+let initialPinchZoom = 0;
 
-if (container) {
-    container.addEventListener("mousedown", e => {
-        isDragging = true;
-        lastMouse = { x: e.clientX, y: e.clientY };
-        container.style.cursor = "grabbing";
-    });
+const getClientPos = (e) => {
+    if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+    return { x: e.clientX, y: e.clientY };
+};
 
-    container.addEventListener("mousemove", e => {
-        if (!isDragging) return;
+const handlePointerStart = (e) => {
+    e.preventDefault();
+    isDragging = true;
+    touchStartPos = getClientPos(e);
+    lastMouse = { ...touchStartPos };
+    
+    if (container) container.style.cursor = "grabbing";
+    
+    if (e.touches && e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        pinchDistance = Math.sqrt(dx * dx + dy * dy);
+        initialPinchZoom = zoomLevel;
+    }
+};
 
-        const dx = (e.clientX - lastMouse.x) / container.clientWidth;
-        const dy = (e.clientY - lastMouse.y) / container.clientHeight;
+const handlePointerMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+
+    if (e.touches && e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const currentDistance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (pinchDistance > 0) {
+            const scale = currentDistance / pinchDistance;
+            zoomLevel = initialPinchZoom * scale;
+            zoomLevel = Math.max(0.1, Math.min(1000, zoomLevel)); 
+            uniforms.u_zoom.value = zoomLevel;
+        }
+        pinchDistance = currentDistance;
+    } 
+    // DRAG TO PAN 
+    else {
+        const currentPos = getClientPos(e);
+        const dx = (currentPos.x - lastMouse.x) / container.clientWidth;
+        const dy = (currentPos.y - lastMouse.y) / container.clientHeight;
 
         uniforms.u_offset.value.x -= dx * 3.0 / zoomLevel;
         uniforms.u_offset.value.y += dy * 3.0 / zoomLevel;
 
-        lastMouse = { x: e.clientX, y: e.clientY };
-    });
+        lastMouse = { ...currentPos };
+    }
+};
 
-    container.addEventListener("mouseup", () => {
-        isDragging = false;
-        container.style.cursor = "grab";
-    });
+const handlePointerEnd = (e) => {
+    e.preventDefault();
+    isDragging = false;
+    touchStartPos = null;
+    pinchDistance = 0;
+    if (container) container.style.cursor = "grab";
+};
 
-    container.addEventListener("mouseleave", () => {
-        isDragging = false;
-        container.style.cursor = "grab";
-    });
+if (container) {
+    container.addEventListener('touchstart', handlePointerStart, { passive: false });
+    container.addEventListener('touchmove', handlePointerMove, { passive: false });
+    container.addEventListener('touchend', handlePointerEnd, { passive: false });
+    container.addEventListener('touchcancel', handlePointerEnd, { passive: false });
+    
+    container.addEventListener("mousedown", handlePointerStart);
+    container.addEventListener("mousemove", handlePointerMove);
+    container.addEventListener("mouseup", handlePointerEnd);
+    container.addEventListener("mouseleave", handlePointerEnd);
+    
+    container.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const zoomSpeed = e.deltaY > 0 ? 0.9 : 1.1;
+        zoomLevel *= zoomSpeed;
+        zoomLevel = Math.max(0.1, Math.min(1000, zoomLevel));
+        uniforms.u_zoom.value = zoomLevel;
+    }, { passive: false });
+    
+    container.style.touchAction = 'none';
 }
