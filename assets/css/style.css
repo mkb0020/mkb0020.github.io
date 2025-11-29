@@ -1580,8 +1580,8 @@ select#Dropdown {
 .d20-page {
   display: grid;
   grid-template-columns: 370px 1fr;
-  height: calc(100vh - 70px);
-  margin-top: 70px;
+  height: calc(100vh - 100px);
+  margin-top: 90px;
   gap: 0;
   padding: 15px;
 }
@@ -1599,6 +1599,8 @@ select#Dropdown {
   border: 2px solid transparent;
   border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
   transition: all 0.4s;
+  height: calc(100vh - 100px);
+
 }
 
 .d20-container {
@@ -1666,6 +1668,8 @@ select#Dropdown {
       background: #000;
       position: relative;
       overflow: hidden;
+      height: calc(100vh - 100px);
+
     }
 
     #fractal-canvas {
@@ -1716,7 +1720,7 @@ select#Dropdown {
       }
 
       .fractal-container {
-        height: 60vh;
+        height: calc(100vh - 100px);
         min-height: 400px;
       }
     }
