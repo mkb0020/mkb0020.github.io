@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>D20 ROLLER ♡ mkb0020</title>
   <meta name="description" content="Physics-based D20 dice roller – Press SPACE to roll!" />
-  
   <link rel="stylesheet" href="assets/css/style.css">
-  
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
   <nav class="navbar">
@@ -22,7 +19,6 @@
     </div>
   </nav>
 
-  <div class="scanline"></div>
 
   <div class="d20-page">
     <div class="d20-controls">
@@ -49,8 +45,9 @@
       <div id="dice-canvas"></div>
     </div>
   </div>
-
-  <!-- MODALS -->
+</body>
+  
+<!-- MODALS -->
   <div id="aboutModal" class="modal" onclick="closeModal('aboutModal', event)">
     <div class="modal-content" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -93,7 +90,24 @@
     </div>
   </div>
 
-  <!-- SCRIPTS -->
+<!-- MODAL OPENER AND CLOSER-->
+<script>
+      function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id, event) {
+      if (event) event.stopPropagation();
+      document.getElementById(id).style.display = 'none';
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+      }
+    });
+</script>
+
+  <!-- DICE JS SCRIPTS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -464,3 +478,4 @@
       });
     }
   </script>
+  </html>
