@@ -97,115 +97,14 @@ function buildFragmentShader() {
     `;
 }
 
-function init() {
-    container = document.getElementById("fractal-container");
-    if (!container) {
-        console.error("Container 'fractal-container' not found!");
-        return;
-    }
-    
-    container.style.cursor = "grab";
-
-    scene = new THREE.Scene();
-    camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
-    const canvas = document.createElement("canvas");
-    container.appendChild(canvas);
-
-    renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        antialias: true
-    });
-
-    uniforms = {
-        u_time: { value: 0.0 },
-        u_resolution: { value: new THREE.Vector2(0, 0) },
-        u_mouse: { value: new THREE.Vector2() },
-        u_zoom: { value: 1.0 },
-        u_offset: { value: new THREE.Vector2(-0.5, 0) }
-    };
-
-    const geometry = new THREE.PlaneGeometry(2, 2);
-
-    material = new THREE.ShaderMaterial({
-        uniforms,
-        fragmentShader: buildFragmentShader()
-    });
-
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-
-    resizeRendererToContainer();
-}
-
-function animate(t) {
-    uniforms.u_time.value = t * 0.001;
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        init();
-        animate(0);
-        setupControls();
-    });
-} else {
-    init();
-    animate(0);
-    setupControls();
-}
-
-// ======================== FRACTAL DROPDOWN ========================
-const fractalSelect = document.getElementById("fractalSelect");
-if (fractalSelect) {
-    fractalSelect.addEventListener("change", e => {
-        currentFractal = e.target.value;
-        material.fragmentShader = buildFragmentShader();
-        material.needsUpdate = true;
-    });
-}
-
-window.addEventListener("resize", resizeRendererToContainer);
-
-// ======================== ZOOM CONTROLS ========================
-let zoomLevel = 1.0;
-const zoomFactor = 1.5;
-
-function setupControls() {
-    const zoomInBtn = document.getElementById("zoomInBtn");
-    const zoomOutBtn = document.getElementById("zoomOutBtn");
-    const resetZoomBtn = document.getElementById("resetZoomBtn");
-
-    if (zoomInBtn) {
-        zoomInBtn.addEventListener("click", () => {
-            zoomLevel *= zoomFactor;
-            uniforms.u_zoom.value = zoomLevel;
-        });
-    }
-
-    if (zoomOutBtn) {
-        zoomOutBtn.addEventListener("click", () => {
-            zoomLevel /= zoomFactor;
-            uniforms.u_zoom.value = zoomLevel;
-        });
-    }
-
-    if (resetZoomBtn) {
-        resetZoomBtn.addEventListener("click", () => {
-            zoomLevel = 1.0;
-            uniforms.u_zoom.value = 1.0;
-            uniforms.u_offset.value.set(-0.5, 0);
-        });
-    }
-}
-
 // ======================== MOBILE & DESKTOP CONTROLS ========================
 let isDragging = false;
 let lastMouse = { x: 0, y: 0 };
 let touchStartPos = null;
 let pinchDistance = 0;
 let initialPinchZoom = 0;
+let zoomLevel = 1.0;
+const zoomFactor = 1.5;
 
 const getClientPos = (e) => {
     if (e.touches && e.touches.length > 0) {
@@ -268,17 +167,22 @@ const handlePointerEnd = (e) => {
     if (container) container.style.cursor = "grab";
 };
 
-if (container) {
+function setupMobileControls() {
+    if (!container) return;
+    
+    // Touch events for mobile
     container.addEventListener('touchstart', handlePointerStart, { passive: false });
     container.addEventListener('touchmove', handlePointerMove, { passive: false });
     container.addEventListener('touchend', handlePointerEnd, { passive: false });
     container.addEventListener('touchcancel', handlePointerEnd, { passive: false });
     
+    // Mouse events for desktop
     container.addEventListener("mousedown", handlePointerStart);
     container.addEventListener("mousemove", handlePointerMove);
     container.addEventListener("mouseup", handlePointerEnd);
     container.addEventListener("mouseleave", handlePointerEnd);
     
+    // Mouse wheel zoom
     container.addEventListener("wheel", (e) => {
         e.preventDefault();
         const zoomSpeed = e.deltaY > 0 ? 0.9 : 1.1;
@@ -287,5 +191,110 @@ if (container) {
         uniforms.u_zoom.value = zoomLevel;
     }, { passive: false });
     
+    // Prevent default touch behaviors
     container.style.touchAction = 'none';
+    container.style.cursor = "grab";
 }
+
+function setupControls() {
+    const zoomInBtn = document.getElementById("zoomInBtn");
+    const zoomOutBtn = document.getElementById("zoomOutBtn");
+    const resetZoomBtn = document.getElementById("resetZoomBtn");
+
+    if (zoomInBtn) {
+        zoomInBtn.addEventListener("click", () => {
+            zoomLevel *= zoomFactor;
+            uniforms.u_zoom.value = zoomLevel;
+        });
+    }
+
+    if (zoomOutBtn) {
+        zoomOutBtn.addEventListener("click", () => {
+            zoomLevel /= zoomFactor;
+            uniforms.u_zoom.value = zoomLevel;
+        });
+    }
+
+    if (resetZoomBtn) {
+        resetZoomBtn.addEventListener("click", () => {
+            zoomLevel = 1.0;
+            uniforms.u_zoom.value = 1.0;
+            uniforms.u_offset.value.set(-0.5, 0);
+        });
+    }
+    
+    // Setup mobile controls after container exists
+    setupMobileControls();
+}
+
+function init() {
+    container = document.getElementById("fractal-container");
+    if (!container) {
+        console.error("Container 'fractal-container' not found!");
+        return;
+    }
+
+    scene = new THREE.Scene();
+    camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+    const canvas = document.createElement("canvas");
+    container.appendChild(canvas);
+
+    renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true
+    });
+
+    uniforms = {
+        u_time: { value: 0.0 },
+        u_resolution: { value: new THREE.Vector2(0, 0) },
+        u_mouse: { value: new THREE.Vector2() },
+        u_zoom: { value: 1.0 },
+        u_offset: { value: new THREE.Vector2(-0.5, 0) }
+    };
+
+    const geometry = new THREE.PlaneGeometry(2, 2);
+
+    material = new THREE.ShaderMaterial({
+        uniforms,
+        fragmentShader: buildFragmentShader()
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    resizeRendererToContainer();
+}
+
+function animate(t) {
+    uniforms.u_time.value = t * 0.001;
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+}
+
+// ======================== INITIALIZATION ========================
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        init();
+        setupControls();
+        animate(0);
+    });
+} else {
+    init();
+    setupControls();
+    animate(0);
+}
+
+// ======================== FRACTAL DROPDOWN ========================
+window.addEventListener('DOMContentLoaded', () => {
+    const fractalSelect = document.getElementById("fractalSelect");
+    if (fractalSelect) {
+        fractalSelect.addEventListener("change", e => {
+            currentFractal = e.target.value;
+            material.fragmentShader = buildFragmentShader();
+            material.needsUpdate = true;
+        });
+    }
+});
+
+window.addEventListener("resize", resizeRendererToContainer);
