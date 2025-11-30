@@ -2,202 +2,197 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <title>BLOBS ♡ mkb0020</title>
 
   <style>
-    :root {
-      --bg: #0d0a12;
-      --text: #e0d8f0;
-      --accent: #C99CE6;
-      --accent2: #F0BFFF;
-      --accent3: #8B3D80;
-      --glow: 0 0 20px rgba(201,156,230,0.5);
-      --panel-bg: rgba(20,10,35,0.6);
-    }
+    
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Courier New', monospace;
-      min-height: 100vh;
-      overflow: hidden;
-      background-image: 
-        radial-gradient(circle at 10% 20%, rgba(139,61,128,0.25) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(162,121,205,0.25) 0%, transparent 20%);
-    }
 
-    /* NAVBAR */
-    .simple-navbar {
-      width: 100%;
-      height: 60px;
-      background-color: rgba(5, 0, 10, 0.062);
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid rgba(162,121,205, 0.7);
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-    }
 
-    .nav-home-icon {
-      width: 35px;
-      height: 35px;
-      transition: transform 0.3s;
-    }
-    .nav-home-link:hover .nav-home-icon {
-      transform: scale(1.1);
-    }
-
-    /* LAYOUT */
-    .blob-page {
-      display: flex;
-      height: calc(100vh - 60px);
-    }
-
-    .blob-controls {
-      width: 380px;
-      padding: 1.5rem;
-      border-right: 2px solid var(--accent);
-      background: var(--panel-bg);
-      backdrop-filter: blur(12px);
-      overflow-y: auto;
-      box-shadow: var(--glow);
-      z-index: 5;
-    }
 
     .blob-container {
-      flex: 1;
       background: #000;
       position: relative;
       overflow: hidden;
     }
 
     #JSCanvas {
-      width: 100%;
-      height: 100%;
+      width: 100% !important;
+      height: 100% !important;
       display: block;
     }
 
+    /* TYPOGRAPHY */
     h1 {
-      font-size: 3.5rem;
+      font-size: 3rem;
       text-align: center;
       margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: var(--glow);
+      background-clip: text;
     }
 
-    h4 {
-      font-size: 1.7rem;
-      text-align: center;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+
+    /* CYBER CARDS */
+    .cyber-card {
+      background: var(--VortexGlow2);
+      backdrop-filter: blur(15px);
+      border-radius: 30px;
+      padding: 0.9rem;
+      box-shadow: 0 8px 32px var(--VortexGlow1);
+      transition: all 0.3s ease;
+    }
+
+    .cyber-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px var(--PlasmaGlow2);
+      border-color: var(--NuclearFuscia);
+    }
+
+    /* SLIDER */
+    .slider-group {
       margin-bottom: 1.5rem;
     }
 
-    .slider-group {
-      margin-bottom: 1.7rem;
-    }
-    label {
+    .slider-group label {
       display: block;
-      margin-bottom: 0.4rem;
-      color: var(--accent2);
-      font-size: 1.1rem;
-      font-weight: bold;
-    }
-
-    input[type=range] {
-      width: 100%;
+      color: var(--AlphaAqua);
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
     }
 
     .control-value {
       float: right;
-      color: var(--accent2);
+      color: var(--ParticlePink);
     }
 
-    .btn-neon {
+    input[type="range"] {
       width: 100%;
-      background: transparent;
-      border: 2px solid var(--accent);
-      padding: 0.6rem 1.2rem;
-      margin: 0.5rem 0;
-      border-radius: 12px;
-      color: var(--text);
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(131,12,222,0.5);
+      outline: none;
       cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--ParticlePink);
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--ParticleGlow2);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--ParticlePink);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 0 10px var(--ParticleGlow2);
+    }
+
+    /* BUTTONS */
+    .cyber-btn {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
       font-weight: bold;
-      transition: 0.4s;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: linear-gradient(45deg, var(--PlasmaPurple), var(--NuclearFuscia));
+      color: white;
+      box-shadow: 0 0 20px var(--PlasmaGlow2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
     }
 
-    .btn-neon:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--glow);
-      border-color: var(--accent2);
+    .cyber-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px var(--PlasmaGlow3);
     }
 
-    @media(max-width: 900px){
-      .blob-page { flex-direction: column; }
-      .blob-controls {
-        width: 100%;
-        height: 280px;
-        border-right: none;
-        border-bottom: 2px solid var(--accent);
+    /* MOBILE */
+    @media (max-width: 992px) {
+      .blob-page {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto 1fr;
+        height: auto !important;
       }
+
+      .blob-controls {
+        border-right: none;
+        border-bottom: 2px solid var(--PlasmaPurple);
+        padding: 1.5rem;
+        height: auto;
+        overflow-y: visible;
+      }
+
+      .blob-container {
+        height: 60vh;
+        min-height: 400px;
+      }
+
+      h1 { font-size: 2.5rem; }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- NAVBAR -->
-  <nav class="simple-navbar">
-    <a class="nav-home-link" href="https://mkb0020.github.io">
-      <img src="home.png" alt="Home" class="nav-home-icon">
-    </a>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="https://mkb0020.github.io">
+        <div class="home-icon"></div>
+        <div class="logo">♡ mkb0020</div>
+      </a>
+    </div>
   </nav>
 
-  <div class="blob-page">
 
-    <!-- CONTROLS -->
-    <div class="blob-controls">
+  <div class="d20-page">
+    <div class="d20-controls">
       <h1>BLOBS</h1>
 
-      <div class="slider-group">
-        <label>Gravity: <span id="gravityValue" class="control-value">0.03</span></label>
-        <input id="gravitySlider" type="range" min="1" max="200" value="30">
+      <div class="cyber-card">
+        <div class="slider-group">
+          <label>Gravity: <span id="gravityValue" class="control-value">0.03</span></label>
+          <input id="gravitySlider" type="range" min="1" max="200" value="30">
+        </div>
+
+        <div class="slider-group">
+          <label>Drip Speed (ms): <span id="dripValue" class="control-value">2000</span></label>
+          <input id="dripSlider" type="range" min="200" max="6000" value="2000">
+        </div>
+
+        <div class="slider-group">
+          <label>Blob Size: <span id="sizeValue" class="control-value">50</span></label>
+          <input id="sizeSlider" type="range" min="20" max="120" value="50">
+        </div>
       </div>
 
-      <div class="slider-group">
-        <label>Drip Speed (ms): <span id="dripValue" class="control-value">2000</span></label>
-        <input id="dripSlider" type="range" min="200" max="6000" value="2000">
-      </div>
-
-      <div class="slider-group">
-        <label>Blob Size: <span id="sizeValue" class="control-value">50</span></label>
-        <input id="sizeSlider" type="range" min="20" max="120" value="50">
-      </div>
-
-      <button id="rainbowToggle" class="btn-neon">Rainbow Blobs</button>
-      <button id="clearBlobBtn" class="btn-neon">Clear Blobs</button>
-
+      <button id="rainbowToggle" class="cyber-btn">Rainbow Blobs</button>
+      <button id="clearBlobBtn" class="cyber-btn">Clear Blobs</button>
     </div>
 
-    <!-- CANVAS -->
-    <div class="blob-container">
+    <div class="d20-container">
       <canvas id="JSCanvas"></canvas>
     </div>
-
   </div>
 
-  <!-- SCRIPT -->
   <script src="js/goo.js"></script>
-
 </body>
 </html>
