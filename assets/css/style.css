@@ -112,7 +112,6 @@
         50% { text-shadow: -0.05em 0 0 var(--ParticlePink), 0.025em 0.03em 0 var(--VortexViolet); }
         }
 
-
     @keyframes neonPulse {
         from { 
             text-shadow: 
@@ -151,7 +150,7 @@ body {
   border-bottom: 1px solid var(--PlasmaGlow2);
   box-shadow: 0 0 30px var(--PlasmaGlow2);
   z-index: 1000;
-  padding: 0.8rem 0; /* 🔥 PERFECT VERTICAL CENTERING 🔥 */
+  padding: 0.8rem 0; 
 }
 
 .nav-container {
@@ -187,7 +186,6 @@ body {
   box-shadow: 0 0 20px var(--AquaAura);
 }
 
-
 .logo {
   position: absolute; 
   left: 50%;
@@ -205,14 +203,11 @@ body {
   flex-shrink: 0; 
 }
 
-
 .nav-spacer {
   width: 40px; 
   height: 40px;
   flex-shrink: 0; 
 }
-
-
 
 @media (max-width: 767px) {
   .nav-container {
@@ -261,7 +256,6 @@ h1 {
   font-weight:bold;
 }
 
-
 h2 {
   font-size: 6rem;
   font-family: 'Orbitron', Arial, Helvetica, sans-serif;;
@@ -274,7 +268,6 @@ h2 {
   font-weight:bold;
   animation: glitch 4s infinite;
 }
-
 
 h4 {
   font-size: 1.5rem;
@@ -355,7 +348,6 @@ select#Dropdown {
       transition: all 0.3s;
     }
 
-
 .coming-soon {
       position: absolute;
       top: 1rem;
@@ -369,7 +361,6 @@ select#Dropdown {
       box-shadow: 0 0 12px var(--NuclearGlow2);
       z-index: 2;
     }
-
 
 .cat-gif {
       width: 250px;
@@ -402,7 +393,6 @@ select#Dropdown {
   box-shadow: 0 0 30px var(--NuclearGlow3);
   border: 3px solid var(--NuclearFuscia);
 }
-
 
 .cyber-btn2 {
   width: 100%;
@@ -461,7 +451,6 @@ select#Dropdown {
   border-color: var(--NuclearFuscia);
 }
    
-/* KAWAII-CYBER X BUTTON */
 .btn-spinX { /* KAWAII-CYBER X BUTTON */
           position: absolute;
           top: 12px;
@@ -735,8 +724,6 @@ select#Dropdown {
       z-index: 1;
     }
 
-
-
 /* =============================================  HOLOGRAPHIC CARDS ============================================= */
 .holo-grid {
         display: grid;
@@ -928,7 +915,6 @@ select#Dropdown {
         margin: 0 0 20px 0;
         font-size: 1rem;
         font-weight: 700;
-        /*text-shadow: 0 0 5px var(--AquaAura));*/
         border-bottom: 2px solid var(--ParticleGlow1);
         font-family: 'Orbitron', 'Courier New', monospace;
         padding-bottom: 12px;
@@ -952,7 +938,6 @@ select#Dropdown {
 
     .neon-box, .neon-#ffffffarea {
         width: 100%;
-        /*background: transparent;*/
         background: #0000006d;
         border: 2px solid transparent;
         border-radius: 12px;
@@ -990,8 +975,6 @@ select#Dropdown {
     }
 
 /* ============================================= MODAL STYLING ============================================= */
-
-/* ========= CYBER MODAL  ========= */
 .modal {
   display: none;
   position: fixed;
@@ -1287,102 +1270,7 @@ modal-header h1 {
 .HoloModalBod { scrollbar-color: rgba(133, 80, 255, 0.927) #2d0256; scrollbar-width: thin; }
 
 
-
-
-/* ============================================= JS CONTROLS ============================================= */
-    .JS-Controls {
-        width: 380px;
-        background: linear-gradient(45deg, var(--VortexGlow2), var(--PlasmaGlow2));
-        backdrop-filter: blur(12px);
-        border: 2px solid transparent;
-        border-radius: 12px;
-        padding: 16px 20px;
-        font-size: 1rem;
-        color: white;
-        border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
-        transition: all 0.4s;
-        gap: 20px;
-        z-index: 10;
-        margin-top:70px;
-        }
-
-    .JS-Slider {
-      margin: 2rem 0;
-    }
-
-    .JS-Slider label {
-      display: block;
-      color: var(--PlasmaPurple);
-      margin-bottom: 0.8rem;
-      font-size: 1.2rem;
-    }
-
-    .JS-Slider input[type="range"] {
-      width: 100%;
-      height: 6px;
-      border-radius: 3px;
-      background: transparent;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .JS-Slider input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--PlasmaPurple);
-      cursor: pointer;
-      box-shadow: var(--PlasmaGlow2);
-    }
-
-    .JS-Slider input[type="range"]::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--PlasmaPurple);
-      cursor: pointer;
-      border: none;
-      box-shadow: var(--PlasmaGlow2);
-    }
-
-/* ============================================= JS  ============================================= */
-    .JS-page {
-      display: flex;
-      height: calc(100vh - 60px);
-      position: relative;
-    }
-
-    #manifold-canvas {
-      width: 100% !important;
-      height: 100% !important;
-      display: block;
-    }
-
-    #JS-canvas {
-      width: 100% !important;
-      height: 100% !important;
-      display: block;
-    }
-
-    .JS-container, .manifold-container {
-      flex: 1;
-      /*background-color: linear-gradient(135deg, rgba(26,0,51,0.5), rgba(42,0,77, 0.5));*/
-      position: relative;
-      overflow: hidden;
-      background: #0000006d;
-      border: 2px solid transparent;
-      border-radius: 12px;
-      padding: 16px 20px;
-      font-size: 1rem;
-      color: white;
-      border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
-      transition: all 0.4s;
-      gap: 20px;
-    }
-
-    /* ============================================= GAME ============================================= */
+/* ============================================= GAME ============================================= */
     .Game-Content {
             margin: 0 !important;
             padding: 0 !important;
@@ -1408,97 +1296,7 @@ modal-header h1 {
         display: none;
     }
     
-    /* ============================================= FOR MOBILE DEVICES ============================================= */   
-        @media (max-width: 900px) {
-        .manifold-page { flex-direction: column; }
-        .manifold-controls { width: 100%; height: auto; border-right: none; border-bottom: 2px solid var(--accent); }
-        .manifold-container { min-height: 400px; }
-        }
-
-        @media (max-width: 900px) {
-        body {
-            overflow: auto !important; /* ALLOW SCROLLING*/
-            padding-top: 70px; /* EXTRA FOR MOBILE */
-            -webkit-overflow-scrolling: touch; /* IOS SCROLLING */
-        }
-        
-        .JS-page, .manifold-page {
-            flex-direction: column !important;
-            height: auto !important;
-            min-height: calc(100vh - 70px);
-        }
-        
-        .JS-controls, .manifold-controls {
-            width: 100% !important;
-            height: auto !important;
-            padding: 1.5rem !important;
-            border-right: none !important;
-            border-bottom: 2px solid var(--accent) !important;
-            overflow-y: visible !important;
-            flex-direction: column !important;
-            align-items: stretch !important;
-        }
-        
-        .JS-container, .manifold-container {
-            flex: none !important;
-            width: 100% !important;
-            height: 60vh !important; /* MOBILE HEIGHT*/
-            min-height: 400px !important;
-        }
-        
-        #dice-canvas, #manifold-canvas, #JS-canvas {
-            width: 100vw !important;
-            height: 60vh !important;
-            position: relative !important;
-        }
-        
-        h1 { font-size: 2.5rem !important; }
-        h4 { font-size: 1.5rem !important; }
-        .JS-result-number { font-size: 3rem !important; }
-        
-        .about-buttons, .zoom-controls { /* MOBILE BUTTONS */
-            flex-wrap: wrap !important;
-            gap: 0.5rem !important;
-        }
-        
-        .btn-neon-portal, .btn-quantum-pulse {
-            padding: 0.7rem 1rem !important;
-            font-size: 1rem !important;
-            min-height: 44px !important; 
-        }
-        
-        .JS-Slider input[type="range"] { /* TOUCH FRIENDLT SLIDERS */
-            height: 8px !important;
-        }
-        
-        .JS-Slider input[type="range"]::-webkit-slider-thumb {
-            width: 28px !important;
-            height: 28px !important;
-        }
-        }
-
-        @supports (-webkit-touch-callout: none) { /* IOS SAFARI */
-        body {
-            padding-bottom: env(safe-area-inset-bottom) !important;
-        }
-        
-        .Nav {
-            padding-bottom: env(safe-area-inset-top) !important;
-        }
-        }
-
-        input[type="range"] {/* PREVENT ZOOM ON INPUT FOCUS ios) */
-        font-size: 16px; 
-        touch-action: manipulation;
-        }
-
-        canvas, .JS-container, .manifold-container {  /* TOUCH ACTION HINTS */
-        touch-action: manipulation;
-        }
-
-
 /* ============================================= LANDING PAGE ============================================= */
-    /* MAIN CONTAINER */
     .main-container {
       min-height: 100vh;
       padding: 80 1rem 1rem;
@@ -1561,8 +1359,6 @@ modal-header h1 {
   
   mix-blend-mode: screen; 
 }
-
-
 .tracer-gif[data-layer="0"] {
   opacity: 1;
   z-index: 10;
@@ -1673,7 +1469,6 @@ modal-header h1 {
       drop-shadow(0 0 24px hsl(calc(var(--glow-color) + 360), 100%, 40%));
   }
 }
-/* ============================================= BLOBS ============================================= */
 
 /* ============================================= CIRCUIT BOARD ============================================= */
 #circuit-container {
@@ -1719,40 +1514,8 @@ svg { width: 100%; height: 100%; }
     height: 100vh !important;
 }
 
-
-
-@media (max-width: 767px) {
-  #circuit-container {
-    height: calc(100vh - 80px) !important; 
-  }
-
-  .main-container {
-    padding-top: 80px !important; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .glass-tile {
-    width: 90% !important; 
-    max-width: 90vw !important;
-    padding: 1.5rem !important; 
-    margin: 1rem auto !important; 
-    font-size: 0.95rem !important; 
-    border-radius: 15px !important; 
-    box-shadow: 0 0 20px var(--PlasmaGlow2) !important; 
-  }
-
-  
-  .glass-tile p {
-    text-align: left !important; 
-    hyphens: auto !important; 
-  }
-}
-
-
-/* ============================================= D20 ============================================= */
-.d20-page {
+/* ============================================= GENERAL JS PAGE< CONTROLS AND CONTAINER ============================================= */
+.JS-page {
   display: grid;
   grid-template-columns: 370px 1fr;
   height: calc(100vh - 100px);
@@ -1761,7 +1524,7 @@ svg { width: 100%; height: 100%; }
   padding: 15px;
 }
 
-.d20-controls {
+.JS-controls {
   background: transparent;
   backdrop-filter: blur(20px);
   padding: 2rem 1.5rem;
@@ -1777,7 +1540,7 @@ svg { width: 100%; height: 100%; }
 
 }
 
-.d20-container {
+.JS-container {
   background: rgba(0, 0, 0, 0);
   position: relative;
   overflow: hidden;
@@ -1786,6 +1549,55 @@ svg { width: 100%; height: 100%; }
   transition: all 0.4s;
 }
 
+    #JS-canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+/* ============================================= JS CONTROLS ============================================= */
+    .JS-Slider {
+      margin: 2rem 0;
+    }
+
+    .JS-Slider label {
+      display: block;
+      color: var(--PlasmaPurple);
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+
+    .JS-Slider input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: transparent;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .JS-Slider input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--PlasmaPurple);
+      cursor: pointer;
+      box-shadow: var(--PlasmaGlow2);
+    }
+
+    .JS-Slider input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--PlasmaPurple);
+      cursor: pointer;
+      border: none;
+      box-shadow: var(--PlasmaGlow2);
+    }
+
+/* ============================================= D20 ============================================= */
 #dice-canvas {
   width: 100% !important;
   height: 100% !important;
@@ -1812,15 +1624,15 @@ svg { width: 100%; height: 100%; }
 
 /* MOBILE */
 @media (max-width: 992px) {
-  .d20-page {
+  .JS-page {
     grid-template-columns: 1fr !important;
     grid-template-rows: auto 1fr;
     height: auto !important;
     margin-top: 80px;
   }
 
-  .d20-controls {
-    border-right: none;
+  .JS-controls {
+    /*border-right: none;
     /*border-bottom: 2px solid var(--PlasmaPurple);*/
     padding: 1.5rem;
     height: auto;
@@ -1829,7 +1641,7 @@ svg { width: 100%; height: 100%; }
     border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
   }
 
-  .d20-container {
+  .JS-container {
     height: 60vh;
     min-height: 400px;
   }
@@ -1840,14 +1652,6 @@ svg { width: 100%; height: 100%; }
 }
 
 /* ============================================= FRACTALS ============================================= */
-    .fractal-container {
-      background: #000;
-      position: relative;
-      overflow: hidden;
-      height: calc(100vh - 100px);
-
-    }
-
     #fractal-canvas {
       width: 100% !important;
       height: 100% !important;
@@ -1902,47 +1706,12 @@ svg { width: 100%; height: 100%; }
     }
 
 /* ============================================= MANIFOLD ============================================= */
-
-    /* LAYOUT */
-  .manifold-page {
-      display: grid;
-      grid-template-columns: 370px 1fr;
-      height: calc(100vh - 100px);
-      margin-top: 90px;
-      gap: 0;
-      padding: 10px;
-    }
-    
-
-  .manifold-controls {
-      background: rgba(0, 0, 0, 0);
-      position: relative;
-      overflow: hidden;
-      border: 2px solid transparent;
-      border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
-      transition: all 0.4s;
-      padding: 5px 5px;
-      gap: 20px;
-    }
-
-.manifold-container {
-    background: rgba(0, 0, 0, 0);
-    position: relative;
-    overflow: hidden;
-    border: 2px solid transparent;
-    border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
-    transition: all 0.4s;
-      }
-
     #manifold-canvas {
       width: 100% !important;
       height: 100% !important;
       display: block;
     }
 
-
-
-    /* SLIDER */
     .slider-control {
       margin: 1rem 0;
     }
@@ -1986,40 +1755,7 @@ svg { width: 100%; height: 100%; }
       box-shadow: 0 0 10px var(--ParticleGlow2);
     }
 
-
-    
-
-    /* MOBILE */
-    @media (max-width: 992px) {
-      .manifold-page {
-        grid-template-columns: 1fr !important;
-        grid-template-rows: auto 1fr;
-        height: auto !important;
-      }
-
-      .manifold-controls {
-        border-right: none;
-        border-bottom: 2px solid var(--PlasmaPurple);
-        padding: 1.5rem;
-        height: auto;
-        overflow-y: visible;
-      }
-
-      .manifold-container {
-        height: 60vh;
-        min-height: 400px;
-      }
-
-      h1 { font-size: 2rem; }
-      h4 { font-size: 1.1rem; }
-    }
-
-
-
-
-
 /* ============================================= RESUME ============================================= */
-
     .summary-section {
       background: var(--PlasmaGlow2);
       backdrop-filter: blur(5px);
@@ -2110,7 +1846,6 @@ svg { width: 100%; height: 100%; }
       cursor: pointer;
     }
 
-
   .auburn-card {
         background: linear-gradient(135deg, 
             rgba(11, 35, 65, 0.532), 
@@ -2126,8 +1861,6 @@ svg { width: 100%; height: 100%; }
             0 0 20px rgba(232, 119, 34, 0.5);
         text-align: center;
     }
-
-
 
   .auburn-card h4 {
         color: rgb(232, 120, 34);
@@ -2158,9 +1891,63 @@ svg { width: 100%; height: 100%; }
         text-align: center;
     }
 
+/* ============================================= FOR MOBILE DEVICES ============================================= */   
+        @media (max-width: 900px) {
+        body {
+            overflow: auto !important; /* ALLOW SCROLLING*/
+            padding-top: 70px; /* EXTRA FOR MOBILE */
+            -webkit-overflow-scrolling: touch; /* IOS SCROLLING */
+        }
+                
+        #dice-canvas, #manifold-canvas, #JS-canvas {
+            width: 100vw !important;
+            height: 60vh !important;
+            position: relative !important;
+        }
+        
+        h1 { font-size: 2.5rem !important; }
+        h4 { font-size: 1.5rem !important; }
+        .JS-result-number { font-size: 3rem !important; }
+        
+        .about-buttons, .zoom-controls { /* MOBILE BUTTONS */
+            flex-wrap: wrap !important;
+            gap: 0.5rem !important;
+        }
+        
+        .btn-neon-portal, .btn-quantum-pulse {
+            padding: 0.7rem 1rem !important;
+            font-size: 1rem !important;
+            min-height: 44px !important; 
+        }
+        
+        .JS-Slider input[type="range"] { /* TOUCH FRIENDLT SLIDERS */
+            height: 8px !important;
+        }
+        
+        .JS-Slider input[type="range"]::-webkit-slider-thumb {
+            width: 28px !important;
+            height: 28px !important;
+        }
+        }
 
-/* ======================= MOBILE FIXES ================ */
+        @supports (-webkit-touch-callout: none) { /* IOS SAFARI */
+        body {
+            padding-bottom: env(safe-area-inset-bottom) !important;
+        }
+        
+        .Nav {
+            padding-bottom: env(safe-area-inset-top) !important;
+        }
+        }
 
+        input[type="range"] {/* PREVENT ZOOM ON INPUT FOCUS ios) */
+        font-size: 16px; 
+        touch-action: manipulation;
+        }
+
+        canvas, .JS-container {  /* TOUCH ACTION HINTS */
+        touch-action: manipulation;
+        }
 
 @media (max-width: 767px) {
   body {
@@ -2229,5 +2016,34 @@ svg { width: 100%; height: 100%; }
   .cat-gif {
     width: 100px !important;
     height: auto !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #circuit-container {
+    height: calc(100vh - 80px) !important; 
+  }
+
+  .main-container {
+    padding-top: 80px !important; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .glass-tile {
+    width: 90% !important; 
+    max-width: 90vw !important;
+    padding: 1.5rem !important; 
+    margin: 1rem auto !important; 
+    font-size: 0.95rem !important; 
+    border-radius: 15px !important; 
+    box-shadow: 0 0 20px var(--PlasmaGlow2) !important; 
+  }
+
+  
+  .glass-tile p {
+    text-align: left !important; 
+    hyphens: auto !important; 
   }
 }
