@@ -20,8 +20,8 @@
     </div>
   </nav>
 
-  <div class="manifold-page">
-    <div class="manifold-controls">
+  <div class="JS-page">
+    <div class="JS-controls">
       <h1>CALABI-YAU MANIFOLD</h1>
  
 
@@ -51,7 +51,7 @@
 
     </div>
 
-    <div class="manifold-container" id="manifold-container"></div>
+    <div class="JS-container" id="JSCanvas"></div>
   </div>
 
   <!-- ABOUT MODAL -->
@@ -138,7 +138,7 @@
     }
 
     function init() {
-      container = document.getElementById('manifold-container');
+      container = document.getElementById('JSCanvas');
       if (!container) return;
 
       const resizeCanvas = () => {
