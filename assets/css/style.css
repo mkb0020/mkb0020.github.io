@@ -4,8 +4,10 @@
         --text: rgba(223,223,242);
         --BosonBlue: #170032; /* FOR BACKGROUNDS  */
         --BosonShadow: #0e001d;
+        --BosonShadow2: #0e001dc8;
         --ProtonPurple: #37025a; /* FOR BACKGROUNDS */
         --ProtonShadow: rgba(24, 1, 40, 0.2);
+        --ProtonShadow2: rgba(24, 1, 40, 0.758);
         --VortexViolet: #830cde; /* FOR SHADOWS OR DEPTH  RGB 131,12,222 */
         --VortexGlow1: rgba(131, 12, 222, 0.2);
         --VortexGlow2: rgba(131,12,222, 0.5);
@@ -350,7 +352,7 @@ select#Dropdown {
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: var(--ProtonShadow);
+  background: var(--ProtonShadow2);
   border: 3px solid var(--NuclearGlow2);
   color: white;
   box-shadow: 0 0 20px var(--NuclearGlow1);
@@ -360,6 +362,31 @@ select#Dropdown {
 }
 
 .cyber-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px var(--NuclearGlow3);
+  border: 3px solid var(--NuclearFuscia);
+}
+
+
+.cyber-btn2 {
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 30px;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--BosonShadow2);
+  border: 3px solid var(--NuclearGlow2);
+  color: white;
+  box-shadow: 0 0 20px var(--NuclearGlow1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+.cyber-btn2:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 30px var(--NuclearGlow3);
   border: 3px solid var(--NuclearFuscia);
@@ -984,6 +1011,14 @@ select#Dropdown {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+}
+
+modal-header h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--ParticlePink);
+      font-size: 1.5rem;
 }
 
 .modal-title {
@@ -1798,3 +1833,258 @@ svg { width: 100%; height: 100%; }
     }
 
 /* ============================================= MANIFOLD ============================================= */
+
+    /* LAYOUT */
+  .manifold-page {
+      display: grid;
+      grid-template-columns: 370px 1fr;
+      height: calc(100vh - 100px);
+      margin-top: 90px;
+      gap: 0;
+      padding: 10px;
+    }
+    
+
+  .manifold-controls {
+      background: rgba(0, 0, 0, 0);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+      border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
+      transition: all 0.4s;
+      padding: 5px 5px;
+      gap: 20px;
+    }
+
+.manifold-container {
+    background: rgba(0, 0, 0, 0);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
+    transition: all 0.4s;
+      }
+
+    #manifold-canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+
+
+    /* SLIDER */
+    .slider-control {
+      margin: 1rem 0;
+    }
+
+    .slider-control label {
+      display: block;
+      color: var(--AlphaAqua);
+      margin-bottom: 0.5rem;
+      font-size: 1.0rem;
+      font-weight: bold;
+      text-shadow: 0 0 30px var(--NuclearFuscia);
+    }
+
+    .slider-control input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(131,12,222,0.5);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .slider-control input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--ParticlePink);
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--ParticleGlow2);
+    }
+
+    .slider-control input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--ParticlePink);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 0 10px var(--ParticleGlow2);
+    }
+
+
+    
+
+    /* MOBILE */
+    @media (max-width: 992px) {
+      .manifold-page {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto 1fr;
+        height: auto !important;
+      }
+
+      .manifold-controls {
+        border-right: none;
+        border-bottom: 2px solid var(--PlasmaPurple);
+        padding: 1.5rem;
+        height: auto;
+        overflow-y: visible;
+      }
+
+      .manifold-container {
+        height: 60vh;
+        min-height: 400px;
+      }
+
+      h1 { font-size: 2rem; }
+      h4 { font-size: 1.1rem; }
+    }
+
+
+
+
+
+/* ============================================= RESUME ============================================= */
+
+    .summary-section {
+      background: var(--PlasmaGlow2);
+      backdrop-filter: blur(5px);
+      border-radius: 30px;
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: var(--glow);
+      line-height: 1.7;
+    }
+    .summary-section p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      margin-bottom: 15px;
+    }
+
+   .resume-container {
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      margin-top: 60px;
+    }
+
+    .resume-container h4 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--ParticlePink);
+      font-size: 5rem;
+      text-transform: uppercase;
+    }
+
+    .resume-container h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--ParticlePink);
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+
+    .summary-section h4 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--ParticlePink);
+      font-size: 3rem;
+      text-transform: uppercase;
+    }
+
+.summary-section h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: #ffffff;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+    }
+
+.summary-section h2 {
+      text-align: center;
+      margin-bottom: 0.1rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: #ffffff;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+
+  .resume-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+  .aubie-img {
+      width: 150px;
+      height: 150px;
+      display: block;
+      margin: 0 auto 1rem;
+      cursor: pointer;
+    }
+
+
+  .auburn-card {
+        background: linear-gradient(135deg, 
+            rgba(11, 35, 65, 0.532), 
+            rgba(12, 35, 64, 0.361));
+        border: 3px solid rgba(232, 119, 34, 1);
+        border-radius: 18px;
+        padding: 15px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 
+            0 10px 30px rgb(232, 120, 34),
+            0 0 20px rgba(232, 119, 34, 0.5);
+        text-align: center;
+    }
+
+
+
+  .auburn-card h4 {
+        color: rgb(232, 120, 34);
+        font-size: 2rem;
+        font-weight: 700;
+        padding-bottom: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+  .auburn-card h3 {
+        color: #FFFFFF;
+        font-size: 1.3rem;
+        font-weight: 700;
+        padding-bottom: 5px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+  .auburn-card p {
+        color: #FFFFFF;
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding-bottom: 5px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
