@@ -2,825 +2,393 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>CALABI-YAU MANIFOLD ♡ mkb0020</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <meta name="description" content="Interactive 6D Calabi-Yau manifold visualizer – spin, zoom, and explore extra dimensions" />
-
-  <style>
-    :root {
-      --bg: #0d0a12;
-      --text: #e0d8f0;
-      --accent: #C99CE6;
-      --accent2: #F0BFFF;
-      --accent3: #8B3D80;
-      --plum: #8B3D80;
-      --glow: 0 0 20px rgba(201,156,230,0.5);
-      --card-bg: rgba(139,61,128,0.15);
-    }
-
-    * { margin:0; padding:0; box-sizing:border-box; }
-
-    body {
-      padding-top: 60px;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Courier New', monospace;
-      min-height: 100vh;
-      overflow: hidden;
-      background-image: 
-        radial-gradient(circle at 10% 20%, rgba(139,61,128,0.25) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(162,121,205,0.25) 0%, transparent 20%);
-    }
-
-    .simple-navbar {
-      width: 100%;
-      height: 60px;
-      background-color: rgba(162, 121, 205, 0);
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid rgba(162,121,205, 0.7);
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      position: fixed;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-    }
-
-    .nav-home-icon {
-      width: 35px;
-      height: 35px;
-      transition: transform 0.3s;
-    }
-
-    .nav-home-link:hover .nav-home-icon {
-      transform: scale(1.1);
-    }
-
-    .scanline {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
-      opacity: 0.3;
-      animation: scan 9s linear infinite;
-      pointer-events: none;
-      z-index: 100;
-    }
-
-    @keyframes scan { 0% { transform:translateY(-100vh); } 100% { transform:translateY(100vh); } }
-
-    .manifold-page {
-      display: flex;
-      height: calc(100vh - 60px);
-      position: relative;
-    }
-
-    .manifold-controls {
-      width: 380px;
-      background: rgba(20,10,35,0.6);
-      backdrop-filter: blur(12px);
-      border-right: 2px solid var(--accent);
-      padding: 2rem 1.5rem;
-      overflow-y: auto;
-      box-shadow: var(--glow);
-      z-index: 10;
-    }
-
-    .manifold-container {
-      flex: 1;
-      background: #000;
-      position: relative;
-      overflow: hidden;
-    }
-
-    #manifold-canvas {
-      width: 100% !important;
-      height: 100% !important;
-      display: block;
-    }
-
-    h1 {
-      font-size: 3.5rem;
-      text-align: center;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: var(--glow);
-    }
-
-    h4 {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 1.1rem;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: var(--glow);
-    }
-
-    .btn-neon-portal {
-      background: transparent;
-      border: 2px solid var(--accent);
-      color: var(--text);
-      padding: 0.7rem 1.8rem;
-      margin: 0.5rem;
-      border-radius: 12px;
-      font-family: 'Courier New', monospace;
-      font-weight: bold;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.4s;
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-    }
-
-    .btn-neon-portal::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(201,156,230,0.3), transparent);
-      transition: 0.7s;
-    }
-
-    .btn-neon-portal:hover::before { left: 100%; }
-    .btn-neon-portal:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--glow), 0 10px 30px rgba(139,61,128,0.4);
-      border-color: var(--accent2);
-    }
-
-    .zoom-controls, .about-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 2rem;
-    }
-
-    .btn-quantum-pulse {
-      background: var(--card-bg);
-      border: 2px solid var(--accent);
-      color: var(--text);
-      width: 100%;
-      padding: 0.8rem;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.4s;
-      font-family: 'Courier New', monospace;
-      font-weight: bold;
-    }
-
-    .btn-quantum-pulse:hover {
-      background: rgba(201,156,230,0.3);
-      transform: scale(1.05);
-      box-shadow: var(--glow);
-    }
-
-    .slider-control {
-      margin: 2rem 0;
-    }
-
-    .slider-control label {
-      display: block;
-      color: var(--accent2);
-      margin-bottom: 0.8rem;
-      font-size: 1.2rem;
-    }
-
-    .slider-control input[type="range"] {
-      width: 100%;
-      height: 6px;
-      border-radius: 3px;
-      background: rgba(139,61,128,0.5);
-      outline: none;
-      cursor: pointer;
-    }
-
-    .slider-control input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--accent2);
-      cursor: pointer;
-      box-shadow: var(--glow);
-    }
-
-    .slider-control input[type="range"]::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--accent2);
-      cursor: pointer;
-      border: none;
-      box-shadow: var(--glow);
-    }
-
-    .hint {
-      font-size: 1rem;
-      color: var(--text);
-      opacity: 0.8;
-      margin-top: 2rem;
-      line-height: 1.6;
-    }
-
-    .manifold-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(10,5,25,0.8);
-      backdrop-filter: blur(12px);
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 1rem;
-    }
-
-    .manifold-modal-content {
-      background: linear-gradient(135deg, rgba(30,15,60,0.9), rgba(15,8,40,0.9));
-      border: 2px solid var(--accent);
-      border-radius: 20px;
-      max-width: 900px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: 0 0 40px rgba(201,156,230,0.6);
-      color: var(--text);
-    }
-
-    .manifold-modal-header {
-      padding: 1.5rem 2rem;
-      border-bottom: 1px solid var(--accent);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(139,61,128,0.3);
-    }
-
-    .manifold-modal-header h2 {
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 2rem;
-    }
-
-    .manifold-modal-close {
-      background: none;
-      border: none;
-      color: #F0BFFF;
-      font-size: 2.5rem;
-      cursor: pointer;
-    }
-
-    .manifold-modal-body {
-      padding: 2rem;
-      line-height: 1.7;
-    }
-
-    .manifold-info-section h3 {
-      color: var(--accent2);
-      margin-bottom: 1rem;
-    }
-
-    .manifold-info-list {
-      list-style-type: disc;
-      padding-left: 1.5rem;
-    }
-
-    .manifold-note {
-      background: rgba(201,156,230,0.15);
-      border-left: 4px solid var(--accent);
-      padding: 1rem;
-      border-radius: 5px;
-      margin-bottom: 1rem;
-    }
-
-    .manifold-modal-footer {
-      padding: 1rem;
-      text-align: center;
-    }
-
-    @media (max-width: 900px) {
-      .manifold-page { flex-direction: column; }
-      .manifold-controls { width: 100%; height: auto; border-right: none; border-bottom: 2px solid var(--accent); }
-      .manifold-container { min-height: 400px; }
-    }
-
-
-
-        /* ===== MOBILE FIXES ===== */
-    @media (max-width: 900px) {
-      body {
-        overflow: auto !important; /* Allow scrolling */
-        padding-top: 70px; /* Extra for mobile safe area */
-        -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
-      }
-      
-      .JS-page, .manifold-page {
-        flex-direction: column !important;
-        height: auto !important;
-        min-height: calc(100vh - 70px);
-      }
-      
-      .JS-controls, .manifold-controls {
-        width: 100% !important;
-        height: auto !important;
-        padding: 1.5rem !important;
-        border-right: none !important;
-        border-bottom: 2px solid var(--accent) !important;
-        overflow-y: visible !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-      }
-      
-      .JS-container, .manifold-container {
-        flex: none !important;
-        width: 100% !important;
-        height: 60vh !important; /* Fixed mobile height */
-        min-height: 400px !important;
-      }
-      
-      #dice-canvas, #manifold-canvas {
-        width: 100vw !important;
-        height: 60vh !important;
-        position: relative !important;
-      }
-      
-      h1 { font-size: 2.5rem !important; }
-      h4 { font-size: 1.5rem !important; }
-      .JS-result-number { font-size: 3rem !important; }
-      
-      /* Mobile buttons */
-      .about-buttons, .zoom-controls {
-        flex-wrap: wrap !important;
-        gap: 0.5rem !important;
-      }
-      
-      .btn-neon-portal, .btn-quantum-pulse {
-        padding: 0.7rem 1rem !important;
-        font-size: 1rem !important;
-        min-height: 44px !important; /* iOS touch target */
-      }
-      
-      /* Touch-friendly sliders */
-      .slider-control input[type="range"] {
-        height: 8px !important;
-      }
-      
-      .slider-control input[type="range"]::-webkit-slider-thumb {
-        width: 28px !important;
-        height: 28px !important;
-      }
-    }
-
-    /* iOS Safari fixes */
-    @supports (-webkit-touch-callout: none) {
-      body {
-        padding-bottom: env(safe-area-inset-bottom) !important;
-      }
-      
-      .simple-navbar {
-        padding-bottom: env(safe-area-inset-top) !important;
-      }
-    }
-
-    /* Prevent zoom on input focus (iOS) */
-    input[type="range"] {
-      font-size: 16px; /* Prevents zoom */
-      touch-action: manipulation;
-    }
-
-    /* Touch action hints */
-    canvas, .JS-container, .manifold-container {
-      touch-action: manipulation;
-    }
-  </style>
 </head>
 <body>
 
-  <nav class="simple-navbar">
-    <a class="nav-home-link" href="https://mkb0020.github.io">
-      <img src="home.png" alt="Home" class="nav-home-icon">
-    </a>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="https://mkb0020.github.io">
+        <div class="home-icon"></div>
+      </a>
+      <div class="logo">♡ mkb0020</div>
+      <div class="nav-spacer"></div>
+    </div>
   </nav>
-
-  <div class="scanline"></div>
 
   <div class="manifold-page">
     <div class="manifold-controls">
-      <h1>CALABI-YAU</h1>
-      <h4>MANIFOLD</h4>
-      <div class="about-buttons">
-        <button class="btn-neon-portal" onclick="openManifoldInfo()">About</button>
-        <button class="btn-neon-portal" onclick="openControlsInfo()">Controls</button>
+      <h1>CALABI-YAU MANIFOLD</h1>
+ 
+
+
+      <div class="cyber-card">
+        <button class="cyber-btn2" id="rotateBtn"><h3>⏸ Pause Rotation</h3></button>
+        <button class="cyber-btn2" id="regenerateBtn" style="margin-top: 0.5rem;"><h3>Regenerate</h3></button>
+    
+        <div class="slider-control">
+          <label for="complexitySlider">Mesh Complexity: <span id="complexityValue">30</span></label>
+          <input type="range" id="complexitySlider" min="10" max="60" value="30" step="5">
+        </div>
+ 
+        <h3 style="font-size: 1rem; margin-bottom: 0.8rem;">Zoom Controls</h3>
+        <div class="zoom-controls">
+          <button class="cyber-btn" id="zoomInBtn"><h1>+</h1></button>
+          <button class="cyber-btn" id="zoomOutBtn"><h1>-</h1></button>
+          <button class="cyber-btn" id="resetZoomBtn"><h3>Reset</h3></button>
+        </div>
       </div>
 
-      <button class="btn-quantum-pulse" id="rotateBtn"><span>⏸</span> <span>Pause Rotation</span></button>
-      <button class="btn-quantum-pulse" id="regenerateBtn">Regenerate</button>
-
-      <div class="slider-control">
-        <label for="complexitySlider">Mesh Complexity: <span id="complexityValue">30</span></label>
-        <input type="range" id="complexitySlider" min="10" max="60" value="30" step="5">
+      <div style="display: flex; gap: 1rem;">
+        <button class="btn-quantum-pulse" onclick="openModal('aboutModal')">About</button>
+        <button class="btn-quantum-pulse" onclick="openModal('controlsModal')">Controls</button>
       </div>
 
-      <div class="zoom-controls">
-        <button class="btn-quantum-pulse" id="zoomInBtn">+ Zoom</button>
-        <button class="btn-quantum-pulse" id="zoomOutBtn">- Zoom</button>
-        <button class="btn-quantum-pulse" id="resetZoomBtn">Reset</button>
-      </div>
 
-      <p class="hint">💡 Drag to rotate • Scroll to zoom • Increase complexity for more detail (but slower!)</p>
     </div>
 
     <div class="manifold-container" id="manifold-container"></div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script>
-  let scene, camera, renderer, manifoldGroup;
-  let container;
-  let isRotating = true;
-  let isDragging = false;
-  let previousPosition = { x: 0, y: 0 };
-  let complexity = 30;
-  let currentZoom = 5;
-  const initialCameraZ = 5;
-
-  function init() {
-    container = document.getElementById('manifold-container');
-    if (!container) {
-      console.error("Container 'manifold-container' not found!");
-      return;
-    }
-
-    // Fullscreen canvas setup
-    const resizeCanvas = () => {
-      const rect = container.getBoundingClientRect();
-      renderer.setSize(rect.width, rect.height);
-      camera.aspect = rect.width / rect.height;
-      camera.updateProjectionMatrix();
-    };
-
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
-
-    camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-    camera.position.z = initialCameraZ;
-
-    renderer = new THREE.WebGLRenderer({ 
-      antialias: true, 
-      alpha: true,
-      powerPreference: "high-performance"
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-
-    const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(5, 5, 5);
-    scene.add(pointLight);
-
-    createManifold();
-    
-    // === CLEAN MOBILE-FRIENDLY CONTROLS ===
-    let touchStartPos = null;
-    let pinchDistance = 0;
-    let initialPinchZoom = 0;
-
-    const getClientPos = (e) => {
-      if (e.touches && e.touches.length > 0) {
-        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      }
-      return { x: e.clientX, y: e.clientY };
-    };
-
-    const handlePointerStart = (e) => {
-      e.preventDefault();
-      isDragging = true;
-      touchStartPos = getClientPos(e);
-      previousPosition = { ...touchStartPos };
-      
-      // Check for pinch
-      if (e.touches && e.touches.length === 2) {
-        const dx = e.touches[0].clientX - e.touches[1].clientX;
-        const dy = e.touches[0].clientY - e.touches[1].clientY;
-        pinchDistance = Math.sqrt(dx * dx + dy * dy);
-        initialPinchZoom = currentZoom;
-      }
-    };
-
-    const handlePointerMove = (e) => {
-      if (!isDragging || !manifoldGroup) return;
-      e.preventDefault();
-
-      if (e.touches && e.touches.length === 2) {
-        // PINCH ZOOM
-        const dx = e.touches[0].clientX - e.touches[1].clientX;
-        const dy = e.touches[0].clientY - e.touches[1].clientY;
-        const currentDistance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (pinchDistance > 0) {
-          const scale = currentDistance / pinchDistance;
-          currentZoom = initialPinchZoom * (1 / scale);
-          currentZoom = Math.max(1, Math.min(12, currentZoom));
-          camera.position.z = currentZoom;
-        }
-        pinchDistance = currentDistance;
-      } else {
-        // DRAG ROTATE
-        const currentPos = getClientPos(e);
-        const deltaX = currentPos.x - previousPosition.x;
-        const deltaY = currentPos.y - previousPosition.y;
-        
-        manifoldGroup.rotation.y += deltaX * 0.008;
-        manifoldGroup.rotation.x += deltaY * 0.008;
-        manifoldGroup.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, manifoldGroup.rotation.x));
-        
-        previousPosition = { ...currentPos };
-      }
-    };
-
-    const handlePointerEnd = (e) => {
-      e.preventDefault();
-      isDragging = false;
-      touchStartPos = null;
-      pinchDistance = 0;
-    };
-
-    // ADD EVENT LISTENERS (CLEAN - NO DUPLICATES)
-    const canvas = renderer.domElement;
-    
-    // Pointer events (works on both desktop + mobile)
-    canvas.addEventListener('pointerdown', handlePointerStart, { passive: false });
-    canvas.addEventListener('pointermove', handlePointerMove, { passive: false });
-    canvas.addEventListener('pointerup', handlePointerEnd, { passive: false });
-    canvas.addEventListener('pointerleave', handlePointerEnd, { passive: false });
-    canvas.addEventListener('pointercancel', handlePointerEnd, { passive: false });
-
-    // Wheel zoom (desktop)
-    canvas.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      const zoomSpeed = 0.3;
-      if (e.deltaY < 0) {
-        currentZoom = Math.max(1, currentZoom - zoomSpeed);
-      } else {
-        currentZoom = Math.min(12, currentZoom + zoomSpeed);
-      }
-      camera.position.z = currentZoom;
-    }, { passive: false });
-
-    // RESIZE HANDLER
-    const handleResize = () => {
-      const rect = container.getBoundingClientRect();
-      renderer.setSize(rect.width, rect.height);
-      camera.aspect = rect.width / rect.height;
-      camera.updateProjectionMatrix();
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Initial resize
-
-    // Touch action CSS hint
-    canvas.style.touchAction = 'none';
-
-    animate();
-  }
-
-  function createCalabiYauGeometry(steps) {
-    const geometry = new THREE.BufferGeometry();
-    const vertices = [];
-    const indices = [];
-
-    const r = (u, v) => {
-      const phi = u * Math.PI * 2;
-      const theta = v * Math.PI * 2;
-      const twist = Math.sin(u * Math.PI * 4) * 0.3;
-      const x = Math.cos(phi + twist) * Math.sin(theta);
-      const y = Math.sin(phi + twist) * Math.sin(theta);
-      const z = Math.cos(theta) + Math.sin(phi * 3 + v * 5) * 0.2;
-      return new THREE.Vector3(x, y, z);
-    };
-
-    for (let i = 0; i <= steps; i++) {
-      for (let j = 0; j <= steps; j++) {
-        const u = i / steps;
-        const v = j / steps;
-        const pos = r(u, v);
-        vertices.push(pos.x, pos.y, pos.z);
-      }
-    }
-
-    for (let i = 0; i < steps; i++) {
-      for (let j = 0; j < steps; j++) {
-        const a = i * (steps + 1) + j;
-        const b = i * (steps + 1) + (j + 1);
-        const c = (i + 1) * (steps + 1) + j;
-        const d = (i + 1) * (steps + 1) + (j + 1);
-
-        indices.push(a, b, d);
-        indices.push(a, d, c);
-      }
-    }
-    
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-    geometry.setIndex(indices);
-    geometry.computeVertexNormals();
-    return geometry;
-  }
-
-  function createManifold() {
-    if (manifoldGroup) {
-      scene.remove(manifoldGroup);
-    }
-
-    const geometry = createCalabiYauGeometry(complexity);
-
-    const wireframeMaterial = new THREE.MeshBasicMaterial({
-      color: 0x00ffff,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.7
-    });
-
-    const surfaceMaterial = new THREE.MeshPhongMaterial({
-      color: 0x4a0080,
-      emissive: 0x220066,
-      specular: 0x00ffff,
-      shininess: 50,
-      transparent: true,
-      opacity: 0.5,
-      side: THREE.DoubleSide
-    });
-    
-    manifoldGroup = new THREE.Group();
-    const surface = new THREE.Mesh(geometry, surfaceMaterial);
-    const wireframe = new THREE.Mesh(geometry, wireframeMaterial);
-    manifoldGroup.add(surface);
-    manifoldGroup.add(wireframe);
-    scene.add(manifoldGroup);
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-    if (isRotating && !isDragging && manifoldGroup) {
-      manifoldGroup.rotation.x += 0.003;
-      manifoldGroup.rotation.y += 0.004;
-      manifoldGroup.rotation.z += 0.0015;
-    }
-    renderer.render(scene, camera);
-  }
-
-  // Button handlers (unchanged)
-  function zoomIn() {
-    currentZoom = Math.max(1, currentZoom - 0.5);
-    camera.position.z = currentZoom;
-  }
-
-  function zoomOut() {
-    currentZoom = Math.min(12, currentZoom + 0.5);
-    camera.position.z = currentZoom;
-  }
-
-  function resetZoom() {
-    currentZoom = initialCameraZ;
-    camera.position.z = currentZoom;
-  }
-
-  // Event listeners for buttons
-  document.addEventListener('DOMContentLoaded', () => {
-    const rotateBtn = document.getElementById('rotateBtn');
-    if (rotateBtn) {
-      rotateBtn.addEventListener('click', function() {
-        isRotating = !isRotating;
-        const pauseIcon = this.querySelector('span:first-child');
-        const text = this.querySelector('span:last-child');
-        if (isRotating) {
-          pauseIcon.textContent = '⏸';
-          text.textContent = 'Pause Rotation';
-        } else {
-          pauseIcon.textContent = '▶';
-          text.textContent = 'Resume Rotation';
-        }
-      });
-    }
-
-    const regenerateBtn = document.getElementById('regenerateBtn');
-    if (regenerateBtn) {
-      regenerateBtn.addEventListener('click', createManifold);
-    }
-
-    document.getElementById('zoomInBtn')?.addEventListener('click', zoomIn);
-    document.getElementById('zoomOutBtn')?.addEventListener('click', zoomOut);
-    document.getElementById('resetZoomBtn')?.addEventListener('click', resetZoom);
-
-    const complexitySlider = document.getElementById('complexitySlider');
-    const complexityValue = document.getElementById('complexityValue');
-    if (complexitySlider && complexityValue) {
-      complexitySlider.addEventListener('input', function() {
-        complexity = parseInt(this.value);
-        complexityValue.textContent = complexity;
-        createManifold();
-      });
-    }
-
-    init();
-  });
-  </script>
-
   <!-- ABOUT MODAL -->
-  <div id="ManifoldModal" class="manifold-modal" onclick="closeManifoldInfo(event)">
-    <div class="manifold-modal-content" onclick="event.stopPropagation()">
-      <div class="manifold-modal-header">
-        <h2>A Calabi-What?</h2>
-        <button class="manifold-modal-close" onclick="closeManifoldInfo(event)">×</button>
+  <div id="aboutModal" class="modal" onclick="closeModal('aboutModal', event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">A Calabi-What?</div>
+        <button class="btn-spinX" onclick="closeModal('aboutModal')">X</button>
       </div>
-      <div class="manifold-modal-body">
-        <div class="manifold-info-section">
-          <p class="manifold-note">Tiny six‑dimensional origami for the universe!</p>
+      <div class="modal-body">
+        <p><div class="NeonNote">
+          Tiny six-dimensional origami for the universe!
+        </div></p>
+
+        <div class="modal-section">
+          <p style="margin-bottom: 1rem;"><div class="holo-card">
+            A Calabi-Yau Manifold is a delicately curved, compact complex shape that's Ricci-flat and carries a holomorphic volume form, meaning it has the kind of internal symmetry mathematicians adore. It lives in six real dimensions (three complex dimensions), but we show it here as a 3D projection you can spin, zoom, and explore.
+          </div></p>
         </div>
-        <div class="manifold-info-section">
-          <p class="manifold-info-list">
-            A Calabi‑Yau Manifold is a delicately curved, compact complex shape that's Ricci‑flat and carries a holomorphic volume form, meaning it has the kind of internal symmetry mathematicians adore. It lives in six real dimensions (three complex dimensions), but we show it here as a 3D projection you can spin, zoom, and explore.
+
+        <div class="modal-section">
+          <p style="margin-bottom: 1rem;">
+          <div class="holo-card">
+            <ul style="margin-bottom: 1rem;">
+              <li><strong>In geometry</strong> - Calabi-Yau spaces are central examples in complex differential geometry and algebraic geometry</li>
+              <li><strong>In physics</strong> - They're the favorite hiding places for extra dimensions in string theory</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="controlsModal" class="modal" onclick="closeModal('controlsModal', event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">Animation Controls</div>
+        <button class="btn-spinX" onclick="closeModal('controlsModal')">X</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p style="margin-bottom: 1rem;">
+          <div class="holo-card">
+              <strong>For PC / Desktop:</strong> 
+              <ul>
+                <li><strong>Rotate</strong> - Drag with your mouse to rotate the manifold manually</li>
+                <li><strong>Zoom</strong> - Use the zoom buttons or scroll wheel</li>
+                <li><strong>Details</strong> - Use the slider to increase or decrease mesh complexity</li>
+              </ul>
+          </div></p>
+        </div>
+        <div class="modal-section">
+          <p style="margin-bottom: 1rem;">
+          <div class="holo-card">
+              <strong>For Mobile Devices:</strong>
+              <ul>
+                <li>Use touch to drag and pinch to zoom</li>
+              </ul>
+          </div>
           </p>
         </div>
-        <div class="manifold-info-section">
-          <ul class="manifold-info-list">
-            <li><strong>In geometry</strong> - Calabi‑Yau spaces are central examples in complex differential geometry and algebraic geometry; they host rich structures like families of deformations (moduli) and special subspaces that mathematicians study to understand shapes and symmetries.</li>
-            <li><strong>In physics</strong> - They're the favorite hiding places for extra dimensions in string theory. Different Calabi‑Yau shapes give different patterns of particles and forces when the extra dimensions are compactified, so choosing one is a bit like picking the blueprint for a universe.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="manifold-modal-footer">
-        <button class="btn-quantum-pulse" onclick="openControlsInfo()">View Controls</button>
-        <button class="btn-quantum-pulse" onclick="closeManifoldInfo(event)">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- CONTROLS MODAL -->
-  <div id="ControlsModal" class="manifold-modal" onclick="closeControlsInfo(event)">
-    <div class="manifold-modal-content" onclick="event.stopPropagation()">
-      <div class="manifold-modal-header">
-        <h2>Animation Controls</h2>
-        <button class="manifold-modal-close" onclick="closeControlsInfo(event)">×</button>
-      </div>
-      <div class="manifold-modal-body">
-        <div class="manifold-info-section">
-          <ul class="manifold-info-list">
-            <li><strong>Rotate</strong> - Drag with your mouse to rotate the manifold manually.</li>
-            <li><strong>Zoom</strong> - Use the zoom buttons or scroll wheel to zoom in and out.</li>
-            <li><strong>Details</strong> - Use the slider to increase or decrease mesh complexity</li>
-          </ul>
-        </div>
-      </div>
-      <div class="manifold-modal-footer">
-        <button class="btn-quantum-pulse" onclick="closeControlsInfo(event)">Close</button>
-      </div>
-    </div>
-  </div>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    function openManifoldInfo() {
-      document.getElementById('ManifoldModal').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+    let scene, camera, renderer, manifoldGroup;
+    let container;
+    let isRotating = true;
+    let isDragging = false;
+    let previousPosition = { x: 0, y: 0 };
+    let complexity = 30;
+    let currentZoom = 5;
+    const initialCameraZ = 5;
+
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
     }
 
-    function closeManifoldInfo(event) {
+    function closeModal(id, event) {
       if (event) event.stopPropagation();
-      document.getElementById('ManifoldModal').style.display = 'none';
-      document.body.style.overflow = 'auto';
+      document.getElementById(id).style.display = 'none';
     }
 
-    function openControlsInfo() {
-      document.getElementById('ControlsModal').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+    function init() {
+      container = document.getElementById('manifold-container');
+      if (!container) return;
+
+      const resizeCanvas = () => {
+        const rect = container.getBoundingClientRect();
+        renderer.setSize(rect.width, rect.height);
+        camera.aspect = rect.width / rect.height;
+        camera.updateProjectionMatrix();
+      };
+
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
+
+      camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+      camera.position.z = initialCameraZ;
+
+      renderer = new THREE.WebGLRenderer({ 
+        antialias: true, 
+        alpha: true,
+        powerPreference: "high-performance"
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      scene.add(ambientLight);
+
+      const pointLight = new THREE.PointLight(0xffffff, 1);
+      pointLight.position.set(5, 5, 5);
+      scene.add(pointLight);
+
+      createManifold();
+      
+      let touchStartPos = null;
+      let pinchDistance = 0;
+      let initialPinchZoom = 0;
+
+      const getClientPos = (e) => {
+        if (e.touches && e.touches.length > 0) {
+          return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+        return { x: e.clientX, y: e.clientY };
+      };
+
+      const handlePointerStart = (e) => {
+        e.preventDefault();
+        isDragging = true;
+        touchStartPos = getClientPos(e);
+        previousPosition = { ...touchStartPos };
+        
+        if (e.touches && e.touches.length === 2) {
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          pinchDistance = Math.sqrt(dx * dx + dy * dy);
+          initialPinchZoom = currentZoom;
+        }
+      };
+
+      const handlePointerMove = (e) => {
+        if (!isDragging || !manifoldGroup) return;
+        e.preventDefault();
+
+        if (e.touches && e.touches.length === 2) {
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          const currentDistance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (pinchDistance > 0) {
+            const scale = currentDistance / pinchDistance;
+            currentZoom = initialPinchZoom * (1 / scale);
+            currentZoom = Math.max(1, Math.min(12, currentZoom));
+            camera.position.z = currentZoom;
+          }
+          pinchDistance = currentDistance;
+        } else {
+          const currentPos = getClientPos(e);
+          const deltaX = currentPos.x - previousPosition.x;
+          const deltaY = currentPos.y - previousPosition.y;
+          
+          manifoldGroup.rotation.y += deltaX * 0.008;
+          manifoldGroup.rotation.x += deltaY * 0.008;
+          manifoldGroup.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, manifoldGroup.rotation.x));
+          
+          previousPosition = { ...currentPos };
+        }
+      };
+
+      const handlePointerEnd = (e) => {
+        e.preventDefault();
+        isDragging = false;
+        touchStartPos = null;
+        pinchDistance = 0;
+      };
+
+      const canvas = renderer.domElement;
+      
+      canvas.addEventListener('pointerdown', handlePointerStart, { passive: false });
+      canvas.addEventListener('pointermove', handlePointerMove, { passive: false });
+      canvas.addEventListener('pointerup', handlePointerEnd, { passive: false });
+      canvas.addEventListener('pointerleave', handlePointerEnd, { passive: false });
+      canvas.addEventListener('pointercancel', handlePointerEnd, { passive: false });
+
+      canvas.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const zoomSpeed = 0.3;
+        if (e.deltaY < 0) {
+          currentZoom = Math.max(1, currentZoom - zoomSpeed);
+        } else {
+          currentZoom = Math.min(12, currentZoom + zoomSpeed);
+        }
+        camera.position.z = currentZoom;
+      }, { passive: false });
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      canvas.style.touchAction = 'none';
+
+      animate();
     }
 
-    function closeControlsInfo(event) {
-      if (event) event.stopPropagation();
-      document.getElementById('ControlsModal').style.display = 'none';
-      document.body.style.overflow = 'auto';
+    function createCalabiYauGeometry(detail) {
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        const indices = [];
+
+        for (let u = 0; u <= detail; u++) {
+            for (let v = 0; v <= detail; v++) {
+                const theta = (u / detail) * Math.PI * 2;
+                const phi = (v / detail) * Math.PI * 2;
+                
+                const r1 = 1 + 0.3 * Math.sin(3 * theta) * Math.cos(2 * phi);
+                const r2 = 1 + 0.2 * Math.cos(5 * theta) * Math.sin(3 * phi);
+                const r3 = 1 + 0.15 * Math.sin(4 * theta + phi) * Math.cos(2 * theta - phi);
+                
+                const x = r1 * Math.sin(theta) * Math.cos(phi) + 0.2 * Math.sin(7 * theta) * Math.cos(4 * phi);
+                const y = r2 * Math.sin(theta) * Math.sin(phi) + 0.2 * Math.cos(5 * theta) * Math.sin(6 * phi);
+                const z = r3 * Math.cos(theta) + 0.15 * Math.sin(3 * theta) * Math.cos(3 * phi);
+
+                vertices.push(x, y, z);
+            }
+        }
+        for (let u = 0; u < detail; u++) {
+            for (let v = 0; v < detail; v++) {
+                const a = u * (detail + 1) + v;
+                const b = a + detail + 1;
+                const c = a + 1;
+                const d = b + 1;
+
+                indices.push(a, b, c);
+                indices.push(b, d, c);
+            }
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        geometry.setIndex(indices);
+        geometry.computeVertexNormals();
+        return geometry;
     }
 
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeManifoldInfo(event);
-        closeControlsInfo(event);
+    function createManifold() {
+      if (manifoldGroup) {
+        scene.remove(manifoldGroup);
+      }
+
+      const geometry = createCalabiYauGeometry(complexity);
+
+      const wireframeMaterial = new THREE.MeshBasicMaterial({
+        color: 0x00ffff,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.7
+      });
+
+      const surfaceMaterial = new THREE.MeshPhongMaterial({
+        color: 0x4a0080,
+        emissive: 0x220066,
+        specular: 0x00ffff,
+        shininess: 50,
+        transparent: true,
+        opacity: 0.5,
+        side: THREE.DoubleSide
+      });
+      
+      manifoldGroup = new THREE.Group();
+      const surface = new THREE.Mesh(geometry, surfaceMaterial);
+      const wireframe = new THREE.Mesh(geometry, wireframeMaterial);
+      manifoldGroup.add(surface);
+      manifoldGroup.add(wireframe);
+      scene.add(manifoldGroup);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (isRotating && !isDragging && manifoldGroup) {
+        manifoldGroup.rotation.x += 0.003;
+        manifoldGroup.rotation.y += 0.004;
+        manifoldGroup.rotation.z += 0.0015;
+      }
+      renderer.render(scene, camera);
+    }
+
+    function zoomIn() {
+      currentZoom = Math.max(1, currentZoom - 0.5);
+      camera.position.z = currentZoom;
+    }
+
+    function zoomOut() {
+      currentZoom = Math.min(12, currentZoom + 0.5);
+      camera.position.z = currentZoom;
+    }
+
+    function resetZoom() {
+      currentZoom = initialCameraZ;
+      camera.position.z = currentZoom;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const rotateBtn = document.getElementById('rotateBtn');
+      if (rotateBtn) {
+        rotateBtn.addEventListener('click', function() {
+          isRotating = !isRotating;
+          const h3 = this.querySelector('h3');
+          if (h3) {
+            h3.textContent = isRotating ? '⏸ Pause Rotation' : '▶ Resume Rotation';
+          }
+        });
+      }
+
+      document.getElementById('regenerateBtn')?.addEventListener('click', createManifold);
+      document.getElementById('zoomInBtn')?.addEventListener('click', zoomIn);
+      document.getElementById('zoomOutBtn')?.addEventListener('click', zoomOut);
+      document.getElementById('resetZoomBtn')?.addEventListener('click', resetZoom);
+
+      const complexitySlider = document.getElementById('complexitySlider');
+      const complexityValue = document.getElementById('complexityValue');
+      if (complexitySlider && complexityValue) {
+        complexitySlider.addEventListener('input', function() {
+          complexity = parseInt(this.value);
+          complexityValue.textContent = complexity;
+          createManifold();
+        });
+      }
+
+      init();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
       }
     });
   </script>
-
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 </body>
 </html>
