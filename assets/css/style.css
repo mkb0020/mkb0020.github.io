@@ -1764,7 +1764,6 @@ svg { width: 100%; height: 100%; }
 .d20-controls {
   background: transparent;
   backdrop-filter: blur(20px);
-  border-right: 2px solid var(--PlasmaPurple);
   padding: 2rem 1.5rem;
   overflow-y: auto;
   box-shadow: 0 0 30px var(--PlasmaGlow2);
@@ -1822,10 +1821,12 @@ svg { width: 100%; height: 100%; }
 
   .d20-controls {
     border-right: none;
-    border-bottom: 2px solid var(--PlasmaPurple);
+    /*border-bottom: 2px solid var(--PlasmaPurple);*/
     padding: 1.5rem;
     height: auto;
     overflow-y: visible;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
   }
 
   .d20-container {
