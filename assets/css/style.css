@@ -209,6 +209,38 @@ body {
   flex-shrink: 0; 
 }
 
+.help-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--AquaAura);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 15px var(--AuraGlow2);
+}
+
+.help-icon:hover {
+  transform: scale(1.2) rotate(180deg);
+  box-shadow: 
+    0 0 25px var(--AquaAura),
+    0 0 35px var(--AlphaAqua);
+}
+
+.question-mark {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--BosonBlue);
+  text-shadow: 0 0 10px var(--ParticleGlow3);
+  z-index: 2;
+}
+
 @media (max-width: 767px) {
   .nav-container {
     position: relative; 
@@ -366,6 +398,14 @@ select#Dropdown {
       width: 250px;
       height: 150px;
       margin-bottom: 2rem auto;
+      
+    }
+
+    .tv-gif {
+      width: 300px;
+      height: 300px;
+      margin-bottom: 3rem auto;
+      margin-top: 3rem auto;
       
     }
 /* ============================================= BUTTONS ============================================= */
