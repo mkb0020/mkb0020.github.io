@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <title>CATastrophe2 - Coming Soon</title>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="https://mkb0020.github.io" class="home-link">
+      <div class="home-icon"></div>
+      <div class="logo">♡ mkb0020</div>
+    </a>
+        <button class="help-icon" id="helpBtn" aria-label="Game Instructions" title="How to play">
+      <div class="question-mark">?</div>
+    </button>
+  </div>
+</nav>
+
+
+
+  <div class="main-container">
+
+      <div class="summary-section" style="margin-top: 6rem; padding-right: 12rem; padding-left: 12rem; padding-bottom:0rem; padding-top:1.0rem;">
+        <p style="font-family: orbitron; font-size:50px;">COMING SOON</p>
+        <img src="assets/images/glitch.gif" alt="404" class="tv-gif" id="glitch">
+      </div>  
+
+  </div>
+
+
+   <!-- HELP MODAL ✅ NEW -->
+  <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">🐱 CATastrophe 2</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+        <blockquote>
+          <p><em>"Nature has no reverence towards life. Nature treats life as though it were the most valueless thing in the world....<br>
+          Nature does not act by purposes."</em><br>
+          <cite>— Erwin Schrödinger 🐾</cite></p>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // HELP MODAL JAVASCRIPT ✅ NEW
+    document.addEventListener('DOMContentLoaded', function() {
+      const helpBtn = document.getElementById('helpBtn');
+      const modal = document.getElementById('helpModal');
+      const closeBtn = document.getElementById('closeModal');
+
+      // Open modal
+      helpBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
+      });
+
+      // Close modal
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      });
+
+      // Close on outside click
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+
+      // Close with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
