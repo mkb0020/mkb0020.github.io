@@ -526,7 +526,7 @@ scene("test", () => {
       };
 
       URL.revokeObjectURL(blobUrl);
-      status.textContent = `Loaded "${animName}" (${customAnimConfig.totalFrames}f) → Press U!`;
+      status.textContent = `Loaded "${animName}" (${customAnimConfig.totalFrames}frames) → Press "U"!`;
     } catch (err) {
       status.textContent = `Error: ${err.message}`;
     }
