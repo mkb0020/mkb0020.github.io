@@ -23,7 +23,7 @@ loadSprite("greenBlast", "assets/images/CATastrophe/GreenBlast.png", { sliceX:12
 loadSprite("biscuits", "assets/images/CATastrophe/Biscuits.png", { sliceX:8, sliceY:3, anims:{glitch:{from:0,to:23}} });
 loadSprite("fireball", "assets/images/CATastrophe/Fireball.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
 loadSprite("scratch", "assets/images/CATastrophe/Scratch.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
-loadSprite("littleCucumber", "assets/images/CATastrophe/LittleCucumber.png");
+loadSprite("littleCucumber", "assets/images/CATastrophe/LittleCucumber.PNG");
 
 scene("test", () => {
 
