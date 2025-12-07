@@ -12,7 +12,8 @@ kaplay({
 
 loadFont("CyberGoth", "assets/fonts/ScienceGothic.ttf");
 
-loadSprite("explosion", "assets/images/CATastrophe/Explosion.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
+loadSprite("purpleBoom", "assets/images/CATastrophe/Explosion.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
+loadSprite("redBoom", "assets/images/CATastrophe/RedBoom.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
 loadSprite("fire", "assets/images/CATastrophe/Fire.png", { sliceX:9, sliceY:1, anims:{ball:{from:0,to:8}} });
 loadSprite("smoke", "assets/images/CATastrophe/Smoke.png", { sliceX:9, sliceY:1, anims:{puff:{from:0,to:8}} });
 loadSprite("swirl", "assets/images/CATastrophe/Swirl.png", { sliceX:12, sliceY:1, anims:{spin:{from:0,to:11}} });
@@ -64,8 +65,8 @@ scene("test", () => {
   boss.onUpdate(() => boss.scale = 1 + Math.sin(time() * 2) * 0.1);
 
 
-  onKeyPress("1", () => animateExplosion(boss));
-  onKeyPress("2", () => animateFire(hero, boss));
+  onKeyPress("1", () => animateRedBoom(hero));
+  onKeyPress("2", () => animatePurpleBoom(boss));
   onKeyPress("3", () => animateSmoke(boss));
   onKeyPress("4", () => animateSwirl(hero));
   onKeyPress("5", () => animatePowerup(hero));
@@ -74,13 +75,30 @@ scene("test", () => {
   onKeyPress("8", () => animateGreenBlast(boss, hero));   
   onKeyPress("9", () => animateBiscuits(hero));           
   onKeyPress("0", () => animateFireball(boss, hero));     
-  onKeyPress("q", () => animateScratch(hero, boss));      
+  onKeyPress("q", () => animateScratch(hero, boss)); 
+  onKeyPress("w", () => animateFire(hero, boss));     
   onKeyPress("space", () => bigBoom(boss));
 
-  function animateExplosion(target) {
+  function animateRedBoom(target) {
     shake(15);
     const boom = add([
-      sprite("explosion", { anim: "burst" }),
+      sprite("redBoom", { anim: "burst" }),
+      pos(target.pos),
+      scale(4),
+      opacity(1),
+      z(10),
+      anchor("center")
+    ]);
+    wait(0.5, () => {
+      tween(boom.opacity, 0, 0.3, (o) => boom.opacity = o, easings.easeOutQuad)
+        .then(() => destroy(boom));
+    });
+  }
+
+  function animatePurpleBoom(target) {
+    shake(15);
+    const boom = add([
+      sprite("purpleBoom", { anim: "burst" }),
       pos(target.pos),
       scale(4),
       opacity(1),
@@ -101,7 +119,7 @@ scene("test", () => {
     const fireball = add([
       sprite("fire", { anim: "ball" }),
       pos(start),
-      scale(1.5),
+      scale(2),
       z(5),
       anchor("center"),
       rotate(0)
@@ -112,7 +130,7 @@ scene("test", () => {
       .then(() => {
         shake(15);
         animateSmoke(target);
-        animateExplosion(target);
+        animateRedBoom(target);
         destroy(fireball);
       });
 
@@ -231,7 +249,7 @@ scene("test", () => {
           });
       } else {
         shake(40);
-        animateExplosion(target);
+        animatePurpleBoom(target);
         tween(1.8, 3.5, 0.25, (s) => glitchCat.scale = vec2(s), easings.easeOutQuad)
           .then(() => destroy(glitchCat));
       }
@@ -273,7 +291,7 @@ scene("test", () => {
 
       tween(shot.pos, target.pos, 0.45, (p) => shot.pos = p, easings.easeOutQuad)
         .then(() => {
-          animateExplosion(target);
+          animateRedBoom(target);
           animateSmoke(target);
           destroy(shot);
         });
@@ -313,7 +331,7 @@ scene("test", () => {
     const fb = add([
       sprite("fireball", { anim: "glitch" }),
       pos(start),
-      scale(2),
+      scale(3),
       anchor("center"),
       z(40)
     ]);
@@ -322,7 +340,7 @@ scene("test", () => {
 
     tween(start, end, 0.45, (p) => fb.pos = p, easings.easeInQuad)
       .then(() => {
-        animateExplosion(target);
+        animateRedBoom(target);
         animateSmoke(target);
         destroy(fb);
       });
@@ -404,7 +422,7 @@ scene("test", () => {
 
 
   add([
-    text("1: Explosion | 2: Fireball Arc | 3: Smoke | 4: Swirl | 5: Powerup | 6: Claw Swipe | 7: Cat Zoomies | 8: Cucumber Cannon | 9: Cat Making Biscuits | 0: Fireball Projectile | Q: Scratch |", {
+    text("1: Fire Explosion | 2: Plasma Explosion | 3: Smoke | 4: Swirl | 5: Powerup | 6: Claw Swipe | 7: Cat Zoomies | 8: Cucumber Cannon | 9: Cat Making Biscuits | 0: Fireball Projectile | Q: Scratch | W: Fire Ball Arc |", {
       size: 26,
       width: 960,
       font: 'CyberGoth'
