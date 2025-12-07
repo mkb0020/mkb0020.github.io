@@ -1,4 +1,3 @@
-
 import kaplay from "kaplay";
 
 kaplay({
@@ -13,26 +12,21 @@ kaplay({
 
 loadFont("CyberGoth", "assets/fonts/ScienceGothic.ttf");
 
-// Load sprites
 loadSprite("explosion", "assets/images/CATastrophe/Explosion.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
 loadSprite("fire", "assets/images/CATastrophe/Fire.png", { sliceX:9, sliceY:1, anims:{ball:{from:0,to:8}} });
 loadSprite("smoke", "assets/images/CATastrophe/Smoke.png", { sliceX:9, sliceY:1, anims:{puff:{from:0,to:8}} });
 loadSprite("swirl", "assets/images/CATastrophe/Swirl.png", { sliceX:12, sliceY:1, anims:{spin:{from:0,to:11}} });
-loadSprite("powerup", "assets/images/CATastrophe/Powerup.png", { sliceX:9, sliceY:1, anims:{beam:{from:0,to:8}} });
+loadSprite("powerup", "assets/images/CATastrophe/PowerUp.png", { sliceX:9, sliceY:1, anims:{beam:{from:0,to:8}} });
 loadSprite("zoomies", "assets/images/CATastrophe/Zoomies.png", { sliceX:3, sliceY:3, anims:{glitch:{from:0,to:8}} });
 loadSprite("claw", "assets/images/CATastrophe/CatnipClaw.png", { sliceX:32, sliceY:1, anims:{slash:{from:0,to:31,speed:30}} });
-
-// NEW SPRITES
 loadSprite("greenBlast", "assets/images/CATastrophe/GreenBlast.png", { sliceX:12, sliceY:1, anims:{glitch:{from:0,to:11}} });
 loadSprite("biscuits", "assets/images/CATastrophe/Biscuits.png", { sliceX:8, sliceY:3, anims:{glitch:{from:0,to:23}} });
 loadSprite("fireball", "assets/images/CATastrophe/Fireball.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
 loadSprite("scratch", "assets/images/CATastrophe/Scratch.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
 loadSprite("littleCucumber", "assets/images/CATastrophe/LittleCucumber.png");
 
-// MAIN SCENE
 scene("test", () => {
 
-  // Breathing grid background
   onDraw(() => {
     const pulse = (Math.sin(time() * 1.8) + 1) / 2;
     const opacity = 0.15 + pulse * 0.35;
@@ -45,7 +39,7 @@ scene("test", () => {
       drawLine({ p1: vec2(0, y), p2: vec2(width(), y), color: lineColor, opacity, width: thickness });
   });
 
-  // HERO (left)
+
   const hero = add([
     circle(50),
     pos(150, 250),
@@ -58,7 +52,7 @@ scene("test", () => {
     hero.angle = Math.sin(time() * 3) * 8;
   });
 
-  // BOSS (right)
+
   const boss = add([
     circle(60),
     pos(750, 150),
@@ -69,7 +63,7 @@ scene("test", () => {
   ]);
   boss.onUpdate(() => boss.scale = 1 + Math.sin(time() * 2) * 0.1);
 
-  // ==== KEYBINDS ====
+
   onKeyPress("1", () => animateExplosion(boss));
   onKeyPress("2", () => animateFire(hero, boss));
   onKeyPress("3", () => animateSmoke(boss));
@@ -77,13 +71,11 @@ scene("test", () => {
   onKeyPress("5", () => animatePowerup(hero));
   onKeyPress("6", () => animateClaw(hero, boss));
   onKeyPress("7", () => animateZoomies(hero, boss));
-  onKeyPress("8", () => animateGreenBlast(boss, hero));   // NEW
-  onKeyPress("9", () => animateBiscuits(hero));           // NEW
-  onKeyPress("0", () => animateFireball(boss, hero));     // NEW
-  onKeyPress("q", () => animateScratch(hero, boss));      // NEW
+  onKeyPress("8", () => animateGreenBlast(boss, hero));   
+  onKeyPress("9", () => animateBiscuits(hero));           
+  onKeyPress("0", () => animateFireball(boss, hero));     
+  onKeyPress("q", () => animateScratch(hero, boss));      
   onKeyPress("space", () => bigBoom(boss));
-
-  // === ANIMATIONS ===
 
   function animateExplosion(target) {
     shake(15);
@@ -248,8 +240,6 @@ scene("test", () => {
     zipNext();
   }
 
-  // === NEW ATTACKS ===
-
   function animateGreenBlast(attacker, target) {
     const charge = add([
       sprite("greenBlast", { anim: "glitch" }),
@@ -374,7 +364,6 @@ scene("test", () => {
     slashNext();
   }
 
-  // 🔥 BIG BOOM
   function bigBoom(target) {
     shake(80);
     for (let i = 0; i < 3; i++) {
@@ -413,7 +402,7 @@ scene("test", () => {
       .then(() => destroy(flash));
   }
 
-  // HUD
+
   add([
     text("1: Explosion | 2: Fireball Arc | 3: Smoke | 4: Swirl | 5: Powerup | 6: Claw Swipe | 7: Cat Zoomies | 8: Cucumber Cannon | 9: Cat Making Biscuits | 0: Fireball Projectile | Q: Scratch |", {
       size: 26,
@@ -425,9 +414,6 @@ scene("test", () => {
     z(20)
   ]);
 
-
-
-  
   onKeyPress("escape", () => {});
 });
 
