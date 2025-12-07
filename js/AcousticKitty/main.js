@@ -4,13 +4,18 @@ kaplay({
   width: 1000,
   height: 480,
   scale: 1,
-  background: [10, 10, 30],
+  background: [12, 5, 18],
   debug: true,
   crisp: true,
   canvas: document.getElementById("gameCanvas"),
 });
 
 loadFont("CyberGoth", "assets/fonts/ScienceGothic.ttf");
+loadFont("Basic", "assets/fonts/PTSansNarrow-Regular.ttf");
+
+loadSprite("cat", "assets/images/CATastrophe/DougBattle2.png");
+loadSprite("rat", "assets/images/CATastrophe/BigRat.png");
+loadSprite("BG", "assets/images/AcousticKittyBG.png");
 
 loadSprite("purpleBoom", "assets/images/CATastrophe/Explosion.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
 loadSprite("redBoom", "assets/images/CATastrophe/RedBoom.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
@@ -40,30 +45,48 @@ scene("test", () => {
       drawLine({ p1: vec2(0, y), p2: vec2(width(), y), color: lineColor, opacity, width: thickness });
   });
 
+  const cat = add([
+    sprite('cat'),
+    pos(60, 190),
+    scale(1.2),
+    z(2),
+    "cat"
+    
+  ]);
 
   const hero = add([
-    circle(50),
-    pos(150, 250),
+    circle(1),
+    pos(170, 300),
     color(131, 12, 222),
     outline(4, rgb(165, 90, 225)),
+    z(1),
     "hero"
   ]);
-  hero.onUpdate(() => {
-    hero.pos.y = 250 + Math.sin(time() * 4) * 12;
-    hero.angle = Math.sin(time() * 3) * 8;
-  });
 
-
+  const rat = add([
+    sprite('rat'),
+    pos(750, 100),
+    scale(2.3),
+    z(2),
+    "rat"
+  ]);
   const boss = add([
-    circle(60),
-    pos(750, 150),
+    circle(1),
+    pos(810, 160),
     color(144, 144, 192),
     outline(5, rgb(196, 195, 208)),
     anchor("center"),
     "boss"
   ]);
-  boss.onUpdate(() => boss.scale = 1 + Math.sin(time() * 2) * 0.1);
 
+  const movesRect = add([
+    rect(1000, 130),
+    pos(0, 350),
+    color(rgb(42,52,57)),
+    outline(5, rgb(131, 12, 222)),
+    "moves",
+    z(1)
+  ]);
 
   onKeyPress("1", () => animateRedBoom(hero));
   onKeyPress("2", () => animatePurpleBoom(boss));
@@ -204,7 +227,7 @@ scene("test", () => {
 
     const slash = add([
       sprite("claw", { anim: "slash" }),
-      pos(startX, attacker.pos.y - 50),
+      pos(startX, attacker.pos.y - 120),
       scale(4),
       z(5),
       anchor("left")
@@ -420,19 +443,134 @@ scene("test", () => {
       .then(() => destroy(flash));
   }
 
-
   add([
-    text("1: Fire Explosion | 2: Plasma Explosion | 3: Smoke | 4: Swirl | 5: Powerup | 6: Claw Swipe | 7: Cat Zoomies | 8: Cucumber Cannon | 9: Cat Making Biscuits | 0: Fireball Projectile | Q: Scratch | W: Fire Ball Arc |", {
-      size: 26,
+    text("1: Fire-Explosion | 2: Plasma-Explosion | 3: Smoke-Puff | 4: Overhead-Swirl | 5: Powerup | 6: Cat-Claw-Slash | 7: Cat-Zoomies | 8: Cucumber-Cannon | 9: Make-Cat-Biscuits | 0: Fireball-Projectile | Q: Scratch | W: Fireball-Arc |", {
+      size: 32,
       width: 960,
-      font: 'CyberGoth'
+      font: 'Basic'
     }),
     pos(20, 370),
-    color(rgb(255, 199, 255)),
+    color(rgb(255, 255, 255)),
     z(20)
   ]);
 
-  onKeyPress("escape", () => {});
-});
+
+  // =========================== CUSTOM SPRITE TESTER =========================== 
+  let customSpriteName = "userSprite"; 
+  let customAnimConfig = null;
+
+  const uploadInput = document.getElementById("sprite-upload");
+  const rowsInput = document.getElementById("rows");
+  const columnsInput = document.getElementById("columns");
+  const animNameInput = document.getElementById("anim-name");
+  const framesInput = document.getElementById("frames");
+  const animSpeedInput = document.getElementById("anim-speed");
+  const positionOffsetInput = document.getElementById("position-offset");
+  const opacityInput = document.getElementById("opacity");
+  const scaleInput = document.getElementById("scale"); 
+  const applyBtn = document.getElementById("apply-btn");
+  const status = document.getElementById("status");
+
+  applyBtn.addEventListener("click", async () => {
+    const file = uploadInput.files[0];
+    if (!file) {
+      status.textContent = "No file uploaded!";
+      return;
+    }
+
+    try {
+      status.textContent = "Loading...";
+      const blobUrl = URL.createObjectURL(file);
+      
+      const sliceY = parseInt(rowsInput.value) || 1;
+      const sliceX = parseInt(columnsInput.value) || 1;
+      
+      const preset = document.getElementById("anim-preset").value;
+      const customName = animNameInput.value.trim();
+      const animName = (preset === "custom" && customName) ? customName : preset;
+
+      const frameRange = framesInput.value.split("-").map(Number);
+      const from = frameRange[0];
+      const to = frameRange[1] || from; 
+      const speed = parseInt(animSpeedInput.value) || 10;
+
+      const offsetStr = positionOffsetInput.value.split(",").map(s => s.trim());
+      const offsetX = parseFloat(offsetStr[0]) || 0;
+      const offsetY = parseFloat(offsetStr[1]) || 0;
+      const startOpacity = parseFloat(opacityInput.value) || 1;
+      const startScale = parseFloat(scaleInput.value) || 3;
+
+      if (isNaN(from) || isNaN(to) || from > to || from < 0) {
+        throw new Error("Invalid frames! Use format like 0-11");
+      }
+
+     
+      await loadSprite(customSpriteName, blobUrl, {
+        sliceX,
+        sliceY,
+        anims: {
+          [animName]: preset === "loop" ? { from, to, loop: true } :
+                    preset === "pingpong" ? { from, to, pingpong: true } :
+                    { from, to, speed }
+        }
+      });
+
+      customAnimConfig = {
+        animName,
+        offsetX, offsetY,
+        startOpacity, startScale,
+        totalFrames: to - from + 1,
+        speed,
+        isLoop: preset === "loop",
+        isPingpong: preset === "pingpong"
+      };
+
+      URL.revokeObjectURL(blobUrl);
+      status.textContent = `Loaded "${animName}" (${customAnimConfig.totalFrames}f) → Press U!`;
+    } catch (err) {
+      status.textContent = `Error: ${err.message}`;
+    }
+  });
+
+  onKeyPress("u", () => {
+    if (!customAnimConfig) {
+      debug.log("💡 Load a custom sprite first!");
+      return;
+    }
+    animateCustom(boss); 
+  });
+
+  function animateCustom(target) {
+    const {
+      animName,
+      offsetX,
+      offsetY,
+      startOpacity,
+      startScale, 
+      totalFrames,
+      speed
+    } = customAnimConfig;
+
+    const duration = totalFrames / speed; 
+
+    const customEffect = add([
+      sprite(customSpriteName, { anim: animName }),
+      pos(target.pos.add(offsetX, offsetY)),
+      scale(startScale), 
+      opacity(startOpacity),
+      z(15), 
+      anchor("center")
+    ]);
+
+    shake(8);
+
+    wait(duration, () => {
+      tween(customEffect.opacity, 0, 0.4, (o) => { customEffect.opacity = o; })
+        .then(() => destroy(customEffect));
+    });
+  }
+
+    onKeyPress("escape", () => {});
+  });
 
 go("test");
