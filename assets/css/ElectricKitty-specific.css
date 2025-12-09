@@ -1,0 +1,274 @@
+/* ============================================= 
+   ELECTRIC KITTY SPECIFIC STYLES / BATTLE ANIMATION LAB
+============================================= */
+
+body { 
+  margin: 0; 
+  background: #000; 
+  background: url('../images/BG2.png') center/cover fixed;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  min-height: 100vh; 
+  font-family: 'Orbitron', sans-serif; 
+}
+
+canvas { 
+    border: 5px solid transparent;
+    border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
+    box-shadow: 0 10px 60px var(--PlasmaGlow3);
+    cursor: pointer;
+    width: 1000px !important;
+    height: 480px !important;
+    display: block;
+    flex-shrink: 0;  
+}
+
+/* ============================ CUSTOM SPRITE TESTER ============================ */
+#toggleTester {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #000;
+  color: #00ffff;
+  border: 3px solid #00ffff;
+  padding: 12px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 0 20px #00ffff;
+  transition: all 0.3s;
+  border-radius: 8px;
+}
+
+#toggleTester:hover { 
+  background: #00ffff; 
+  color: #000;
+  transform: scale(1.05);
+}
+
+#spriteTester {
+  background: rgba(10, 10, 30, 0.95);
+  border: 3px solid #00ffff;
+  box-shadow: 0 0 30px #00ffff;
+  padding: 20px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 600px;
+  color: #00ffff;
+  border-radius: 8px;
+  display: none;
+  z-index: 99;
+}
+
+#spriteTester h1 {
+  text-align: center;
+  font-family: 'GothNerd', sans-serif;
+  color: var(--NuclearFuscia);
+  text-shadow: 0 0 30px var(--ParticlePink);
+  font-size: 50px;
+  font-weight: 900;
+}
+
+#spriteTester h2 {
+  text-align: center;
+  margin-top: 20px;
+  font-family: 'GothNerd', sans-serif;
+  color: #ffffff;
+  text-shadow: 0 0 10px #0ff;
+}
+
+#spriteTester label {
+  display: block;
+  margin: 20px 0 4px;
+  font-family: 'GothNerd', sans-serif;
+  color: #00ffff;
+}
+
+#spriteTester input, 
+#spriteTester select {
+  width: 100%;
+  padding: 10px;
+  background: #111;
+  border: 2px solid #00ffff;
+  color: #0ff;
+  font-family: 'GothNerd', sans-serif;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+#buttonContainer {
+  font-family: 'GothNerd', sans-serif;
+  border-radius: 20px;
+  align-items:center !important;
+  text-align: center !important;
+  padding-bottom: 20px;
+}
+
+#buttonContainer button {
+  width: 50%;
+  padding: 20px;
+  background: #000;
+  cursor: pointer;
+  transition: 0.3s;
+  color: var(--AlphaAqua);
+  font-size: 20px;
+  border-radius: 20px;
+  border: 2px solid var(--AlphaAqua);
+  box-shadow: 0 0 10px var(--AtomicAqua);
+}
+
+#buttonContainer button:hover {
+  background: #67FEBD;
+  color: #000;
+  box-shadow: 0 0 30px var(--AtomicAqua);
+}
+
+#container {
+  display: block;
+  margin: 20px 0 4px;
+  padding:10px;
+  font-family: 'GothNerd', sans-serif;
+  color: var(--NuclearFuscia);
+  border: 2px solid var(--NuclearFuscia);
+  box-shadow: 0 0 15px var(--NuclearFuscia);
+  border-radius: 30px;
+  align-items:center !important;
+  text-align: center !important;
+}
+
+#container h1 {
+  color: var(--NuclearFuscia); 
+  font-size: 25px; 
+  margin-top: 10px; 
+  text-align: center !important;
+  font-family: 'GothNerd';
+
+}
+
+#status { 
+  color: var(--AtomicAqua); 
+  font-size: 20px; 
+  margin-top: 10px; 
+  text-align: center; 
+  font-family: 'GothNerd', sans-serif;
+}
+
+#error { 
+  color: #ff4444; 
+  font-size: 16px; 
+  margin-top: 10px; 
+  text-align: center; 
+  display: none;
+  font-family: 'GothNerd', sans-serif;
+  padding: 10px;
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid #ff4444;
+  border-radius: 6px;
+}
+
+/* ============================ MOBILE CONTROLS ============================ */
+#mobileControls {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 30, 0.95);
+  border-top: 3px solid #00ffff;
+  padding: 15px;
+  z-index: 200;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.mobile-btn {
+  background: #000;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  padding: 12px 16px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00ffff;
+  transition: all 0.2s;
+  min-width: 80px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.mobile-btn:active {
+  background: #00ffff;
+  color: #000;
+  transform: scale(0.95);
+}
+
+.mobile-btn.custom {
+  background: #000;
+  color: #67FEBD;
+  border-color: #67FEBD;
+  box-shadow: 0 0 10px #67FEBD;
+}
+
+.mobile-btn.custom:active {
+  background: #67FEBD;
+  color: #000;
+}
+
+/* ============================ UFO & CAT ============================ */
+#Ufo {
+  position:relative;
+  width: 120px !important;
+  z-index: 800;
+
+  image-rendering: pixelated;
+  transition: all 1.5s cubic-bezier(0.2, 0.8, 0.4, 1);
+  display: block;
+}
+
+/* ============================ GAME CONTENT ============================ */
+.JS-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Game-content {
+  margin-top: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ============================ RESPONSIVE ============================ */
+@media (max-width: 768px) {
+  #mobileControls {
+    display: flex;
+  }
+
+  #toggleTester {
+    bottom: auto;
+    top: 80px;
+    right: 10px;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  canvas {
+    border: 4px solid #333;
+  }
+
+  #spriteTester {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .floating-back-to-top {
+    bottom: 160px;
+  }
+}
