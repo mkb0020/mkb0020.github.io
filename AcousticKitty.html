@@ -1,105 +1,308 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <link rel="stylesheet" href="assets/css/CatStyle.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-  <script type="importmap">
-    {
-      "imports": {
-        "kaplay": "https://cdn.skypack.dev/kaplay"
-      }
-    }
-  </script>
-  <title>BATTLE ANIMATION LAB</title>
-  <style>
-    body { margin-top:100px; background:#000; display:flex; justify-content:center; align-items:center; height:100vh; }
-    canvas { image-rendering: pixelated; border: 6px solid #333; box-shadow: 0 0 30px #00ffff; margin-top: 60px;}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACOUSTIC KITTY - SPRITE TOOLKIT</title>
+  
+  <link rel="stylesheet" href="assets/css/KittyStyle.css">
+  <link rel="stylesheet" href="assets/css/AcousticKitty-specific.css">
 </head>
+
 <body>
-
-
 <nav class="navbar">
   <div class="nav-container">
     <a href="https://mkb0020.github.io" class="home-link">
       <div class="home-icon"></div>
       <div class="logo">♡ mkb0020</div>
     </a>
-        <button class="help-icon" id="helpBtn" aria-label="Game Instructions" title="How to play">
-      <div class="question-mark">?</div>
-    </button>
+    <div class="help-dropdown">
+      <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+        <div class="question-mark">?</div>
+      </button>
+      
+      <div class="dropdown-menu" id="dropdownMenu">
+        <button id="openMainHelp"> ABOUT</button>
+        <button id="openGuide">INSTRUCTIONS MANUAL</button>
+      </div>
+    </div>
   </div>
 </nav>
 
-
+  <!-- Help Modal -->
   <div id="helpModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title">WHAT IS THIS?</h1>
-        <button class="modal-close" id="closeModal">X</button>
+        <h1 class="modal-title">ACOUSTIC KITTY - 3-IN-1 SPRITE TOOLKIT</h1>
+        <button class="modal-close" id="closeModal">×</button>
       </div>
       <div class="modal-body">
-        <h3>Welcome to my Game Dev Animation Lab!</h3>
-        <p>I originally built this little sandbox while developing CATastrophe2 (COMING SOON!), which uses Pokémon-style battle scenes powered by Kaplay + Tween magic.</p>
-        <p>Instead of replaying levels just to reach a boss fight, I made this tool so I could tweak every animation in real time.</p>
-        <p>It turned into a surprisingly fun mini-project, so I’ve made it public here for anyone who wants to try it out. Enjoy experimenting!</p>
-          <!--<p>In my game development journey, I struggled with figuring out how to animate battle scenes.  I originally created this tool for personal while I've been developing CATastophe2 (COMING SOON!) which features pokemon-style battle scenes using kaplay / tween.  It ended up being so helpful that I wanted to put it somewhere public for anyone else out there who needs a place to test out their battle animations!</p>-->
+        <h3>What is this?</h3>
+        <p>I originally built a Python version of this tool to help standardize sprites for CATastrophe2 (coming soon!). I made one grayscale cat sprite, then recolored it to create dozens of unique cats instantly!</p>
+        <p>Acoustic Kitty is a sprite sheet toolkit for game dev with THREE powerful features...</p>
         
-              
-        <h3>🎮 How to use this tool:</h3>
+        <h3>Three Tools in One:</h3>
         <ul>
-          <li><strong>Press the numbers or letters listed on the bottom of the screen</strong> and watch fun explosions, fireballs, and cucumber cannons!</li>
+          <li><strong>Tab 1 - Sheet Builder:</strong> Combine multiple PNG frames into a single organized sprite sheet</li>
+          <li><strong>Tab 2 - Recolor One:</strong> Take a sprite sheet and swap out specific colors to create variants</li>
+          <li><strong>Tab 3 - Batch Recolor:</strong> Recolor multiple sprite sheets at once (walk, jump, attack, etc.)</li>
         </ul>
-        <p class="mission-text"><strong>Enjoy!</strong><br> 🐾</p>
 
-        <!--<h3>🎮 How to use this tool:</h3>
-        <ul>
-          <li><strong>Upload:</strong> your sprite sheet</li>
-          <li><strong>Set</strong> rows and columns</li>
-          <li><strong>tweak</strong> parameters</li>
-        </ul>
-        <p class="mission-text"><strong>Good luck, fellow beginner game devs!</strong><br> 🐾</p>-->
+        <button id="openGuideBtn" class="btn-quantum-pulse">VIEW INSTRUCTIONS MANUAL</button>
       </div>
     </div>
   </div>
 
-  <div class="JS-page">
-    <div class="Game-content">
-      <canvas id="gameCanvas"></canvas>
+  <div id="guideModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">INSTRUCTIONS MANUAL</h1>
+        <button class="modal-close" id="closeGuide">×</button>
+      </div>
+      <div class="modal-body">
+        <h3>Tab 1: Sprite Sheet Builder</h3>
+        <p><strong>What it does:</strong> Combines individual animation frames into a single sprite sheet.</p>
+        <p><strong>How to use:</strong></p>
+        <ul>
+          <li>Upload multiple PNG files (your animation frames)</li>
+          <li>Set how many columns you want</li>
+          <li>Add padding between frames if needed</li>
+          <li>Click "Build Sheet" to generate</li>
+          <li>Download your finished sprite sheet!</li>
+        </ul>
+
+        <h3>Tab 2: Recolor Single Sheet</h3>
+        <p><strong>What it does:</strong> Takes ONE sprite sheet and swaps specific colors to create a variant.</p>
+        <p><strong>How to use:</strong></p>
+        <ul>
+          <li>Upload a sprite sheet</li>
+          <li>Set your 5 "master colors" - these are the exact RGB values you want to REPLACE</li>
+          <li>Set your 5 "new colors" - what you want to replace them WITH</li>
+          <li>Click "Recolor Sheet" and download!</li>
+        </ul>
+        <p><strong>Pro tip:</strong> Master colors must match EXACTLY (pixel-perfect). Use a color picker to get the exact hex values from your sprite!</p>
+
+        <h3>Tab 3: Batch Recolor</h3>
+        <p><strong>What it does:</strong> Recolors MULTIPLE sprite sheets at once with the same palette.</p>
+        <p><strong>Perfect for:</strong> When you have walk_cycle.png, jump.png, attack.png, etc. and want to recolor them all consistently.</p>
+        <p><strong>How to use:</strong></p>
+        <ul>
+          <li>Upload ALL your sprite sheets that need recoloring</li>
+          <li>Set your master colors (what to replace)</li>
+          <li>Set your new palette colors</li>
+          <li>Click "Batch Recolor All"</li>
+          <li>Download all recolored sheets at once!</li>
+        </ul>
+
+        <h3>Master Colors Explained</h3>
+        <p>The default master colors are:</p>
+        <ul>
+          <li>#FFFFFF - White</li>
+          <li>#7C7C7D - Medium Gray</li>
+          <li>#A7A7A8 - Light Gray</li>
+          <li>#B4B4B4 - Lighter Gray</li>
+          <li>#000000 - Black</li>
+        </ul>
+        <p>These work great if you create your original sprite in grayscale! Then you can recolor it to any palette you want.</p>
+
+        <h3>Real-World Example</h3>
+        <p>For CATastrophe2, I did this:</p>
+        <ul>
+          <li>Created ONE grayscale cat sprite with animations</li>
+          <li>Used Tab 1 to build sprite sheets from my frames</li>
+          <li>Used Tab 3 to batch recolor ALL animations (walk, jump, attack, idle) to create orange cats, black cats, tuxedo cats, calico cats, etc.</li>
+          <li>Boom! 20+ unique cat characters from one base sprite!</li>
+        </ul>
+
+        <div style="text-align:center; margin:30px 0;">
+          <button id="closeGuideBottom" class="btn-quantum-pulse">Close Guide</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <script type="module" src="js/AcousticKitty/main.js"></script>
+  <button class="floating-back-to-top" id="floatingBackToTop">BACK TO TOP</button>
 
- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const helpBtn = document.getElementById('helpBtn');
-      const modal = document.getElementById('helpModal');
-      const closeBtn = document.getElementById('closeModal');
-      helpBtn.addEventListener('click', () => {
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-      });
-      closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-      });
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.style.display = 'none';
-          document.body.style.overflow = 'auto';
-        }
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.style.display === 'flex') {
-          modal.style.display = 'none';
-          document.body.style.overflow = 'auto';
-        }
-      });
-    });
-  </script>
+  <h2>SPRITE SHEET 3-IN-1 TOOLKIT</h2>
 
+  <div class="tab-container">
+    <button class="tab-btn active" data-tab="tab1">Build Sheet</button>
+    <button class="tab-btn" data-tab="tab2">Recolor One</button>
+    <button class="tab-btn" data-tab="tab3">Batch Recolor</button>
+  </div>
+
+  <div id="tab1" class="tab-content active">
+    <div class="wrap-single">
+      <div class="card">
+        <h3>Sprite Sheet Builder</h3>
+        <h1>Combine multiple PNG frames into a single sprite sheet</h1>
+
+        <label>Upload frames (PNG)</label>
+        <input id="files" type="file" accept="image/png" multiple />
+
+        <label>Columns</label>
+        <input id="cols" type="number" min="1" value="4"/>
+
+        <label>Padding (px)</label>
+        <input id="pad" type="number" min="0" value="0"/>
+
+        <label>Output filename</label>
+        <input id="outname" type="text" value="sheet.png"/>
+
+        <div class="btn-row">
+          <button id="build">BUILD</button>
+          <button id="download">DOWNLOAD</button>
+        </div>
+
+        <h1>Frames are placed in order uploaded. If sizes differ, first image size defines the cell.</h1>
+
+        <canvas id="preview" width="512" height="256"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab2" class="tab-content">
+    <div class="wrap-single">
+      <div class="card">
+        <h3>Recolor A Single Sprite Sheet</h3>
+        <h1>Replace specific colors in ONE sprite sheet</h1>
+
+        <label>Upload sprite sheet</label>
+        <input id="recolor-input" type="file" accept="image/png" />
+
+        <label>Output filename</label>
+        <input id="recolor-output" type="text" value="recolored.png"/>
+
+        <hr>
+
+        <h4>Master Colors</h4>
+        <h1>These are the exact RGB values in your sprite sheet that will be replaced</h1>
+        <div class="color-grid">
+          <div class="color-input-group">
+            <input type="color" id="recolor-master1" value="#ffffff">
+            <input type="text" id="recolor-master1-hex" value="#FFFFFF" placeholder="#FFFFFF">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="recolor-master2" value="#7c7c7d">
+            <input type="text" id="recolor-master2-hex" value="#7C7C7D" placeholder="#7C7C7D">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="recolor-master3" value="#a7a7a8">
+            <input type="text" id="recolor-master3-hex" value="#A7A7A8" placeholder="#A7A7A8">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="recolor-master4" value="#b4b4b4">
+            <input type="text" id="recolor-master4-hex" value="#B4B4B4" placeholder="#B4B4B4">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="recolor-master5" value="#000000">
+            <input type="text" id="recolor-master5-hex" value="#000000" placeholder="#000000">
+          </div>
+        </div>
+
+        <hr>
+
+        <h4>New Palette Colors</h4>
+        <h1>What you want to change the master colors TO</h1>
+        <div class="color-grid">
+          <div class="color-input-group">
+            <input type="color" id="recolor-new1" value="#ffffff">
+            <input type="text" id="recolor-new1-hex" value="#FFFFFF" placeholder="#FFFFFF">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="recolor-new2" value="#7c7c7d">
+            <input type="text" id="recolor-new2-hex" value="#7C7C7D" placeholder="#7C7C7D">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="recolor-new3" value="#a7a7a8">
+            <input type="text" id="recolor-new3-hex" value="#A7A7A8" placeholder="#A7A7A8">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="recolor-new4" value="#b4b4b4">
+            <input type="text" id="recolor-new4-hex" value="#B4B4B4" placeholder="#B4B4B4">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="recolor-new5" value="#000000">
+            <input type="text" id="recolor-new5-hex" value="#000000" placeholder="#000000">
+          </div>
+        </div>
+
+        <button id="recolor-single">RECOLOR & DOWNLOAD</button>
+
+        <canvas id="recolor-preview" width="512" height="256"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab3" class="tab-content">
+    <div class="wrap-single">
+      <div class="card">
+        <h3>Batch Recolor Multiple Sheets</h3>
+        <h1>Recolor ALL your sprite sheets at once with the same palette</h1>
+
+        <label>Upload multiple sprite sheets (walk, jump, attack, etc.)</label>
+        <input id="batch-files" type="file" accept="image/png" multiple />
+
+        <hr>
+
+        <h4>Master Colors (colors to REPLACE)</h4>
+        <div class="color-grid">
+          <div class="color-input-group">
+            <input type="color" id="batch-master1" value="#ffffff">
+            <input type="text" id="batch-master1-hex" value="#FFFFFF">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="batch-master2" value="#7c7c7d">
+            <input type="text" id="batch-master2-hex" value="#7C7C7D">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="batch-master3" value="#a7a7a8">
+            <input type="text" id="batch-master3-hex" value="#A7A7A8">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="batch-master4" value="#b4b4b4">
+            <input type="text" id="batch-master4-hex" value="#B4B4B4">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="batch-master5" value="#000000">
+            <input type="text" id="batch-master5-hex" value="#000000">
+          </div>
+        </div>
+
+        <hr>
+
+        <h4>New Palette Colors</h4>
+        <div class="color-grid">
+          <div class="color-input-group">
+            <input type="color" id="batch-new1" value="#ffffff">
+            <input type="text" id="batch-new1-hex" value="#FFFFFF">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="batch-new2" value="#7c7c7d">
+            <input type="text" id="batch-new2-hex" value="#7C7C7D">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="batch-new3" value="#a7a7a8">
+            <input type="text" id="batch-new3-hex" value="#A7A7A8">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="batch-new4" value="#b4b4b4">
+            <input type="text" id="batch-new4-hex" value="#B4B4B4">
+          </div>
+          <div class="color-input-group">
+            <input type="color" id="batch-new5" value="#000000">
+            <input type="text" id="batch-new5-hex" value="#000000">
+          </div>
+        </div>
+
+        <button id="batch-recolor">BATCH RECOLOR & DOWNLOAD</button>
+
+        <div id="batch-status"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/KittyModals.js"></script>
+  <script src="js/AcousticKitty.js"></script>
 </body>
 </html>
