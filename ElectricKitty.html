@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <link rel="stylesheet" href="assets/css/KittyStyle.css">
+  <link rel="stylesheet" href="assets/css/ElectricKitty-specific.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "kaplay": "https://cdn.skypack.dev/kaplay"
+      }
+    }
+  </script>
+  <title>ELECTRIC KITTY - BATTLE ANIMATION LAB</title>
+
+</head>
+
+
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="https://mkb0020.github.io" class="home-link">
+      <div class="home-icon"></div>
+      <div class="logo">♡ mkb0020</div>
+    </a>
+    <div class="help-dropdown">
+      <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+        <div class="question-mark">?</div>
+      </button>
+      
+      <div class="dropdown-menu" id="dropdownMenu">
+        <button id="openMainHelp"> ABOUT THIS TOOL </button>
+        <button id="openGuide">BEGINNER'S FIELD GUIDE</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div id="helpModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title">BATTLE ANIMATION LAB</h1>
+      <button class="modal-close" id="closeModal">X</button>
+    </div>
+    <div class="modal-body" style="font-family: Arial, Helvetica, sans-serif";>
+      <h3>♡  Welcome to my Game Dev Animation Lab!</h3>
+      <div class="mission-text">Now with CUSTOM SPRITE TESTING!</div>
+      <h3>What is this?</h3>
+      <p>I originally built this little sandbox while developing CATastrophe2 (COMING SOON!), which uses Pokémon-style battle scenes powered by Kaplay + Tween magic.</p>
+      <p>Instead of replaying levels just to reach a boss fight, I made this tool so I could tweak every animation in real time.</p>
+      <p>It turned into a surprisingly fun mini-project, so I've made it public here for anyone who wants to try it out. Enjoy experimenting!</p>
+      <h3>🎮 How to use this:</h3>
+      <ul>
+          <li><strong>Desktop:</strong> Press '1'–'0', 'Q', 'W', 'E', 'R', 'T', 'Y', or 'P' for my built-in attacks.</li>
+          <li><strong>Mobile:</strong> Use the button controls at the bottom of the screen!</li>
+          <li><strong>To animate your own sprite sheet:</strong> Click the glowing button that says "Animate your own sprite sheet" → scroll down → upload your sprite sheet → tweak the settings → press <strong>"U"</strong> (or tap the custom button on mobile) to fire!</li>
+          <li><strong>Note for sizing:</strong> the canvas is 1000x480</li>
+      </ul>
+      <button id="openGuideBtn" class="btn-quantum-pulse">New to animating sprites?  Click here for more details!</button>
+      <p class="mission-text"><strong>Enjoy!</strong></p>
+
+    </div>
+  </div>
+</div>
+
+<div id="guideModal" class="modal">
+  <div class="modal-content" style="max-height:90vh; overflow-y:auto;">
+    <div class="modal-header">
+      <h1 class="modal-title">Beginner's Field Guide</h1>
+      <button class="modal-close" id="closeGuide">X</button>
+    </div>
+    <div class="modal-body guide-body">
+      <h3>What Each Input Does</h3>
+      <p><strong>Sprite Sheet (the file picker)</strong><br>
+      What it is: This is your animation picture! It's like a comic strip where each "panel" is one frame of animation.<br>
+      <strong>What to upload:</strong> A single image file (PNG, JPG, etc.) that contains ALL your animation frames laid out in a grid, like this:</p>
+      <pre style="background:#111; padding:15px; border:1px solid #0ff; border-radius:8px;">
+[Frame1] [Frame2] [Frame3] [Frame4]
+[Frame5] [Frame6] [Frame7] [Frame8]</pre>
+      <p><strong>Pro tip:</strong> Make sure all your frames are the same size and evenly spaced!</p>
+
+      <h3>Columns (sliceX)</h3>
+      <p>How many frames are going LEFT to RIGHT across your image.<br>
+      Example: If your sprite sheet looks like this:<br>
+      <code>Cat Cat Cat Cat Cat Cat</code><br>
+      → You have 6 columns, so type <strong>6</strong></p>
+
+      <h3>Rows (sliceY)</h3>
+      <p>How many frames go UP and DOWN in your image.<br>
+      Example: 2 rows = type <strong>2</strong></p>
+
+      <h3>Animation Preset</h3>
+      <p>How your animation will play!</p>
+      <ul>
+        <li>play - Plays once then stops</li>
+        <li>loop - Repeats forever</li>
+        <li>pingpong - Goes forward then backward</li>
+        <li>glitch - Chaotic perfection</li>
+        <li>burst, spin, beam, slash, puff, fireball - Special effects!</li>
+      </ul>
+      <p><strong>Start with "play" or "loop"</strong> — they're the friendliest!</p>
+
+      <h3>Frames</h3>
+      <p>Type it like "<code>START-END</code>" (make sure to start with 0!!)<br>
+      6 frames → <code>0-5</code><br>
+      12 frames → <code>0-11</code><br>
+      First 4 frames → <code>0-3</code></p>
+
+      <h3>Speed</h3>
+      <p>Higher number = faster!<br>
+      15 = normal · 30 = fast · 5 = slow-mo</p>
+
+      <h3>Offset X,Y</h3>
+      <p>Where the animation is positioned within the canvas (aka game screen). Changing the first number moves it horizonally, changing the second number, moves it vertically.  Try <code>0,-50</code> to move it up!</p>
+
+      <h3>Start Scale</h3>
+      <p>This is if you want to resize your sprite sheet.  Scale 3 = big (relative to your sprite sheet).  Scale 0.3 = tiny (relative to your sprite sheet). </p>
+
+      <h3>Opacity</h3>
+      <p>Opacity 1 = solid · 0.5 = ghostly</p>
+
+      <h3>Quick Start Guide</h3>
+      <ul>
+        <li>Upload a sprite sheet</li>
+        <li>Set Columns & Rows correctly</li>
+        <li>Type frames like <code>0-11</code></li>
+        <li>Pick "loop" or "play"</li>
+        <li>Click LOAD → Press U</li>
+      </ul>
+
+      <h3>Pro Tips</h3>
+      <ul>
+        <li>Start simple: 1 row, 6 columns</li>
+        <li>If nothing shows → try Offset Y: <code>-50</code></li>
+        <li>I generally make my frames around 50x50 and set the scale to 2 or 3</li>
+        <li>Experiment! It’s impossible to break</li>
+      </ul>
+
+      <p style="text-align:center; font-size:1.5em; margin:30px 0;">
+        Happy animating! <br>
+        <strong>♡ mkb0020</strong>
+      </p>
+
+      <div style="text-align:center; margin:30px 0;">
+        <button id="closeGuideBottom" class="btn-quantum-pulse">CLOSE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="floating-back-to-top" id="floatingBackToTop">
+          BACK TO TOP
+</button>
+
+<div class="JS-page">
+  <div class="Game-content">
+    <canvas id="gameCanvas"></canvas>
+  </div>
+</div>
+
+<!-- MOBILE CONTROLS -->
+<div id="mobileControls">
+  <button class="mobile-btn" data-key="1">Fire 💥</button>
+  <button class="mobile-btn" data-key="2">Plasma ⚡</button>
+  <button class="mobile-btn" data-key="3">Smoke 💨</button>
+  <button class="mobile-btn" data-key="4">Swirl 🌀</button>
+  <button class="mobile-btn" data-key="5">Power ✨</button>
+  <button class="mobile-btn" data-key="6">Claw ⚔️</button>
+  <button class="mobile-btn" data-key="7">Zoomies 😼</button>
+  <button class="mobile-btn" data-key="8">Cucumber 🥒</button>
+  <button class="mobile-btn" data-key="9">Biscuits 🐾</button>
+  <button class="mobile-btn" data-key="0">Fireball 🔥</button>
+  <button class="mobile-btn" data-key="q">Scratch 💢</button>
+  <button class="mobile-btn" data-key="w">Arc 🌙</button>
+  <button class="mobile-btn custom" data-key="u">CUSTOM 🎨</button>
+  <button class="mobile-btn" data-key="space" style="width: 100%;">BIG BOOM 💣</button>
+</div>
+
+<!-- CUSTOM SPRITE SHEET TESTER PANEL -->
+<button id="toggleTester">ANIMATE YOUR OWN SPRITE SHEET!</button>
+
+<div id="spriteTester">
+  <h2>UPLOAD & TEST YOUR VERY OWN SPRITE SHEET</h2>
+  <label>Choose your sprite sheet and fill out the form below -> press "U" (or tap CUSTOM button) to see your animation in action!</label>
+  
+  <label>Sprite Sheet</label>
+  <input type="file" id="sprite-upload" accept="image/*">
+
+  <label>Columns (sliceX)</label>
+  <input type="number" id="columns" value="6" min="1">
+
+  <label>Rows (sliceY)</label>
+  <input type="number" id="rows" value="1" min="1">
+
+  <label>Animation Preset</label>
+  <select id="anim-preset">
+    <option value="custom">✏️ Custom (type your own)</option>
+    <option value="play">▶️ play (default – plays once)</option>
+    <option value="loop">🔄 loop (repeats forever)</option>
+    <option value="pingpong">↔️ pingpong (back and forth)</option>
+    <option value="glitch">💀 glitch (my favorite)</option>
+    <option value="burst">💥 burst (explosion style)</option>
+    <option value="spin">🌀 spin (swirl style)</option>
+    <option value="beam">✨ beam (power-up ray)</option>
+    <option value="slash">⚔️ slash (claw attack)</option>
+    <option value="puff">💨 puff (smoke poof)</option>
+    <option value="ball">🔥 fireball (rolling)</option>
+  </select>
+
+  <label>Custom Anim Name (only if you chose "Custom" above!)</label>
+  <input type="text" id="anim-name" value="play" placeholder="e.g. glitch, myAnim, etc.">
+
+  <label>Frames (example - if you have 12 frames, type: "0-11")</label>
+  <input type="text" id="frames" value="0-11" placeholder="0-11">
+
+  <label>Speed (higher = faster)</label>
+  <input type="number" id="anim-speed" value="15" min="1">
+
+  <label>Offset X,Y (example: "0,-50")</label>
+  <input type="text" id="position-offset" value="0,-30">
+
+  <label>Start Scale (if you want to re-size your sprites)</label>
+  <input type="number" id="scale" value="3" step="0.1" min="0.1">
+
+  <label>Start Opacity (0–1)</label>
+  <input type="number" id="opacity" value="1" step="0.1" min="0" max="1">
+  <h1>↓</h1>
+  <div id="buttonContainer">  <button id="apply-btn">UPLOAD</button></div>
+  <div id="error"></div>
+    <div id="container">
+      <img src="assets/images/UFO2.gif" id="Ufo">
+      <h1>STATUS:</h1>
+      <div id="status">Ready – load a sprite sheet!</div>
+    </div>
+</div>
+
+
+
+
+
+
+  <script src="js/KittyModals.js"></script>
+  <script type="module" src="js/ElectricKitty.js"></script>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleTester');
+    const testerPanel = document.getElementById('spriteTester');
+    
+    toggleBtn.onclick = () => {
+      const visible = testerPanel.style.display === 'block';
+      testerPanel.style.display = visible ? 'none' : 'block';
+      toggleBtn.textContent = visible ? 'CUSTOM SPRITE TESTER' : 'HIDE TESTER';
+    };
+
+    const mobileButtons = document.querySelectorAll('.mobile-btn');
+    mobileButtons.forEach(btn => {
+      btn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const key = btn.getAttribute('data-key');
+        
+        const keyEvent = new KeyboardEvent('keydown', {
+          key: key,
+          code: key === 'space' ? 'Space' : `Key${key.toUpperCase()}`,
+          keyCode: key === 'space' ? 32 : key.charCodeAt(0),
+          bubbles: true
+        });
+        document.dispatchEvent(keyEvent);
+      });
+
+      btn.addEventListener('click', (e) => {
+        const key = btn.getAttribute('data-key');
+        const keyEvent = new KeyboardEvent('keydown', {
+          key: key,
+          code: key === 'space' ? 'Space' : `Key${key.toUpperCase()}`,
+          keyCode: key === 'space' ? 32 : key.charCodeAt(0),
+          bubbles: true
+        });
+        document.dispatchEvent(keyEvent);
+      });
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        modal.style.display = guideModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        floatingBackToTop.style.display = 'none';
+      }})
+
+  </script>
+</body>
+</html>
