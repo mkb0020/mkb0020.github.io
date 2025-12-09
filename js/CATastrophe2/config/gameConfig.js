@@ -1,13 +1,11 @@
 // gameConfig.js
-
-
 export const SCREEN_W = 1000;
 export const SCREEN_H = 480;
 export const FPS = 60;
 
 export const Colors = {
     BG: '#FFC7FF',
-    FedBlue: '#2A3439',          // rgba → array
+    FedBlue: '#2A3439',          
     FedBlue2: '#2A3439',
     ElectricLilac: '#A55AFF',
     SoftPeriwinkle: '#9090C0',
