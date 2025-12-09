@@ -1,6 +1,16 @@
 /* ============================================= 
    ELECTRIC KITTY SPECIFIC STYLES / BATTLE ANIMATION LAB
 ============================================= */
+@font-face {
+  font-family: 'GothNerd'; 
+  src: url('../fonts/ScienceGothic.ttf') format('truetype'); 
+}
+
+@font-face {
+  font-family: 'SpaceLetters'; 
+  src: url('../fonts/Orbitron-Bold.ttf') format('truetype'); 
+}
+
 
 body { 
   margin: 0; 
@@ -10,7 +20,7 @@ body {
   flex-direction: column; 
   align-items: center; 
   min-height: 100vh; 
-  font-family: 'Orbitron', sans-serif; 
+  font-family: 'SpaceLetters', sans-serif; 
 }
 
 canvas { 
@@ -33,7 +43,7 @@ canvas {
   color: #00ffff;
   border: 3px solid #00ffff;
   padding: 12px 20px;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'SpaceLetters', sans-serif;
   font-size: 16px;
   cursor: pointer;
   z-index: 100;
@@ -113,6 +123,7 @@ canvas {
   cursor: pointer;
   transition: 0.3s;
   color: var(--AlphaAqua);
+  font-family: 'SpaceLetters';
   font-size: 20px;
   border-radius: 20px;
   border: 2px solid var(--AlphaAqua);
@@ -126,16 +137,19 @@ canvas {
 }
 
 #container {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 20px 0 4px;
-  padding:10px;
-  font-family: 'GothNerd', sans-serif;
+  padding: 20px;
+  font-family: 'SpaceLetters';
   color: var(--NuclearFuscia);
   border: 2px solid var(--NuclearFuscia);
   box-shadow: 0 0 15px var(--NuclearFuscia);
   border-radius: 30px;
-  align-items:center !important;
-  text-align: center !important;
+  text-align: center;
+  min-height: 200px; 
 }
 
 #container h1 {
@@ -143,7 +157,7 @@ canvas {
   font-size: 25px; 
   margin-top: 10px; 
   text-align: center !important;
-  font-family: 'GothNerd';
+  font-family: 'SpaceLetters';
 
 }
 
@@ -152,7 +166,7 @@ canvas {
   font-size: 20px; 
   margin-top: 10px; 
   text-align: center; 
-  font-family: 'GothNerd', sans-serif;
+  font-family: 'SpaceLetters', sans-serif;
 }
 
 #error { 
@@ -219,15 +233,13 @@ canvas {
   color: #000;
 }
 
-/* ============================ UFO & CAT ============================ */
+/* ============================ UFO  ============================ */
 #Ufo {
-  position:relative;
   width: 120px !important;
-  z-index: 800;
-
+  height: auto;
   image-rendering: pixelated;
-  transition: all 1.5s cubic-bezier(0.2, 0.8, 0.4, 1);
   display: block;
+  margin: 0 auto 15px auto; 
 }
 
 /* ============================ GAME CONTENT ============================ */
