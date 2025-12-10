@@ -1,4 +1,4 @@
-// bossScene.js - Boss Battle Scenes for Kaplay
+// bossScene.js
 import { SCREEN_W, SCREEN_H, Colors } from '../config/gameConfig.js';
 import { getBoss, initializeBoss, chooseBossMove } from '../config/bosses.js';
 import { calculateDamage } from '../systems/battleSystem.js';
@@ -36,17 +36,15 @@ import {
 } from '../helpers/bossHelpers.js';
 
 /**
- * Create boss battle scene - used for all three bosses
+ * CREATE BOSS BATTLE SCENES
  */
 export function createBossBattleScene(bossId, character, playerHP) {
-  // Setup music
   setupBossMusic();
 
-  // Get boss config and initialize
   const bossConfig = getBoss(bossId);
   const boss = initializeBoss(bossId);
   
-  // Initialize player stats
+  // PLAYER STATS
   const player = {
     name: character.name,
     hp: parseInt(playerHP) || character.stats.maxHP,
@@ -59,12 +57,12 @@ export function createBossBattleScene(bossId, character, playerHP) {
     defenseBuffTurns: 0
   };
 
-  // Battle state
+  // BATTLE STATE
   let battleLog = bossConfig.introMessage[0];
   let waitingForPlayer = true;
   let battleActive = true;
 
-  // Add visual elements
+  // VISUAL ELEMENTS
   addBossBackground(bossConfig);
   const { playerSprite, playerGlow, bossSprite, bossGlow } = addBattleSprites(character, bossConfig);
   const { playerHPBar, playerHPText } = addPlayerHPPanel(player);
@@ -72,29 +70,26 @@ export function createBossBattleScene(bossId, character, playerHP) {
   const logText = addBattleLogPanel(battleLog);
   addMoveButtonsPanel();
 
-  // Getters for game state
+  // GETTERS FOR GAME STATES
   const getGameActive = () => battleActive && waitingForPlayer;
 
-  // Create move buttons
+  // CREATE MOVE BUTTONS
   const moveButtons = createMoveButtons(player, executeTurn, getGameActive);
 
-  // Update battle log
+  // UPDATE BATTLE LOG
   function updateLog(message) {
     battleLog = message;
     logText.text = message;
   }
 
 
-
-
-
-  // 🎮 Choose which particle animation to play!
+  // 🎮 ANIMATIONS
   function playAttackAnimation(moveName, attackerSprite, targetSprite, attackerGlow, isHeal) {
       console.log('🎮 Playing animation for:', moveName, 'uppercase:', moveName.toUpperCase());
 
   const isPlayer = attackerSprite === playerSprite;
   
-  // Map move names to animations
+  // MAP MOVES TO ANIMATIONS
   switch(moveName.toUpperCase()) {
     // PLAYER MOVES
     case "ZOOMIES":
@@ -163,7 +158,7 @@ export function createBossBattleScene(bossId, character, playerHP) {
       animateHeal(attackerSprite, attackerGlow);
       break;
     
-          // OBSERVER MOVES - 🔬 THE NEW QUANTUM ATTACKS!
+    // OBSERVER MOVES 
     case "POISON":
         animatePoisonAttack(attackerSprite, targetSprite);
         animateAttack(attackerSprite, attackerGlow, isPlayer);
@@ -183,7 +178,7 @@ export function createBossBattleScene(bossId, character, playerHP) {
         break;
       
 
-    // DEFAULT: Simple explosion
+    // DEFAULT: SIMPLE EXPLOSION
     default:
       animateExplosion(targetSprite);
       animateAttack(attackerSprite, attackerGlow, isPlayer);
@@ -192,22 +187,20 @@ export function createBossBattleScene(bossId, character, playerHP) {
   }
   }
 
-
-
-  // Execute a turn
+  // EXECUTE A TURN
   function executeTurn(playerMoveName) {
     waitingForPlayer = false;
     
-    // Get moves
+    // GET MOVES
     const playerMove = player.moves[playerMoveName];
     const bossMoveName = chooseBossMove(boss, null);
     const bossMove = boss.moves[bossMoveName];
     
-    // Decrement uses
+    // DECREMENT USES
     playerMove.uses--;
     bossMove.uses--;
     
-    // Determine order based on speed
+    // DETERMINE ORDER BASED ON SPEED
     let firstAttacker, secondAttacker;
     let firstMove, secondMove;
     let firstMoveName, secondMoveName;
@@ -237,11 +230,10 @@ export function createBossBattleScene(bossId, character, playerHP) {
       secondGlow = playerGlow;
     }
     
-    // First move
+    // FIRST MOVE
     wait(0.5, () => {
       let logMessage = "";
       
-      // 🎨 ALL moves go through playAttackAnimation now!
       playAttackAnimation(firstMoveName, firstSprite, secondSprite, firstGlow, firstMove.heal);
       
       if (firstAttacker === player) {
@@ -253,18 +245,14 @@ export function createBossBattleScene(bossId, character, playerHP) {
       updateLog(logMessage);
       updateHPBars(player, boss, playerHPBar, playerHPText, bossHPBar, bossHPText);
       
-      // Check if battle ends after first move
+      // CHECK IF SOMEONE IS AT 0 HP
       if (checkBattleEnd()) {
         return;
       }
-      
-      // Second move
-    // Second move
-    // Second move
+
     wait(2.5, () => {
       let secondLogMessage = "";
       
-      // 🎨 ALL moves go through playAttackAnimation now!
       playAttackAnimation(secondMoveName, secondSprite, firstSprite, secondGlow, secondMove.heal);
       
       if (secondAttacker === player) {
@@ -276,18 +264,17 @@ export function createBossBattleScene(bossId, character, playerHP) {
         updateLog(secondLogMessage);
         updateHPBars(player, boss, playerHPBar, playerHPText, bossHPBar, bossHPText);
         
-        // Check if battle ends after second move
         if (checkBattleEnd()) {
           return;
         }
         
-        // Update buffs
+        // UPDATE BUFFS
         if (player.speedBuffTurns > 0) player.speedBuffTurns--;
         if (player.defenseBuffTurns > 0) player.defenseBuffTurns--;
         if (boss.speedBuffTurns > 0) boss.speedBuffTurns--;
         if (boss.defenseBuffTurns > 0) boss.defenseBuffTurns--;
         
-        // Ready for next turn
+        // READY FOR NEXT TURN
         wait(1, () => {
           updateMoveButtons(moveButtons, player);
           waitingForPlayer = true;
@@ -297,17 +284,17 @@ export function createBossBattleScene(bossId, character, playerHP) {
     });
   }
 
-  // Execute a single move (handles damage calculation, healing, and buffs)
+  // HANDLES DAMAGE CALCULATION, HEALING, AND BUFFS
   function executeMove(attacker, defender, moveName, move) {
     let message = "";
     
     if (move.heal) {
-      // Healing move
+      // HEALING
       const healAmount = Math.min(move.heal, attacker.maxHP - attacker.hp);
       attacker.hp += healAmount;
       message = `${attacker.name} used ${moveName} and restored ${healAmount} HP!`;
     } else if (move.dmg) {
-      // Damage move - calculateDamage returns an object with {damage, crit}
+      // DAMAGE
       const damageResult = calculateDamage(attacker, defender, move.dmg);
       defender.hp = Math.max(0, defender.hp - damageResult.damage);
       message = `${attacker.name} used ${moveName} and dealt ${damageResult.damage} damage!`;
@@ -316,7 +303,7 @@ export function createBossBattleScene(bossId, character, playerHP) {
         message += " CRITICAL HIT!";
       }
       
-      // Apply buffs if any
+      // BUFFS
       if (move.speedBoost) {
         attacker.speedBuffTurns = 2;
         message += ` ${attacker.name}'s speed increased!`;
@@ -341,8 +328,7 @@ export function createBossBattleScene(bossId, character, playerHP) {
       battleActive = false;
       updateLog(`${boss.name} has been defeated! Victory!`);
       
-      // Animate boss defeat
-      animateDefeat(bossSprite, bossGlow, false);
+      animateDefeat(bossSprite, bossGlow, false); // ANIMATE BOSS DEFEAT
       
       wait(2, () => {
         if (bossId === 'BossCup') {
@@ -378,11 +364,9 @@ export function createBossBattleScene(bossId, character, playerHP) {
         animateDefeat(playerSprite, playerGlow, true);
         
         wait(2, () => {
-          // Pass lives data - boss battles start with 3 lives by default
-          // You can modify this if you want to carry lives from levels
           go("gameOver", { 
             level: "boss",
-            lives: 3, // Could be passed in from level if you want
+            lives: 3, 
             character: character
           });
         });
@@ -393,15 +377,13 @@ export function createBossBattleScene(bossId, character, playerHP) {
     return false;
   }
 
-  // Initialize
+  // INITIALIZE
   updateHPBars(player, boss, playerHPBar, playerHPText, bossHPBar, bossHPText);
   updateMoveButtons(moveButtons, player);
   createVolumeToggle();
 }
 
-/**
- * Helper function to create all three boss scenes
- */
+
 export function createCupBossScene(character, playerHP) {
   createBossBattleScene('BossCup', character, playerHP);
 }
