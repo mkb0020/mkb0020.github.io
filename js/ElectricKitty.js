@@ -38,6 +38,15 @@ loadSprite("box", "assets/images/CATastrophe/box.png", { sliceX: 2, sliceY: 1, a
 loadSprite("bottle", "assets/images/CATastrophe/PoisonBottle.png", { sliceX: 1, sliceY: 1, anims: { glitch: { from: 0, to: 0 } }});
 loadSprite("shatter", "assets/images/CATastrophe/Shatter.png", { sliceX: 6, sliceY: 1, anims: { glitch: { from: 0, to: 5 } }});
 loadSprite("poison", "assets/images/CATastrophe/Poison.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
+loadSprite("bam", "assets/images/CATastrophe/Bam.png", { sliceX: 8, sliceY: 1, anims: { glitch: { from: 0, to: 7 } }});
+loadSprite("bite", "assets/images/CATastrophe/Bite.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
+loadSprite("laserCharge", "assets/images/CATastrophe/LaserCharge.png", { sliceX: 6, sliceY: 1, anims: { glitch: { from: 0, to: 5 } }});
+loadSprite("laserBeam", "assets/images/CATastrophe/LaserBeam.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
+loadSprite("zap", "assets/images/CATastrophe/Zap.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
+loadSprite("smallRat", "assets/images/CATastrophe/SmallRat.png");
+
+
+
 
 scene("test", () => {
 
@@ -113,6 +122,10 @@ scene("test", () => {
   onKeyPress("t", () => animateSuperpositionSlam(boss, hero));
   onKeyPress("y", () => animateHydrogenHammer(boss, hero));
   onKeyPress("p", () => animatePoisonAttack(boss, hero));
+  onKeyPress("m", () => animateMouseMissiles(boss, hero));
+  onKeyPress("b", () => animateRatBite(hero));
+  onKeyPress("z", () => animateZap(hero));
+  onKeyPress("l", () => animateLaserBeam(boss, hero));
 
 
   function animateRedBoom(target) {
@@ -811,9 +824,136 @@ function animatePoisonAttack(boss, hero) {
   });
 }
 
+function animateMouseMissiles(boss, hero) {
+  const flash = add([
+    sprite("bam", { anim: "glitch" }),
+    pos(boss.pos.add(-40, 20)),
+    scale(4),
+    anchor("center"),
+    z(40),
+    opacity(1)
+  ]);
+
+  wait(0.25, () => destroy(flash));
+
+  const count = randi(3, 5);
+
+  for (let i = 0; i < count; i++) {
+    wait(i * 0.12, () => {
+      const ratProj = add([
+        sprite("smallRat"),
+        pos(boss.pos.add(-30, 30)),
+        scale(5),
+        anchor("center"),
+        rotate(-15),
+        z(40),
+      ]);
+
+      tween(
+        ratProj.pos,
+        hero.pos.add(rand(-10, 10), rand(-10, 10)),
+        0.45,
+        (p) => ratProj.pos = p,
+        easings.easeOutQuad
+      ).then(() => {
+        shake(12);
+        animateRedBoom(hero);
+        destroy(ratProj);
+      });
+    });
+  }
+}
+
+function animateRatBite(hero) {
+  shake(25);
+
+  const bite = add([
+    sprite("bite", { anim: "glitch" }),
+    pos(hero.pos.add(0, -40)),
+    scale(5),
+    anchor("center"),
+    z(50),
+    opacity(1)
+  ]);
+
+  tween( bite.scale, vec2(5, 5), 0.15, s => bite.scale = s )
+    .then(() => {
+      tween( bite.scale, vec2(4, 4), 0.15, s => bite.scale = s )
+      shake(30);
+    });
+
+  wait(0.4, () => {
+    tween(bite.opacity, 0, 0.25, (o) => bite.opacity = o).then(() => destroy(bite));
+  });
+}
+
+function animateZap(target) {
+  shake(20);
+
+  const zap = add([
+    sprite("zap", { anim: "glitch" }),
+    pos(target.pos),
+    scale(5),
+    anchor("center"),
+    opacity(1),
+    z(20)
+  ]);
+
+  wait(0.25, () => {
+    tween(zap.opacity, 0, 0.2, o => zap.opacity = o)
+      .then(() => destroy(zap));
+  });
+}
+
+function animateLaserBeam(boss, hero) {
+  const charge = add([
+    sprite("laserCharge", { anim: "glitch" }),
+    pos(boss.pos.add(-30, 10)),
+    scale(5),
+    anchor("center"),
+    opacity(0),
+    z(50)
+  ]);
+
+  tween(charge.opacity, 1, 0.4, o => charge.opacity = o);
+  tween(3, 4, 0.4, s => charge.scale = vec2(s));
+
+  wait(0.45, () => {
+    destroy(charge);
+    shake(12);
+
+    const beamStart = boss.pos.add(-150, 20);
+    const beamEnd = hero.pos;
+
+    const beam = add([
+      sprite("laserBeam", { anim: "glitch" }),
+      pos(beamStart),
+      scale(vec2(5)),
+      anchor("center"),
+      rotate(15),
+      z(60),
+      opacity(1)
+    ]);
+
+    tween(
+      beam.pos,
+      beamEnd,
+      0.3,
+      (p) => beam.pos = p,
+      easings.easeInQuad
+    ).then(() => {
+      animateZap(hero);
+      shake(25);
+      destroy(beam);
+    });
+  });
+}
+
+
+
   add([
-    text("1: Fire-Explosion | 2: Plasma-Explosion | 3: Smoke-Puff | 4: Overhead-Swirl | 5: Powerup | 6: Cat-Claw | 7: Zoomies | 8: Cucumber-Cannon | 9: Make-Biscuits | 0: Fireball-Projectile | Q: Scratch | W: Fireball-Arc | E: Cat-Arrow | R. Shock | T. Superposition-Slam | Y. Hydrogen-Hammer | P. Poison", {
-      size: 28,
+    text("1: Fire-Explosion | 2: Plasma-Explosion | 3: Smoke-Puff | 4: Overhead-Swirl | 5: Powerup | 6: Cat-Claw | 7: Zoomies | 8: Cucumber-Cannon | 9: Make-Biscuits | 0: Fireball-Projectile | Q: Scratch | W: Fireball-Arc | E: Cat-Arrow | R. Shock | T. Superposition-Slam | Y. Hydrogen-Hammer | P. Poison | L. Laser-Beam | M. Mouse-Missles | B. Rat-Bite | Z. Zap", {
+      size: 25,
       width: 960,
       font: 'Basic'
     }),
