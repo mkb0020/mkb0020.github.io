@@ -1,13 +1,20 @@
 import kaplay from "kaplay";
 
+// RESPONSIVE SETUP FOR MOBILE
+const isMobile = window.innerWidth <= 768;
+const canvasWidth = isMobile ? window.innerWidth : 1000;
+const canvasHeight = isMobile ? Math.min(window.innerHeight * 0.6, 480) : 480;
+
 kaplay({
-  width: 1000,
-  height: 480,
+  width: canvasWidth,
+  height: canvasHeight,
   scale: 1,
   background: [12, 5, 18],
   debug: true,
   crisp: true,
   canvas: document.getElementById("gameCanvas"),
+  stretch: true,
+  letterbox: true,
 });
 
 loadFont("CyberGoth", "assets/fonts/ScienceGothic.ttf");
@@ -44,9 +51,11 @@ loadSprite("laserCharge", "assets/images/CATastrophe/LaserCharge.png", { sliceX:
 loadSprite("laserBeam", "assets/images/CATastrophe/LaserBeam.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
 loadSprite("zap", "assets/images/CATastrophe/Zap.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
 loadSprite("smallRat", "assets/images/CATastrophe/SmallRat.png");
+loadSprite("poof", "assets/images/CATastrophe/poof.png", { sliceX:8, sliceY:1, anims:{burst:{from:0,to:7}} });
+loadSprite("smallRat2", "assets/images/CATastrophe/SmallRat2.png");
+loadSprite("ghostRat", "assets/images/CATastrophe/GhostRat.png");
 
-
-
+window.gameActions = {};
 
 scene("test", () => {
 
@@ -105,6 +114,41 @@ scene("test", () => {
     z(1)
   ]);
 
+
+  window.gameActions = {
+    '1': () => animateRedBoom(hero),
+    '2': () => animatePurpleBoom(boss),
+    '3': () => animateSmoke(boss),
+    '4': () => animateSwirl(hero),
+    '5': () => animatePowerup(hero),
+    '6': () => animateClaw(hero, boss),
+    '7': () => animateZoomies(hero, boss),
+    '8': () => animateGreenBlast(boss, hero),
+    '9': () => animateBiscuits(hero),
+    '0': () => animateFireball(boss, hero),
+    'q': () => animateScratch(hero, boss),
+    'w': () => animateFire(hero, boss),
+    'e': () => animateCatArrow(hero, boss),
+    'r': () => animateShock(boss),
+    't': () => animateSuperpositionSlam(boss, hero),
+    'y': () => animateHydrogenHammer(boss, hero),
+    'p': () => animatePoisonAttack(boss, hero),
+    'm': () => animateMouseMissiles(boss, hero),
+    'b': () => animateRatBite(hero),
+    'z': () => animateZap(hero),
+    'l': () => animateLaserBeam(boss, hero),
+    'n': () => animateGhostPoof(boss),
+    'u': () => {
+      if (!customAnimConfig) {
+        console.log("Load a custom sprite first!");
+        return;
+      }
+      animateCustom(boss);
+    },
+    'space': () => bigBoom(boss)
+  };
+
+
   onKeyPress("1", () => animateRedBoom(hero));
   onKeyPress("2", () => animatePurpleBoom(boss));
   onKeyPress("3", () => animateSmoke(boss));
@@ -126,6 +170,9 @@ scene("test", () => {
   onKeyPress("b", () => animateRatBite(hero));
   onKeyPress("z", () => animateZap(hero));
   onKeyPress("l", () => animateLaserBeam(boss, hero));
+  onKeyPress("n", () => animateGhostPoof(boss));
+
+  
 
 
   function animateRedBoom(target) {
@@ -949,9 +996,39 @@ function animateLaserBeam(boss, hero) {
   });
 }
 
+function animateGhostPoof(target) {
+  const pooooof = add([
+    sprite("poof", { anim: "burst" }),
+    pos(target.pos),
+    scale(2),
+    opacity(1),
+    z(12),
+    anchor("center")
+    ]);
+
+  wait(0.3, () => {
+    tween(pooooof.opacity, 0, 0.25, (o) => pooooof.opacity = o, easings.easeOutQuad)
+      .then(() => destroy(pooooof));
+    });
+
+  const ghost = add([
+        sprite("ghostRat"),
+        pos(target.pos),
+        scale(1),
+        opacity(0.8),
+        z(100),
+       anchor("center"),
+        rotate(0)
+      ]);
+      
+  tween(ghost.pos.y, 0, 1.5, (y) => ghost.pos.y = y, easings.easeOutQuad);
+  tween(ghost.opacity, 0, 1.5, (o) => ghost.opacity = o, easings.easeOutQuad);
+      
+  wait(1.5, () => destroy(ghost));
+}
 
 
-  add([
+add([
     text("1: Fire-Explosion | 2: Plasma-Explosion | 3: Smoke-Puff | 4: Overhead-Swirl | 5: Powerup | 6: Cat-Claw | 7: Zoomies | 8: Cucumber-Cannon | 9: Make-Biscuits | 0: Fireball-Projectile | Q: Scratch | W: Fireball-Arc | E: Cat-Arrow | R. Shock | T. Superposition-Slam | Y. Hydrogen-Hammer | P. Poison | L. Laser-Beam | M. Mouse-Missles | B. Rat-Bite | Z. Zap", {
       size: 25,
       width: 960,
