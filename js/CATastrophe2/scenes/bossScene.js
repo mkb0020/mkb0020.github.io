@@ -40,9 +40,6 @@ import {
   animateZap
 } from '../helpers/bossHelpers.js';
 
-/**
- * CREATE BOSS BATTLE SCENES
- */
 export function createBossBattleScene(bossId, character, playerHP) {
   setupBossMusic();
 
@@ -87,7 +84,6 @@ export function createBossBattleScene(bossId, character, playerHP) {
     logText.text = message;
   }
 
-
   // 🎮 ANIMATIONS
   function playAttackAnimation(moveName, attackerSprite, targetSprite, attackerGlow, isHeal) {
       console.log('🎮 Playing animation for:', moveName, 'uppercase:', moveName.toUpperCase());
@@ -96,6 +92,7 @@ export function createBossBattleScene(bossId, character, playerHP) {
   
   // MAP MOVES TO ANIMATIONS
   switch(moveName.toUpperCase()) {
+   
     // PLAYER MOVES
     case "ZOOMIES":
       animateZoomies(attackerSprite, targetSprite);
@@ -130,10 +127,8 @@ export function createBossBattleScene(bossId, character, playerHP) {
       
     case "LASER BEAM":
       animateLaserBeam(attackerSprite, targetSprite);
-      //animateAttack(attackerSprite, attackerGlow, isPlayer);
       wait(0.2, () => animateHit(targetSprite, isPlayer ? bossGlow : playerGlow));
       break;
-    
     
       // BOSS CUP MOVES
     case "ESPRESSO EMBER":
@@ -180,10 +175,10 @@ export function createBossBattleScene(bossId, character, playerHP) {
     
     // RAT KING
     case "BITE":
-  animateBite(attackerSprite, targetSprite);
-  animateAttack(attackerSprite, attackerGlow, isPlayer);
-  wait(0.2, () => animateHit(targetSprite, isPlayer ? bossGlow : playerGlow));
-  break;
+      animateBite(attackerSprite, targetSprite);
+      animateAttack(attackerSprite, attackerGlow, isPlayer);
+      wait(0.2, () => animateHit(targetSprite, isPlayer ? bossGlow : playerGlow));
+      break;
   
     case "RODENT RAGE":
       animateRodentRage(attackerSprite, targetSprite);
@@ -193,11 +188,8 @@ export function createBossBattleScene(bossId, character, playerHP) {
       
     case "MOUSE MISSILES":
       animateMouseMissiles(attackerSprite, targetSprite);
-     // animateAttack(attackerSprite, attackerGlow, isPlayer);
       wait(0.2, () => animateHit(targetSprite, isPlayer ? bossGlow : playerGlow));
       break;
-
-
 
     // OBSERVER MOVES 
     case "POISON":
@@ -218,7 +210,6 @@ export function createBossBattleScene(bossId, character, playerHP) {
         wait(0.2, () => animateHit(targetSprite, isPlayer ? bossGlow : playerGlow));
         break;
       
-
     // DEFAULT: SIMPLE EXPLOSION
     default:
       animateExplosion(targetSprite);
@@ -228,11 +219,9 @@ export function createBossBattleScene(bossId, character, playerHP) {
   }
   }
 
-  // EXECUTE A TURN
   function executeTurn(playerMoveName) {
     waitingForPlayer = false;
     
-    // GET MOVES
     const playerMove = player.moves[playerMoveName];
     const bossMoveName = chooseBossMove(boss, null);
     const bossMove = boss.moves[bossMoveName];
