@@ -5,8 +5,8 @@ import kaplay from "kaplay";
 //const canvasWidth = isMobile ? window.innerWidth : 1000;
 //const canvasHeight = isMobile ? Math.min(window.innerHeight * 0.6, 480) : 480;
 
-const canvasWidth = 1000;
-const canvasHeight = 480;
+const canvasWidth = 800;
+const canvasHeight = 400;
 
 kaplay({
   width: canvasWidth,
@@ -76,8 +76,8 @@ scene("test", () => {
 
   const cat = add([
     sprite('cat'),
-    pos(60, 190),
-    scale(1.2),
+    pos(30, 220),
+    scale(1.1),
     z(2),
     "cat"
     
@@ -85,7 +85,7 @@ scene("test", () => {
 
   const hero = add([
     circle(1),
-    pos(170, 300),
+    pos(120, 310),
     color(131, 12, 222),
     outline(4, rgb(165, 90, 225)),
     z(1),
@@ -94,28 +94,28 @@ scene("test", () => {
 
   const rat = add([
     sprite('rat'),
-    pos(750, 100),
-    scale(2.3),
+    pos(620, 100),
+    scale(2.1),
     z(2),
     "rat"
   ]);
   const boss = add([
     circle(1),
-    pos(810, 160),
+    pos(670, 180),
     color(144, 144, 192),
     outline(5, rgb(196, 195, 208)),
     anchor("center"),
     "boss"
   ]);
 
-  const movesRect = add([
-    rect(1000, 130),
-    pos(0, 350),
-    color(rgb(42,52,57)),
-    outline(5, rgb(131, 12, 222)),
-    "moves",
-    z(1)
-  ]);
+//  const movesRect = add([
+//    rect(800, 130),
+//    pos(0, 350),
+//    color(rgb(42,52,57)),
+//    outline(5, rgb(131, 12, 222)),
+//    "moves",
+//    z(1)
+//  ]);
 
 
   window.gameActions = {
@@ -141,6 +141,7 @@ scene("test", () => {
     'z': () => animateZap(hero),
     'l': () => animateLaserBeam(boss, hero),
     'n': () => animateGhostPoof(boss),
+    'x': () => animateKaBAM(boss),
     'u': () => {
       if (!customAnimConfig) {
         console.log("Load a custom sprite first!");
@@ -174,16 +175,15 @@ scene("test", () => {
   onKeyPress("z", () => animateZap(hero));
   onKeyPress("l", () => animateLaserBeam(boss, hero));
   onKeyPress("n", () => animateGhostPoof(boss));
-
-  
-
+  onKeyPress("x", () =>  animateKaBAM(boss));
+ 
 
   function animateRedBoom(target) {
       shake(15);
       const boom = add([
         sprite("redBoom", { anim: "burst" }),
         pos(target.pos),
-        scale(4),
+        scale(3),
         opacity(1),
         z(10),
         anchor("center")
@@ -199,7 +199,7 @@ scene("test", () => {
       const boom = add([
         sprite("purpleBoom", { anim: "burst" }),
         pos(target.pos),
-        scale(4),
+        scale(3),
         opacity(1),
         z(10),
         anchor("center")
@@ -303,7 +303,7 @@ scene("test", () => {
 
     const slash = add([
       sprite("claw", { anim: "slash" }),
-      pos(startX, attacker.pos.y - 120),
+      pos(startX, attacker.pos.y - 160),
       scale(4),
       z(5),
       anchor("left")
@@ -319,7 +319,7 @@ scene("test", () => {
     const glitchCat = add([
       sprite("zoomies", { anim: "glitch" }),
       pos(attacker.pos),
-      scale(1.8),
+      scale(1.1),
       z(15),
       anchor("center"),
       opacity(1)
@@ -331,9 +331,9 @@ scene("test", () => {
     });
 
     const zips = [
-      vec2(rand(100, 400), rand(150, 400)), 
-      vec2(rand(600, 900), rand(100, 300)), 
-      vec2(rand(500, 800), rand(300, 500)), 
+      vec2(rand(80, 300), rand(150, 300)), 
+      vec2(rand(600, 700), rand(100, 300)), 
+      vec2(rand(200, 500), rand(100, 500)), 
       target.pos
     ];
 
@@ -361,7 +361,7 @@ scene("test", () => {
     const charge = add([
       sprite("greenBlast", { anim: "glitch" }),
       pos(attacker.pos),
-      scale(3),
+      scale(2.5),
       anchor("center"),
       z(20),
       opacity(0)
@@ -383,7 +383,7 @@ scene("test", () => {
       const shot = add([
         sprite("littleCucumber"),
         pos(attacker.pos),
-        scale(1.5),
+        scale(1.3),
         anchor("center"),
         z(30)
       ]);
@@ -422,7 +422,7 @@ scene("test", () => {
       const arrow = add([
         sprite("arrow"),         
         pos(target.pos),
-        scale(1.5),
+        scale(1),
         anchor("center"),
         rotate(0),
         z(30),
@@ -467,10 +467,10 @@ scene("test", () => {
                 tween(arrow.pos, target.pos.add(dirToPlayer.scale(-15)), 0.06, (p) => arrow.pos = p, easings.easeOutCubic) // OVERSHOOT
                   .then(() => {
                     arrow.pos = target.pos;
-                    animatePurpleBoom(target);
+                    animateRedBoom(target);
                     animateSmoke(target);
                     shake(20);
-                  //  play("cat_meow_hit");       // optional: add a smug meow here
+
                     destroy(arrow);
                   });
               });
@@ -484,7 +484,7 @@ scene("test", () => {
       const paws = add([
         sprite("biscuits", { anim: "glitch" }),
         pos(target.pos.add(100, -20)),
-        scale(3),
+        scale(2.8),
         anchor("center"),
         z(30),
         opacity(0)
@@ -513,7 +513,7 @@ scene("test", () => {
       const fb = add([
         sprite("fireball", { anim: "glitch" }),
         pos(start),
-        scale(3),
+        scale(2.5),
         anchor("center"),
         z(40)
       ]);
@@ -624,7 +624,7 @@ function animateSuperpositionSlam(boss, hero) {
   const makeCopy = () => add([
     sprite("superposition", { anim: "glitch" }),
     pos(boss.pos),
-    scale(2),
+    scale(2.2),
     anchor("center"),
     z(20),
     opacity(0)
@@ -700,7 +700,7 @@ function animateHydrogenHammer(boss, hero) {
   const hammer = add([
     sprite("hammer", { anim: "smash" }),
     pos(boss.pos.add(-200, 10)),
-    scale(3.5),
+    scale(3.2),
     anchor("center"),
     z(25),
     opacity(1)
@@ -726,7 +726,7 @@ function animatePoisonBox(boss) {
   const box = add([
     sprite("box", { frame: 0 }), 
     pos(boss.pos.add(-40, 20)),
-    scale(2),
+    scale(1.8),
     z(30),
     anchor("center"),
     opacity(0)
@@ -746,7 +746,7 @@ function animatePoisonBottleRise(box) {
   const bottle = add([
     sprite("bottle"),
     pos(box.pos.add(0, -20)),
-    scale(2.2),
+    scale(1.8),
     anchor("center"),
     z(35),
     opacity(0)
@@ -762,7 +762,7 @@ function animatePoisonBottleSuperposition(bottle, hero, onComplete) {
   const makeCopy = () => add([
     sprite("bottle"),
     pos(bottle.pos),
-    scale(2.2),
+    scale(1.8),
     anchor("center"),
     z(40),
     opacity(0)
@@ -825,7 +825,7 @@ function animatePoisonMergeAndShatter(A, B, hero, onComplete) {
     const shatter = add([
       sprite("shatter", { anim: "glitch" }),
       pos(mergePoint),
-      scale(3),
+      scale(2),
       anchor("center"),
       z(50)
     ]);
@@ -839,8 +839,8 @@ function animatePoisonMergeAndShatter(A, B, hero, onComplete) {
 function animatePoisonDrip(hero) {
   const drip = add([
     sprite("poison", { anim: "glitch" }), 
-    pos(hero.pos.add(0, -10)),
-    scale(3),
+    pos(hero.pos.add(0, 0)),
+    scale(2),
     opacity(0),
     anchor("center"),
     z(60)
@@ -872,6 +872,20 @@ function animatePoisonAttack(boss, hero) {
       });
     });
   });
+}
+
+function animateKaBAM(boss, hero) {
+  shake(20);
+  const kabam = add([
+    sprite("bam", { anim: "glitch" }),
+    pos(boss.pos),
+    scale(5),
+    anchor("center"),
+    z(40),
+    opacity(1)
+  ]);
+
+  wait(0.4, () => destroy(kabam))
 }
 
 function animateMouseMissiles(boss, hero) {
@@ -1030,17 +1044,16 @@ function animateGhostPoof(target) {
   wait(1.5, () => destroy(ghost));
 }
 
-
-add([
-    text("1: Fire-Explosion | 2: Plasma-Explosion | 3: Smoke-Puff | 4: Overhead-Swirl | 5: Powerup | 6: Cat-Claw | 7: Zoomies | 8: Cucumber-Cannon | 9: Make-Biscuits | 0: Fireball-Projectile | Q: Scratch | W: Fireball-Arc | E: Cat-Arrow | R. Shock | T. Superposition-Slam | Y. Hydrogen-Hammer | P. Poison | L. Laser-Beam | M. Mouse-Missles | B. Rat-Bite | Z. Zap", {
-      size: 25,
-      width: 960,
-      font: 'Basic'
-    }),
-    pos(20, 360),
-    color(rgb(255, 255, 255)),
-    z(20)
-  ]);
+//add([
+//    text("1: Fire-Explosion | 2: Plasma-Explosion | 3: Smoke-Puff | 4: Overhead-Swirl | 5: Powerup | 6: Cat-Claw | 7: Zoomies | 8: Cucumber-Cannon | 9: Make-Biscuits | 0: Fireball-Projectile | Q: Scratch | W: Fireball-Arc | E: Cat-Arrow | R. Shock | T. Superposition-Slam | Y. Hydrogen-Hammer | P. Poison | L. Laser-Beam | M. Mouse-Missles | B. Rat-Bite | Z. Zap", {
+//      size: 25,
+//      width: 800,
+//      font: 'Basic'
+//    }),
+//    pos(20, 360),
+//    color(rgb(255, 255, 255)),
+//    z(20)
+//  ]);
 
   // =========================== CUSTOM SPRITE TESTER  =========================== 
   let customSpriteName = "userSprite"; 
