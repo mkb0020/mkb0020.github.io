@@ -32,7 +32,12 @@ import {
   animateScratch,
   animateSuperpositionSlam,
   animateHydrogenHammer,
-  animatePoisonAttack
+  animatePoisonAttack,
+  animateRodentRage,
+  animateBite,
+  animateMouseMissiles,
+  animateLaserBeam,
+  animateZap
 } from '../helpers/bossHelpers.js';
 
 /**
@@ -115,7 +120,22 @@ export function createBossBattleScene(bossId, character, playerHP) {
       animateHeal(attackerSprite, attackerGlow);
       break;
     
-    // BOSS CUP MOVES
+    
+    // LASER POINTER BOSS MOVES
+    case "ZAP":
+      animateZap(attackerSprite, targetSprite);
+      animateAttack(attackerSprite, attackerGlow, isPlayer);
+      wait(0.2, () => animateHit(targetSprite, isPlayer ? bossGlow : playerGlow));
+      break;
+      
+    case "LASER BEAM":
+      animateLaserBeam(attackerSprite, targetSprite);
+      //animateAttack(attackerSprite, attackerGlow, isPlayer);
+      wait(0.2, () => animateHit(targetSprite, isPlayer ? bossGlow : playerGlow));
+      break;
+    
+    
+      // BOSS CUP MOVES
     case "ESPRESSO EMBER":
       animateEspressoFireball(attackerSprite, targetSprite);
       animateAttack(attackerSprite, attackerGlow, isPlayer);
@@ -158,6 +178,27 @@ export function createBossBattleScene(bossId, character, playerHP) {
       animateHeal(attackerSprite, attackerGlow);
       break;
     
+    // RAT KING
+    case "BITE":
+  animateBite(attackerSprite, targetSprite);
+  animateAttack(attackerSprite, attackerGlow, isPlayer);
+  wait(0.2, () => animateHit(targetSprite, isPlayer ? bossGlow : playerGlow));
+  break;
+  
+    case "RODENT RAGE":
+      animateRodentRage(attackerSprite, targetSprite);
+      animateAttack(attackerSprite, attackerGlow, isPlayer);
+      wait(0.2, () => animateHit(targetSprite, isPlayer ? bossGlow : playerGlow));
+      break;
+      
+    case "MOUSE MISSILES":
+      animateMouseMissiles(attackerSprite, targetSprite);
+     // animateAttack(attackerSprite, attackerGlow, isPlayer);
+      wait(0.2, () => animateHit(targetSprite, isPlayer ? bossGlow : playerGlow));
+      break;
+
+
+
     // OBSERVER MOVES 
     case "POISON":
         animatePoisonAttack(attackerSprite, targetSprite);
@@ -331,11 +372,19 @@ export function createBossBattleScene(bossId, character, playerHP) {
       animateDefeat(bossSprite, bossGlow, false); // ANIMATE BOSS DEFEAT
       
       wait(2, () => {
-        if (bossId === 'BossCup') {
+        if (bossId === 'BossLaserPointer') {
+          go("bossDefeated", {
+            level: "laserPointerBoss",
+            score: 0,
+            nextLevel: "Transition2",
+            character: character,
+            playerHP: player.hp
+          });
+        } else if (bossId === 'BossCup') {
           go("bossDefeated", {
             level: "cupBoss",
             score: 0,
-            nextLevel: "level2",
+            nextLevel: "Transition3",
             character: character,
             playerHP: player.hp
           });
@@ -343,17 +392,26 @@ export function createBossBattleScene(bossId, character, playerHP) {
           go("bossDefeated", {
             level: "cucumberBoss",
             score: 0,
-            nextLevel: "level3",
+            nextLevel: "Transition4",
             character: character,
             playerHP: player.hp
           });
-        } else if (bossId === 'Observer') {
-          go("victory", { character });
-        }
+        } else if (bossId === 'BossRatKing') {
+          go("bossDefeated", {
+            level: "ratKingBoss",
+            score: 0,
+            nextLevel: "Transition5",
+            character: character,
+            playerHP: player.hp
+          });
+        } else if (bossId === 'observerBoss') {
+            go("transition", "Transition7", character, player.hp);
+          }
       });
-      
-      return true;
-    }
+
+            
+            return true;
+          }
     
 
       if (currentPlayerHP <= 0) {
@@ -383,6 +441,9 @@ export function createBossBattleScene(bossId, character, playerHP) {
   createVolumeToggle();
 }
 
+export function createLaserPointerBossScene(character, playerHP) {
+  createBossBattleScene('BossLaserPointer', character, playerHP);
+}
 
 export function createCupBossScene(character, playerHP) {
   createBossBattleScene('BossCup', character, playerHP);
@@ -392,6 +453,11 @@ export function createCucumberBossScene(character, playerHP) {
   createBossBattleScene('BossCucumber', character, playerHP);
 }
 
+export function createRatKingBossScene(character, playerHP) {
+  createBossBattleScene('BossRatKing', character, playerHP);
+}
+
 export function createObserverBossScene(character, playerHP) {
   createBossBattleScene('observerBoss', character, playerHP);
 }
+
