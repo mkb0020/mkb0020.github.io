@@ -38,14 +38,14 @@ canvas {
 /* ============================ CUSTOM SPRITE TESTER ============================ */
 #toggleTester {
   position: fixed;
-  bottom: 20px;
+  bottom: 15px;
   right: 20px;
   background: #000;
   color: #00ffff;
-  border: 3px solid #00ffff;
-  padding: 12px 20px;
+  border: 2px solid #00ffff;
+  padding: 5px 10px;
   font-family: 'SpaceLetters', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   z-index: 100;
   box-shadow: 0 0 20px #00ffff;
@@ -252,7 +252,7 @@ canvas {
 }
 
 .Game-content {
-  margin-top: 65px;
+  margin-top: 45px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -261,8 +261,8 @@ canvas {
 /* ============================ RESPONSIVE ============================ */
 @media (min-width: 769px) {
   canvas {
-    width: 1000px !important;
-    height: 480px !important;
+    width: 800px !important;
+    height: 400px !important;
   }
 }
 
@@ -440,5 +440,95 @@ canvas {
     padding: 8px 12px;
     font-size: 12px;
     min-width: 60px;
+  }
+}
+
+
+/* ============================ DESKTOP DUAL CONTROL PANELS (SIDE BY SIDE) ============================ */
+.desktop-controls-wrapper {
+  display: none;
+  margin: 25px auto 40px;
+  max-width: 1200px;
+  padding: 0 10px;
+  pointer-events: none; 
+}
+
+.controls-column {
+  width: 200px;
+  background: rgba(10, 10, 30, 0.92);
+  border: 2px solid var(--AquaAura);
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 
+    0 0 25px var(--AuraGlow3),
+    inset 0 0 15px rgba(0, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  font-family: 'GothNerd', sans-serif;
+  pointer-events: auto; 
+  margin-top:70px;
+}
+
+.controls-column h3 {
+  margin: 0 0 14px 0;
+  font-size: 20px;
+  text-align: center;
+  background: linear-gradient(90deg, var(--NuclearFuscia), var(--AlphaAqua));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px var(--ParticlePink);
+  font-family: 'SpaceLetters';
+}
+
+.left-column   { float: left;  }
+.right-column  { float: right; }
+
+.ctrl-item {
+  background: rgba(0, 255, 255, 0.07);
+  padding: 0px 0px;
+  margin: 5px 0;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ctrl-item:hover {
+  background: rgba(103, 254, 189, 0.25);
+  border-color: var(--AlphaAqua);
+  box-shadow: 0 0 20px var(--AlphaGlow2);
+}
+
+.ctrl-item kbd {
+  background: #000;
+  color: var(--NuclearFuscia);
+  border: 0.5px solid var(--NuclearFuscia);
+  padding: 3px 3px;
+  border-radius: 6px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  min-width: 28px;
+  text-align: center;
+  box-shadow: 0 0 12px var(--NuclearGlow2);
+}
+
+/* Clear floats & show only on desktop */
+.desktop-controls-wrapper::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 769px) {
+  .desktop-controls-wrapper {
+    display: block;
+  }
+}
+
+/* Hide completely on mobile */
+@media (max-width: 768px) {
+  .desktop-controls-wrapper {
+    display: none !important;
   }
 }
