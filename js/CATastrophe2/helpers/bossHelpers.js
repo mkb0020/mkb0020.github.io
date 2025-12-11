@@ -2,9 +2,6 @@
 import { SCREEN_W, SCREEN_H, Colors } from '../config/gameConfig.js';
 import { createVolumeToggle } from '../utils/audioControls.js';
 
-/**
- * MUSIC FOR BOSS BATTLE
- */
 export function setupBossMusic() {
   window.levelMusic = play("levelMusic", { volume: 0.4, loop: true });
   
@@ -16,9 +13,6 @@ export function setupBossMusic() {
   });
 }
 
-/**
- * BACKGROUND FOR BOSS BATTLE
- */
 export function addBossBackground(bossConfig) {
   add([
     sprite(bossConfig.background),
@@ -28,11 +22,7 @@ export function addBossBackground(bossConfig) {
   ]);
 }
 
-/**
- *  ADD CHARACTER SPRITES WITH GLOW ANIMATIONS
- */
 export function addBattleSprites(character, bossConfig) {
-  // Player glow
   const playerGlow = add([
     sprite("glow"),
     pos(260, 250),
@@ -43,7 +33,6 @@ export function addBattleSprites(character, bossConfig) {
     "playerGlow"
   ]);
 
-  // Player sprite
   const playerSprite = add([
     sprite(character.sprites.battle),
     pos(260, 250),
@@ -54,7 +43,6 @@ export function addBattleSprites(character, bossConfig) {
     "playerSprite"
   ]);
   
-  // Boss glow
   const bossGlow = add([
     sprite(bossConfig.glowSprite || "glow"),
     pos(725, 120),
@@ -65,7 +53,6 @@ export function addBattleSprites(character, bossConfig) {
     "bossGlow"
   ]);
 
-  // Boss sprite
   const bossSprite = add([
     sprite(bossConfig.sprite),
     pos(725, 120),
@@ -79,11 +66,7 @@ export function addBattleSprites(character, bossConfig) {
   return { playerSprite, playerGlow, bossSprite, bossGlow };
 }
 
-/**
- * ADD PLAYER HP PANNEL AND BAR
- */
 export function addPlayerHPPanel(player) {
-  // Background panel (dark)
   add([
     rect(400, 85, { radius: 50 }),
     pos(470, 250),
@@ -93,7 +76,6 @@ export function addPlayerHPPanel(player) {
     z(10)
   ]);
 
-  // Outline panel (cyan glow)
   add([
     rect(400, 85, { radius: 50 }),
     pos(470, 250),
@@ -103,7 +85,6 @@ export function addPlayerHPPanel(player) {
     z(9)
   ]);
 
-  // Player name (shadow)
   add([
     text(player.name, { size: 23, font: "orbitronBold" }),
     pos(540, 275),
@@ -112,7 +93,6 @@ export function addPlayerHPPanel(player) {
     z(12)
   ]);
 
-  // Player name (main)
   add([
     text(player.name, { size: 23, font: "orbitronBold" }),
     pos(542, 277),
@@ -121,7 +101,6 @@ export function addPlayerHPPanel(player) {
     z(11)
   ]);
 
-  // HP label (shadow)
   add([
     text("HP:", { size: 20, font: "orbitronBold" }),
     pos(520, 295),
@@ -129,7 +108,6 @@ export function addPlayerHPPanel(player) {
     z(12)
   ]);
 
-  // HP label (main)
   add([
     text("HP:", { size: 20, font: "orbitronBold" }),
     pos(521, 296),
@@ -137,7 +115,6 @@ export function addPlayerHPPanel(player) {
     z(11)
   ]);
 
-  // HP bar background
   add([
     rect(280, 20, { radius: 8 }),
     pos(565, 295),
@@ -147,7 +124,6 @@ export function addPlayerHPPanel(player) {
     z(11)
   ]);
 
-  // HP bar fill
   const playerHPBar = add([
     rect(280, 20, { radius: 8 }),
     pos(565, 295),
@@ -156,7 +132,6 @@ export function addPlayerHPPanel(player) {
     "playerHPBar"
   ]);
 
-  // HP text
   const playerHPText = add([
     text(`${player.hp} / ${player.maxHP}`, { size: 16, font: "orbitron" }),
     pos(785, 275),
@@ -168,9 +143,6 @@ export function addPlayerHPPanel(player) {
   return { playerHPBar, playerHPText };
 }
 
-/**
- * ADD BOSS HP PANNEL AND BAR
- */
 export function addBossHPPanel(boss) {
   // Background panel (dark)
   add([
@@ -257,11 +229,7 @@ export function addBossHPPanel(boss) {
   return { bossHPBar, bossHPText };
 }
 
-/**
- * ADD BATTLE LOG PANEL
- */
 export function addBattleLogPanel(initialMessage) {
-  // Panel background
   add([
     rect(425, 115, { radius: 30 }),
     pos(120, 360),
@@ -271,7 +239,6 @@ export function addBattleLogPanel(initialMessage) {
     z(10)
   ]);
 
-  // Log text
   const logText = add([
     text(initialMessage, { size: 24, font: "narrow", width: 360 }),
     pos(145, 375),
@@ -283,9 +250,6 @@ export function addBattleLogPanel(initialMessage) {
   return logText;
 }
 
-/**
- * ADD MOVE BUTTONS PANEL BACKGROUND
- */
 export function addMoveButtonsPanel() {
   add([
     rect(335, 115, { radius: 5 }),
@@ -297,9 +261,6 @@ export function addMoveButtonsPanel() {
   ]);
 }
 
-/**
- * CREATE MOVE BUTTONS FOR PLAYER
- */
 export function createMoveButtons(player, onMoveClick, gameStateGetter) {
   const moveButtons = [];
   const moveNames = Object.keys(player.moves);
@@ -309,7 +270,6 @@ export function createMoveButtons(player, onMoveClick, gameStateGetter) {
     const x = i % 2 === 0 ? 555 : 720;
     const y = i < 2 ? 370 : 420;
     
-    // Button background
     const btn = add([
       rect(160, 45, { radius: 25 }),
       pos(x, y),
@@ -325,7 +285,6 @@ export function createMoveButtons(player, onMoveClick, gameStateGetter) {
       "moveBtn"
     ]);
 
-    // Button text
     const btnText = btn.add([
       text(`${moveName} (${moveData.uses})`, { size: 22, font: "narrowBold" }),
       pos(75, 25),
@@ -334,14 +293,12 @@ export function createMoveButtons(player, onMoveClick, gameStateGetter) {
       z(12)
     ]);
 
-    // Click handler
     btn.onClick(() => {
       if (gameStateGetter() && btn.enabled) {
         onMoveClick(moveName);
       }
     });
 
-    // Hover effects
     btn.onHover(() => {
       if (btn.enabled) {
         btn.color = Color.fromHex(Colors.VortexViolet);
@@ -358,9 +315,6 @@ export function createMoveButtons(player, onMoveClick, gameStateGetter) {
   return moveButtons;
 }
 
-/**
- * UPDATE HP BARS
- */
 export function updateHPBars(player, boss, playerHPBar, playerHPText, bossHPBar, bossHPText) {
   const currentHP = parseInt(player.hp) || 0;
   const maxHP = parseInt(player.maxHP) || 1;
@@ -377,9 +331,6 @@ export function updateHPBars(player, boss, playerHPBar, playerHPText, bossHPBar,
   bossHPText.text = `${bossCurrentHP} / ${bossMaxHP}`;
 }
 
-/**
- * UPDATE MOVE BUTTONS
- */
 export function updateMoveButtons(moveButtons, player) {
   moveButtons.forEach(({ btn, btnText, moveName }) => {
     const move = player.moves[moveName];
@@ -393,13 +344,7 @@ export function updateMoveButtons(moveButtons, player) {
   });
 }
 
-// ============================================================================
-//  BASIC ANIMATIONS
-// ============================================================================
-
-/**
- * ANIMATION: ATTACK - SLIDE FORWARD AND BACK
- */
+// ================================================== ANIMATIONS ==================================================
 export function animateAttack(sprite, glow, isPlayer) {
   const originalX = sprite.pos.x;
   const slideDistance = isPlayer ? 100 : -100;
@@ -427,9 +372,6 @@ export function animateAttack(sprite, glow, isPlayer) {
   });
 }
 
-/**
- * ANIMATION: HIT / SHAKE
- */
 export function animateHit(sprite, glow) {
   const originalX = sprite.pos.x;
   const shakeAmount = 10;
@@ -457,9 +399,6 @@ export function animateHit(sprite, glow) {
     }));
 }
 
-/**
- * ANIMATION: Heal (pulse/glow)
- */
 export function animateHeal(sprite, glow) {
   tween(sprite.opacity, 0.3, 0.3, (val) => {
     sprite.opacity = val;
@@ -479,9 +418,6 @@ export function animateHeal(sprite, glow) {
     }));
 }
 
-/**
- * ANIMATION: DEFEAT - SLIDES OFF SCREEN
- */
 export function animateDefeat(sprite, glow, isPlayer) {
   const slideDirection = isPlayer ? -300 : 300;
   const targetX = sprite.pos.x + slideDirection;
@@ -513,9 +449,77 @@ export function animateDefeat(sprite, glow, isPlayer) {
 // FANCY  ANIMATIONS
 // ============================================================================
 
-/**
- * ANIMATION EXPLOSION -
- */
+// ========================= GENERAL =========================
+export function animateRedBoom(target) {
+  shake(30);
+  const boom = add([
+    sprite("boom", { anim: "burst" }),
+    pos(target.pos),
+    scale(4),
+    opacity(1),
+    z(100),
+    anchor("center")
+  ]);
+  wait(0.5, () => {
+    tween(boom.opacity, 0, 0.3, (o) => boom.opacity = o, easings.easeOutQuad)
+      .then(() => destroy(boom));
+  });
+}
+
+export function animateShock(target) {
+  shake(20);
+
+  const zap = add([
+    sprite("shock", { anim: "burst" }),
+    pos(target.pos),
+    scale(4),
+    opacity(1),
+    z(12),
+    anchor("center")
+  ]);
+
+  wait(0.3, () => {
+    tween(zap.opacity, 0, 0.25, (o) => zap.opacity = o, easings.easeOutQuad)
+      .then(() => destroy(zap));
+  });
+}
+
+export function animateBigBoom(target) {
+  shake(100);
+  for (let i = 0; i < 3; i++) {
+    wait(i * 0.1, () => {
+      add([
+        pos(target.pos.add(rand(-30, 30), rand(-30, 30))),
+        particles({
+          max: 120,
+          speed: [100, 300],
+          direction: 0,
+          spread: 360,
+          lifeTime: [0.5, 1.5],
+        }, () => [
+          circle(rand(2, 8)),
+          color(choose([ORANGE, YELLOW, RED, MAGENTA, rgb(255, 100, 255)])),
+          opacity(1),
+          move(rand(0, 360), rand(100, 300)),
+          lifespan(rand(0.5, 1.5)),
+        ]),
+        z(120)
+      ]);
+    });
+  }
+  const flash = add([
+    circle(100),
+    pos(target.pos),
+    color(WHITE),
+    opacity(0.8),
+    z(125),
+    anchor("center")
+  ]);
+  tween(flash.scale, 3, 0.3, (s) => flash.scale = vec2(s), easings.easeOutQuad);
+  tween(flash.opacity, 0, 0.3, (o) => flash.opacity = o, easings.easeOutQuad)
+    .then(() => destroy(flash));
+}
+
 export function animateExplosion(target) {
   shake(30);
   const boom = add([
@@ -526,16 +530,12 @@ export function animateExplosion(target) {
     z(100),
     anchor("center")
   ]);
-  // Fade out after animation plays
   wait(0.5, () => {
     tween(boom.opacity, 0, 0.3, (o) => boom.opacity = o, easings.easeOutQuad)
       .then(() => destroy(boom));
   });
 }
 
-/**
- * ANIMATION FIREBALL
- */
 export function animateFireball(attacker, target) {
   const start = attacker.pos.add(0, -20);
   const end = target.pos.add(0, -10);
@@ -550,7 +550,6 @@ export function animateFireball(attacker, target) {
     rotate(0)
   ]);
 
-  // Arc trajectory with rotation
   tween(start, mid, 0.35, (p) => fireball.pos = p, easings.easeOutQuad)
     .then(() => tween(mid, end, 0.35, (p) => fireball.pos = p, easings.easeInQuad))
     .then(() => {
@@ -560,15 +559,11 @@ export function animateFireball(attacker, target) {
       destroy(fireball);
     });
   
-  // Spin the fireball
   fireball.onUpdate(() => {
     fireball.angle += 180 * dt();
   });
 }
 
-/**
- * ANIMATION SMOKE 
- */
 export function animateSmoke(target) {
   const poof = add([
     sprite("smoke", { anim: "puff" }),
@@ -578,20 +573,14 @@ export function animateSmoke(target) {
     z(95),
     anchor("center")
   ]);
-  // Fade in quickly
   tween(poof.opacity, 0.7, 0.5, (o) => poof.opacity = o, easings.easeOutQuad);
-  // Float up while fading
   tween(poof.pos.y, poof.pos.y - 50, 1.2, (y) => poof.pos.y = y, easings.easeOutQuad);
-  // Fade out
   wait(0.3, () => {
     tween(poof.opacity, 0, 0.9, (o) => poof.opacity = o, easings.easeOutQuad)
       .then(() => destroy(poof));
   });
 }
 
-/**
- *  SWIRL
- */
 export function animateSwirl(target) {
   const aura = add([
     sprite("swirl", { anim: "spin" }),
@@ -601,27 +590,20 @@ export function animateSwirl(target) {
     z(85),
     anchor("center")
   ]);
-  // Fade in
   tween(aura.opacity, 0.7, 0.3, (o) => aura.opacity = o, easings.easeOutQuad);
-  // Spin it!
   aura.onUpdate(() => {
     aura.angle += 180 * dt();
-    aura.pos = target.pos.add(0, -40); // Follow above head
+    aura.pos = target.pos.add(0, -40); 
   });
-  // Scale pulse
   const startScale = 2.5;
   const endScale = 3.5;
   tween(startScale, endScale, 1.5, (s) => aura.scale = vec2(s), easings.easeInOutSine);
-  // Fade out and destroy
   wait(1.5, () => {
     tween(aura.opacity, 0, 0.5, (o) => aura.opacity = o, easings.easeInQuad)
       .then(() => destroy(aura));
   });
 }
 
-/**
- *  POWERUP -
- */
 export function animatePowerup(target) {
   const startY = target.pos.y + 100;
   const endY = target.pos.y - 150;
@@ -635,20 +617,77 @@ export function animatePowerup(target) {
     anchor("center")
   ]);
   
-  // Fade in quickly
   tween(beam.opacity, 0.8, 0.7, (o) => beam.opacity = o, easings.easeOutQuad);
-  // Rise up!
   tween(beam.pos.y, endY, 1.5, (y) => beam.pos.y = y, easings.easeOutQuad);
-  // Fade out
   wait(0.8, () => {
     tween(beam.opacity, 0, 0.5, (o) => beam.opacity = o, easings.easeInQuad)
       .then(() => destroy(beam));
   });
 }
 
-/**
- *  CATNIP CLAW
- */
+// ========================= CAT =========================
+export function animateScratch(attacker, target) {
+    shake(20);
+
+    const angles = [30, 10, 0, 0];
+    const offsets = [
+      vec2(15, -20),
+      vec2(0, 10),
+      vec2(-20, 10),
+      vec2(-40, 20)
+    ];
+
+    let i = 0;
+
+   function slashNext() {
+      if (i >= angles.length) return;
+
+      const slash = add([
+        sprite("scratch", { anim: "glitch" }),
+        pos(target.pos.add(offsets[i])),
+        scale(10),
+        anchor("center"),
+        rotate(angles[i]),
+        z(30),
+        opacity(1)
+      ]);
+
+      tween(1, 0, 0.7, (o) => slash.opacity = o)
+        .then(() => destroy(slash));
+
+      i++;
+      wait(0.05, slashNext);
+    }
+
+    slashNext();
+  }
+
+export function animateBiscuits(target) {
+    const paws = add([
+      sprite("biscuits", { anim: "glitch" }),
+      pos(target.pos.add(100, -20)),
+      scale(3),
+      anchor("center"),
+      z(30),
+      opacity(0)
+    ]);
+
+    tween(paws.opacity, 1, 0.5, (o) => paws.opacity = o);
+
+    let t = 0;
+    paws.onUpdate(() => {
+      t += dt();
+      const squish = 1 + Math.sin(t * 8) * 0.01;
+      paws.scale = vec2(3 * squish, 3 / squish);
+      paws.pos = target.pos.add(100, -20);
+    });
+
+    wait(1.0, () => {
+      tween(paws.opacity, 0, 1, (o) => paws.opacity = o)
+        .then(() => destroy(paws));
+    });
+  }
+
 export function animateClaw(attacker, target) {
   shake(20);
   const startX = target.pos.x-50;
@@ -662,7 +701,6 @@ export function animateClaw(attacker, target) {
     anchor("left")
   ]);
   
-  // Swipe across!
   tween(slash.pos.x, endX, 1, (x) => slash.pos.x = x, easings.easeInOutQuad)
     .then(() => {
       animateSmoke(target);
@@ -670,9 +708,6 @@ export function animateClaw(attacker, target) {
     });
 }
 
-/**
- * ANIMATION ZOOMIES - GLITCHY ZIP AROUND MOVE
- */
 export function animateZoomies(attacker, target) {
   const glitchCat = add([
     sprite("zoomies", { anim: "glitch" }),
@@ -719,50 +754,95 @@ export function animateZoomies(attacker, target) {
   zipNext();
 }
 
-/**
- * ANIMATION BIG BOOM
- */
-export function animateBigBoom(target) {
-  shake(100);
-  // Create multiple particle bursts
-  for (let i = 0; i < 3; i++) {
-    wait(i * 0.1, () => {
-      add([
-        pos(target.pos.add(rand(-30, 30), rand(-30, 30))),
-        particles({
-          max: 120,
-          speed: [100, 300],
-          direction: 0,
-          spread: 360,
-          lifeTime: [0.5, 1.5],
-        }, () => [
-          circle(rand(2, 8)),
-          color(choose([ORANGE, YELLOW, RED, MAGENTA, rgb(255, 100, 255)])),
-          opacity(1),
-          move(rand(0, 360), rand(100, 300)),
-          lifespan(rand(0.5, 1.5)),
-        ]),
-        z(120)
-      ]);
-    });
-  }
-  // Big flash
-  const flash = add([
-    circle(100),
+// ========================= LASER POINTER =========================
+export function animateZap(attacker, target) {
+  shake(20);
+
+  const zap = add([
+    sprite("zap", { anim: "glitch" }),
     pos(target.pos),
-    color(WHITE),
-    opacity(0.8),
-    z(125),
-    anchor("center")
+    scale(8),
+    anchor("center"),
+    opacity(1),
+    z(20)
   ]);
-  tween(flash.scale, 3, 0.3, (s) => flash.scale = vec2(s), easings.easeOutQuad);
-  tween(flash.opacity, 0, 0.3, (o) => flash.opacity = o, easings.easeOutQuad)
-    .then(() => destroy(flash));
+
+  wait(0.25, () => {
+    tween(zap.opacity, 0, 0.2, o => zap.opacity = o)
+      .then(() => destroy(zap));
+  });
 }
 
- /**
- * ANIMATION CUCUMBER CANNON - CHARGE THEN FIRE CUCUMBER
- */
+export function animateLaserBeam(attacker, target) {
+  const charge = add([
+    sprite("laserCharge", { anim: "glitch" }),
+    pos(attacker.pos.add(-70, 60)),
+    scale(20),
+    anchor("center"),
+    opacity(0),
+    z(50)
+  ]);
+
+  tween(charge.opacity, 1, 0.6, o => charge.opacity = o);
+  tween(3, 4, 0.5, s => charge.scale = vec2(s));
+
+  wait(0.45, () => {
+    destroy(charge);
+    shake(12);
+
+    const beamStart = attacker.pos.add(-200, 100);
+    const beamEnd = target.pos;
+
+    const beam = add([
+      sprite("laserBeam", { anim: "glitch" }),
+      pos(beamStart),
+      scale(vec2(5)),
+      anchor("center"),
+      rotate(15),
+      z(60),
+      opacity(1)
+    ]);
+
+    tween(
+      beam.pos,
+      beamEnd,
+      0.4,
+      (p) => beam.pos = p,
+      easings.easeInQuad
+    ).then(() => {
+      animateRedBoom(target);
+      shake(25);
+      destroy(beam);
+    });
+  });
+}
+
+// ========================= CUP =========================
+export function animateEspressoFireball(attacker, target) {
+    const start = attacker.pos.add(40, -30);
+    const end = target.pos.add(-20, 0);
+
+    const fb = add([
+      sprite("fireball", { anim: "glitch" }),
+      pos(start),
+      scale(2),
+      anchor("center"),
+      z(40)
+    ]);
+
+    fb.onUpdate(() => fb.angle += 720 * dt());
+
+    tween(start, end, 0.45, (p) => fb.pos = p, easings.easeInQuad)
+      .then(() => {
+        animateExplosion(target);
+        animateSmoke(target);
+        destroy(fb);
+      });
+  }
+
+
+
+// ========================= CUCUMBER =========================
 export function animateGreenBlast(attacker, target) {
     const charge = add([
       sprite("greenBlast", { anim: "glitch" }),
@@ -803,123 +883,115 @@ export function animateGreenBlast(attacker, target) {
     });
   }
 
- /**
- * ANIMATION: MAKE BISCUITS - HEALING MOVE
- */
-export function animateBiscuits(target) {
-    const paws = add([
-      sprite("biscuits", { anim: "glitch" }),
-      pos(target.pos.add(100, -20)),
-      scale(3),
-      anchor("center"),
-      z(30),
-      opacity(0)
-    ]);
 
-    tween(paws.opacity, 1, 0.5, (o) => paws.opacity = o);
 
-    let t = 0;
-    paws.onUpdate(() => {
-      t += dt();
-      const squish = 1 + Math.sin(t * 8) * 0.01;
-      paws.scale = vec2(3 * squish, 3 / squish);
-      paws.pos = target.pos.add(100, -20);
-    });
+// ========================= RAT KING =========================
+export function animateRodentRage(attacker, target) {
+  const ragingRat = add([
+    sprite("rage"),  
+    pos(attacker.pos),
+    scale(3),
+    z(110),
+    anchor("center"),
+    opacity(1)
+  ]);
+  
+  
+  let colorUpdate = ragingRat.onUpdate(() => {
+    const flash = Math.sin(time() * 20) > 0 ? rgb(255, 50, 50) : rgb(180, 30, 30);
+    ragingRat.color = flash;
+  });
+  
 
-    wait(1.0, () => {
-      tween(paws.opacity, 0, 1, (o) => paws.opacity = o)
-        .then(() => destroy(paws));
-    });
-  }
-
- /**
- * ANIMATION: ESPRESSO FIREBALL - PROJECTILE FIREBALL WITH EXPLOSION
- */
-export function animateEspressoFireball(attacker, target) {
-    const start = attacker.pos.add(40, -30);
-    const end = target.pos.add(-20, 0);
-
-    const fb = add([
-      sprite("fireball", { anim: "glitch" }),
-      pos(start),
-      scale(2),
-      anchor("center"),
-      z(40)
-    ]);
-
-    fb.onUpdate(() => fb.angle += 720 * dt());
-
-    tween(start, end, 0.45, (p) => fb.pos = p, easings.easeInQuad)
-      .then(() => {
-        animateExplosion(target);
-        animateSmoke(target);
-        destroy(fb);
-      });
-  }
-
- /**
- * ANIMATION: SCRATCH
- */
-  export function animateScratch(attacker, target) {
-    shake(20);
-
-    const angles = [30, 10, 0, 0];
-    const offsets = [
-      vec2(15, -20),
-      vec2(0, 10),
-      vec2(-20, 10),
-      vec2(-40, 20)
-    ];
-
-    let i = 0;
-
-   function slashNext() {
-      if (i >= angles.length) return;
-
-      const slash = add([
-        sprite("scratch", { anim: "glitch" }),
-        pos(target.pos.add(offsets[i])),
-        scale(10),
-        anchor("center"),
-        rotate(angles[i]),
-        z(30),
-        opacity(1)
-      ]);
-
-      tween(1, 0, 0.7, (o) => slash.opacity = o)
-        .then(() => destroy(slash));
-
-      i++;
-      wait(0.05, slashNext);
+  const positions = [
+    target.pos.add(-100, -20),
+    target.pos.add(100, -20),
+    target.pos.add(-100, 20),
+    target.pos.add(100, 20),
+    target.pos
+  ];
+  
+  let i = 0;
+  function attackNext() {
+    if (i < positions.length) {
+      tween(ragingRat.pos, positions[i], 0.1, (p) => ragingRat.pos = p, easings.linear)
+        .then(() => {
+          shake(15);
+          i++;
+          attackNext();
+        });
+    } else {
+      shake(40);
+      destroy(ragingRat);
     }
-
-    slashNext();
   }
+  attackNext();
+}
 
-/**
- * ⚡ SHOCK 
- */
-function animateShock(target) {
-  shake(20);
-
-  const zap = add([
-    sprite("shock", { anim: "burst" }),
-    pos(target.pos),
+export function animateMouseMissiles(attacker, target) {
+  const flash = add([
+    sprite("bam", { anim: "glitch" }),
+    pos(attacker.pos.add(-40, 20)),
     scale(4),
-    opacity(1),
-    z(12),
-    anchor("center")
+    anchor("center"),
+    z(40),
+    opacity(1)
   ]);
 
-  wait(0.3, () => {
-    tween(zap.opacity, 0, 0.25, (o) => zap.opacity = o, easings.easeOutQuad)
-      .then(() => destroy(zap));
+  wait(0.25, () => destroy(flash));
+
+  const count = randi(3, 5);
+
+  for (let i = 0; i < count; i++) {
+    wait(i * 0.12, () => {
+      const ratProj = add([
+        sprite("smallRat"),
+        pos(attacker.pos.add(-30, 30)),
+        scale(5),
+        anchor("center"),
+        rotate(-15),
+        z(40),
+      ]);
+
+      tween(
+        ratProj.pos,
+        target.pos.add(rand(-10, 10), rand(-10, 10)),
+        0.45,
+        (p) => ratProj.pos = p,
+        easings.easeOutQuad
+      ).then(() => {
+        shake(12);
+        animateRedBoom(target);
+        destroy(ratProj);
+      });
+    });
+  }
+}
+
+export function animateBite(attacker, target) {
+  shake(25);
+
+  const bite = add([
+    sprite("bite", { anim: "glitch" }),
+    pos(target.pos.add(0, 70)),
+    scale(6),
+    anchor("center"),
+    z(50),
+    opacity(1)
+  ]);
+
+  tween( bite.scale, vec2(5, 5), 0.3, s => bite.scale = s )
+    .then(() => {
+      tween( bite.scale, vec2(4, 4), 0.3, s => bite.scale = s )
+      shake(20);
+    });
+
+  wait(0.5, () => {
+    tween(bite.opacity, 0, 0.25, (o) => bite.opacity = o).then(() => destroy(bite));
   });
 }
 
-/**
- * ⚡ SUPERPOSITION SLAM - QUANTUM COPIES WARP AND CONVERGE
- */
+// ========================= OBSERVER =========================
 export function animateSuperpositionSlam(boss, hero) {
   const makeCopy = () => add([
     sprite("superposition", { anim: "glitch" }),
@@ -995,9 +1067,6 @@ export function animateSuperpositionSlam(boss, hero) {
   }
 }
 
-/**
- * 🔨 HYDROGEN HAMMER 
- */
 export function animateHydrogenHammer(boss, hero) {
   const hammer = add([
     sprite("hammer", { anim: "smash" }),
@@ -1025,9 +1094,6 @@ export function animateHydrogenHammer(boss, hero) {
     });
 }
 
-/**
- * ☠️ POISON - OPEN SCHRODINGERS BOX - POISON BOTTLE FLOATS UP - BOTTLE SPLITS / SUPERPOSITIONS ITSELF -BOTTLES CONVERGE AND SHATTER - POISON SPILLS
- */
 export function animatePoisonAttack(boss, hero) {
   // Phase 1: Open Schrödinger's Box
   const box = add([
