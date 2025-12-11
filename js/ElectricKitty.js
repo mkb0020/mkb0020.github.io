@@ -40,11 +40,11 @@ loadSprite("fireball", "assets/images/CATastrophe/Fireball.png", { sliceX:4, sli
 loadSprite("scratch", "assets/images/CATastrophe/Scratch.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
 loadSprite("littleCucumber", "assets/images/CATastrophe/LittleCucumber.PNG");
 loadSprite("lock", "assets/images/CATastrophe/LockOn.png", { sliceX:22, sliceY:1, anims:{glitch:{from:0,to:21,speed:30}} });
-loadSprite("arrow", "assets/images/CatArrow.PNG");
+loadSprite("arrow", "assets/images/CatArrow.png");
 loadSprite("superposition", "assets/images/CATastrophe/Superposition.png", { sliceX: 4,   sliceY: 1,   anims: { glitch: { from: 0, to: 3 } }});
 loadSprite("shock", "assets/images/CATastrophe/Shock.png", {   sliceX: 4, sliceY: 1,   anims: { burst: { from: 0, to: 3 } }});
 loadSprite("hammer", "assets/images/CATastrophe/HydrogenHammer.png", { sliceX: 10, sliceY: 1, anims: { smash: { from: 0, to: 9 } }});
-loadSprite("box", "assets/images/CATastrophe/box.png", { sliceX: 2, sliceY: 1, anims: { glitch: { from: 0, to: 1 } }});
+loadSprite("box", "assets/images/CATastrophe/Box.png", { sliceX: 2, sliceY: 1, anims: { glitch: { from: 0, to: 1 } }});
 loadSprite("bottle", "assets/images/CATastrophe/PoisonBottle.png", { sliceX: 1, sliceY: 1, anims: { glitch: { from: 0, to: 0 } }});
 loadSprite("shatter", "assets/images/CATastrophe/Shatter.png", { sliceX: 6, sliceY: 1, anims: { glitch: { from: 0, to: 5 } }});
 loadSprite("poison", "assets/images/CATastrophe/Poison.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
@@ -54,7 +54,7 @@ loadSprite("laserCharge", "assets/images/CATastrophe/LaserCharge.png", { sliceX:
 loadSprite("laserBeam", "assets/images/CATastrophe/LaserBeam.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
 loadSprite("zap", "assets/images/CATastrophe/Zap.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
 loadSprite("smallRat", "assets/images/CATastrophe/SmallRat.png");
-loadSprite("poof", "assets/images/CATastrophe/poof.png", { sliceX:8, sliceY:1, anims:{burst:{from:0,to:7}} });
+loadSprite("poof", "assets/images/CATastrophe/Poof.png", { sliceX:8, sliceY:1, anims:{burst:{from:0,to:7}} });
 loadSprite("smallRat2", "assets/images/CATastrophe/SmallRat2.png");
 loadSprite("ghostRat", "assets/images/CATastrophe/GhostRat.png");
 
