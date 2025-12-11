@@ -57,9 +57,10 @@
           <li><strong>Desktop:</strong> Press '1'–'0', 'Q', 'W', 'E', 'R', 'T', 'Y', or 'P' for my built-in attacks.</li>
           <li><strong>Mobile:</strong> Use the button controls at the bottom of the screen!</li>
           <li><strong>To animate your own sprite sheet:</strong> Click the glowing button that says "Animate your own sprite sheet" → scroll down → upload your sprite sheet → tweak the settings → press <strong>"U"</strong> (or tap the custom button on mobile) to fire!</li>
-          <li><strong>Note for sizing:</strong> the canvas is 1000x480</li>
+          <li><strong>Note for sizing:</strong> the canvas is 1000x480 (on desktop)</li>
       </ul>
       <button id="openGuideBtn" class="btn-quantum-pulse">New to animating sprites?  Click here for more details!</button>
+      <p><a href="https://mkb0020.github.io/AcousticKitty"><button class="btn-quantum-pulse"> Need to make a sprite sheet? Click here!</button></a></p>
       <p class="mission-text"><strong>Enjoy!</strong></p>
 
     </div>
@@ -163,20 +164,18 @@
 
 <!-- MOBILE CONTROLS -->
 <div id="mobileControls">
-  <button class="mobile-btn" data-key="1">Fire 💥</button>
-  <button class="mobile-btn" data-key="2">Plasma ⚡</button>
-  <button class="mobile-btn" data-key="3">Smoke 💨</button>
-  <button class="mobile-btn" data-key="4">Swirl 🌀</button>
-  <button class="mobile-btn" data-key="5">Power ✨</button>
-  <button class="mobile-btn" data-key="6">Claw ⚔️</button>
-  <button class="mobile-btn" data-key="7">Zoomies 😼</button>
-  <button class="mobile-btn" data-key="8">Cucumber 🥒</button>
-  <button class="mobile-btn" data-key="9">Biscuits 🐾</button>
-  <button class="mobile-btn" data-key="0">Fireball 🔥</button>
-  <button class="mobile-btn" data-key="q">Scratch 💢</button>
-  <button class="mobile-btn" data-key="w">Arc 🌙</button>
-  <button class="mobile-btn custom" data-key="u">CUSTOM 🎨</button>
-  <button class="mobile-btn" data-key="space" style="width: 100%;">BIG BOOM 💣</button>
+  <button class="mobile-btn" data-key="6">Catnip-Claw</button>
+  <button class="mobile-btn" data-key="7">Zoomies</button>
+  <button class="mobile-btn" data-key="8">Cucumber-Cannon 🥒</button>
+  <button class="mobile-btn" data-key="9">Make-Biscuits 🐾</button>
+  <button class="mobile-btn" data-key="e">Cat-Arrow</button>
+  <button class="mobile-btn" data-key="y">Hyrogen-Hammer</button>
+  <button class="mobile-btn" data-key="p">Poison</button>
+  <button class="mobile-btn" data-key="m">Mouse-Missiles</button>
+  <button class="mobile-btn" data-key="b">Rat-Bite</button>
+  <button class="mobile-btn" data-key="l">Laser-Beam</button>
+  <button class="mobile-btn" data-key="n">Ghost</button>
+  <button class="mobile-btn custom" data-key="u">CUSTOM</button>
 </div>
 
 <!-- CUSTOM SPRITE SHEET TESTER PANEL -->
@@ -237,11 +236,6 @@
     </div>
 </div>
 
-
-
-
-
-
   <script src="js/KittyModals.js"></script>
   <script type="module" src="js/ElectricKitty.js"></script>
 
@@ -289,6 +283,32 @@
         floatingBackToTop.style.display = 'none';
       }})
 
+  </script>
+
+  <script> // FOR MOBILE 
+    window.gameActions = {};
+    function setupMobileControls() {
+      const mobileButtons = document.querySelectorAll('.mobile-btn');
+      
+      mobileButtons.forEach(btn => {
+        const triggerAction = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const key = btn.getAttribute('data-key');
+          if (window.gameActions[key]) {
+            window.gameActions[key]();
+          }
+        };
+        btn.removeEventListener('touchstart', triggerAction);
+        btn.removeEventListener('click', triggerAction);
+        
+        btn.addEventListener('touchstart', triggerAction, { passive: false });
+        btn.addEventListener('click', triggerAction);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', setupMobileControls);
   </script>
 </body>
 </html>
