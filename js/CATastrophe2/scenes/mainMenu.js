@@ -351,12 +351,13 @@ export function createCharSelectScene() {
     z(2)
   ]);
 
-  confirmBtn.onClick(() => {
-    if (selectedIndex !== null) {
-      const selectedChar = characters[selectedIndex];
-      go("level1", { character: selectedChar });
-    }
-  });
+confirmBtn.onClick(() => {
+  if (selectedIndex !== null) {
+    const selectedChar = characters[selectedIndex];
+    // Go to first transition instead of directly to level 1
+    go("transition", "Transition1", selectedChar);
+  }
+});
 
   const backBtn = add([
     rect(150, 40, { radius: 30 }),
