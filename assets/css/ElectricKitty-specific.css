@@ -24,14 +24,14 @@ body {
 }
 
 canvas { 
-    border: 5px solid transparent;
-    border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
-    box-shadow: 0 10px 60px var(--PlasmaGlow3);
-    cursor: pointer;
-    width: 1000px !important;
-    height: 480px !important;
-    display: block;
-    flex-shrink: 0;  
+  border: 5px solid transparent;
+  border-image: linear-gradient(45deg, var(--AquaAura),var(--NuclearFuscia)) 1;
+  box-shadow: 0 10px 60px var(--PlasmaGlow3);
+  cursor: pointer;
+  max-width: 100%;
+  height: auto !important;
+  display: block;
+  flex-shrink: 0;
 }
 
 /* ============================ CUSTOM SPRITE TESTER ============================ */
@@ -258,29 +258,170 @@ canvas {
 }
 
 /* ============================ RESPONSIVE ============================ */
-@media (max-width: 768px) {
-  #mobileControls {
-    display: flex;
+@media (min-width: 769px) {
+  canvas {
+    width: 1000px !important;
+    height: 480px !important;
   }
+}
 
-  #toggleTester {
-    bottom: auto;
-    top: 80px;
-    right: 10px;
-    font-size: 14px;
-    padding: 8px 12px;
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
   }
 
   canvas {
-    border: 4px solid #333;
+    width: 100vw !important;
+    height: auto !important;
+    max-height: 60vh;
+    border: 3px solid #00ffff;
+    margin: 0;
+  }
+
+  .Game-content {
+    margin-top: 60px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .JS-page {
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+/* Mobile controls improvements */
+#mobileControls {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 30, 0.98);
+  border-top: 3px solid #00ffff;
+  padding: 12px 8px;
+  z-index: 200;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  max-height: 35vh;
+  overflow-y: auto;
+  box-shadow: 0 -5px 20px rgba(0, 255, 255, 0.3);
+}
+
+.mobile-btn {
+  background: #000;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  padding: 10px 14px;
+  font-family: 'Orbitron', 'SpaceLetters', sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00ffff;
+  transition: all 0.2s;
+  min-width: 70px;
+  text-align: center;
+  border-radius: 6px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.mobile-btn:active {
+  background: #00ffff;
+  color: #000;
+  transform: scale(0.92);
+  box-shadow: 0 0 20px #00ffff;
+}
+
+.mobile-btn.custom {
+  background: #000;
+  color: #67FEBD;
+  border-color: #67FEBD;
+  box-shadow: 0 0 10px #67FEBD;
+  font-weight: 900;
+}
+
+.mobile-btn.custom:active {
+  background: #67FEBD;
+  color: #000;
+  box-shadow: 0 0 20px #67FEBD;
+}
+
+/* Show mobile controls on touch devices */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  #mobileControls {
+    display: flex;
+  }
+}
+
+/* Sprite tester adjustments for mobile */
+@media (max-width: 768px) {
+  #toggleTester {
+    position: fixed;
+    bottom: auto;
+    top: 70px;
+    right: 10px;
+    font-size: 12px;
+    padding: 8px 12px;
+    z-index: 150;
   }
 
   #spriteTester {
     width: 95%;
     padding: 15px;
+    margin: 10px auto;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  #spriteTester h1 {
+    font-size: 32px;
+  }
+
+  #spriteTester h2 {
+    font-size: 18px;
+  }
+
+  #container {
+    padding: 15px;
+    min-height: 150px;
+  }
+
+  #Ufo {
+    width: 80px !important;
   }
 
   .floating-back-to-top {
-    bottom: 160px;
+    bottom: 140px;
+    right: 15px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+
+/* Prevent zoom on double-tap for mobile buttons */
+@media (max-width: 768px) {
+  button, .mobile-btn {
+    touch-action: manipulation;
+  }
+}
+
+/* Landscape mode on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  canvas {
+    max-height: 50vh;
+  }
+
+  #mobileControls {
+    max-height: 30vh;
+    padding: 8px 6px;
+  }
+
+  .mobile-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    min-width: 60px;
   }
 }
