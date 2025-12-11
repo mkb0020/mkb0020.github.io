@@ -23,7 +23,7 @@ kaplay({
 loadFont("CyberGoth", "assets/fonts/ScienceGothic.ttf");
 loadFont("Basic", "assets/fonts/PTSansNarrow-Regular.ttf");
 
-loadSprite("cat", "assets/images/CATastrophe/DougBattle2.png");
+loadSprite("cat", "assets/images/Niels2.png");
 loadSprite("rat", "assets/images/CATastrophe/BigRat.png");
 
 loadSprite("purpleBoom", "assets/images/CATastrophe/Explosion.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
@@ -76,8 +76,8 @@ scene("test", () => {
 
   const cat = add([
     sprite('cat'),
-    pos(30, 220),
-    scale(1.1),
+    pos(10, 165),
+    scale(0.55),
     z(2),
     "cat"
     
@@ -85,7 +85,7 @@ scene("test", () => {
 
   const hero = add([
     circle(1),
-    pos(120, 310),
+    pos(170, 300),
     color(131, 12, 222),
     outline(4, rgb(165, 90, 225)),
     z(1),
