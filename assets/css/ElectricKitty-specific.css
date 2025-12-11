@@ -32,6 +32,7 @@ canvas {
   height: auto !important;
   display: block;
   flex-shrink: 0;
+  margin: 0 auto; /* ! FOR MOBILE !*/
 }
 
 /* ============================ CUSTOM SPRITE TESTER ============================ */
@@ -270,12 +271,21 @@ canvas {
     overflow-x: hidden;
   }
 
-  canvas {
+  /*canvas {
     width: 100vw !important;
     height: auto !important;
     max-height: 60vh;
     border: 3px solid #00ffff;
     margin: 0;
+  }*/
+
+  canvas {
+    width: auto !important;  
+    height: auto !important;
+    max-width: 100vw;  
+    max-height: 60vh;  /* SCALES */
+    border: 3px solid #00ffff;
+    margin: 0 auto;  /* CENTER */
   }
 
   .Game-content {
@@ -291,7 +301,7 @@ canvas {
   }
 }
 
-/* Mobile controls improvements */
+
 #mobileControls {
   display: none;
   position: fixed;
@@ -349,14 +359,14 @@ canvas {
   box-shadow: 0 0 20px #67FEBD;
 }
 
-/* Show mobile controls on touch devices */
+
 @media (max-width: 768px), (hover: none) and (pointer: coarse) {
   #mobileControls {
     display: flex;
   }
 }
 
-/* Sprite tester adjustments for mobile */
+
 @media (max-width: 768px) {
   #toggleTester {
     position: fixed;
@@ -401,17 +411,24 @@ canvas {
   }
 }
 
-/* Prevent zoom on double-tap for mobile buttons */
 @media (max-width: 768px) {
   button, .mobile-btn {
     touch-action: manipulation;
   }
 }
 
-/* Landscape mode on mobile */
+/* LANDCAPE ON MOBILE*/
 @media (max-width: 768px) and (orientation: landscape) {
-  canvas {
+  /*canvas {
     max-height: 50vh;
+  }*/
+
+  canvas { /* ! CANVAS SIZING FOR MOBILE ! */
+    width: auto !important; 
+    height: auto !important;
+    max-width: 100vw; 
+    max-height: 50vh;  
+    margin: 0 auto;
   }
 
   #mobileControls {
