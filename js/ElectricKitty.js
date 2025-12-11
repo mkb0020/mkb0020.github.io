@@ -1,9 +1,12 @@
 import kaplay from "kaplay";
 
 // RESPONSIVE SETUP FOR MOBILE
-const isMobile = window.innerWidth <= 768;
-const canvasWidth = isMobile ? window.innerWidth : 1000;
-const canvasHeight = isMobile ? Math.min(window.innerHeight * 0.6, 480) : 480;
+//const isMobile = window.innerWidth <= 768;
+//const canvasWidth = isMobile ? window.innerWidth : 1000;
+//const canvasHeight = isMobile ? Math.min(window.innerHeight * 0.6, 480) : 480;
+
+const canvasWidth = 1000;
+const canvasHeight = 480;
 
 kaplay({
   width: canvasWidth,
