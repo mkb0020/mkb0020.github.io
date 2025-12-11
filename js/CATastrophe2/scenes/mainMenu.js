@@ -3,9 +3,6 @@ import { SCREEN_W, SCREEN_H, Colors } from '../config/gameConfig.js';
 import { getCharacterList } from '../config/characters.js';
 import { createVolumeToggle } from '../utils/audioControls.js';
 
-/**
- * MENU
- */
 export function createMainMenuScene() {
 
   const menuBG = add([
@@ -128,9 +125,6 @@ export function createMainMenuScene() {
 
 }
 
-/**
- * SELECT CHARACTER
- */
 export function createCharSelectScene() {
   let selectedIndex = null;
 
@@ -184,7 +178,6 @@ export function createCharSelectScene() {
     z(1)
   ]);
 
-
   const characters = getCharacterList();
   const catPositions = [
     [60, 105], [240, 105], [420, 105],
@@ -193,11 +186,9 @@ export function createCharSelectScene() {
 
   const characterCards = [];
 
-
   catPositions.forEach((position, i) => {
     const [x, y] = position;
     
-   
     const card = add([
       rect(160, 175, { radius: 30 }),
       pos(x - 20, y - 15),
@@ -218,7 +209,7 @@ export function createCharSelectScene() {
       z(3)
     ]);
 
-    
+  
     card.add([
       text(characters[i].name, { 
         size: 25, 
@@ -242,7 +233,6 @@ export function createCharSelectScene() {
       color(0, 0, 0),
       z(3)
     ]);
-
 
     card.onClick(() => {
       selectedIndex = i;
@@ -313,7 +303,6 @@ export function createCharSelectScene() {
     "previewName",
     ]);
 
-
   function updatePreview(index) {
     const char = characters[index];
     
@@ -354,7 +343,6 @@ export function createCharSelectScene() {
 confirmBtn.onClick(() => {
   if (selectedIndex !== null) {
     const selectedChar = characters[selectedIndex];
-    // Go to first transition instead of directly to level 1
     go("transition", "Transition1", selectedChar);
   }
 });
