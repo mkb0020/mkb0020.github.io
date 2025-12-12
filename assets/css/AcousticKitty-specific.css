@@ -8,9 +8,7 @@
   src: url('../fonts/Orbitron-Bold.ttf') format('truetype'); 
 }
 
-/* ============================================= 
-   ACOUSTIC KITTY SPECIFIC STYLES
-============================================= */
+
 body {
   color: #ffffff;
   min-height: 100vh;
@@ -59,6 +57,7 @@ h4 {
   padding: 0 20px;
   justify-content: center;
   flex-wrap: wrap;
+  z-index:10;
 }
 
 .tab-btn {
@@ -73,6 +72,7 @@ h4 {
   transition: all 0.3s;
   flex: 1;
   min-width: 150px;
+  z-index: 11;
 }
 
 .tab-btn:hover {
@@ -168,7 +168,7 @@ input[type="file"]::file-selector-button:hover {
 input[type="color"] {
   width: 60px;
   height: 40px;
-  border: 2px solid #00ffff;
+  border: 2px solid var(--NuclearFuscia);
   border-radius: 4px;
   background: transparent;
   cursor: pointer;
