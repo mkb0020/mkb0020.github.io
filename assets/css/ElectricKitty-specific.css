@@ -544,7 +544,6 @@ body.has-tester-open {
   transform: scale(1.05);
 }
 
-/* Show the button only when mobile controls are visible on a "desktop-like" narrow window */
 @media (min-width: 769px) {
   #mobileControls.visible-on-desktop ~ #desktopMobileToggle {
     display: block;
