@@ -78,26 +78,41 @@
   50% { box-shadow: 0 0 40px var(--NuclearFuscia); }
 }
 
-/* ============================ BASE STYLES ============================ */
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-}
+#stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+        }
+.star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff;
+            animation: twinkle 4s infinite;
+        }
+@keyframes twinkle {
+            0%,100% { opacity: 0.4; transform: scale(1); }
+            50%     { opacity: 1; transform: scale(1.4); }
+        }
 
-html, body { 
-  margin: 0; 
-  background: #000; 
-  background: url('../images/BG2.png') center/cover fixed;
-  height: 100%; 
-  color: var(--text);
+/* ============================ BASE STYLES ============================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body, html {
+    margin: 0;
+    margin-top: 40px;
+    padding: 0;
+    min-height: 100vh; 
+    color: #FFFFFF;
+    background: linear-gradient(to bottom, #000000, #0f001e, #270142);
 }
 
 /* ============================ NAVBAR ============================ */
 .navbar {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   background: linear-gradient(135deg, var(--BosonShadow) 0%, var(--ProtonShadow) 50%, var(--BosonShadow) 100%);
   backdrop-filter: blur(50px);
   border-bottom: 1px solid var(--PlasmaGlow2);
@@ -125,19 +140,17 @@ html, body {
 }
 
 .home-icon {
-  width: 30px;
-  height: 30px;
-  background: var(--AquaAura);
-  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>') no-repeat center;
-  -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>') no-repeat center;
-  mask-size: contain;
+  width: 39px;
+  height: 39px;
+  mask: none !important;
+  -webkit-mask: none !important;
   transition: all 0.3s ease;
   flex-shrink: 0;
 }
 
 .home-icon:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 20px var(--AquaAura);
+  transform: scale(1.5);
+  filter: drop-shadow(0 0 30px var(--AquaAura));
 }
 
 .logo {
@@ -146,7 +159,6 @@ html, body {
   top: 50%;
   transform: translate(-50%, -50%);
   font-size: 1.7rem;
-  font-weight: bold;
   background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -154,7 +166,7 @@ html, body {
   text-shadow: 0 0 30px var(--ParticleGlow3);
   animation: neonPulse 2s ease-in-out infinite alternate;
   font-family: 'SpaceLetters', sans-serif;
-  z-index: 2;
+  z-index: 900;
   flex-shrink: 0;
 }
 
@@ -165,9 +177,10 @@ html, body {
 }
 
 .help-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--AquaAura);
+  width: 35px;
+  height: 35px;
+  background: transparent;
+  color: var(--AquaAura);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -178,26 +191,25 @@ html, body {
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 15px var(--AuraGlow2);
 }
 
 .help-icon:hover {
-  transform: scale(1.2) rotate(180deg);
+  transform: scale(1.1) rotate(180deg);
   box-shadow: 
     0 0 25px var(--AquaAura),
     0 0 35px var(--AlphaAqua);
 }
 
 .help-dropdown.active .help-icon {
-  background: #830CDE;
-  color: #FFC7FF;
+  background: var(--AquaAura);
+  color: var(--Black);
 }
 
 .question-mark {
   font-size: 24px;
   font-weight: 900;
-  color: var(--BosonBlue);
-  text-shadow: 0 0 10px var(--ParticleGlow3);
+  color: var(--AquaAura);
+  text-shadow: 0 0 10px var(--AquaAura);
   z-index: 2;
 }
 
@@ -205,9 +217,11 @@ html, body {
   position: absolute;
   top: 100%;
   right: 0;
-  background: rgba(0, 0, 0, 0.909);
-  border: 3px solid #830CDE;
-  box-shadow: 0 10px 30px rgba(165,90,255,0.5);
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  border: 1px solid var(--AquaAura);
+  box-shadow: 0 3px 5px var(--AquaAura);
+  backdrop-filter: blur(15px);
   min-width: 280px;
   opacity: 0;
   visibility: hidden;
@@ -225,17 +239,19 @@ html, body {
   border: none;
   text-align: left;
   font-family: 'GothNerd', sans-serif;
-  font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.2s;
-  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  border-bottom: 1px solid var(--PlasmaGlow3);
 }
 
 .dropdown-menu button:hover {
-  background: #A55AFF;
-  color: #000;
+  background: rgba(101,115,131,0.25);
+  border-color: var(--PlasmaPurple);
+  box-shadow: 0 0 20px var(--VortexViolet);
   text-shadow: none;
+  border-radius:12px;
+  padding-left: 30px;
 }
 
 .dropdown-menu button:last-child {
@@ -246,6 +262,98 @@ html, body {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+/* ============================ LEFT DROPDOWN MENU ============================ */
+.left-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 1001;
+}
+
+.menu-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-trigger .home-icon {
+  transition: all 0.3s ease;
+}
+
+.menu-trigger:hover .home-icon {
+  transform: scale(1.5);
+  filter: drop-shadow(0 0 30px var(--AquaAura));
+}
+
+.left-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  border: 1px solid var(--AquaAura);
+  box-shadow: 0 3px 5px var(--AquaAura);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  padding: 12px 0;
+  z-index: 9999;
+}
+
+.left-dropdown.active .left-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(5px);
+}
+
+.menu-item {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  color: var(--White);
+  text-align: left;
+  text-decoration: none;
+  font-family: 'GothNerd', sans-serif;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+}
+
+.menu-item:hover {
+  background: rgba(101,115,131,0.25);
+  color: white;
+  padding-left: 30px;
+  box-shadow: 0 0 20px var(--VortexViolet);
+}
+
+.social-links {
+  margin-top: 20px;
+  padding: 15px 20px 10px;
+  border-top: 1px solid var(--PlasmaGlow3);
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.social-icon:hover {
+  opacity: 1;
+  transform: scale(1.1) translateY(-1px);
+  filter: drop-shadow(0 0 15px var(--AquaAura)) brightness(0) invert(1);
 }
 
 /* ============================ MODALS ============================ */
@@ -262,6 +370,7 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  overflow-y: auto; /* ADDED - allows scrolling within modals if needed */
 }
 
 .modal-content {
@@ -440,14 +549,6 @@ html, body {
   }
 
   .modal-title {
-    font-size: 1.3rem;
-  }
-
-  .nav-container {
-    padding: 0.5rem;
-  }
-
-  .logo {
     font-size: 1.3rem;
   }
 }
