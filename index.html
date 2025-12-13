@@ -3,24 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/KittyStyle.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <title>mkb0020</title>
   <meta name="description" content="JAVASCRIPT PAYGROUND" />
   
   <style>
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-image: 
-        radial-gradient(circle at 20% 80%, rgba(7, 0, 50, 0.297)0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(7, 0, 50, 0.027) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(226, 9, 255, 0.176) 0%, transparent 50%);
-      animation: cyberFloat 20s ease-in-out infinite;
-      z-index: -2;
-      pointer-events: none;
+    .main-container {
+      min-height: 100vh;
+      padding: 80 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index:10;
+    }
+
+    .main-container h4 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--ParticlePink);
+      font-size: 3rem;
+    }
+
+    .main-container h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--AlphaAqua);
+      font-size: 2rem;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .hero-section h4 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--ParticlePink);
+      font-size: 3rem;
+    }
+
+    .hero-section h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--AlphaAqua);
+      font-size: 1.4rem;
     }
 
     .main-container {
@@ -32,27 +65,247 @@
       justify-content: center;
       margin-top: 80px;
     }
+
+
+    .subtitle-card {
+      background: rgba(23, 0, 50, 0.6);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--VortexViolet);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      box-shadow: 0 8px 32px var(--VortexGlow2), inset 0 1px 0 var(--PlasmaGlow2);
+    }
+
+    /* PROJECT GRID */
+  .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+  .project-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+    .project-card {
+      background: rgba(23, 0, 50, 0.594);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--VortexViolet);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 32px var(--VortexGlow1), inset 0 1px 0 var(--PlasmaGlow2);
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      max-width: 100%;
+      margin-bottom: 20px;
+      z-index: 9;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(transparent, var(--NuclearGlow2), transparent 30%);
+      opacity: 0.1;
+      z-index: 9;
+    }
+
+
+   .project-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px var(--PlasmaGlow2), 0 0 60px var(--NuclearGlow3);
+      border-color: var(--NuclearFuscia);
+
+    }
+
+
+    .project-card h3 {
+      text-shadow: 0 0 15px var(--ParticleGlow2);
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--AlphaAqua);
+      font-size: 2rem;
+
+    }
+
+    .project-card p {
+      color: var(--MutedGray);
+      font-size: 1.5rem;
+      line-height: 1.5;
+      position: relative;
+      font-family: Arial, Helvetica, sans-serif;
+      z-index: 10;
+    }
+
+    .project-card strong {
+      color: var(--ParticlePink);
+      font-size: 1.5rem;
+      font-weight: bold;
+      line-height: 1.5;
+      position: relative;
+      z-index: 10;
+    }
+
+
+
+  @media (max-width: 767px) {
+  body {
+    font-size: 14px; /
+  }
+  .main-container {
+    padding: 1rem !important;
+    margin: 0 auto !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    padding-top: 80px !important; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+   h1 {
+    font-size: 1.5rem !important; 
+  }
+
+  h2 {
+    font-size: 1.85rem !important;
+  }
+
+  h3 {
+    font-size: 1.5rem !important;
+  }
+
+  h4 {
+    font-size: 1.8rem !important;
+  }
+}
+
+  .cat2-gif {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+      }
+
+  .coming-soon {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--RadiationRed);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        box-shadow: 0 0 12px var(--NuclearGlow2);
+        z-index: 2;
+      }
+
+  .cat-gif {
+        width: 250px;
+        height: 150px;
+        margin-bottom: 2rem auto;
+        
+      }
   </style>
   
 </head>
 <body>
-  <div class="scanline"></div>
+ 
 
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
-      <div class="logo">♡ mkb0020</div>
+      
+      <div class="left-dropdown"><!-- LEFT DROPDOWN MENU -->
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+
+        <div class="left-menu">
+          <a href="https://mkb0020.github.io" class="menu-item">Home</a>
+          <!--<a href="https://mkb0020.github.io" class="menu-item" target="_blank">Resume</a>-->
+
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>
+            <!--<a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>-->
+          </div>
+        </div>
+      </div>
+
+     
+       <a href="https://mkb0020.github.io">
+            <div class="logo">♡ mkb0020</div>  <!-- CENTER LOGO -->
+        </a>
+ 
+      <div class="help-dropdown"> <!-- RIGHT HELP DROPDOWN -->
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">About</button>
+        </div>
+      </div>
     </div>
   </nav>
 
 
+ <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">WELCOME!</h1>
+        <button class="modal-close" id="closeModal">×</button>
+      </div>
+      <div class="modal-body">
+        <h3>Thanks for stopping by!</h3>
+                <p><strong>Click around and explore my creations, experiments, and pratical tools I’ve been working on throughout my coding journey!</strong></p>
+                <p>This segment of my portfolio is dedicated to my JavaScript creations!  Its designed to be  <strong>fun</strong> and <strong>interactive</strong> AND <strong>useful!</strong>!</p>   
+        
+        <h3>What you'll find here:</h3>
+        <ul>
+          <li><strong>Visual Experiences:</strong> Get lost in fractals or explore the structure of a 6D object! </li>
+          <li><strong>Interactive Experiences:</strong> Roll for initiative with a virtual D20 dice or play with Blobs!! </li>
+          <li><strong>Game Dev Tools:</strong> Test out your battle animations with Electic Kitty or generate sprite sheets with Acoustic Kitty! </li>
+          <li><strong>COMING SOON:</strong> Play the iconic CATastrophe2! </li>
+
+        </ul>
+
+       
+      </div>
+    </div>
+  </div>
+
+
   <div class="main-container">
     <div class="hero-section">
-      <h2>♡</h2>
-      <div class="subtitle-card">
-        <h4>WELCOME TO MY VIRTUAL PLAYGROUND</h4>
-      </div>
-      <img src="assets/images/cat_cup.gif" alt="meow!" class="cat-gif" id="cat">
+      <h4>♡</h4>
+        <h4>WELCOME TO MY VIRTUAL PLAYGROUND!</h4>
+        <h3>Click on the cards below to explore my interactive and visual creations!</h3>
+
+        <img src="assets/images/cat_cup.gif" alt="meow!" class="cat-gif" id="cat">
 
     <!-- PROJECT GRID -->
       <a href="AcousticKitty.html" class="project-card">
@@ -64,7 +317,7 @@
       <a href="blobs.html" class="project-card">
         <h3>Blobs</h3>
         <p><strong> Play with blobs </strong></p>
-        <p>Three.js experiments</p>
+        <p>Three.js experiment</p>
       </a>
 
       <a href="COMING__SOON.html" class="project-card">
@@ -82,7 +335,7 @@
       <a href="d20.html" class="project-card">
         <h3>D20 Roller</h3>
         <p><strong> Roll for Initiative... but make it pretty </strong></p>
-        <p>Three.js experiments</p>
+        <p>Three.js experiment</p>
       </a>
 
       <a href="ElectricKitty.html" class="project-card">
@@ -94,7 +347,7 @@
       <a href="fractals.html" class="project-card">
         <h3>Fractal Visualizer</h3>
         <p><strong>Get lost in Fractals</strong></p>
-        <p>Three.js experiments</p>
+        <p>Three.js experiment</p>
       </a>
       
       <a href="manifold.html" class="project-card">
@@ -103,19 +356,13 @@
         <p>Three.js experiment</p>
       </a>
       
-        <div class="psychedelic-gif-container">
-          <img src="assets/images/cat_hop.gif" class="tracer-gif" data-layer="1">
-          <img src="assets/images/cat_hop.gif" class="tracer-gif" data-layer="2">
-          <img src="assets/images/cat_hop.gif" class="tracer-gif" data-layer="0"> <!-- MAIN GIF -->
-          <img src="assets/images/cat_hop.gif" class="tracer-gif" data-layer="3">
-          <img src="assets/images/cat_hop.gif" class="tracer-gif" data-layer="4">
-          <!--<img src="assets/images/cat_hop.gif" class="tracer-gif" data-layer="5">-->
-        </div>
+      <img src="assets/images/cat_hop.gif" class="cat2-gif"> 
 
-      <a href="resume.html" class="project-card">
+     
+      <!--<a href="resume.html" class="project-card">
         <h3>Resume</h3>
         <p>View my professional background & experience</p>
-      </a>
+      </a>-->
 
       <a href="https://github.com/mkb0020" class="project-card" target="_blank">
         <h3>GitHub</h3>
@@ -125,5 +372,19 @@
   </div>
 
 
+  <div id="stars"></div>
+  <script src="js/KittyCore.js"></script>
+  <script>
+        const starsDiv = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = star.style.height = Math.random() * 2 + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 4 + 's';
+            starsDiv.appendChild(star);
+        }
+  </script>
 </body>
 </html>
