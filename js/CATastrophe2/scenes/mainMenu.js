@@ -1,10 +1,67 @@
 // mainMenu.js
 import { SCREEN_W, SCREEN_H, Colors } from '../config/gameConfig.js';
 import { getCharacterList } from '../config/characters.js';
-import { createVolumeToggle } from '../utils/audioControls.js';
+import { createVolumeToggle, stopAllMusic, startMenuMusic } from '../utils/audioControls.js';
+
+export function createStartScene(){
+  add([
+    sprite('startBG'),
+    pos(0, 0),
+    z(0)
+  ]);
+
+  const clickText = add([
+    text("CLICK TO START", { 
+      size: 70, 
+      font: "orbitronBold"
+    }),
+    pos(SCREEN_W / 2, 400),
+    anchor("center"),
+    color(255, 255, 255),
+    z(3),
+    opacity(1)
+  ]);
+
+    const clickText2 = add([
+    text("CLICK TO START", { 
+      size: 70, 
+      font: "orbitronBold"
+    }),
+    pos(SCREEN_W / 2 +2, 402),
+    anchor("center"),
+    color(0, 0, 0),
+    z(2),
+    opacity(1)
+  ]);
+
+  let pulseDirection = -1;
+  clickText.onUpdate(() => {
+    clickText.opacity += pulseDirection * 2 * dt();
+    if (clickText.opacity <= 0.3) {
+      pulseDirection = 1;
+    } else if (clickText.opacity >= 1) {
+      pulseDirection = -1;
+    }
+  });
+
+  onClick(() => {
+    startMenuMusic();
+        go("menu");
+  });
+
+  // Also allow space/enter
+  onKeyPress("space", () => {
+    startMenuMusic();
+    go("menu");
+  });
+
+  onKeyPress("enter", () => {
+    startMenuMusic();
+    go("menu");
+  });
+}
 
 export function createMainMenuScene() {
-
   const menuBG = add([
     sprite('menuBG'),
     pos(0, 0),
@@ -12,8 +69,7 @@ export function createMainMenuScene() {
     z(0)
   ]);
 
-  // TITLE BACKGROUND PANEL
-  add([
+  add([   // TITLE BACKGROUND PANEL
     rect(600, 80, { radius: 30 }),
     pos(200, 20),
     color(17, 12, 30),
@@ -122,22 +178,20 @@ export function createMainMenuScene() {
   });
 
   createVolumeToggle();
-
 }
 
 export function createCharSelectScene() {
+
   let selectedIndex = null;
 
-  // BACKGROUND
-  add([
+  add([ // BACKGROUND
     sprite("SelectBG"), 
     pos(0, 0),
     scale(SCREEN_W/500, SCREEN_H/240), 
     z(0)
   ]);
   
-  //  TITLE PANEL
-  add([
+  add([ //  TITLE PANEL
     rect(900, 50, { radius: 30 }),
     pos(50, 15),
     color(17, 12, 30),
@@ -169,8 +223,7 @@ export function createCharSelectScene() {
     z(2)
   ]);
 
-  // LEFT PANEL - CHARACTER SELECTIONS
-  add([
+  add([ // LEFT PANEL - CHARACTER SELECTIONS
     rect(560, 400, { radius: 40 }),
     pos(20, 75),
     color(17, 12, 30),
@@ -266,9 +319,8 @@ export function createCharSelectScene() {
     characterCards.push(card);
   });
 
-  // RIGHT PANEL - PREVIEW
-  const previewSprite = add([
-    sprite(characters[0].sprites.big),
+  const previewSprite = add([ // RIGHT PANEL - PREVIEW
+    sprite(characters[0].sprites.select),
     pos(750, 290),
     anchor("center"),
     scale(1.2),
@@ -306,7 +358,7 @@ export function createCharSelectScene() {
   function updatePreview(index) {
     const char = characters[index];
     
-    previewSprite.use(sprite(char.sprites.big));
+    previewSprite.use(sprite(char.sprites.select));
     previewSprite.scale = vec2(1.1,1.1);
     previewSprite.opacity = 1;
     
