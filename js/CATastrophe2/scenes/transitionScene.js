@@ -1,6 +1,6 @@
 import { SCREEN_W, SCREEN_H, Colors } from '../config/gameConfig.js';
 import { getTransition } from '../config/transitions.js';
-import { createVolumeToggle } from '../utils/audioControls.js';
+import { createVolumeToggle, stopAllMusic, startMenuMusic } from '../utils/audioControls.js';
 
 export function createTransitionScene(transitionKey, character, playerHP) {
   const transition = getTransition(transitionKey);
@@ -24,15 +24,13 @@ export function createTransitionScene(transitionKey, character, playerHP) {
     z(0),
   ]);
 
-  // DARK OVERLAY TO DIM BG
-  add([
+  add([   // DARK OVERLAY TO DIM BG
     rect(SCREEN_W, SCREEN_H),
     pos(0, 0),
     color(0, 0, 0),
     opacity(0.4),
     z(1)
   ]);
-
 
   const catSprite = add([
     sprite(character.sprites[transition.sprites[0]] || character.sprites.idle),
@@ -43,8 +41,7 @@ export function createTransitionScene(transitionKey, character, playerHP) {
     opacity(1)
   ]);
 
-  // TEXT BG
-  add([
+  add([ // TEXT BG
     rect(SCREEN_W - 100, 100, { radius: 20 }),
     pos(SCREEN_W / 2, SCREEN_H - 80),
     anchor('center'),
@@ -54,8 +51,7 @@ export function createTransitionScene(transitionKey, character, playerHP) {
     z(2)
   ]);
 
-  // TEXT
-  const textDisplay = add([
+  const textDisplay = add([   // TEXT
     text(transition[textKeys[0]][0], {
       size: 25,
       width: SCREEN_W - 150,
@@ -68,8 +64,8 @@ export function createTransitionScene(transitionKey, character, playerHP) {
     z(3)
   ]);
 
-  // DOTS
-  const dots = [];
+  const dots = [];   // DOTS
+
   for (let i = 0; i < 3; i++) {
     const dot = add([
       circle(i === 0 ? 7 : 4),
@@ -81,8 +77,8 @@ export function createTransitionScene(transitionKey, character, playerHP) {
     dots.push(dot);
   }
 
-  // PROMPT - PRESS SPACE
-  const prompt = add([
+  const prompt = add([   // PROMPT - PRESS SPACE
+
     text('Press SPACE or ENTER to continue', { 
       size: 18, 
       font: 'science'
@@ -94,19 +90,16 @@ export function createTransitionScene(transitionKey, character, playerHP) {
     z(3)
   ]);
 
-  // BLINKING PROMPT
-  let blinkTime = 0;
+  let blinkTime = 0;   // BLINKING PROMPT
   prompt.onUpdate(() => {
     blinkTime += dt();
     prompt.opacity = Math.sin(blinkTime * 3) * 0.3 + 0.6;
   });
 
-  // UPDATE TEXT AND DOTS
-  function updateText() {
+  function updateText() {   // UPDATE TEXT AND DOTS
     textDisplay.text = transition[textKeys[textIndex]][0];
     
-    // SWAP THE CAT SPRITE!
-    const newSprite = transition.sprites[textIndex];
+    const newSprite = transition.sprites[textIndex];     // SWAP THE CAT SPRITE!
     catSprite.use(sprite(character.sprites[newSprite] || character.sprites.idle));
     
     // FADE-IN
