@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/KittyStyle.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <title>GAME DEV TOOLKIT</title>
+  <meta name="description" content="GAME DEV TOOLKIT" />
+<style>
+
+  .main-container {
+      min-height: 100vh;
+      padding: 100 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 80px;
+    }
+
+   .Niels-zone {
+    text-align: center;
+  }
+
+  .toolkit-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 3rem;
+    background: linear-gradient(135deg, var(--BosonBlue), var(--ProtonPurple));
+    border: 3px solid var(--VortexViolet);
+    border-radius: 25px;
+    box-shadow: 0 0 60px var(--VortexGlow2);
+    position: relative;
+    z-index: 20;
+  }
+
+  .title {
+    font-family: 'SpaceLetters', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: neonPulse 2s ease-in-out infinite alternate;
+  }
+
+  .subtitle{
+    font-family: 'GothNerd', sans-serif;
+    font-size: 1.3rem;
+    text-align: center;
+    color: var(--AlphaAqua);
+    margin-bottom: 3rem;
+    text-shadow: 0 0 10px var(--AlphaGlow2);
+  }
+
+   /*  GRID */
+  .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+  .project-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+    .project-card {
+      background: rgba(4, 0, 8, 0.717);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--VortexViolet);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 32px var(--VortexGlow1), inset 0 1px 0 var(--PlasmaGlow2);
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      max-width: 100%;
+      margin-bottom: 20px;
+      z-index: 9;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(transparent, var(--NuclearGlow2), transparent 30%);
+      opacity: 0.1;
+      z-index: 9;
+    }
+
+   .project-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px var(--PlasmaGlow2), 0 0 60px var(--NuclearGlow3);
+      border-color: var(--NuclearFuscia);
+
+    }
+
+    .project-card h3 {
+      text-shadow: 0 0 15px var(--ParticleGlow2);
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--AlphaAqua);
+      font-size: 1.5rem;
+
+    }
+
+    .project-card p {
+      color: var(--MutedGray);
+      font-size: 1.2rem;
+      line-height: 1.5;
+      position: relative;
+      font-family: Arial, Helvetica, sans-serif;
+      z-index: 10;
+    }
+
+    .project-card strong {
+      color: var(--ParticlePink);
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1.5;
+      position: relative;
+      z-index: 10;
+    }
+
+  @media (max-width: 767px) {
+  body {
+    font-size: 14px; /
+  }
+  .main-container {
+    padding: 1rem !important;
+    margin: 0 auto !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    padding-top: 80px !important; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+   h1 {
+    font-size: 1.5rem !important; 
+  }
+
+  h2 {
+    font-size: 1.85rem !important;
+  }
+
+  h3 {
+    font-size: 1.5rem !important;
+  }
+
+  h4 {
+    font-size: 1.8rem !important;
+  }
+}
+
+  @media (max-width: 768px) {
+    .toolkit-container {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+
+    .title {
+      font-size: 2rem;
+    }
+
+    .subtitle{
+      font-size: 1.1rem;
+    }
+  }
+</style>
+</head>
+<body>
+ <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      
+      <div class="left-dropdown"><!-- LEFT DROPDOWN MENU -->
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+
+        <div class="left-menu">
+          <a href="https://mkb0020.onrender.com" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
+          <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Game Dev Toolkit</a>
+          <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>
+          <a href="https://mkb0020.onrender.com/review" class="menu-item">Review CATastrophe 2</a>
+          <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
+          <a href="https://mkb0020.onrender.com/admin_login" class="menu-item">Admin</a>
+
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>
+            <!--<a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>-->
+          </div>
+        </div>
+      </div>
+
+     
+       <a href="https://mkb0020.github.io">
+            <div class="logo">♡ mkb0020</div>  <!-- CENTER LOGO -->
+        </a>
+ 
+      <div class="help-dropdown"> <!-- RIGHT HELP DROPDOWN -->
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">About</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+ <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">🛠️ GAME DEV TOOLKIT 🛠️</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+        <h3>Welcome to my collection of tools that I built while devolping CATastrophe2!</h3>
+        <p> When I set out to build CATastrophe2, I had no idea how many sprites and sounds I would end up needing!  Along the way, I built several tools to save time and make life easier - and now I'm sharing them with the world! </p>   
+        <h3>The toolkit includes:</h3>
+        <ul>
+          <li><strong>Acoustic Kitty:</strong> Build evenly spaced sprite sheets and recolor them for variants </li>
+          <li><strong>Electric Kitty:</strong> Test out Kaplay animations </li>
+          <li><strong>Mp3 Converter:</strong> Exactly what it sounds like</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="main-container">
+  <div class="toolkit-container">
+        <div class = "Niels-zone">
+            <h1><img src="assets/images/NielsToolKit.png"></h1>
+        </div>
+        <h1 class="title">GAME DEVELOPMENT TOOLKIT</h1>
+
+    <a href="AcousticKitty.html" class="project-card">
+        <h3>Acoustic Kitty</h3>
+        <p>Build and Recolor Sprite Sheets</p>
+      </a>
+
+          
+      <a href="ElectricKitty.html" class="project-card">
+        <h3>Electric Kitty</h3>
+        <p>Sandbox for testing new game animations</p>
+      </a>
+
+    <a href="https://mkb0020.onrender.com/audio-converter" class="project-card">
+        <h3>mp3 Converter</h3>
+        <p>Convert weird audio formats into mp3 files</p>
+      </a>
+
+
+  </div>
+</div>
+  <div id="stars"></div>
+  <script src="js/KittyCore.js"></script>
+  <script>
+        const starsDiv = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = star.style.height = Math.random() * 2 + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 4 + 's';
+            starsDiv.appendChild(star);
+        }
+  </script>
+</body>
+</html>
+
