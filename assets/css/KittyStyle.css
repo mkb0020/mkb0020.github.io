@@ -104,8 +104,11 @@ body, html {
     margin-top: 40px;
     padding: 0;
     min-height: 100vh; 
+    height: 100%; 
     color: #FFFFFF;
     background: linear-gradient(to bottom, #000000, #0f001e, #270142);
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
 }
 
 /* ============================ NAVBAR ============================ */
