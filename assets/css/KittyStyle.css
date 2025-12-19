@@ -130,8 +130,12 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding-top: 0.5rem;
+  padding-bottom:  1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
   height: 40px;
+  max-height:40px;
 }
 
 .home-link {
@@ -143,8 +147,9 @@ body, html {
 }
 
 .home-icon {
-  width: 39px;
-  height: 39px;
+  width: 38px;
+  height: 38px;
+  top: 50%;
   mask: none !important;
   -webkit-mask: none !important;
   transition: all 0.3s ease;
@@ -179,20 +184,24 @@ body, html {
   display: inline-block;
 }
 
+
+
 .help-icon {
-  width: 35px;
-  height: 35px;
+  width: 38px;
+  height: 38px;
+  top: 50%;
   background: transparent;
   color: var(--AquaAura);
   border: none;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  justify-content: center;
   transition: all 0.3s ease;
   flex-shrink: 0;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
@@ -209,11 +218,17 @@ body, html {
 }
 
 .question-mark {
-  font-size: 24px;
-  font-weight: 900;
+  font-size: 28px;
+  font-family: 'GothNerd';
   color: var(--AquaAura);
   text-shadow: 0 0 10px var(--AquaAura);
   z-index: 2;
+  margin: 0;                  
+  line-height: 1;            
+  display: flex;              
+  align-items: center;       
+  justify-content: center;    
+  height: 100%;
 }
 
 .dropdown-menu {
