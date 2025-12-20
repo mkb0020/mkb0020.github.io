@@ -1,7 +1,6 @@
 /* ===============================
- MODAL STUFF FOR ACOUSTIC AND ELECTRIC KITTY
+ MODAL STUFF
 ================================= */
-
 document.addEventListener('DOMContentLoaded', () => {
   const helpBtn = document.getElementById('helpBtn');
   const dropdown = helpBtn?.parentElement;
@@ -27,17 +26,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  if (floatingBackToTop && guideModal) {
-    const guideContent = guideModal.querySelector('.modal-content');
+  if (floatingBackToTop) {
+    const modalContent = modal?.querySelector('.modal-content');
+    const guideContent = guideModal?.querySelector('.modal-content');
     
     floatingBackToTop.onclick = () => {
-      if (guideContent) {
+      if (modal && modal.style.display === 'flex' && modalContent) {
+        modalContent.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+      if (guideModal && guideModal.style.display === 'flex' && guideContent) {
         guideContent.scrollTo({
           top: 0,
           behavior: 'smooth'
         });
       }
     };
+
+    if (modalContent) {
+      modalContent.addEventListener('scroll', () => {
+        if (modalContent.scrollTop > 150) {
+          showBackToTop();
+        } else {
+          hideBackToTop();
+        }
+      });
+    }
 
     if (guideContent) {
       guideContent.addEventListener('scroll', () => {
@@ -80,12 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModal.onclick = () => {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
+      hideBackToTop();
     };
 
     modal.onclick = (e) => {
       if (e.target === modal) {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
+        hideBackToTop();
       }
     };
   }
@@ -97,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
       guideModal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
       if (dropdown) dropdown.classList.remove('active');
-      showBackToTop();
     };
   }
 
@@ -105,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
     openGuideBtn.onclick = () => {
       modal.style.display = 'none';
       guideModal.style.display = 'flex';
-      showBackToTop();
     };
   }
 
@@ -156,6 +172,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
-
-
-
