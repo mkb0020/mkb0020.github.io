@@ -388,7 +388,7 @@ body, html {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  overflow-y: auto; /* ADDED - allows scrolling within modals if needed */
+  overflow-y: auto; 
 }
 
 .modal-content {
@@ -537,18 +537,23 @@ body, html {
   background: #000;
   color: var(--NuclearFuscia);
   border: 3px solid var(--NuclearFuscia);
-  padding: 14px 18px;
+  width: 50px;  
+  height: 50px; 
   font-family: 'GothNerd', sans-serif;
-  font-size: 15px;
+  font-size: 20px;
   cursor: pointer;
   z-index: 99999;
   box-shadow: 0 0 30px var(--NuclearFuscia);
-  border-radius: 50px;
+  border-radius: 50%;
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
   transition: all 0.4s ease;
   animation: pulseGlow 2s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0; 
 }
 
 .floating-back-to-top.visible {
