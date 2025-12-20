@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/KittyStyle.css">
+  <title>QUANTA KITTY — Sprite to GIF Lab</title>
+  <meta name="description" content="Sprite Sheet → GIF Generator" />
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, #FFC7FF, #dc4ce8, #67FEBD);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 30px rgba(255,199,255,0.8);
+    }
+    .container {
+      max-width: 1400px;
+      padding-top: 1px;
+      padding-right:50px;
+      padding-left: 50px;
+      margin: auto;
+      z-index: 5;
+
+    }
+
+    .main-layout {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .panel {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 320px;
+      width: 100%;
+      box-shadow: 0 10px 40px rgba(95,12,158,0.9);
+      border: 3px solid transparent;
+      border-image: linear-gradient(45deg, #00ffff, #dc4ce8) 1;
+      z-index: 10;
+
+    }
+
+    .panel h2 {
+      color: #FFC7FF;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: #9EFF9E;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      background: rgba(14,14,17,0.9);
+      color: #fff;
+      border: 2px solid rgba(144,144,192,0.7);
+      border-radius: 5px;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    button {
+      width: 100%;
+      padding: 8px;
+      background: linear-gradient(45deg, #830cde, #dc4ce8);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #dc4ce8, #67FEBD);
+      box-shadow: 0 0 20px rgba(165,90,255,0.8);
+    }
+
+    .canvas-container {
+      background: rgba(0, 0, 0, 0.85);
+      flex: 1;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 3px solid transparent;
+      border-image: linear-gradient(45deg, #00ffff, #dc4ce8) 1;
+      padding: 20px;
+      z-index: 10;
+
+    }
+
+canvas {
+    background: #000;
+    border-radius: 10px;
+    border: 2px dashed var(--VortexViolet);
+    box-shadow: 0 5px 10px rgba(164, 90, 255, 0.591);
+    image-rendering: pixelated; 
+    width: auto;
+    height: auto;
+    min-width: 200px;  
+    min-height: 200px;
+    max-width: 380px; 
+    max-height: 380px;
+    z-index: 11;
+    }
+
+    .hint {
+      margin-top: 12px;
+      font-size: 1rem;
+      opacity: 0.7;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+ <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      
+      <div class="left-dropdown"><!-- LEFT DROPDOWN MENU -->
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+
+        <div class="left-menu">
+          <a href="https://mkb0020.onrender.com" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
+          <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
+          <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>
+          <a href="https://mkb0020.onrender.com/review" class="menu-item">Review CATastrophe 2</a>
+          <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
+          <a href="https://mkb0020.onrender.com/admin_login" class="menu-item">Admin</a>
+
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>
+            <!--<a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>-->
+          </div>
+        </div>
+      </div>
+
+     
+       <a href="https://mkb0020.github.io">
+            <div class="logo">♡ mkb0020</div>  <!-- CENTER LOGO -->
+        </a>
+ 
+      <div class="help-dropdown"> <!-- RIGHT HELP DROPDOWN -->
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">About</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+ <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">QUANTA KITTY</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+        <h3>Animation Tester / GIF-maker</h3>
+            <p>Quanta Kitty is a <strong>tiny, joyful tool</strong> for turning sprite sheets into animated <strong>GIFs</strong> so you can test out your sprites. Upload your sheet, input the number of rows, columns, and frame speed, and Quanta Kitty instantly assembles a looping animation.</p>   
+        
+        <h3>It’s perfect for:</h3>
+        <ul>
+          <li>Previewing sprite animations  </li>
+          <li>Creating cute GIFs for social posts or devlogs </li>
+          <li>Checking timing before implementing in‑game </li>
+        </ul>
+        <h3>Simple, fast, and adorable — exactly what a sprite‑animation helper should be.</h3>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="main-layout">
+      <div class="panel">
+        <h2>Upload Sprite Sheet</h2>
+        <input type="file" id="spriteInput" accept="image/png">
+        <label>Rows</label>
+        <input type="number" id="rows" value="4" min="1">
+        <label>Columns</label>
+        <input type="number" id="cols" value="4" min="1">
+        <label>Frame Speed (ms)</label>
+        <input type="number" id="speed" value="100" min="10">
+        <button id="previewBtn">▶ PREVIEW</button>
+        <button id="exportBtn">EXPORT GIF</button>
+      </div>
+
+      <div class="canvas-container">
+        <canvas id="previewCanvas" width="256" height="256"></canvas>
+        <div class="hint">
+          Upload a sprite sheet to visualize discrete quanta of motion 
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="stars"></div>
+
+   <script src="js/KittyCore.js"></script>
+  <script>
+        const starsDiv = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = star.style.height = Math.random() * 2 + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 4 + 's';
+            starsDiv.appendChild(star);
+        }
+  </script>
+
+  <script src="js/QuantaKitty.js"></script>
+  <script src="js/gif.js"></script>
+
+</body>
+</html>
