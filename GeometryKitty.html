@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/KittyStyle.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+  <title>PLATFORMER PHYSICS LAB</title>
+  <meta name="description" content="PLATFORMER PHYSICS LAB" />
+  <style>
+    :root {
+      --BosonBlue: #170032;
+      --ProtonPurple: #37025a;
+      --VortexViolet: #830cde;
+      --PlasmaPurple: #A55AFF;
+      --NuclearFuscia: #dc4ce8;
+      --ParticlePink: #FFC7FF;
+      --AquaAura: #00ffff;
+      --AlphaAqua: #67FEBD;
+      --PlasmaGlow2: rgba(165,90,255,0.5);
+      --PlasmaGlow3: rgba(165,90,255,0.8);
+      --VortexGlow3: rgba(95, 12, 158, 0.904);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to bottom, #000000, #0f001e, #270142);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 1400px;
+      padding: 20px;
+      margin:  auto;
+      z-index: 10;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 30px rgba(255,199,255,0.8);
+    }
+    .main-layout {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .panel {
+      background: rgba(21, 21, 28, 0.95);
+      padding: 20px;
+      border: 3px solid transparent;
+      border-image: linear-gradient(45deg, var(--AquaAura), var(--NuclearFuscia)) 1;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 10px 40px var(--VortexGlow3);
+      z-index: 20;
+    }
+    .panel h2 {
+      font-size: 1.2rem;
+      color: var(--ParticlePink);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .control-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--AlphaAqua);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      background: rgba(14, 14, 17, 0.9);
+      color: #fff;
+      border: 2px solid rgba(131, 12, 222, 0.5);
+      border-radius: 5px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    input[type="number"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--NuclearFuscia);
+      box-shadow: 0 0 15px var(--PlasmaGlow2);
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: linear-gradient(45deg, var(--VortexViolet), var(--NuclearFuscia));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    button:hover {
+      background: linear-gradient(45deg, var(--NuclearFuscia), var(--AlphaAqua));
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px var(--PlasmaGlow3);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    .canvas-container {
+      flex: 1;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    canvas {
+      background: #000;
+      border: 3px solid transparent;
+      border-image: linear-gradient(45deg, var(--AquaAura), var(--NuclearFuscia)) 1;
+      border-radius: 10px;
+      box-shadow: 0 10px 60px var(--PlasmaGlow3);
+      cursor: crosshair;
+      max-width: 100%;
+      height: auto;
+      z-index:1000;
+    }
+    .hint {
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 15px;
+      line-height: 1.6;
+    }
+    .stats {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(14, 14, 17, 0.7);
+      border-radius: 8px;
+      border: 1px solid var(--PlasmaGlow2);
+    }
+    .stats h3 {
+      color: var(--AquaAura);
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    .stats p {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin: 5px 0;
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      .main-layout {
+        flex-direction: column;
+      }
+      .panel {
+        max-width: 100%;
+      }
+      canvas {
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+ <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      
+      <div class="left-dropdown"><!-- LEFT DROPDOWN MENU -->
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+
+        <div class="left-menu">
+          <a href="https://mkb0020.onrender.com" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
+          <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
+          <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>
+          <a href="https://mkb0020.onrender.com/review" class="menu-item">Review CATastrophe 2</a>
+          <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
+          <a href="https://mkb0020.onrender.com/admin_login" class="menu-item">Admin</a>
+
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>
+            <!--<a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>-->
+          </div>
+        </div>
+      </div>
+
+     
+       <a href="https://mkb0020.github.io">
+            <div class="logo">♡ mkb0020</div>  <!-- CENTER LOGO -->
+        </a>
+ 
+      <div class="help-dropdown"> <!-- RIGHT HELP DROPDOWN -->
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">About</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+ <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">PLATFORMER PHYSICS SIMULATION</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+                <p><strong>Geometry Kitty</strong> 
+                  is a lightweight platform‑generation sandbox for game developers who want fast, predictable, physics‑aware level layouts. Give it a few core movement parameters — gravity, jumpForce, moveSpeed, levelLength, platformCount, difficulty, and your sprite dimensions — and Geometry Kitty builds a clean, drop‑in platformer level tailored to your game’s mechanics.
+                </p>
+        
+        <p><strong>Under the hood, it calculates your character’s actual movement capabilities:</strong></p>
+        <ul>
+          <li><strong>Max Jump Height:</strong> (\mathrm{jumpForce^{\mathnormal{2}}})/(2\cdot \mathrm{gravity})  </li>
+          <li><strong>Time to Peak: </strong> \mathrm{jumpForce}/\mathrm{gravity}  </li>
+          <li><strong>Air Time:</strong> 2\cdot \mathrm{timeToPeak} </li>
+          <li><strong>Max Jump Distance:</strong>  \mathrm{moveSpeed}\cdot \mathrm{airTime} </li>
+        </ul>        
+        <p><strong>Then it applies a difficulty‑based safety range:</strong></p>
+        <ul>
+          <li><strong>Easy:</strong> 50–60% of max capability</li>
+          <li><strong>Normal: </strong>  65–75% </li>
+          <li><strong>Hard:</strong> 80–90% </li>
+        </ul>
+        <p>These percentages scale jump height, jump distance, and platform width (inversely), ensuring levels feel fair, readable, and tuned to your intended challenge.</p>
+        <p><strong>Example Output:</strong></p>
+        <p><br>{ x: 320, y: 420, width: 96, height: 16 },
+        <br>{ x: 470, y: 360, width: 88, height: 16 },
+        <br>{ x: 640, y: 390, width: 72, height: 16 }</p>
+        <p>Perfect for prototyping, testing movement feel, or generating quick levels that “just work” with your physics.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <div class="main-layout">
+      <div class="panel">
+        <div class="control-group">
+          <label for="gravity">Gravity</label>
+          <input id="gravity" type="number" value="1.2" step="0.1" min="0.1">
+        </div>
+        <div class="control-group">
+          <label for="jumpForce">Jump Force</label>
+          <input id="jumpForce" type="number" value="18" step="1" min="1">
+        </div>
+        <div class="control-group">
+          <label for="speed">Move Speed</label>
+          <input id="speed" type="number" value="6" step="1" min="1">
+        </div>
+
+        <div class="control-group">
+          <label for="levelLength">Level Length</label>
+          <input id="levelLength" type="number" value="2000" step="100" min="500">
+        </div>
+        <div class="control-group">
+          <label for="platformCount">Platform Count</label>
+          <input id="platformCount" type="number" value="8" step="1" min="1" max="20">
+        </div>
+        <div class="control-group">
+          <label for="difficulty">Difficulty</label>
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="normal" selected>Normal</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="spriteW">Width</label>
+          <input id="spriteW" type="number" value="32" step="1" min="16" max="128">
+        </div>
+        <div class="control-group">
+          <label for="spriteH">Height</label>
+          <input id="spriteH" type="number" value="32" step="1" min="16" max="128">
+        </div>
+
+        <button id="generate">🔄 Generate Level</button>
+        <button id="exportBtn">💾 Export JSON</button>
+
+        <div class="stats" id="stats">
+          <h3>📊 Physics Stats</h3>
+          <p id="maxHeight">Max Jump Height: 0</p>
+          <p id="maxDistance">Max Jump Distance: 0</p>
+          <p id="airTime">Air Time: 0s</p>
+        </div>
+      </div>
+
+      <div class="canvas-container">
+        <canvas id="canvas" width="800" height="400"></canvas>
+        <div class="hint">
+          🎮 <strong>Controls:</strong><br>
+          A/D or ← → to move · Space/W/↑ to jump · R to regenerate
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="stars"></div>
+  <script src="js/KittyCore.js"></script>
+  <script>
+        const starsDiv = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = star.style.height = Math.random() * 2 + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 4 + 's';
+            starsDiv.appendChild(star);
+        }
+  </script>
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const groundY = 350;
+    let platforms = [];
+
+    let player = {
+      x: 50,
+      y: groundY - 32,
+      vx: 0,
+      vy: 0,
+      w: 32,
+      h: 32,
+      onGround: false
+    };
+
+    let camera = {
+      x: 0
+    };
+
+    const keys = {};
+    window.addEventListener("keydown", e => {
+      keys[e.key] = true;
+      if (e.key === 'r' || e.key === 'R') {
+        generate.click();
+      }
+      if (e.key === ' ') {
+        e.preventDefault();
+      }
+    });
+    window.addEventListener("keyup", e => keys[e.key] = false);
+
+    const DIFF = {
+      easy:   { min: 0.5, max: 0.6 },
+      normal: { min: 0.65, max: 0.75 },
+      hard:   { min: 0.8, max: 0.9 }
+    };
+
+    function rand(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function generatePlatforms(cfg) {
+      const diff = DIFF[cfg.difficulty];
+
+      const maxH = (cfg.jumpForce ** 2) / (2 * cfg.gravity);
+      const airTime = (cfg.jumpForce / cfg.gravity) * 2;
+      const maxD = cfg.speed * airTime;
+
+      document.getElementById('maxHeight').textContent = `Max Jump Height: ${Math.round(maxH)}px`;
+      document.getElementById('maxDistance').textContent = `Max Jump Distance: ${Math.round(maxD)}px`;
+      document.getElementById('airTime').textContent = `Air Time: ${airTime.toFixed(2)}s`;
+
+      let x = 120;
+      let y = groundY;
+
+      platforms = [];
+
+      for (let i = 0; i < cfg.platformCount; i++) {
+        x += maxD * rand(diff.min, diff.max);
+        y = groundY - maxH * rand(diff.min, diff.max);
+
+        platforms.push({
+          x: Math.round(x),
+          y: Math.round(y),
+          w: Math.round(cfg.spriteW * rand(1.5, 2.5)),
+          h: 12
+        });
+      }
+    }
+
+    function collide(a, b) {
+      return (
+        a.x < b.x + b.w &&
+        a.x + a.w > b.x &&
+        a.y < b.y + b.h &&
+        a.y + a.h > b.y
+      );
+    }
+
+    function update(cfg) {
+      player.vx = 0;
+      if (keys["a"] || keys["A"] || keys["ArrowLeft"]) player.vx = -cfg.speed;
+      if (keys["d"] || keys["D"] || keys["ArrowRight"]) player.vx = cfg.speed;
+
+      if ((keys[" "] || keys["w"] || keys["W"] || keys["ArrowUp"]) && player.onGround) {
+        player.vy = -cfg.jumpForce;
+        player.onGround = false;
+      }
+
+      player.vy += cfg.gravity;
+
+      player.x += player.vx;
+      player.y += player.vy;
+
+      player.onGround = false;
+
+      if (player.y + player.h >= groundY) {
+        player.y = groundY - player.h;
+        player.vy = 0;
+        player.onGround = true;
+      }
+
+      for (let p of platforms) {
+        if (collide(player, p) && player.vy > 0) {
+          player.y = p.y - player.h;
+          player.vy = 0;
+          player.onGround = true;
+        }
+      }
+
+      const targetCameraX = player.x - canvas.width / 3;
+      camera.x += (targetCameraX - camera.x) * 0.1;
+      
+      if (camera.x < 0) camera.x = 0;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.save();
+      ctx.translate(-camera.x, 0);
+
+      ctx.fillStyle = "#1a1a2e";
+      ctx.fillRect(camera.x, groundY, canvas.width, canvas.height - groundY);
+
+      ctx.strokeStyle = "#67FEBD";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(camera.x, groundY);
+      ctx.lineTo(camera.x + canvas.width, groundY);
+      ctx.stroke();
+
+      platforms.forEach(p => {
+        if (p.x + p.w > camera.x && p.x < camera.x + canvas.width) {
+          ctx.fillStyle = "rgba(220, 76, 232, 0.3)";
+          ctx.fillRect(p.x + 4, p.y + 4, p.w, p.h);
+          
+          ctx.fillStyle = "#dc4ce8";
+          ctx.fillRect(p.x, p.y, p.w, p.h);
+          
+          ctx.fillStyle = "rgba(255, 199, 255, 0.5)";
+          ctx.fillRect(p.x, p.y, p.w, 2);
+        }
+      });
+
+      ctx.fillStyle = "rgba(103, 254, 189, 0.3)";
+      ctx.fillRect(player.x + 4, player.y + 4, player.w, player.h);
+
+      ctx.fillStyle = "#67FEBD";
+      ctx.fillRect(player.x, player.y, player.w, player.h);
+
+      ctx.fillStyle = "rgba(0, 255, 255, 0.5)";
+      ctx.fillRect(player.x, player.y, player.w, 4);
+
+      if (Math.abs(player.vx) > 0 || Math.abs(player.vy) > 0) {
+        ctx.strokeStyle = "#00ffff";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(player.x + player.w/2, player.y + player.h/2);
+        ctx.lineTo(player.x + player.w/2 + player.vx * 3, player.y + player.h/2 + player.vy * 2);
+        ctx.stroke();
+      }
+
+      ctx.restore();
+
+      ctx.fillStyle = "rgba(0, 255, 255, 0.8)";
+      ctx.font = "14px Orbitron";
+      ctx.fillText(`Position: ${Math.round(player.x)}px`, 10, 20);
+      ctx.fillText(`Platforms: ${platforms.length}`, 10, 40);
+    }
+
+    function loop(cfg) {
+      update(cfg);
+      draw();
+      requestAnimationFrame(() => loop(cfg));
+    }
+
+    function getConfig() {
+      return {
+        gravity: +gravity.value,
+        jumpForce: +jumpForce.value,
+        speed: +speed.value,
+        levelLength: +levelLength.value,
+        platformCount: +platformCount.value,
+        difficulty: difficulty.value,
+        spriteW: +spriteW.value,
+        spriteH: +spriteH.value
+      };
+    }
+
+    generate.onclick = () => {
+      const cfg = getConfig();
+      player.w = cfg.spriteW;
+      player.h = cfg.spriteH;
+      player.x = 50;
+      player.y = groundY - player.h;
+      player.vx = 0;
+      player.vy = 0;
+      camera.x = 0;
+      generatePlatforms(cfg);
+    };
+
+    exportBtn.onclick = () => {
+      const data = {
+        config: getConfig(),
+        platforms: platforms,
+        groundY: groundY
+      };
+      
+      const blob = new Blob(
+        [JSON.stringify(data, null, 2)],
+        { type: "application/json" }
+      );
+
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `geometry-kitty-${Date.now()}.json`;
+      a.click();
+    };
+
+    generate.onclick();
+    loop(getConfig());
+  </script>
+</body>
+</html>
