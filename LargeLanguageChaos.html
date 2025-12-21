@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link rel="stylesheet" href="assets/css/KittyStyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Conversation</title>
+    <title>Casual</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         .chat-container {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -68,31 +68,28 @@
         }
 
         .avatar {
-            width: 60px;
+            width: 70px;
             font-family: 'GothNerd';
-            height: 60px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.9rem;
             flex-shrink: 0;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .avatar.left {
-            background: linear-gradient(135deg, #d791ef00, #9874d300);
             color: #ffffff;
         }
 
         .avatar.right {
-            background: linear-gradient(135deg, #00d5ff00, #0099cc00);
             color: white;
         }
 
         .bubble {
-            max-width: 65%;
+            max-width: 70%;
             padding: 18px 24px;
             border-radius: 20px;
             position: relative;
@@ -103,13 +100,13 @@
         }
         .bubble ul{
             color: var(--ParticlePink);
-            font-size: 1rem;
+            font-size: 1.2rem;
 
         }
 
         .bubble li{
-            color: var(--ParticlePink);
-            font-size: 1rem;
+            color: var(--White);
+            font-size: 1.2rem;
 
         }
 
@@ -119,52 +116,52 @@
         }
 
         .message.left .bubble {
-            background: rgba(0, 0, 0, 0.792);
-            border: 1px solid var(--PlasmaPurple);
+            background: rgba(0, 61, 61, 0.63);
+            border: 1px solid var(--AquaAura);
             border-bottom-left-radius: 4px;
         }
 
         .message.left .bubble:hover {
-            border-color: var(--VortexViolet);
-            box-shadow: 0 12px 35px rgba(216, 145, 239, 0.3);
+            border-color: var(--AquaAura);
+            box-shadow: 0 12px 35px rgba(0, 255, 255, 0.7);
         }
 
         .message.right .bubble {
-            background: rgba(0, 0, 0, 0.792);
-            border: 1px solid var(--AquaAura);
+            background: rgba(36, 20, 57, 0.82);
+            border: 1px solid var(--PlasmaPurple);
             border-bottom-right-radius: 4px;
         }
 
         .message.right .bubble:hover {
-            border-color: var(--AquaAura);
-            box-shadow: 0 12px 35px rgba(0, 255, 255, 0.3);
+            border-color: var(--VortexViolet);
+            box-shadow: 0 12px 35px rgb(165,90,255,0.7);
         }
 
         .bubble-content h3 {
             margin: 0 0 12px 0;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
         }
 
         .message.left .bubble-content h3 {
-            color: #D9BDF8;
+            color: #ffffff;
         }
 
         .message.right .bubble-content h3 {
-            color: #00ffff;
+            color: #ffffff;
         }
 
         .bubble-content p {
             margin: 0;
             line-height: 1.7;
-            color: #e6d9ff;
-            font-size: 1.05rem;
+            color: #ffffff;
+            font-size: 1.2rem;
         }
 
         .bubble-content ul {
             margin: 12px 0 0 0;
             padding-left: 20px;
-            color: #e6d9ff;
+            color: #ffffff;
         }
 
         .bubble-content li {
@@ -215,13 +212,13 @@
             .avatar {
                 width: 38px;
                 height: 38px;
-                font-size: 1rem;
+                font-size: 0.7rem;
             }
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 20px 12px;
+            .avatar{
+                font-size: 0.5rem;
             }
 
             .bubble {
@@ -230,11 +227,11 @@
             }
 
             .bubble-content h3 {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
 
             .bubble-content p {
-                font-size: 0.95rem;
+                font-size: 1.25rem;
             }
         }
     </style>
@@ -293,11 +290,12 @@
   <div id="helpModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title">AI Experiment</h1>
+        <h1 class="modal-title">Large Language Chaos</h1>
         <button class="modal-close" id="closeModal">X</button>
       </div>
       <div class="modal-body">
-                <p>One day I asked GROK to think of the most off-the-wall yet interesting question that would make people go "huh I've never thought about that" and be thinking about it for days after. I told Grok that I'm sending the question to ChatGPT who I asked to respond to Grok's question and ask a follow up question.</p>  
+                <p>One day I asked Chat GPT and Grok if they were down to play a game (they both said yes).</p>
+                <p>I asked GROK to think of the most off-the-wall yet interesting question that they could think of.  The kind that would make someone go: "huh I've never thought about that," and then be thinking about it for the next several days because it was such an interesting concept. I told Grok that I'm sending the question to ChatGPT.  I then asked Chat GPT if they could respond to Grok's question and ask a follow up question that I would pass back to Grok.</p>  
                 <p>And repeat.</p>
                 <p>This is the result...</p>
                 <p><strong> Buckle up!</strong></p>
@@ -308,7 +306,6 @@
 
     <div class="chat-container">
         <div class="chat-header">
-            <h1>Casual Conversation Between LLMs</h1>
 
         </div>
 
