@@ -1038,31 +1038,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
       document.body.style.overflow = 'auto';
     }
   }
-
-  const menuTrigger = document.querySelector('.menu-trigger');
-  const leftDropdown = document.querySelector('.left-dropdown');
-  if (menuTrigger && leftDropdown) {
-    menuTrigger.addEventListener('click', () => {
-      leftDropdown.classList.toggle('active');
-    });
-  }
-
-  const helpBtn = document.getElementById('helpBtn');
-  const helpDropdown = document.querySelector('.help-dropdown');
-  if (helpBtn && helpDropdown) {
-    helpBtn.addEventListener('click', () => {
-      helpDropdown.classList.toggle('active');
-    });
-  }
-
-  const openMainHelp = document.getElementById('openMainHelp');
-  if (openMainHelp) {
-    openMainHelp.addEventListener('click', () => {
-      document.getElementById('helpModal').style.display = 'flex';
-      helpDropdown?.classList.remove('active');
-    });
-  }
-});
+})
+ 
 </script>
 
 <script>
