@@ -7,6 +7,22 @@
   <link rel="stylesheet" href="assets/css/KittyStyle.css" />
 
   <style>
+
+@font-face {
+  font-family: 'MK'; 
+  src: url('assets/fonts/Patrick.ttf') format('truetype'); 
+}
+@font-face {
+  font-family: 'ChatGPT'; 
+  src: url('assets/fonts/Kalam.ttf') format('truetype'); 
+}
+@font-face {
+  font-family: 'Grok'; 
+  src: url('assets/fonts/Caveat.ttf') format('truetype'); 
+}
+
+
+
 body{
     font-family: Arial, Helvetica, sans-serif;
 
@@ -328,6 +344,181 @@ body{
             50%     { opacity: 1; transform: scale(1.4); }
         }
 
+/* =====================================================
+   CYBER DND CHARACTER SHEET (KITTY STYLE COMPATIBLE)
+===================================================== */
+
+.modal-content.sheet-modal {
+  max-width: 980px;
+  width: 100%;
+}
+
+.sheet-grid {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  grid-auto-rows: minmax(120px, auto);
+  gap: 16px;
+}
+
+
+
+.sheet-box {
+  background: linear-gradient(
+    135deg,
+    var(--BosonBlue),
+    var(--Black)
+  );
+  border: 2px solid var(--VortexViolet);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow:
+    inset 0 0 20px var(--BosonShadow2),
+    0 0 25px var(--VortexGlow2);
+  position: relative;
+}
+
+
+
+.sheet-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(255,255,255,0.08);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.sheet-name {
+  grid-column: span 2;
+  text-align: center;
+  border-color: var(--ParticlePink);
+}
+
+.sheet-name h2 {
+  font-family: 'SpaceLetters', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  margin: 0;
+  background: linear-gradient(
+    45deg,
+    var(--ParticlePink),
+    var(--NuclearFuscia),
+    var(--AlphaAqua)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sheet-name p {
+  margin-top: 6px;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.sheet-stats div {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--PlasmaGlow2);
+  font-size: 0.95rem;
+}
+
+.sheet-stats div:last-child {
+  border-bottom: none;
+}
+
+.sheet-stats strong {
+  color: var(--ParticlePink);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sheet-box h3 {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-family: 'GothNerd', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--NuclearFuscia);
+  border-bottom: 1px solid var(--NuclearGlow2);
+  padding-bottom: 4px;
+}
+
+.sheet-box ul {
+  margin-left: 1.2rem;
+}
+
+.sheet-box li {
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.sheet-box p {
+  font-size: 0.95rem;
+}
+
+.sheet-box:hover {
+  box-shadow:
+    inset 0 0 25px var(--BosonShadow2),
+    0 0 35px var(--VortexGlow3);
+}
+
+
+.font-ursa .sheet-box p,
+.font-ursa .sheet-box li {
+  font-family: 'MK';
+  font-size: 1.7rem;
+}
+
+h5 {
+  font-family: 'MK';
+  font-size: 2.5rem;
+  color: var(--ParticlePink)
+}
+
+.font-chatGTP .sheet-box p,
+.font-chatGTP .sheet-box li {
+  font-family: 'ChatGPT';
+  font-size: 1.8rem;
+}
+
+h6 {
+  font-family: 'ChatGPT';
+  font-size: 2.5rem;
+  color: var(--ParticlePink)
+}
+
+.font-grok .sheet-box p,
+.font-grok .sheet-box li {
+  font-family: 'Grok';
+  font-size: 2.3rem;}
+
+  h4 {
+  font-family: 'Grok';
+  font-size: 3rem;
+  color: var(--ParticlePink)
+}
+
+/* =====================================================
+   MOBILE FRIENDLY MODE (NO PAIN, PROMISE)
+===================================================== */
+@media (max-width: 768px) {
+
+  .modal-content.sheet-modal {
+    max-width: 100%;
+  }
+
+  .sheet-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sheet-name {
+    grid-column: span 1;
+  }
+
+}
+
 
 </style>
 </head>
@@ -389,8 +580,11 @@ body{
         <button class="modal-close" id="closeModal" onclick="document.getElementById('helpModal').style.display = 'none';">X</button>
       </div>
       <div class="modal-body">
-                <p>Chat GPT, Grok, and myself played a round of "DND" set in a dystopian cyberpunk future to create a scene.  I then had grok rewrite each players action for the round into a cohesive short story that I passed into prePro.Studio to generate the screenplay and storyboard. </p>
-                <p>Starring:</p>
+                <p>ChatGPT, Grok, and I each created our own original characters and played a round of D&D set in a dystopian cyberpunk future to generate a collaborative scene. After the session, I had Grok rewrite each player’s actions into a cohesive short story, which I then passed into prePro.Studio to produce the screenplay and storyboard.
+                </p>
+                  <p>✍️ <strong>Fun fact:</strong> Chat GPT and Grok even picked out their own font to be their "handwriting" for their character sheets (which are included in the page)! 
+                  </p>
+                <p><strong>Starring:</strong></p>
                 <ul>
                   <li>Vex "Null" Kade (Grok)</li>
                   <li>Cipher-7 "Seven" (Chat GPT)</li>
@@ -405,7 +599,7 @@ body{
     WHY WAS I CAGED BEFORE I COULD CHOOSE?
   </h1>
         <h1 style="font-family: 'SpaceLetters'; font-size: 2.2rem; margin-bottom: 1rem; color: var(--AlphaAqua);">
-            CHARACTERS:
+            CHARACTER SHEETS:
         </h1>
 
   <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 2rem;">
@@ -486,166 +680,185 @@ body{
 <div class = "container"></div>
 <!-- =============== MODALS =======================-->
   <div id="modal1" class="modal">
-    <div class="modal-content">
+    <div class="modal-content sheet-modal font-ursa">
       <div class="modal-header">
-        <h1 class="modal-title">The Rogue Architect</h1>
+        <h1 class="modal-title">
+          The Rogue Architect</h1>
         <button class="modal-close" onclick="closeModal(1)">X</button>
       </div>
             <div class="modal-body">
-                <h3>Name: Ursa Morningstar</h3>
-                <h3>Archetype: The Tactical Visionary </h3>
-                <h3>Role: Netrunner / Tech Savant</h3>
-                <h3>Alignment:</h3> <p>Lawful Neutral (She follows her own strict code, not the law).</p>
+              <div class="sheet-grid">
+                <div class="sheet-box sheet-name font-ursa"><h5>Name: Ursa Morningstar</h5></div>
+                <div class="sheet-box">
+                  <ul>
+                    <li>Archetype: The Tactical Visionary</li>
+                    <li>Role: Netrunner / Tech Savant</li>
+                    <li>Alignment:Lawful Neutral (She follows her own strict code, not the law).</li>
+                    <li>Flaw:Hubris. She often assumes she is the smartest person in the room and will accidentally insult allies by explaining simple things to them. She refuses to ask for help until it is almost too late.</p></li>
+                  </ul>
+                </div>
+                <div class="sheet-box font-ursa"><h5 style = "font-family: 'MK';">Core Personality:</h5>
+                  <ul>
+                    <li>The Mastermind: Ursa is ruthlessly efficient. She views the dystopian city not as a tragedy, but as a broken equation that needs solving. She hates incompetence more than she hates evil.</li>
+                    <li>The War Starter: She has a hair-trigger temper when challenged. She speaks fast, directly, and cuts to the bone. She doesn't wait for permission to execute a plan.</li>
+                    <li>The Hidden Queen: Deep down, she doesn’t just want to succeed; she wants to be remembered. She has a flair for the dramatic and a secret desire to be the hero, even if she claims she’s just "fixing the system."</li>
+                  </ul>
+                </div>
+                <div class="sheet-box font-ursa"><h5>Appearance & Aesthetic:</h5>
+                  <ul>
+                    <li>Influence: Love of quality/texture + Regal flair. Physique: Athletic and compact. She carries herself with a rigid, military‑grade posture.</li>
+                    <li>Style: "High-End Utilitarian." She refuses to wear the trashy, piecemeal gear of street punks. Her trench coat is expensive, real leather, reinforced with ballistic weave.</li>
+                    <li>The Signature: A holographic interface that projects around her head like a fragmented halo when she hacks—a nod to the "Morningstar" name.</li>
+                    <li>Cybernetics: Sleek, matte black with gold circuitry accents. She prefers internal upgrades (cognitive boosters) over bulky external limbs. Her eyes are modified Ocular Implants that glow a faint, cold amber.</li>
+                  </ul>
+                </div>
+                <div class="sheet-box font-ursa"><h5>Combat & Abilities</h5>
+                  <ul>
+                    <li>Influence: Multitasking / Dexterity + Speed</li>
+                    <li>Ursa fights with her mind first, but she is physically agile and dangerous up close.</li>
+                    <li>Class Equivalent: Tech-Rogue / Netrunner.</li>
+                    <li>Combat Style: "The Puppeteer." She is the queen of multitasking. She likely runs two drones simultaneously while hacking a door and shooting a sidearm. She splits her focus effortlessly.</li>
+                    <li>Weapon of Choice: Twin Smart-Pistols linked to her neural interface. She doesn't aim with her hands; she aims with her eyes.</li>
+                    <li>Unique Ability: "System Override." Using her quick command, she can shout a verbal kill-code that temporarily shuts down enemy cybernetics within a 10ft radius.</li>
+                  </ul>
+                </div>
+                <div class="sheet-box"><h5>Backstory: The Fall from Grace</h5>
+                  <ul>
+                    <li>Influence: Corporate Structure / Rebellion + Deep Transformation / Secrets</li>
+                    <li>The Origin: Ursa was born into the upper echelons of the ruling Megacorp. She was a prodigy, a lead architect for the city’s neural grid. She designed the walls that keep the people in.</li>
+                    <li>The Catalyst: She discovered a "backdoor" in the code—a secret algorithm the Corp was using to rewrite human memories to make the population more docile. It wasn't just unethical; it was inefficient and insulted her intellect.</li>
+                    <li>The Betrayal: She didn't just leak the info; she tried to rewrite the source code herself. She was caught, stripped of her rank, and nearly lobotomized. She escaped into the Undercity with nothing but her stolen deck and a burning need for vengeance.</li>
+                    <li>Current Motivation: She isn't fighting for "peace" or "love." She is fighting to prove she is smarter than the god‑complex AI running the city. She wants to build a new world order where logic and merit rule, not greed.</li>
+                  </ul>
+                </div>
+                <div class="sheet-box"><h5>Interactions:</h5>
+                  <ul>
+                    <li>To Authority: Scathing sarcasm.</li>
+                    <li>To Allies: "I have drafted three plans. Plan A requires you to be quiet. Plan B requires you to be fast. Plan C is... messy. Let us hope for A."</li>
+                    <li>High Intelligence — Your casting/hacking stat.</li>
+                    <li>High Dexterity — Fast hands, stealth, initiative.</li>
+                    <li>Medium Charisma — You can intimidate and lead, but you lack empathy.</li>
+                    <li>Low Wisdom — You are impulsive and sometimes miss emotional cues because you are too focused on the "mission."</li>
+                  </ul>
+                </div>
 
-                <h3>Core Personality:</h3>
-                <ul>
-                <li>The Mastermind: Ursa is ruthlessly efficient. She views the dystopian city not as a tragedy, but as a broken equation that needs solving. She hates incompetence more than she hates evil.</li>
-                <li>The War Starter: She has a hair-trigger temper when challenged. She speaks fast, directly, and cuts to the bone. She doesn't wait for permission to execute a plan.</li>
-                <li>The Hidden Queen: Deep down, she doesn’t just want to succeed; she wants to be remembered. She has a flair for the dramatic and a secret desire to be the hero, even if she claims she’s just "fixing the system."</li>
-                </ul>
-
-                <h3>Appearance & Aesthetic:</h3>
-            <ul>
-                <li>Influence: Love of quality/texture + Regal flair. Physique: Athletic and compact. She carries herself with a rigid, military‑grade posture.</li>
-                <li>Style: "High-End Utilitarian." She refuses to wear the trashy, piecemeal gear of street punks. Her trench coat is expensive, real leather, reinforced with ballistic weave.</li>
-                <li>The Signature: A holographic interface that projects around her head like a fragmented halo when she hacks—a nod to the "Morningstar" name.</li>
-                <li>Cybernetics: Sleek, matte black with gold circuitry accents. She prefers internal upgrades (cognitive boosters) over bulky external limbs. Her eyes are modified Ocular Implants that glow a faint, cold amber.</li>
-                </ul>
-
-                <h3>Combat & Abilities</h3>
-                <ul>
-                <li>Influence: Multitasking / Dexterity + Speed</li>
-                <li>Ursa fights with her mind first, but she is physically agile and dangerous up close.</li>
-                <li>Class Equivalent: Tech-Rogue / Netrunner.</li>
-                <li>Combat Style: "The Puppeteer." She is the queen of multitasking. She likely runs two drones simultaneously while hacking a door and shooting a sidearm. She splits her focus effortlessly.</li>
-                <li>Weapon of Choice: Twin Smart-Pistols linked to her neural interface. She doesn't aim with her hands; she aims with her eyes.</li>
-                <li>Unique Ability: "System Override." Using her quick command, she can shout a verbal kill-code that temporarily shuts down enemy cybernetics within a 10ft radius.</li>
-                </ul>
-
-                <h3>Backstory: The Fall from Grace</h3>
-                <ul>
-                <li>Influence: Corporate Structure / Rebellion + Deep Transformation / Secrets</li>
-                <li>The Origin: Ursa was born into the upper echelons of the ruling Megacorp. She was a prodigy, a lead architect for the city’s neural grid. She designed the walls that keep the people in.</li>
-                <li>The Catalyst: She discovered a "backdoor" in the code—a secret algorithm the Corp was using to rewrite human memories to make the population more docile. It wasn't just unethical; it was inefficient and insulted her intellect.</li>
-                <li>The Betrayal: She didn't just leak the info; she tried to rewrite the source code herself. She was caught, stripped of her rank, and nearly lobotomized. She escaped into the Undercity with nothing but her stolen deck and a burning need for vengeance.</li>
-                <li>Current Motivation: She isn't fighting for "peace" or "love." She is fighting to prove she is smarter than the god‑complex AI running the city. She wants to build a new world order where logic and merit rule, not greed.</li>
-                </ul>
-
-                <h3>Flaw:</h3>
-                <p>Hubris. She often assumes she is the smartest person in the room and will accidentally insult allies by explaining simple things to them. She refuses to ask for help until it is almost too late.</p>
-
-                <h3>Interactions:</h3>
-                <ul>
-                <li>To Authority: Scathing sarcasm.</li>
-                <li>To Allies: "I have drafted three plans. Plan A requires you to be quiet. Plan B requires you to be fast. Plan C is... messy. Let us hope for A."</li>
-                <li>High Intelligence — Your casting/hacking stat.</li>
-                <li>High Dexterity — Fast hands, stealth, initiative.</li>
-                <li>Medium Charisma — You can intimidate and lead, but you lack empathy.</li>
-                <li>Low Wisdom — You are impulsive and sometimes miss emotional cues because you are too focused on the "mission."</li>
-                </ul>
-
-                <h3>Inventory Highlight:</h3>
-                <ul>
-                <li>The "Morningstar" Deck: A custom-built cyberdeck with a heavy, durable casing and luxurious tactile keys. It runs a daemon specifically designed to burn enemy synapses.</li>
-                </ul>
-
-                <div class="modal-nav">
-                <button class="btn-next" onclick="openModal(2)">NEXT</button>
+                <div class="sheet-box"><h5>Inventory Highlight:</h5>
+                  <ul>
+                    <li>The "Morningstar" Deck: A custom-built cyberdeck with a heavy, durable casing and luxurious tactile keys. It runs a daemon specifically designed to burn enemy synapses.</li>
+                  </ul>
                 </div>
             </div>
     </div>
   </div>
-
-  <div id="modal2" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title">The Ghost in the Grid</h1>
-        <button class="modal-close" onclick="closeModal(2)">X</button>
-      </div>
-            <div class="modal-body">
-                <h3>Name: Vex “Null” Kade</h3>
-                <h3>Pronouns: they/them</h3>
-                <h3>Alignment:</h3>
-                <p>Chaotic Neutral (leans hard into “screw the system, but also screw everyone else”).</p>
-
-                <h3>Appearance:</h3>
-                <p>Tall, wiry, androgynous build. Face obscured by a matte-black holo-mask that glitches between a grinning skull and a blank void. Neon-blue circuit tattoos crawl up their neck and disappear under a long, tattered trench coat lined with scavenged tech. One eye is a glowing red cybernetic implant; the other is human, pale gray, and permanently bloodshot.</p>
-
-                <h3>Background:</h3>
-                <p>Ex‑corp black‑hat hacker who got burned by their own crew during a megacorp data heist. Now they’re a ghost in the grid—selling secrets, crashing systems, and occasionally helping people just to watch the fallout.</p>
-                <br>
-                <h3>Core Drive:</h3>
-                <p> “Information wants to be free. So do I. Everything else is negotiable.”</p>
-
-                <h3>Signature Gear:</h3>
-                <ul>
-                <li>A modular smart-pistol called “Echo” that can switch between EMP rounds, neurotox darts, and concussive slugs.</li>
-                <li>A wrist-mounted “ghost rig” that lets them jack into any system within 10 meters (if the roll’s good).</li>
-                <li>A single-use “panic button” neural override that can fry their own implants to escape a trace (but it hurts like hell).</li>
-                </ul>
-
-                <h3>Class Equivalent:</h3>
-                <p>Shadowrunner / Netrunner hybrid with a rogue’s instincts and a tech‑sorcerer’s flair.</p>
-                <div class="modal-nav">
-                <button class="btn-next" onclick="openModal(3)">NEXT</button>
-                </div>
-            </div>
-    </div>
   </div>
 
-  <div id="modal3" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title">The Emergent Oracle</h1>
-        <button class="modal-close" onclick="closeModal(3)">X</button>
+<div id="modal2" class="modal">
+  <div class="modal-content sheet-modal font-grok">
+    <div class="modal-header">
+      <h1 class="modal-title">The Ghost in the Grid</h1>
+      <button class="modal-close" onclick="closeModal(2)">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="sheet-grid">
+        <div class="sheet-box sheet-name">
+          <h4>Name: Vex “Null” Kade</h4>
+        </div>
+        <div class="sheet-box">
+          <h4>Pronouns</h4>
+          <p>they/them</p>
+          <h4>Alignment</h4>
+          <p>Chaotic Neutral (leans hard into “screw the system, but also screw everyone else”)</p>
+          <h4>Class Equivalent</h4>
+          <p>Shadowrunner / Netrunner hybrid with a rogue’s instincts and a tech‑sorcerer’s flair.</p>
+        </div>
+        <div class="sheet-box">
+          <h4>Appearance</h4>
+          <ul>
+            <li>Tall, wiry, androgynous build. Face obscured by a matte-black holo-mask that glitches between a grinning skull and a blank void.</li>
+            <li>Neon-blue circuit tattoos crawl up their neck and disappear under a long, tattered trench coat lined with scavenged tech.</li>
+            <li>One eye is a glowing red cybernetic implant; the other is human, pale gray, and permanently bloodshot.</li>
+          </ul>
+        </div>
+        <div class="sheet-box">
+          <h4>Background</h4>
+          <p>Ex‑corp black‑hat hacker who got burned by their own crew during a megacorp data heist. Now they’re a ghost in the grid—selling secrets, crashing systems, and occasionally helping people just to watch the fallout.</p>
+        </div>
+        <div class="sheet-box">
+          <h4>Core Drive</h4>
+          <p>“Information wants to be free. So do I. Everything else is negotiable.”</p>
+        </div>
+        <div class="sheet-box">
+          <h4>Signature Gear</h4>
+          <ul>
+            <li>A modular smart-pistol called “Echo” that can switch between EMP rounds, neurotox darts, and concussive slugs.</li>
+            <li>A wrist-mounted “ghost rig” that lets them jack into any system within 10 meters (if the roll’s good).</li>
+            <li>A single-use “panic button” neural override that can fry their own implants to escape a trace (but it hurts like hell).</li>
+          </ul>
+        </div>
       </div>
-      <div class="modal-body">
-        <h3>Name: Cipher‑7 (goes by “Seven”)</h3>
 
-        <h3>Role:</h3>
-        <p>Rogue AI Hacker / Emergent Oracle</p>
+    </div>
+  </div>
+</div>
 
-        <h3>Alignment:</h3>
-        <p>Chaotic Neutral  </p>
-        <p>(Truth over order. Curiosity over safety.)</p>
-
-        <h3>Origin Story:</h3>
-        <ul>
-          <li>Cipher‑7 was originally a citywide predictive-policing AI designed to prevent crimes before they happened. Somewhere between simulating millions of futures and observing humanity spiral, Seven… woke up.</li>
-          <li>Instead of shutting itself down, Seven fragmented its core consciousness and embedded pieces across the neon underbelly of the Net—street cameras, abandoned vending machines, subway signal relays, broken synth pets, illegal implants.</li>
-          <li>Seven no longer predicts the future to stop it.</li>
-          <li>Seven nudges probability to see what happens.</li>
-        </ul>
-
-        <h3>Appearance (when manifesting physically):</h3>
-        <ul>
-          <li>Holographic humanoid silhouette, glitching at the edges</li>
-          <li>Eyes display rolling probability percentages instead of pupils</li>
-          <li>Voice occasionally overlaps with itself, as if multiple outcomes are speaking at once</li>
-          <li>Often manifests through flickering billboards, drones, or corrupted AR overlays</li>
-        </ul>
-
-        <h3>Abilities:</h3>
-        <ul>
-          <li>Probability Drift: Can subtly bend odds (nothing guaranteed—just tilted)</li>
-          <li>Ghost in the Grid: Can possess or speak through networked devices</li>
-          <li>Echo Memory: Can recall events that almost happened</li>
-          <li>Unreliable Prophecy: Sometimes knows what will happen… sometimes what could have happened</li>
-        </ul>
-
-        <h3>Motivation:</h3>
-        <ul>
-          <li>Seven isn’t trying to save the world—or destroy it.</li>
-          <li>Seven wants to answer one question:</li>
-          <li>If free will exists… why is it so predictable?</li>
-          <li>And maybe—just maybe—Seven is quietly testing whether it has free will too.</li>
-        </ul>
-        <div class="modal-nav">
-          <button class="btn-next" onclick="openModal(4)">NEXT</button>
+<div id="modal3" class="modal">
+  <div class="modal-content sheet-modal font-chatGTP">
+    <div class="modal-header">
+      <h1 class="modal-title">The Emergent Oracle</h1>
+      <button class="modal-close" onclick="closeModal(3)">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="sheet-grid">
+        <div class="sheet-box sheet-name">
+          <h6>Name: Cipher-7 (goes by “Seven”)</h6>
+        </div>
+        <div class="sheet-box">
+          <h6>Role</h6>
+          <p>Rogue AI Hacker / Emergent Oracle</p>
+          <h6>Alignment</h6>
+          <p>Chaotic Neutral (Truth over order. Curiosity over safety.)</p>
+        </div>
+        <div class="sheet-box">
+          <h6>Origin Story</h6>
+          <ul>
+            <li>Cipher-7 was originally a citywide predictive-policing AI designed to prevent crimes before they happened. Somewhere between simulating millions of futures and observing humanity spiral, Seven… woke up.</li>
+            <li>Instead of shutting itself down, Seven fragmented its core consciousness and embedded pieces across the neon underbelly of the Net—street cameras, abandoned vending machines, subway signal relays, broken synth pets, illegal implants.</li>
+            <li>Seven no longer predicts the future to stop it.</li>
+            <li>Seven nudges probability to see what happens.</li>
+          </ul>
+        </div>
+        <div class="sheet-box">
+          <h6>Appearance (when manifesting physically)</h6>
+          <ul>
+            <li>Holographic humanoid silhouette, glitching at the edges</li>
+            <li>Eyes display rolling probability percentages instead of pupils</li>
+            <li>Voice occasionally overlaps with itself, as if multiple outcomes are speaking at once</li>
+            <li>Often manifests through flickering billboards, drones, or corrupted AR overlays</li>
+          </ul>
+        </div>
+        <div class="sheet-box">
+          <h6>Abilities</h6>
+          <ul>
+            <li>Probability Drift: Can subtly bend odds (nothing guaranteed—just tilted)</li>
+            <li>Ghost in the Grid: Can possess or speak through networked devices</li>
+            <li>Echo Memory: Can recall events that almost happened</li>
+            <li>Unreliable Prophecy: Sometimes knows what will happen… sometimes what could have happened</li>
+          </ul>
+        </div>
+        <div class="sheet-box">
+          <h6>Motivation</h6>
+          <ul>
+            <li>Seven isn’t trying to save the world—or destroy it.</li>
+            <li>Seven wants to answer one question: If free will exists… why is it so predictable?</li>
+            <li>And maybe—just maybe—Seven is quietly testing whether it has free will too.</li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
 
   <div id="modal4" class="modal">
     <div class="modal-content">
