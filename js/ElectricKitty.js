@@ -20,43 +20,66 @@ kaplay({
   letterbox: true,
 });
 
+  loadSound("cupFinishHim", "assets/sounds/cup.mp3");
+  loadSound("cucumberFinishHim", "assets/sounds/cucumber.mp3");
+  loadSound("ratFinishHim", "assets/sounds/rat.mp3");
+  loadSound("laserFinishHim", "assets/sounds/laser.mp3");
+  loadSound("finalFinishHim", "assets/sounds/finalBoom.mp3");
+
+
 loadFont("CyberGoth", "assets/fonts/ScienceGothic.ttf");
 loadFont("Basic", "assets/fonts/PTSansNarrow-Regular.ttf");
 
 loadSprite("cat", "assets/images/Niels2.png");
-loadSprite("rat", "assets/images/CATastrophe/BigRat.png");
+loadSprite("rat", "assets/images/CATastrophe/enemies/BigRat.png");
 
-loadSprite("purpleBoom", "assets/images/CATastrophe/Explosion.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
-loadSprite("redBoom", "assets/images/CATastrophe/RedBoom.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
-loadSprite("fire", "assets/images/CATastrophe/Fire.png", { sliceX:9, sliceY:1, anims:{ball:{from:0,to:8}} });
-loadSprite("smoke", "assets/images/CATastrophe/Smoke.png", { sliceX:9, sliceY:1, anims:{puff:{from:0,to:8}} });
-loadSprite("swirl", "assets/images/CATastrophe/Swirl.png", { sliceX:12, sliceY:1, anims:{spin:{from:0,to:11}} });
-loadSprite("powerup", "assets/images/CATastrophe/PowerUp.png", { sliceX:9, sliceY:1, anims:{beam:{from:0,to:8}} });
-loadSprite("zoomies", "assets/images/CATastrophe/Zoomies.png", { sliceX:3, sliceY:3, anims:{glitch:{from:0,to:8}} });
-loadSprite("claw", "assets/images/CATastrophe/CatnipClaw.png", { sliceX:32, sliceY:1, anims:{slash:{from:0,to:31,speed:30}} });
-loadSprite("greenBlast", "assets/images/CATastrophe/GreenBlast.png", { sliceX:12, sliceY:1, anims:{glitch:{from:0,to:11}} });
-loadSprite("biscuits", "assets/images/CATastrophe/Biscuits.png", { sliceX:8, sliceY:3, anims:{glitch:{from:0,to:23}} });
-loadSprite("fireball", "assets/images/CATastrophe/Fireball.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
-loadSprite("scratch", "assets/images/CATastrophe/Scratch.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
-loadSprite("littleCucumber", "assets/images/CATastrophe/LittleCucumber.PNG");
-loadSprite("lock", "assets/images/CATastrophe/LockOn.png", { sliceX:22, sliceY:1, anims:{glitch:{from:0,to:21,speed:30}} });
-loadSprite("arrow", "assets/images/CatArrow.png");
-loadSprite("superposition", "assets/images/CATastrophe/Superposition.png", { sliceX: 4,   sliceY: 1,   anims: { glitch: { from: 0, to: 3 } }});
-loadSprite("shock", "assets/images/CATastrophe/Shock.png", {   sliceX: 4, sliceY: 1,   anims: { burst: { from: 0, to: 3 } }});
-loadSprite("hammer", "assets/images/CATastrophe/HydrogenHammer.png", { sliceX: 10, sliceY: 1, anims: { smash: { from: 0, to: 9 } }});
-loadSprite("box", "assets/images/CATastrophe/Box.png", { sliceX: 2, sliceY: 1, anims: { glitch: { from: 0, to: 1 } }});
-loadSprite("bottle", "assets/images/CATastrophe/PoisonBottle.png", { sliceX: 1, sliceY: 1, anims: { glitch: { from: 0, to: 0 } }});
-loadSprite("shatter", "assets/images/CATastrophe/Shatter.png", { sliceX: 6, sliceY: 1, anims: { glitch: { from: 0, to: 5 } }});
-loadSprite("poison", "assets/images/CATastrophe/Poison.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
-loadSprite("bam", "assets/images/CATastrophe/Bam.png", { sliceX: 8, sliceY: 1, anims: { glitch: { from: 0, to: 7 } }});
-loadSprite("bite", "assets/images/CATastrophe/Bite.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
-loadSprite("laserCharge", "assets/images/CATastrophe/LaserCharge.png", { sliceX: 6, sliceY: 1, anims: { glitch: { from: 0, to: 5 } }});
-loadSprite("laserBeam", "assets/images/CATastrophe/LaserBeam.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
-loadSprite("zap", "assets/images/CATastrophe/Zap.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
-loadSprite("smallRat", "assets/images/CATastrophe/SmallRat.png");
-loadSprite("poof", "assets/images/CATastrophe/Poof.png", { sliceX:8, sliceY:1, anims:{burst:{from:0,to:7}} });
-loadSprite("smallRat2", "assets/images/CATastrophe/SmallRat2.png");
-loadSprite("ghostRat", "assets/images/CATastrophe/GhostRat.png");
+loadSprite("purpleBoom", "assets/images/CATastrophe/attacks/Explosion.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
+loadSprite("redBoom", "assets/images/CATastrophe/attacks/RedBoom.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
+loadSprite("fire", "assets/images/CATastrophe/attacks/Fire.png", { sliceX:9, sliceY:1, anims:{ball:{from:0,to:8}} });
+loadSprite("smoke", "assets/images/CATastrophe/attacks/Smoke.png", { sliceX:9, sliceY:1, anims:{puff:{from:0,to:8}} });
+loadSprite("swirl", "assets/images/CATastrophe/attacks/Swirl.png", { sliceX:12, sliceY:1, anims:{spin:{from:0,to:11}} });
+loadSprite("powerup", "assets/images/CATastrophe/attacks/PowerUp.png", { sliceX:9, sliceY:1, anims:{beam:{from:0,to:8}} });
+loadSprite("zoomies", "assets/images/CATastrophe/attacks/Zoomies.png", { sliceX:3, sliceY:3, anims:{glitch:{from:0,to:8}} });
+loadSprite("claw", "assets/images/CATastrophe/attacks/CatnipClaw.png", { sliceX:32, sliceY:1, anims:{slash:{from:0,to:31,speed:30}} });
+loadSprite("greenBlast", "assets/images/CATastrophe/attacks/GreenBlast.png", { sliceX:12, sliceY:1, anims:{glitch:{from:0,to:11}} });
+loadSprite("biscuits", "assets/images/CATastrophe/attacks/Biscuits.png", { sliceX:8, sliceY:3, anims:{glitch:{from:0,to:23}} });
+loadSprite("fireball", "assets/images/CATastrophe/attacks/Fireball.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
+loadSprite("scratch", "assets/images/CATastrophe/attacks/Scratch.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
+loadSprite("littleCucumber", "assets/images/CATastrophe/attacks/LittleCucumber.PNG");
+loadSprite("lock", "assets/images/CATastrophe/attacks/LockOn.png", { sliceX:22, sliceY:1, anims:{glitch:{from:0,to:21,speed:15}} });
+loadSprite("arrow", "assets/images/CATastrophe/attacks/CatArrow.png");
+loadSprite("superposition", "assets/images/CATastrophe/attacks/Superposition.png", { sliceX: 4,   sliceY: 1,   anims: { glitch: { from: 0, to: 3 } }});
+loadSprite("shock", "assets/images/CATastrophe/attacks/Shock.png", {   sliceX: 4, sliceY: 1,   anims: { burst: { from: 0, to: 3 } }});
+loadSprite("hammer", "assets/images/CATastrophe/attacks/HydrogenHammer.png", { sliceX: 10, sliceY: 1, anims: { smash: { from: 0, to: 9 } }});
+loadSprite("box", "assets/images/CATastrophe/attacks/Box.png", { sliceX: 2, sliceY: 1, anims: { glitch: { from: 0, to: 1 } }});
+loadSprite("bottle", "assets/images/CATastrophe/attacks/PoisonBottle.png", { sliceX: 1, sliceY: 1, anims: { glitch: { from: 0, to: 0 } }});
+loadSprite("shatter", "assets/images/CATastrophe/attacks/Shatter.png", { sliceX: 6, sliceY: 1, anims: { glitch: { from: 0, to: 5 } }});
+loadSprite("poison", "assets/images/CATastrophe/attacks/Poison.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
+loadSprite("bam", "assets/images/CATastrophe/attacks/Bam.png", { sliceX: 8, sliceY: 1, anims: { glitch: { from: 0, to: 7 } }});
+loadSprite("bite", "assets/images/CATastrophe/attacks/Bite.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
+loadSprite("laserCharge", "assets/images/CATastrophe/attacks/LaserCharge.png", { sliceX: 6, sliceY: 1, anims: { glitch: { from: 0, to: 5 } }});
+loadSprite("laserBeam", "assets/images/CATastrophe/attacks/LaserBeam.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
+loadSprite("zap", "assets/images/CATastrophe/attacks/Zap.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
+loadSprite("smallRat", "assets/images/CATastrophe/attacks/SmallRat.png");
+loadSprite("poof", "assets/images/CATastrophe/attacks/Poof.png", { sliceX:8, sliceY:1, anims:{burst:{from:0,to:7}} });
+loadSprite("smallRat2", "assets/images/CATastrophe/attacks/smallRat2.png");
+loadSprite("ghostRat", "assets/images/CATastrophe/attacks/GhostRat.png");
+
+
+
+loadSprite("CocktailLight", "assets/images/CATastrophe/attacks/MeowlotovCocktailLight.png", { sliceX:3, sliceY:1, anims:{glitch:{from:0,to:2}} });
+loadSprite("CocktailSpin", "assets/images/CATastrophe/attacks/MeowlotovCocktailSpin.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
+loadSprite("lock2", "assets/images/CATastrophe/attacks/LockOn2.png", { sliceX:22, sliceY:1, anims:{glitch:{from:0,to:21,speed:30}} });
+loadSprite("Burn", "assets/images/CATastrophe/attacks/Burn.png", { sliceX:4, sliceY:1, anims:{glitch:{from:0,to:3}} });
+loadSprite("MuzzleFlash", "assets/images/CATastrophe/attacks/MuzzleFlash.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
+loadSprite("pinkBoom", "assets/images/CATastrophe/attacks/PinkBoom.png", { sliceX:6, sliceY:1, anims:{burst:{from:0,to:5}} });
+loadSprite("mushroom", "assets/images/CATastrophe/attacks/MushroomCloud.png", { sliceX:4, sliceY:2, anims:{burst:{from:0,to:7}} });
+loadSprite("splat", "assets/images/CATastrophe/attacks/Splat.png", { sliceX: 4, sliceY: 1, anims: { glitch: { from: 0, to: 3 } }});
+loadSprite("BrassToeBeans", "assets/images/CATastrophe/attacks/BrassToeBeans.png");
+loadSprite("rifle", "assets/images/CATastrophe/attacks/PurrcisionRifle.png");
+loadSprite("CrossBow", "assets/images/CATastrophe/attacks/CatCrossBow.png", { sliceX: 2, sliceY: 1, anims: { glitch: { from: 0, to: 1 } }});
+
+
 
 window.gameActions = {};
 
@@ -77,7 +100,7 @@ scene("test", () => {
   const cat = add([
     sprite('cat'),
     pos(10, 165),
-    scale(0.55),
+    scale(1.1),
     z(2),
     "cat"
     
@@ -108,14 +131,6 @@ scene("test", () => {
     "boss"
   ]);
 
-//  const movesRect = add([
-//    rect(800, 130),
-//    pos(0, 350),
-//    color(rgb(42,52,57)),
-//    outline(5, rgb(131, 12, 222)),
-//    "moves",
-//    z(1)
-//  ]);
 
 
   window.gameActions = {
@@ -176,7 +191,15 @@ scene("test", () => {
   onKeyPress("l", () => animateLaserBeam(boss, hero));
   onKeyPress("n", () => animateGhostPoof(boss));
   onKeyPress("x", () =>  animateKaBAM(boss));
- 
+
+
+  onKeyPress("a", () =>  animateMeowlotovCocktail(hero, boss));
+  onKeyPress("s", () =>  animateBrassToeBeans(hero, boss));
+  onKeyPress("d", () =>   animatePurrcisionRifle(hero, boss));
+  onKeyPress("f", () =>  animateFelineFission(boss));
+  onKeyPress("c", () =>    animateCatCrossbow(hero,boss));
+
+
 
   function animateRedBoom(target) {
       shake(15);
@@ -879,7 +902,7 @@ function animateKaBAM(boss, hero) {
   const kabam = add([
     sprite("bam", { anim: "glitch" }),
     pos(boss.pos),
-    scale(5),
+    scale(5.5),
     anchor("center"),
     z(40),
     opacity(1)
@@ -1044,16 +1067,451 @@ function animateGhostPoof(target) {
   wait(1.5, () => destroy(ghost));
 }
 
-//add([
-//    text("1: Fire-Explosion | 2: Plasma-Explosion | 3: Smoke-Puff | 4: Overhead-Swirl | 5: Powerup | 6: Cat-Claw | 7: Zoomies | 8: Cucumber-Cannon | 9: Make-Biscuits | 0: Fireball-Projectile | Q: Scratch | W: Fireball-Arc | E: Cat-Arrow | R. Shock | T. Superposition-Slam | Y. Hydrogen-Hammer | P. Poison | L. Laser-Beam | M. Mouse-Missles | B. Rat-Bite | Z. Zap", {
-//      size: 25,
-//      width: 800,
-//      font: 'Basic'
-//    }),
-//    pos(20, 360),
-//    color(rgb(255, 255, 255)),
-//    z(20)
-//  ]);
+// =================== SPECIAL FINISHING MOVES ===================
+function animateMeowlotovCocktail(attacker, target) {
+    const lightPos = attacker.pos.add(vec2(30, -150));
+    const cocktailLight = add([
+        sprite("CocktailLight", { anim: "glitch" }),
+        pos(lightPos),
+        scale(4.5), 
+        z(40),
+    ]);
+    cocktailLight.play("glitch", { loop: false });
+    play("laserFinishHim");
+
+    wait(0.6, () => { 
+        destroy(cocktailLight);
+
+        const startPos = lightPos;
+        const endPos = target.pos.add(vec2(-30, -30)); 
+        const throwTime = 0.8;
+        const spin = add([
+            sprite("CocktailSpin", { anim: "glitch" }),
+            pos(startPos),
+            scale(3),
+            z(40),
+        ]);
+        spin.play("glitch", { loop: true });
+        const startY = startPos.y;
+        const endY = endPos.y;
+        const peakHeight = 150;
+        
+        tween(0, 1, throwTime, (t) => {
+            spin.pos.x = startPos.x + (endPos.x - startPos.x) * t;
+            const arcProgress = Math.sin(t * Math.PI);
+            spin.pos.y = startY + (endY - startY) * t - (peakHeight * arcProgress);
+        }, easings.easeInQuad);
+
+        wait(throwTime, () => {
+            destroy(spin);
+
+            animateKaBAM(target, attacker);
+            
+            for (let i = 0; i < 12; i++) {
+                wait(i * 0.1, () => {
+                    const burnOffset = vec2(rand(-130, 2), rand(-110, 2));
+                    const burn = add([
+                        sprite("Burn", { anim: "glitch" }),
+                        pos(endPos.add(burnOffset)),
+                        scale(3.5 + rand(-0.6, 0.6)),
+                        opacity(0.7),
+                        z(35),
+                    ]);
+                    burn.play("glitch", { loop: false });
+                    wait(1, () => destroy(burn));
+                });
+            }
+            wait(0.7, () => {animateSmoke(target); } )
+        });
+    });
+}
+
+function animateFelineFission(target) {
+    shake(30);
+    play("finalFinishHim");
+    const startPos = target.pos.sub(vec2(250, -90));
+    const mushroom = add([
+        sprite("mushroom", { anim: "burst" }),
+        pos(startPos), 
+        scale(2),
+        z(50),
+        opacity(0.8),
+    ]);
+    
+    const startScale = 3; // GROW CLOUD UP
+    const endScale = 9;
+    tween(0, 1, 1.5, (t) => {
+        const currentScale = startScale + (endScale - startScale) * t;
+        mushroom.scale = vec2(currentScale, currentScale);
+        const scaleGrowth = currentScale - startScale; // KEEP BOTTOM ANCHORED
+        mushroom.pos.y = startPos.y - (scaleGrowth * 50); //  HEIGHT MULTIPLIER
+    }, easings.easeOutQuad);
+    
+    tween(mushroom.opacity, 0.7, 0.5, (o) => mushroom.opacity = o);
+    mushroom.play("burst", { loop: false });
+
+    wait(0.4, () => {
+        shake(70); // SHAKE BUILD UP
+        const flash1 = add([ // QUICK FLASH
+            rect(width(), height()),
+            pos(0, 0),
+            color(255, 255, 255), 
+            opacity(0),
+            fixed(),
+            z(10000),
+        ]);
+        
+        tween(flash1.opacity, 1, 0.15, (val) => flash1.opacity = val, easings.easeInQuad);
+        wait(0.15, () => {
+            tween(flash1.opacity, 0, 0.2, (val) => flash1.opacity = val, easings.easeOutQuad);
+            wait(0.2, () => destroy(flash1));
+        });
+        
+        wait(1.5, () => destroy(mushroom)); // DESTROY MUSHROOM AFTER FIRST FLASH
+        wait(0.6, () => { // CINEMATIC FLASH
+            shake(100);
+            const flash2 = add([
+                rect(width(), height()),
+                pos(0, 0),
+                color(255, 255, 255), 
+                opacity(0),
+                fixed(),
+                z(10000),
+            ]);
+            tween(flash2.opacity, 1, 0.3, (val) => flash2.opacity = val, easings.easeInQuad); // LINGERING FULL WHITE SCREEN 
+            
+            wait(1.5, () => {
+                for (let i = 0; i < 12; i++) { // FILL SCREEN WITH SMOKE
+                    const xPos = (i % 4) * (width() / 3) + rand(-50, 50);
+                    const yPos = Math.floor(i / 4) * (height() / 2) + rand(-50, 50);
+                    const poof = add([ // SMOKE
+                        sprite("smoke", { anim: "puff" }),
+                        pos(xPos, yPos),
+                        scale(6 + rand(-1, 1)),
+                        opacity(0),
+                        z(9999),
+                        anchor("center"),
+                        fixed(),
+                    ]);
+                    poof.play("puff", { loop: true });
+                    
+                    wait(i * 0.03, () => { // FILL SCREEN WITH SMOKE
+                        tween(poof.opacity, 0.8, 0.3, (o) => poof.opacity = o);
+                        tween(poof.pos.y, poof.pos.y + rand(-30, 30), 2, (y) => poof.pos.y = y, easings.easeOutQuad); // DRIFT SMOKE
+                        
+                        wait(1.5, () => { // FADE OUT SMOKE
+                            shake(10);
+                            tween(poof.opacity, 0, 1.0, (o) => poof.opacity = o, easings.easeOutQuad)
+                                .then(() => destroy(poof));
+                        });
+                    });
+                }
+                wait(0.35, () => { // FADE WHITE OUT SLOWLY
+                    tween(flash2.opacity, 0, 1.2, (val) => flash2.opacity = val, easings.easeOutQuad);
+                    wait(1.2, () => destroy(flash2));
+                    
+                });
+            });
+        });
+    });
+}
+
+function animateBrassToeBeans(hero, target) {
+    const startPos = hero.pos.add(vec2(100, -100));
+    
+    // SHOW OFF THE KNUCKLES
+    const knuckles = add([
+        sprite("BrassToeBeans"),
+        pos(startPos),
+        scale(1),
+        rotate(0),
+        z(45),
+        opacity(0),
+        anchor("center"),
+    ]);
+    
+    tween(knuckles.opacity, 1, 0.2, (o) => knuckles.opacity = o);
+    play("cucumberFinishHim"); 
+
+    wait(0.2, () => {
+        tween(knuckles.scale, vec2(2, 2), 0.3, (s) => knuckles.scale = s, easings.easeOutBack);
+    });
+    
+    wait(0.7, () => {
+        const windUpPos = startPos.add(vec2(-100, 0));
+        tween(knuckles.pos, windUpPos, 0.25, (p) => knuckles.pos = p, easings.easeInQuad);
+        tween(knuckles.angle, 110, 0.25, (a) => knuckles.angle = a);
+        
+        wait(0.2, () => {
+            const punchTime = 0.1;
+            const endPos = target.pos.add(vec2(50, 0));
+            
+            tween(knuckles.pos, endPos, punchTime, (p) => knuckles.pos = p, easings.easeInCubic);
+            tween(knuckles.scale, vec2(1.8, 1.8), punchTime * 0.5, (s) => knuckles.scale = s, easings.easeInQuad);
+            
+            wait(punchTime, () => {
+                shake(70);
+                
+                for (let i = 0; i < 4; i++) {
+                    wait(i * 0.08, () => {
+                        const angle = (i * 90) + rand(-20, 20);
+                        const distance = rand(2, 2);
+                        const splatOffset = vec2(
+                            Math.cos(angle * Math.PI / 180) * distance,
+                            Math.sin(angle * Math.PI / 180) * distance
+                        );
+                        
+                        const splat = add([
+                            sprite("splat", { anim: "glitch" }),
+                            pos(target.pos.add(splatOffset)),
+                            scale(1.2 + rand(-0.2, 0.3)),
+                            rotate(rand(0, 360)),
+                            z(40),
+                            opacity(0.6),
+                        ]);
+                        splat.play("glitch", { loop: false });
+                        wait(0.5, () => destroy(splat));
+                    });
+                }
+                
+                wait(0.1, () => shake(30));
+                
+                wait(0.01, () => {
+                    const heroReturnPos = hero.pos.add(vec2(120, -20)); // Back near the hero
+                    tween(knuckles.pos, heroReturnPos, 0.25, (p) => knuckles.pos = p, easings.easeOutQuad);
+                    tween(knuckles.scale, vec2(1.5, 1.5), 0.25, (s) => knuckles.scale = s);
+                    tween(knuckles.angle, 90, 0.1, (a) => knuckles.angle = a, easings.easeInQuad);
+                    
+                    wait(0.45, () => {
+                        tween(knuckles.angle, 25, 0.1, (a) => knuckles.angle = a, easings.easeInQuad);
+                        
+                        wait(0.12, () => {
+                            tween(knuckles.angle, 115, 0.1, (a) => knuckles.angle = a, easings.easeOutQuad);
+                            
+                            wait(0.1, () => {
+                                const flickAngle = 35; 
+                                const flickSplat = add([
+                                    sprite("splat", { anim: "glitch" }),
+                                    pos(knuckles.pos),
+                                    scale(1.3),
+                                    rotate(rand(0, 360)),
+                                    z(46),
+                                    opacity(1),
+                                ]);
+                                flickSplat.play("glitch", { loop: false });
+                                
+                                const flickTarget = knuckles.pos.add(vec2(
+                                    Math.cos(flickAngle * Math.PI / 180) * 200,
+                                    Math.sin(flickAngle * Math.PI / 180) * 200
+                                ));
+                                tween(flickSplat.pos, flickTarget, 0.4, (p) => flickSplat.pos = p, easings.easeOutQuad);
+                                tween(flickSplat.opacity, 0, 0.4, (o) => flickSplat.opacity = o);
+                                wait(0.5, () => destroy(flickSplat));
+                            });
+                            
+                            wait(0.3, () => {
+                                tween(knuckles.opacity, 0, 0.3, (o) => knuckles.opacity = o);
+                                wait(0.3, () => destroy(knuckles));
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
+}
+
+function animatePurrcisionRifle(hero, target) {
+    const startPos = hero.pos.add(vec2(-90, 50));
+    const rifle = add([
+        sprite("rifle"),
+        pos(startPos),
+        scale(2.3),
+        rotate(-85), // START VERTICAL-ISH
+        z(100),
+        opacity(0),
+    ]);
+  
+    tween(rifle.opacity, 1, 0.2, (o) => rifle.opacity = o);
+        wait(0.6, () => { // PAUSE TO SHOW OFF RIFLE
+        const aimingAngle = -15; // ROTATE TO AIMING POSITION
+        const aimingPos = hero.pos.add(vec2(-110, -120));
+        
+        tween(rifle.angle, aimingAngle, 0.8, (a) => rifle.angle = a, easings.easeInOutQuad);
+        tween(rifle.pos, aimingPos, 0.8, (p) => rifle.pos = p, easings.easeInOutQuad);
+        
+        const lock = add([ // LOCK ON TARGET
+            sprite("lock2", { anim: "glitch" }),
+            pos(target.pos.add(vec2(-90, -70))),
+            scale(2),
+            opacity(0),
+            z(150),
+        ]);
+        
+        wait(0.6, () => {
+            tween(lock.opacity, 0.8, 0.2, (o) => lock.opacity = o);
+            lock.play("glitch", { loop: false, speed: 30 });
+        });
+        play("ratFinishHim"); 
+        wait(1.8, () => {
+            destroy(lock);
+            const flashPos = rifle.pos.add(vec2(340, -20)); // MUZZLE FLASH
+            const flash = add([
+                sprite("MuzzleFlash", { anim: "burst" }),
+                pos(flashPos),
+                scale(3.5),
+                rotate(-15),
+                z(150),
+            ]);
+            flash.play("burst", { loop: false, speed: 20 });
+            shake(50);
+            
+            tween(rifle.angle, -45, 0.08, (a) => rifle.angle = a, easings.easeOutQuad); // RECOIL
+            tween(rifle.pos, aimingPos.add(vec2(-50, 15)), 0.08, (p) => rifle.pos = p, easings.easeOutQuad);
+            
+            wait(0.08, () => { // RETURN TO FIRING POSITION
+                tween(rifle.angle, aimingAngle, 0.15, (a) => rifle.angle = a, easings.easeOutQuad);
+                tween(rifle.pos, aimingPos, 0.15, (p) => rifle.pos = p, easings.easeOutQuad);
+            });
+            
+            wait(0.07, () => {
+              animateKaBAM(boss, hero)
+
+                wait(0.5, () => {
+                    destroy(flash);
+  
+                    
+                    wait(0.2, () => {
+                        tween(rifle.opacity, 0, 0.3, (o) => rifle.opacity = o);
+                        wait(0.3, () => destroy(rifle));
+                    });
+                });
+            });
+        });
+    });
+}
+
+function animateCatCrossbow(attacker, target) {
+    const crossbow = add([
+      sprite("CrossBow"), 
+      pos(attacker.pos.add(130, 20)),
+      scale(1.3),
+      anchor("center"),
+      z(25),
+      rotate(-35),
+      opacity(0),
+    ]);
+    crossbow.frame = 0;
+    tween(crossbow.opacity, 1, 0.25, (o) => crossbow.opacity = o);
+    wait(0.8, () => {
+      play("cupFinishHim"); 
+
+      const dirToTarget = target.pos.sub(attacker.pos).unit();
+      
+      const spriteWidth = crossbow.width * crossbow.scale.x; // CALCULATE OFFSET TO KEEP HANDLE IN SAME SPOT
+      const spriteHeight = crossbow.height * crossbow.scale.y; // HANDLE MOVES FROM TOP-LEFT TO BOTTOM-LEFT
+      
+      const handleOffset = vec2(20, spriteHeight * -0.3); // THIS ADJUSTS VERTICALLY // OFFEST TO COMPENSATE FOR HANDLE PLACEMENT ON SPRITE SHEET
+            crossbow.frame = 1; // FRAME 2 - TILT UP TO AIM
+      crossbow.pos = crossbow.pos.add(handleOffset);
+      crossbow.angle = dirToTarget.angle()+10;
+
+      const lock = add([ // LOCK ON TARGET
+        sprite("lock", { anim: "glitch" }),
+        pos(target.pos),
+        scale(2),
+        anchor("center"),
+        z(20),
+        opacity(0),
+      ]);
+
+      tween(lock.opacity, 1, 0.3, (o) => lock.opacity = o);
+
+      let t = 0;
+      lock.onUpdate(() => {
+        t += dt();
+        lock.pos = target.pos.add(Math.sin(t * 20) * 6, Math.cos(t * 10) * 8);
+      });
+
+      wait(1, () => {
+        const arrow = add([ // SPAWN ARROW ON THE BOW
+          sprite("arrow"),         
+          pos(attacker.pos.add(dirToTarget.scale(20))), // SLIGHTLY IN FRONT
+          scale(1.1),
+          anchor("center"),
+          rotate(dirToTarget.angle()),
+          z(30),
+        ]);
+
+
+        tween( // COCK IT BACK
+          arrow.pos,
+          attacker.pos.add(dirToTarget.scale(-15)), // PULL BACK
+          0.3,
+          (p) => arrow.pos = p,
+          easings.easeOutQuad
+        ).then(() => {
+          crossbow.scale = vec2(1.2, 1.3); // SLIGHT TENSION SQUISH
+          
+          let vibe = 0; // VIBRATION - HOLDING THAT TENSION
+          const vibeHandle = arrow.onUpdate(() => {
+            vibe += dt();
+            arrow.pos = arrow.pos.add(Math.sin(vibe * 50) * 2, Math.sin(vibe * 30) * 1);
+            arrow.scale = vec2(1.3, 1.4); // SLIGHT TENSION SQUISH
+
+          });
+
+          wait(1.0, () => {
+            vibeHandle.cancel();
+            destroy(lock);
+            
+            tween(arrow.scale, vec2(0.3, 0.8), 0.08, (s) => arrow.scale = s)  // WIND UP SQUISH
+              .then(() => {
+                shake(20);
+                
+                tween(arrow.scale, vec2(1.5), 0.08, (s) => arrow.scale = s); // FIRE!!!
+                
+                const recoilDir = dirToTarget.scale(-5);  // CROSSBOW RECOIL
+                const originalPos = crossbow.pos;
+                tween(
+                  crossbow.pos,
+                  originalPos.add(recoilDir.scale(20)),
+                  0.1,
+                  (p) => crossbow.pos = p,
+                  easings.easeOutQuad
+                ).then(() => {
+                  tween(crossbow.pos, originalPos, 0.2, (p) => crossbow.pos = p, easings.easeInOutQuad);
+                });
+                
+                crossbow.scale = vec2(2, 2); // RECOIL STRETCH
+
+                tween( // ARROW FLIES
+                  arrow.pos,
+                  target.pos,
+                  0.15,
+                  (p) => arrow.pos = p,
+                  easings.easeInCubic
+                ).then(() => {
+                  tween(arrow.pos, target.pos.add(dirToTarget.scale(15)), 0.06, (p) => arrow.pos = p, easings.easeOutCubic)
+                    .then(() => {
+                      arrow.pos = target.pos;
+                      animateKaBAM(target);
+                      animateSmoke(target);
+                      shake(70);
+
+                      destroy(arrow);
+                      
+                      tween(crossbow.opacity, 0, 0.5, (o) => crossbow.opacity = o) // FADE OUT CROSSBOW
+                        .then(() => destroy(crossbow));
+                    });
+                });
+              });
+          });
+        });
+      });
+    });
+  }
+
 
   // =========================== CUSTOM SPRITE TESTER  =========================== 
   let customSpriteName = "userSprite"; 
