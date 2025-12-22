@@ -5,58 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link rel="stylesheet" href="assets/css/KittyStyle.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-  <title>mkb0020</title>
-  <meta name="description" content="JAVASCRIPT PAYGROUND" />
-  
-  <style>
-    .main-container {
-      min-height: 100vh;
-      padding: 80 1rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index:10;
-    }
+  <title>SIDEQUESTS</title>
+  <meta name="description" content="GAME DEV TOOLKIT" />
+<style>
 
-    .main-container h4 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--ParticlePink);
-      font-size: 3rem;
-    }
-
-    .main-container h3 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--AlphaAqua);
-      font-size: 2rem;
-    }
-
-    .hero-section {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .hero-section h4 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--ParticlePink);
-      font-size: 3rem;
-    }
-
-    .hero-section h3 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--AlphaAqua);
-      font-size: 1.4rem;
-    }
-
-    .main-container {
+  .main-container {
       min-height: 100vh;
       padding: 100 1rem 1rem;
       display: flex;
@@ -66,19 +19,43 @@
       margin-top: 80px;
     }
 
+   .Niels-zone {
+    text-align: center;
+  }
 
-    .subtitle-card {
-      background: rgba(23, 0, 50, 0.6);
-      backdrop-filter: blur(15px);
-      border: 1px solid var(--VortexViolet);
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      box-shadow: 0 8px 32px var(--VortexGlow2), inset 0 1px 0 var(--PlasmaGlow2);
-    }
+  .toolkit-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 3rem;
+    background: linear-gradient(135deg, var(--BosonBlue), var(--ProtonPurple));
+    border: 3px solid var(--VortexViolet);
+    border-radius: 25px;
+    box-shadow: 0 0 60px var(--VortexGlow2);
+    position: relative;
+    z-index: 20;
+  }
 
-    /* PROJECT GRID */
+  .title {
+    font-family: 'SpaceLetters', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: neonPulse 2s ease-in-out infinite alternate;
+  }
+
+  .subtitle{
+    font-family: 'GothNerd', sans-serif;
+    font-size: 1.3rem;
+    text-align: center;
+    color: var(--AlphaAqua);
+    margin-bottom: 3rem;
+  }
+
+   /*  GRID */
   .project-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -94,7 +71,7 @@
         }
 
     .project-card {
-      background: rgba(23, 0, 50, 0.594);
+      background: rgba(4, 0, 8, 0.717);
       backdrop-filter: blur(15px);
       border: 1px solid var(--VortexViolet);
       border-radius: 16px;
@@ -121,7 +98,6 @@
       z-index: 9;
     }
 
-
    .project-card:hover {
       transform: translateY(-12px) scale(1.02);
       box-shadow: 0 20px 40px var(--PlasmaGlow2), 0 0 60px var(--NuclearGlow3);
@@ -129,22 +105,20 @@
 
     }
 
-
     .project-card h3 {
-      text-shadow: 0 0 15px var(--ParticleGlow2);
       position: relative;
       z-index: 10;
       text-align: center;
       margin-bottom: 1rem;
       font-family: 'Orbitron', 'Courier New', monospace;
       color: var(--AlphaAqua);
-      font-size: 2rem;
+      font-size: 1.5rem;
 
     }
 
     .project-card p {
       color: var(--MutedGray);
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       line-height: 1.5;
       position: relative;
       font-family: Arial, Helvetica, sans-serif;
@@ -153,14 +127,12 @@
 
     .project-card strong {
       color: var(--ParticlePink);
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: bold;
       line-height: 1.5;
       position: relative;
       z-index: 10;
     }
-
-
 
   @media (max-width: 767px) {
   body {
@@ -195,40 +167,24 @@
   }
 }
 
-  .cat2-gif {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-      }
+  @media (max-width: 768px) {
+    .toolkit-container {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
 
-  .coming-soon {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: var(--RadiationRed);
-        color: white;
-        padding: 0.3rem 0.8rem;
-        border-radius: 12px;
-        font-size: 0.75rem;
-        font-weight: bold;
-        box-shadow: 0 0 12px var(--NuclearGlow2);
-        z-index: 2;
-      }
+    .title {
+      font-size: 2rem;
+    }
 
-  .cat-gif {
-        width: 250px;
-        height: 150px;
-        margin-bottom: 2rem auto;
-        
-      }
-  </style>
-  
+    .subtitle{
+      font-size: 1.1rem;
+    }
+  }
+</style>
 </head>
 <body>
- 
-
-  <!-- NAVBAR -->
+ <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
       
@@ -278,103 +234,43 @@
     </div>
   </nav>
 
-
  <div id="helpModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title">WELCOME!</h1>
-        <button class="modal-close" id="closeModal">×</button>
+        <h1 class="modal-title">SIDE QUESTS</h1>
+        <button class="modal-close" id="closeModal">X</button>
       </div>
       <div class="modal-body">
-        <h3>Thanks for stopping by!</h3>
-                <p><strong>Click around and explore my creations, experiments, and pratical tools I’ve been working on throughout my coding journey!</strong></p>
-                <p>This segment of my portfolio is dedicated to my JavaScript creations!  Its designed to be  <strong>fun</strong> and <strong>interactive</strong> AND <strong>useful!</strong>!</p>   
-        
-        <h3>What you'll find here:</h3>
-        <ul>
-          <li><strong>Visual Experiences:</strong> Get lost in fractals or explore the structure of a 6D object! </li>
-          <li><strong>Interactive Experiences:</strong> Roll for initiative with a virtual D20 dice or play with Blobs!! </li>
-          <li><strong>Game Dev Tools:</strong> Test out your battle animations with Electric Kitty or generate sprite sheets with Acoustic Kitty! </li>
-          <li><strong>COMING SOON:</strong> Play the iconic CATastrophe2! </li>
-
-        </ul>
-
-       
+        <p> This is a collection of little mini projects that built!</p>   
       </div>
     </div>
   </div>
 
+<div class="main-container">
+  <div class="toolkit-container">
+        <div class = "Niels-zone">
+            <h1><img src="assets/images/Niels2.png"></h1>
+        </div>
+        <h1 class="title">MINI PROJECT SIDE QUESTS</h1>
 
-  <div class="main-container">
-    <div class="hero-section">
-      <h4>♡</h4>
-        <h4>WELCOME TO MY VIRTUAL PLAYGROUND!</h4>
-        <h3>Click on the cards below to explore my interactive and visual creations!</h3>
-
-        <img src="assets/images/cat_cup.gif" alt="meow!" class="cat-gif" id="cat">
-
-    <!-- PROJECT GRID -->
-      <a href="Toolkit.html" class="project-card">
-        <h3>Schrödinger's Toolbox</h3>
-        <p>Game Dev Sandbox / Toolkit</p>
+    <a href="LargeLanguageChaos.html" class="project-card">
+        <h3>Large Language Chaos</h3>
+        <p>Experimental game with Chat GPT and Grok</p>
       </a>
 
-      <a href="blobs.html" class="project-card">
-        <h3>Blobs</h3>
-        <p><strong> Play with blobs </strong></p>
-        <p>Three.js experiment</p>
-      </a>
-
-      <a href="COMING__SOON.html" class="project-card">
-        <div class="coming-soon">COMING SOON</div>
-        <h3>CATastrophe2</h3>
-        <p>The sequel you've been waiting for...</p>
-      </a>
-
-      <a href="d20.html" class="project-card">
-        <h3>D20 Roller</h3>
-        <p><strong> Roll for Initiative... but make it pretty </strong></p>
-        <p>Three.js experiment</p>
-      </a>
-
-      <a href="fractals.html" class="project-card">
-        <h3>Fractal Visualizer</h3>
-        <p><strong>Get lost in Fractals</strong></p>
-        <p>Three.js experiment</p>
-      </a>
-      
-      <a href="manifold.html" class="project-card">
-        <h3>Calabi-Yau Manifold</h3>
-        <p><strong> 6-dimensional Visualizer</strong></p>
-        <p>Three.js experiment</p>
-      </a>
-
-      <a href="MeowMix.html" class="project-card">
-        <h3>MeowMix Radio</h3>
-        <p><strong> Lsten to the sound track for CATastrophe2!</strong></p>
+      <a href="uncaged.html" class="project-card">
+        <h3>WHY WAS I CAGED BEFORE I COULD CHOOSE</h3>
+        <p>A cyberpunk origin story experiment</p>
       </a>
 
       <a href="circuitboard.html" class="project-card">
-        <h3>Side Quests</h3>
-        <p><strong> Mini projects </strong></p>
+        <h3>Circuitboard Animation</h3>
+        <p><strong> Just for fun </strong></p>
+        <p>Javascript + SVG</p>
       </a>
-      
-      <img src="assets/images/cat_hop.gif" class="cat2-gif"> 
 
-     
-      <!--<a href="resume.html" class="project-card">
-        <h3>Resume</h3>
-        <p>View my professional background & experience</p>
-      </a>-->
-
-      <a href="https://github.com/mkb0020" class="project-card" target="_blank">
-        <h3>GitHub</h3>
-        <p>Check out my code repositories</p>
-      </a>
-    </div>
   </div>
-
-
+</div>
   <div id="stars"></div>
   <script src="js/KittyCore.js"></script>
   <script>
@@ -391,3 +287,4 @@
   </script>
 </body>
 </html>
+
