@@ -2,16 +2,16 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const groundY = 350;
+const groundY = 340;
 let platforms = [];
 
 let player = {
   x: 50,
-  y: groundY - 32,
+  y: groundY - 108,  
   vx: 0,
   vy: 0,
-  w: 32,
-  h: 32,
+  w: 150,  
+  h: 108, 
   onGround: false
 };
 
@@ -103,8 +103,8 @@ async function loadPlatformsFromInput() {
   }));
 
 // ============================================= PLAYER =============================================
-  player.w = Math.max(16, Math.min(96, Number(spriteWInput.value) || 32));
-  player.h = Math.max(16, Math.min(96, Number(spriteHInput.value) || 32));
+  player.w = Math.max(1, Math.min(200, Number(spriteWInput.value) || 150));
+  player.h = Math.max(1, Math.min(200, Number(spriteHInput.value) || 108));
   player.y = groundY - player.h; 
 
   resetPlayerPosition();
@@ -121,10 +121,10 @@ resetBtn.onclick = () => {
 // ============================================= PHYSICS & COLLISION =============================================
 function getConfig() {
   return {
-    gravity:   Math.max(0.1, Number(gravityInput.value) || 1.2),
-    jumpForce: Math.max(1,   Number(jumpForceInput.value) || 18),
-    speed:     Math.max(1,   Number(speedInput.value) || 6),
-    levelLength: Math.max(800, Number(levelLengthInput.value) || 3000)
+    gravity:   Math.max(0.1, Number(gravityInput.value) || 1600),
+    jumpForce: Math.max(1,   Number(jumpForceInput.value) || 780),
+    speed:     Math.max(1,   Number(speedInput.value) || 250),
+    levelLength: Math.max(800, Number(levelLengthInput.value) || 10000)
   };
 }
 
@@ -139,6 +139,7 @@ function collide(a, b) {
 
 function update() {
   const cfg = getConfig();
+  const dt = 1/60;
 
   player.vx = 0;
   if (keys.a || keys.A || keys.ArrowLeft)  player.vx = -cfg.speed;
@@ -149,20 +150,18 @@ function update() {
     player.onGround = false;
   }
 
-  player.vy += cfg.gravity;
-  player.x += player.vx;
-  player.y += player.vy;
+  player.vy += cfg.gravity * dt;
+  player.x += player.vx * dt;
+  player.y += player.vy * dt;
 
   player.onGround = false;
 
-  // Ground collision
   if (player.y + player.h >= groundY) {
     player.y = groundY - player.h;
     player.vy = 0;
     player.onGround = true;
   }
 
-  // Platform collision (only from above)
   for (let p of platforms) {
     if (collide(player, p) && player.vy > 0 && 
         player.y + player.h - player.vy <= p.y) {
@@ -172,7 +171,6 @@ function update() {
     }
   }
 
-  // Camera follow (smooth)
   const targetCameraX = player.x - canvas.width / 3;
   camera.x += (targetCameraX - camera.x) * 0.1;
   camera.x = Math.max(0, camera.x);
@@ -193,13 +191,11 @@ function draw() {
   ctx.lineTo(camera.x + canvas.width * 2, groundY);
   ctx.stroke();
 
-  // Platforms
   platforms.forEach(p => {
     ctx.fillStyle = "#dc4ce8";
     ctx.fillRect(p.x, p.y, p.w, p.h);
   });
 
-  // Player
 if (playerSprite.complete) {
     ctx.drawImage(
       playerSprite,
