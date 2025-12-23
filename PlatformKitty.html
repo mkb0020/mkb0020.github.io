@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>PLATFORMER PHYSICS TESTER</title>
+  <meta name="description" content="Test your platformer physics with custom levels" />
+  
+  <link rel="stylesheet" href="assets/css/KittyStyle.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1400px;
+      padding: 20px;
+      margin: auto;
+      z-index: 10;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--ParticlePink);
+      margin-top: 0rem;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 30px rgba(255,199,255,0.8);
+    }
+
+    .inputs-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .input-column {
+      background: rgba(21, 21, 28, 0.95);
+      padding: 20px;
+      border: 3px solid transparent;
+      border-image: linear-gradient(45deg, var(--AquaAura), var(--NuclearFuscia)) 1;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 10px 40px var(--VortexGlow3);
+      flex: 1;
+    }
+
+    .input-column h2 {
+      font-size: 1.1rem;
+      color: var(--ParticlePink);
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .control-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--AlphaAqua);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    input[type="number"],
+    input[type="file"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      background: rgba(14, 14, 17, 0.9);
+      color: #fff;
+      border: 2px solid rgba(144, 144, 192, 0.527);
+      border-radius: 5px;
+      font-family: 'GothNerd', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    input[type="number"]:focus,
+    input[type="file"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--NuclearFuscia);
+      box-shadow: 0 0 15px var(--PlasmaGlow2);
+    }
+
+    textarea {
+      height: 300px; 
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: linear-gradient(45deg, var(--VortexViolet), var(--NuclearFuscia));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, var(--NuclearFuscia), var(--AlphaAqua));
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px var(--PlasmaGlow3);
+    }
+
+    .canvas-container {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    canvas {
+      background: #000;
+      border: 3px solid transparent;
+      border-image: linear-gradient(45deg, var(--AquaAura), var(--NuclearFuscia)) 1;
+      border-radius: 10px;
+      box-shadow: 0 10px 60px var(--PlasmaGlow3);
+      cursor: crosshair;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 2 / 1;
+    }
+
+@media (max-width: 768px) {
+  .canvas-container {
+    max-width: 100%;
+  }
+}
+
+    .hint {
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 15px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .inputs-section { flex-direction: column; }
+      .input-column { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="stars"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="left-dropdown">
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+        <div class="left-menu">
+          <a href="https://mkb0020.onrender.com" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
+          <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
+          <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>
+          <a href="https://mkb0020.onrender.com/review" class="menu-item">Review CATastrophe 2</a>
+          <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
+          <a href="https://mkb0020.onrender.com/admin_login" class="menu-item">Admin</a>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://mkb0020.github.io">
+        <div class="logo">♡ mkb0020</div>
+      </a>
+
+      <div class="help-dropdown">
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">About</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HELP MODAL -->
+  <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">PLATFORMER PHYSICS TESTER</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+        <p><strong style="color:#00FFFF">Use this tool to test your custom platformer levels with real physics simulation.</strong></p>
+        <ul>
+          <li>Enter your game's <strong>gravity</strong>, <strong>jump force</strong>, and <strong>move speed</strong>.</li>
+          <li>Set character size (width & height).</li>
+          <li>Upload or paste a JSON file with your platform layout.</li>
+          <li>Use <strong>A/D</strong> or <strong>←/→</strong> to move, <strong>Space/W/↑</strong> to jump, <strong>R</strong> to reset position.</li>
+        </ul>
+        <p><strong style="color:#00FFFF">Expected JSON format:</strong></p>
+        <pre style="background:rgba(0,0,0,0.4); padding:10px; border-radius:6px;">
+{
+  "platforms": [
+    { "x": 200, "y": 300, "w": 120, "h": 16 },
+    { "x": 450, "y": 240, "w": 100, "h": 16 },
+    ...
+  ]
+}</pre>
+
+ <h3>What Do These Numbers Mean?</h3>
+
+            <p><strong style="color:#00FFFF">Gravity</strong> (e.g., 1.2)</p>
+            <p>How fast your character accelerates downward. Higher = falls faster, feels "heavier." This is measured in pixels per frame squared.</p>
+            <ul>
+              <li><strong>Default: 1.2</strong> (floaty, light feel)</li>
+              <li><strong>Try: 0.6</strong> (super floaty, moon-like)</li>
+              <li><strong>Try: 2.0</strong> (heavy, snappy)</li>
+            </ul>
+
+            <p><strong style="color:#00FFFF">Jump Force</strong> (e.g., 18)</p>
+            <p>The initial upward velocity when your character jumps. Higher = jumps higher and stays in the air longer. (For all my physics people out there - yes, I know that Force is not the same thing as velocity - "Jump Force" is a standard convention in the Game Dev universe so I'm playing by their rules.)</p>
+            <p>⚠️ <strong style="color:#00FFFF">Use POSITIVE numbers!</strong> Geometry Kitty handles the direction for you.</p>
+            <ul>
+              <li><strong>Default: 18</strong> (moderate jump)</li>
+              <li><strong>Try: 25</strong> (high jumper)</li>
+              <li><strong>Try: 12</strong> (short hops)</li>
+            </ul>
+
+            <p><strong style="color:#00FFFF">Move Speed</strong> (e.g., 6)</p>
+            <p>How fast your character moves left and right (pixels per frame).</p>
+            <ul>
+              <li><strong>Default: 6</strong> (standard platformer speed)</li>
+              <li><strong>Try: 10</strong> (zippy, fast-paced)</li>
+              <li><strong>Try: 3</strong> (slow, precise)</li>
+            </ul>
+
+            <h3>Behind The Scenes 🔬</h3>
+
+            <p>When you hit "Generate Level," Geometry Kitty does some physics math to figure out what your character can actually do:</p>
+
+            <p><strong style="color:#00FFFF">Max Jump Height</strong> = (Jump Force²) ÷ (2 × Gravity)<br>
+            <em>How high can your character reach at the peak of their jump?</em></p>
+
+            <p><strong style="color:#00FFFF">Air Time</strong> = (Jump Force ÷ Gravity) × 2<br>
+            <em>How long are they airborne during a full jump?</em></p>
+
+            <p><strong style="color:#00FFFF">Max Jump Distance</strong> = Move Speed × Air Time<br>
+            <em>How far can they travel horizontally while jumping?</em></p>
+
+            <p>Then it uses these calculations and places platforms in the locations specified by your json so you can test out how your platforms will feel in your game!</p>
+<h3>Coordinate System Note 📐</h3>
+
+            <p>In most game engines, <strong style="color:#00FFFF">Y = 0 is at the TOP</strong> of the screen, and Y increases as you go DOWN. That's why jumps are "negative" velocity in the code—you're moving to smaller Y values!</p>
+
+            <p>Geometry Kitty handles this automatically, so just use positive numbers and let the tool do its magic.</p>
+
+            <h3>Translating From Your Game 🎮</h3>
+
+            <p>If you're pulling physics from your own game code, look for these values:</p>
+
+            <ul>
+              <li><strong>Global gravity setting</strong> (e.g., <code>setGravity(1600)</code>)</li>
+              <li><strong>Jump force/power</strong> after any multipliers (e.g., <code>12 × 65 = 780</code>)</li>
+              <li><strong>Movement speed</strong> after multipliers (e.g., <code>5 × 50 = 250</code>)</li>
+            </ul>
+
+            <p>Geometry Kitty works with the <strong>final calculated values</strong>, not the raw character stats. If your game uses big numbers (like 1600 for gravity), you might want to scale them down proportionally to see them work in this tool!</p>
+
+            <h3>Tips for Tweaking 💡</h3>
+
+            <ul>
+              <li><strong>Floaty feel?</strong> Lower gravity, increase jump force</li>
+              <li><strong>Too fast-paced?</strong> Reduce move speed</li>
+            </ul>
+
+            <p>Experiment! The real-time simulation lets you test your physics instantly. Use <strong>A/D</strong> or <strong>Arrow Keys</strong> to move, <strong>Space/W/↑</strong> to jump, and <strong>R</strong> to regenerate.</p>
+            <p><strong style="color:#00FFFF"><em>Remember: These aren't "right" or "wrong" numbers—they're all about the feel you want for YOUR game!</em></strong></p>
+
+          </div>
+    </div>
+  </div>
+
+<button class="floating-back-to-top" id="floatingBackToTop">↑</button>
+
+
+  <div class="container">
+    <h1>PLATFORMER PHYSICS TESTER</h1>
+
+    <div class="inputs-section">
+      <div class="input-column">
+        <h2>Physics</h2>
+        <div class="control-group">
+          <label for="gravity">Gravity (px/frame²)</label>
+          <input id="gravity" type="number" value="1.2" step="0.1" min="0.1">
+        </div>
+        <div class="control-group">
+          <label for="jumpForce">Jump Force</label>
+          <input id="jumpForce" type="number" value="18" step="1" min="1">
+        </div>
+        <div class="control-group">
+          <label for="speed">Move Speed (px/frame)</label>
+          <input id="speed" type="number" value="6" step="1" min="1">
+        </div>
+
+        <h2>Character</h2>
+        <div class="control-group">
+          <label for="spriteW">Width (min: 16 / max: 96)</label>
+          <input id="spriteW" type="number" value="32" min="16" max="96" step="1">
+        </div>
+        <div class="control-group">
+          <label for="spriteH">Height (min: 16 / max: 96)</label>
+          <input id="spriteH" type="number" value="32" min="16" max="96" step="1">
+        </div>
+
+        <h2>Level Length (px)</h2>
+        <div class="control-group">
+          <input id="levelLength" type="number" value="3000" min="800" step="100">
+        </div>
+      </div>
+
+      <div class="input-column">
+
+
+        <h2>Platforms</h2>
+        <div class="control-group">
+          <label>Upload JSON</label>
+          <input type="file" id="jsonFile" accept=".json,.txt">
+        </div>
+        <div class="control-group">
+          <label>Or paste JSON</label>
+          <textarea id="jsonInput" placeholder='EXAMPLE (creates two platforms): {"platforms": [{ "x": 200, "y": 300, "w": 120, "h": 16  }, { "x": 450, "y": 240, "w": 100, "h": 16 }]}'></textarea>
+        </div>
+
+        <button id="loadLevel">Load & Test Level</button>
+        <button id="resetPlayer">Reset Player</button>
+      </div>
+    </div>
+
+    <div class="canvas-container">
+      <canvas id="canvas" width="800" height="400"></canvas>
+      <div class="hint">
+        🎮 <strong>Controls:</strong><br>
+        A/D or ← → to move · Space/W/↑ to jump · R to reset position
+      </div>
+    </div>
+  </div>
+
+
+  <script src="js/KittyCore.js"></script>
+  <script src="js/PlatformKitty.js"></script>
+
+</body>
+</html>
