@@ -1,4 +1,9 @@
-<!doctype html>
+
+
+
+
+
+  <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -98,14 +103,32 @@
     }
 
     .playlist li:hover {
-      background: rgba(131,12,222,0.25);
-      box-shadow: 0 0 20px var(--VortexViolet);
+      background: rgba(131,12,222,0.35);
+      box-shadow: 0 0 25px var(--NuclearGlow3);
       padding-left: 26px;
+    }
+
+    .playlist .section-header {
+      background: linear-gradient(45deg, var(--VortexViolet), var(--NuclearFuscia));
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 14px;
+      margin: 25px 0 15px;
+      border-radius: 12px;
+      pointer-events: none;
+      box-shadow: 0 0 20px var(--VortexGlow2);
+      border: none;
     }
   </style>
 </head>
 
 <body>
+
+  <!-- STARS -->
+  <div id="stars"></div>
+
   <nav class="navbar">
     <div class="nav-container">
       <div class="left-dropdown">
@@ -121,18 +144,6 @@
           <a href="https://mkb0020.onrender.com/review" class="menu-item">Review CATastrophe 2</a>
           <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
           <a href="https://mkb0020.onrender.com/admin_login" class="menu-item">Admin</a>
-
-          <!--<div class="social-links">
-            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
-              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
-            </a>
-            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
-              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
-            </a>
-            <a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
-              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
-            </a>
-          </div>-->
         </div>
       </div>
 
@@ -149,8 +160,8 @@
 
   <!-- MUSIC PLAYER -->
   <div class="player-container">
-    <h1><img src="/assets/images/DJNiels.png"></h1>
-    <h1> Now Playing:</h1>
+    <h1><img src="/assets/images/DJNiels.png" alt="DJ Niels"></h1>
+    <h1>Now Playing:</h1>
     <div class="now-playing" id="trackTitle">Select a track</div>
 
     <audio id="audio"></audio>
@@ -174,104 +185,116 @@
   <div id="helpModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title">Welcome to MeoMix Radio</h1>
+        <h1 class="modal-title">Welcome to MeowMix Radio</h1>
         <button class="modal-close" id="closeHelp">×</button>
       </div>
       <div class="modal-body">
-        <p>Please enjoy the soundtrack for my up-and-comng game you've all been waiting for, CATastrophe2!</p>
-        <p> I've also imcluded some bonus original, experimental songs by me.</p>
+        <p>Enjoy the soundtrack for my upcoming game, <strong>CATastrophe2</strong>!</p>
+        <p>Plus some bonus original, experimental songs by me.</p>
         <ul>
           <li>Select a track from the playlist</li>
           <li>Use Play/Pause and the seek bar</li>
           <li>Adjust volume freely</li>
         </ul>
-        <p> 🎵 Music composed by MK using Garage Band</p>
-
+        <p>🎵 Music composed by MK using GarageBand</p>
       </div>
     </div>
   </div>
 
-  <!-- STARS -->
-  <div id="stars"></div>
-  <script src="js/KittyCore.js"></script>
+
 
   <script>
-    const tracks = [
-      { title: 'LO-FI SONG TO DEBUG YOUR BRAIN', src: 'assets/sounds/DebuggingMyBrain.mp3' },
-      { title: 'LOOKING AT MY CONSOLES DEBUG LOGS', src: 'assets/sounds/ConsoleLog.mp3' },
-      { title: 'LOBOTOMY LULLABY', src: 'assets/sounds/LobotomyLullaby.mp3' },
-      { title: 'PLATFORMER TRACK 1', src: 'assets/sounds/PlatformerTrack1.mp3' },
-      { title: 'PLATFORMER TRACK 2', src: 'assets/sounds/PlatformerTrack2.mp3' },
-      { title: 'PLATFORMER TRACK 3', src: 'assets/sounds/PlatformerTrack3.mp3' },
-      { title: 'PLATFORMER TRACK 4', src: 'assets/sounds/PlatformerTrack4.mp3' },
-      { title: 'PLATFORMER TRACK 5', src: 'assets/sounds/PlatformerTrack5.mp3' },
-      { title: 'CAT NAP (CLOSING SCENE)', src: 'assets/sounds/FinalVictory.mp3' },
-      //{ title: 'CATNIP POWER UP LOOP', src: 'assets/sounds/CatnipTrack.mp3' },
-      { title: 'BOSS BATTLE', src: 'assets/sounds/BossTrack.mp3' },
-      { title: 'FINAL BOSS BATTLE', src: 'assets/sounds/FnalBossTrack.mp3' },
-      { title: 'GAME OVER', src: 'assets/sounds/GameOverTrack.mp3' },
-      { title: 'MAIN MENU', src: 'assets/sounds/MenuTrack.mp3' },
-      { title: 'PIXEL CATS ON PARADE (BONUS SONG)', src: 'assets/sounds/PixelCatsOnParade.mp3' },
-      { title: 'NIELS THEME (BONUS SONG)', src: 'assets/sounds/NielsTheme.mp3' },
-      { title: 'PSYCHIC DRIVING (BONUS SONG)', src: 'assets/sounds/PsychicDriving.mp3' },
+  const tracks = [
+  { title: 'ORIGINAL EXPERIMENTAL TRACKS BY MK', isHeader: true },
+  { title: 'LO-FI SONG TO DEBUG YOUR BRAIN', src: 'assets/sounds/DebuggingMyBrain.mp3', section: 'other' },
+  { title: 'LOBOTOMY LULLABY', src: 'assets/sounds/LobotomyLullaby.mp3', section: 'other' },
+  { title: 'LOOKING AT MY CONSOLES DEBUG LOGS', src: 'assets/sounds/ConsoleLog.mp3', section: 'other' },
+  { title: 'NIELS THEME', src: 'assets/sounds/NielsTheme.mp3', section: 'other' },
+  { title: 'PSYCHIC DRIVING', src: 'assets/sounds/PsychicDriving.mp3', section: 'other' },
 
+  { title: 'CATastrophe2 Soundtrack', isHeader: true },
+  { title: 'MAIN MENU', src: 'assets/sounds/MenuTrack.mp3', section: 'soundtrack' },
+  { title: 'PIXEL CATS ON PARADE (original menu song)', src: 'assets/sounds/PixelCatsOnParade.mp3', section: 'soundtrack' },
+  { title: 'PLATFORMER TRACK 1', src: 'assets/sounds/PlatformerTrack1.mp3', section: 'soundtrack' },
+  { title: 'PLATFORMER TRACK 2', src: 'assets/sounds/PlatformerTrack2.mp3', section: 'soundtrack' },
+  { title: 'PLATFORMER TRACK 3', src: 'assets/sounds/PlatformerTrack3.mp3', section: 'soundtrack' },
+  { title: 'PLATFORMER TRACK 4', src: 'assets/sounds/PlatformerTrack4.mp3', section: 'soundtrack' },
+  { title: 'PLATFORMER TRACK 5', src: 'assets/sounds/PlatformerTrack5.mp3', section: 'soundtrack' },
+  { title: 'CAT NAP (CLOSING SCENE)', src: 'assets/sounds/FinalVictory.mp3', section: 'soundtrack' },
+  { title: 'BOSS BATTLE', src: 'assets/sounds/BossTrack.mp3', section: 'soundtrack' },
+  { title: 'FINAL BOSS BATTLE', src: 'assets/sounds/FnalBossTrack.mp3', section: 'soundtrack' },
+  { title: 'GAME OVER', src: 'assets/sounds/GameOverTrack.mp3', section: 'soundtrack' },
+  ];
 
-    ];
+  const audio = document.getElementById('audio');
+  const playlist = document.getElementById('playlist');
+  const title = document.getElementById('trackTitle');
+  const seek = document.getElementById('seek');
+  const volume = document.getElementById('volume');
 
-    const audio = document.getElementById('audio');
-    const playlist = document.getElementById('playlist');
-    const title = document.getElementById('trackTitle');
-    const seek = document.getElementById('seek');
-    const volume = document.getElementById('volume');
+  let currentTrackIndex = -1;
 
-    tracks.forEach((t, i) => {
-      const li = document.createElement('li');
+  tracks.forEach((t, i) => {
+    const li = document.createElement('li');
+
+    if (t.isHeader) {
+      li.className = 'section-header';
       li.textContent = t.title;
-      li.onclick = () => loadTrack(i);
-      playlist.appendChild(li);
-    });
-
-    function loadTrack(i) {
-      audio.src = tracks[i].src;
-      title.textContent = tracks[i].title;
-      audio.play();
+    } else {
+      li.textContent = t.title;
+      li.onclick = () => {
+        currentTrackIndex = i;
+        loadTrack(i);
+      };
     }
 
-    function togglePlay() {
+    playlist.appendChild(li);
+  });
+
+  function loadTrack(i) {
+    if (tracks[i].isHeader) return;
+
+    audio.src = tracks[i].src;
+    title.textContent = tracks[i].title;
+    audio.play();
+  }
+
+  function togglePlay() {
+    if (audio.src) {
       audio.paused ? audio.play() : audio.pause();
     }
+  }
 
-    audio.addEventListener('timeupdate', () => {
-      seek.max = audio.duration || 0;
-      seek.value = audio.currentTime;
-      current.textContent = format(audio.currentTime);
-      duration.textContent = format(audio.duration);
-    });
+  audio.addEventListener('timeupdate', () => {
+    seek.max = audio.duration || 0;
+    seek.value = audio.currentTime;
+    document.getElementById('current').textContent = format(audio.currentTime);
+    document.getElementById('duration').textContent = format(audio.duration);
+  });
 
-    seek.addEventListener('input', () => audio.currentTime = seek.value);
-    volume.addEventListener('input', () => audio.volume = volume.value);
+  seek.addEventListener('input', () => audio.currentTime = seek.value);
+  volume.addEventListener('input', () => audio.volume = volume.value);
 
-    function format(t) {
-      if (!t) return '0:00';
-      const m = Math.floor(t / 60);
-      const s = Math.floor(t % 60).toString().padStart(2, '0');
-      return `${m}:${s}`;
-    }
+  function format(t) {
+    if (!t) return '0:00';
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
 
-    document.getElementById('openHelp').onclick = () => helpModal.style.display = 'flex';
-    document.getElementById('closeHelp').onclick = () => helpModal.style.display = 'none';
+  document.getElementById('openHelp').onclick = () => document.getElementById('helpModal').style.display = 'flex';
+  document.getElementById('closeHelp').onclick = () => document.getElementById('helpModal').style.display = 'none';
 
-    // STARS
-    const stars = document.getElementById('stars');
-    for (let i = 0; i < 200; i++) {
-      const s = document.createElement('div');
-      s.className = 'star';
-      s.style.width = s.style.height = Math.random() * 2 + 'px';
-      s.style.left = Math.random() * 100 + '%';
-      s.style.top = Math.random() * 100 + '%';
-      s.style.animationDelay = Math.random() * 4 + 's';
-      stars.appendChild(s);
-    }
+  const stars = document.getElementById('stars');
+  for (let i = 0; i < 200; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.width = s.style.height = Math.random() * 2 + 'px';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = Math.random() * 4 + 's';
+    stars.appendChild(s);
+  }
   </script>
 </body>
 </html>
