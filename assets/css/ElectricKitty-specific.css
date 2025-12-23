@@ -8,10 +8,28 @@
   src: url('../fonts/Orbitron-Bold.ttf') format('truetype'); 
 }
 
+
+#stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -10;
+        }
+.star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff;
+            animation: twinkle 4s infinite;
+        }
+@keyframes twinkle {
+            0%,100% { opacity: 0.4; transform: scale(1); }
+            50%     { opacity: 1; transform: scale(1.4); }
+        }
+
 body { 
   margin: 0; 
   background: #000; 
-  background: linear-gradient(to bottom, #000000, #0f001e, #270142);
   display: flex; 
   flex-direction: column; 
   align-items: center; 
