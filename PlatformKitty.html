@@ -316,31 +316,32 @@
       <div class="input-column">
         <h2>Physics</h2>
         <div class="control-group">
-          <label for="gravity">Gravity (px/frame²)</label>
-          <input id="gravity" type="number" value="1.2" step="0.1" min="0.1">
+          <label for="gravity">Gravity</label>
+          <input id="gravity" type="number" value="1600" step="0.1" min="0.1">
         </div>
         <div class="control-group">
-          <label for="jumpForce">Jump Force</label>
-          <input id="jumpForce" type="number" value="18" step="1" min="1">
+          <label for="jumpForce">Jump Force (upwards velocity)</label>
+          <input id="jumpForce" type="number" value="780" step="1" min="1">
         </div>
         <div class="control-group">
-          <label for="speed">Move Speed (px/frame)</label>
-          <input id="speed" type="number" value="6" step="1" min="1">
+          <label for="speed">Move Speed (horzontally)</label>
+          <input id="speed" type="number" value="250" step="1" min="1">
         </div>
 
         <h2>Character</h2>
         <div class="control-group">
-          <label for="spriteW">Width (min: 16 / max: 96)</label>
-          <input id="spriteW" type="number" value="32" min="16" max="96" step="1">
+          <label for="spriteW">Width (min: 1 / max: 200)</label>
+          <input type="number" id="spriteW" value="150" min="1" max="200">
+
         </div>
         <div class="control-group">
-          <label for="spriteH">Height (min: 16 / max: 96)</label>
-          <input id="spriteH" type="number" value="32" min="16" max="96" step="1">
+          <label for="spriteH">Height (min: 1 / max: 200)</label>
+          <input type="number" id="spriteH" value="108" min="1" max="200">
         </div>
 
         <h2>Level Length (px)</h2>
         <div class="control-group">
-          <input id="levelLength" type="number" value="3000" min="800" step="100">
+          <input id="levelLength" type="number" value="10000" min="800" step="100">
         </div>
       </div>
 
