@@ -95,13 +95,12 @@ async function loadPlatformsFromInput() {
     return;
   }
 
-  platforms = data.platforms.map(p => ({
-    x: Number(p.x) || 0,
-    y: Number(p.y) || groundY,
-    w: Number(p.w) || 100,
-    h: Number(p.h) || 16
-  }));
-
+platforms = data.platforms.map(p => ({
+  x: Number(p.x),
+  y: Number(p.y),
+  w: Number(p.w),
+  h: Number(p.h)
+}));
 // ============================================= PLAYER =============================================
   player.w = Math.max(1, Math.min(200, Number(spriteWInput.value) || 150));
   player.h = Math.max(1, Math.min(200, Number(spriteHInput.value) || 108));
