@@ -2,7 +2,6 @@
 import { SCREEN_W, SCREEN_H, Colors } from '../config/gameConfig.js';
 import { getCharacterList } from '../config/characters.js';
 import { createVolumeToggle, stopAllMusic, startMenuMusic } from '../utils/audioControls.js';
-import { showMenuUI, hideMenuUI} from "../helpers/uiHelper.js";
 
 
 export function createStartScene(){
