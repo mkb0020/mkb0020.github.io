@@ -1,35 +1,45 @@
 /// levels.js - Clean, organized level configurations
 export const LEVELS = {
-  level1: {
+  level1: { 
     id: 'level1',
     name: 'Level 1',
-    timeLimit: 90,
+    timeLimit: 90000,
     length: 12000,
     playerSpawn: { x: 1000, y: 300 },
+    GroundSegments: [
+      {x: -1000, y: 440, width: 5000, height: 50}, 
+      {x: 4250, y: 440, width: 2600, height: 50}, 
+      {x: 7100, y: 440, width: 2150, height: 50}, 
+      {x: 9500, y: 440, width: 6000, height: 50}, 
+    ],
     groundPlatform: { x: -1000, y: 440, width: 13000, height: 50 },
     platforms: [
-      { x: 40000, y: 350, width: 200, height: 20 },
-      { x: 8300, y: 250, width: 200, height: 20 },
-      { x: 12700, y: 220, width: 200, height: 20 },
-      { x: 1950, y: 270, width: 200, height: 20 },
-      { x: 2350, y: 200, width: 200, height: 20 },
-      { x: 3000, y: 340, width: 200, height: 20 },
-      { x: 3400, y: 290, width: 200, height: 20 },
-      { x: 3700, y: 190, width: 200, height: 20 },
-      { x: 4480, y: 270, width: 200, height: 20 },
-      { x: 4800, y: 190, width: 200, height: 20 },
-      { x: 5200, y: 160, width: 200, height: 20 },
-      { x: 5750, y: 260, width: 200, height: 20 },
-      { x: 6050, y: 210, width: 200, height: 20 },
-      { x: 6330, y: 270, width: 200, height: 20 },
-      { x: 6730, y: 180, width: 200, height: 20 },
-      { x: 6920, y: 270, width: 200, height: 20 },
-      { x: 7200, y: 270, width: 200, height: 20 },
-      { x: 7600, y: 230, width: 200, height: 20 },
-      { x: 8000, y: 210, width: 200, height: 20 },
-      { x: 8400, y: 150, width: 200, height: 20 },
-    ],
-    cups: { enabled: true, count: 20 },
+    {x: 1300, y: 330, width: 250, height: 12},  
+    {x: 1720, y: 300, width: 245, height: 12}, 
+    {x: 2145, y: 270, width: 240, height: 12}, 
+    {x: 2565, y: 305, width: 235, height: 12}, 
+    {x: 2985, y: 280, width: 240, height: 12}, 
+    
+    {x: 3900, y: 285, width: 240, height: 12}, 
+    {x: 4325, y: 315, width: 235, height: 12},
+    {x: 4750, y: 345, width: 230, height: 12}, 
+    {x: 5180, y: 310, width: 225, height: 12},  
+    {x: 5615, y: 275, width: 240, height: 12}, 
+    
+    {x: 6380, y: 360, width: 245, height: 12},  
+    {x: 6815, y: 295, width: 240, height: 12},  
+    {x: 7250, y: 325, width: 235, height: 12},  
+    {x: 7700, y: 280, width: 230, height: 12}, 
+    {x: 8130, y: 310, width: 240, height: 12}, 
+    
+    {x: 8875, y: 340, width: 235, height: 12},  
+    {x: 9310, y: 305, width: 230, height: 12},  
+    {x: 9740, y: 270, width: 225, height: 12},  
+    {x: 10175, y: 290, width: 240, height: 12}, 
+    {x: 10625, y: 220, width: 220, height: 12},
+  ],
+
+    cups: { enabled: true, count: 15 }, 
     enemies: {
       cucumbers: { enabled: false },
       rats: { enabled: false },
@@ -39,153 +49,75 @@ export const LEVELS = {
       fishBones: { enabled: true, count: 3 },
       tunaCan: { enabled: false },
       milkBottle: { enabled: false },
-      catnip: { enabled: true, count: 5 },
+      catnip: { enabled: false },
     },
     playerHP: { start: 100, max: 100 },
     background: 'level1BG',
     levelMusic: 'PlatformerTrack1',
-    nextBoss: 'cupBoss'
+    nextBoss: 'cupBoss',
+    bossSprite: "bossCup", 
   },
 
-  level2: {
+  level2: { 
     id: 'level2',
     name: 'Level 2',
-    timeLimit: 90,
+    timeLimit: 900000,
     length: 12000,
     playerSpawn: { x: 1000, y: 300 },
+    GroundSegments: [
+  { x: -1000, y: 440, width: 3600, height: 50 },
+  { x: 3000, y: 440, width: 1800, height: 50 },
+  { x: 5100, y: 440, width: 2300, height: 50 },
+  { x: 7400, y: 440, width: 2300, height: 50 },
+  { x: 9900, y: 440, width: 2500, height: 50 },
+  { x: 11900, y: 440, width: 4000, height: 50 }
+],
     groundPlatform: { x: -1000, y: 440, width: 13000, height: 50 },  
     platforms: [
-{
-      "x": 287,
-      "y": 212,
-      "w": 288,
-      "h": 12
-    },
-    {
-      "x": 470,
-      "y": 220,
-      "w": 323,
-      "h": 12
-    },
-    {
-      "x": 650,
-      "y": 212,
-      "w": 360,
-      "h": 12
-    },
-    {
-      "x": 821,
-      "y": 219,
-      "w": 292,
-      "h": 12
-    },
-    {
-      "x": 993,
-      "y": 222,
-      "w": 278,
-      "h": 12
-    },
-    {
-      "x": 1163,
-      "y": 216,
-      "w": 344,
-      "h": 12
-    },
-    {
-      "x": 1344,
-      "y": 226,
-      "w": 372,
-      "h": 12
-    },
-    {
-      "x": 1524,
-      "y": 211,
-      "w": 351,
-      "h": 12
-    },
-    {
-      "x": 1689,
-      "y": 223,
-      "w": 359,
-      "h": 12
-    },
-    {
-      "x": 1860,
-      "y": 218,
-      "w": 341,
-      "h": 12
-    },
-    {
-      "x": 2034,
-      "y": 224,
-      "w": 274,
-      "h": 12
-    },
-    {
-      "x": 2214,
-      "y": 224,
-      "w": 338,
-      "h": 12
-    },
-    {
-      "x": 2395,
-      "y": 218,
-      "w": 244,
-      "h": 12
-    },
-    {
-      "x": 2574,
-      "y": 225,
-      "w": 312,
-      "h": 12
-    },
-    {
-      "x": 2752,
-      "y": 211,
-      "w": 303,
-      "h": 12
-    },
-    {
-      "x": 2929,
-      "y": 213,
-      "w": 313,
-      "h": 12
-    },
-    {
-      "x": 3096,
-      "y": 212,
-      "w": 267,
-      "h": 12
-    },
-    {
-      "x": 3274,
-      "y": 219,
-      "w": 328,
-      "h": 12
-    },
-    {
-      "x": 3442,
-      "y": 217,
-      "w": 375,
-      "h": 12
-    },
-    {
-      "x": 3604,
-      "y": 211,
-      "w": 374,
-      "h": 12
-    }
-    ],
+    {x: 1300, y: 320, width: 250, height: 12},  
+    {x: 1725, y: 285, width: 245, height: 12}, 
+    {x: 2150, y: 310, width: 240, height: 12},  
+    {x: 2575, y: 270, width: 235, height: 12},  
+    {x: 3005, y: 300, width: 240, height: 12}, 
+
+    {x: 3890, y: 280, width: 240, height: 12},  
+    {x: 4320, y: 310, width: 235, height: 12},  
+    {x: 4755, y: 265, width: 230, height: 12},  
+    {x: 5195, y: 290, width: 225, height: 12},  
+    {x: 5635, y: 260, width: 240, height: 12}, 
+
+    {x: 6380, y: 340, width: 245, height: 12}, 
+    {x: 6825, y: 280, width: 240, height: 12},  
+    {x: 7270, y: 305, width: 235, height: 12},  
+    {x: 7725, y: 270, width: 230, height: 12}, 
+    {x: 8165, y: 295, width: 240, height: 12}, 
+
+    {x: 8880, y: 325, width: 235, height: 12},  
+    {x: 9320, y: 285, width: 230, height: 12},  
+    {x: 9755, y: 260, width: 225, height: 12},  
+    {x: 10195, y: 275, width: 240, height: 12}, 
+    {x: 10655, y: 200, width: 220, height: 12}
+  ],
+
     cups: { enabled: true, count: 15 },
     enemies: {
-      cucumbers: { 
-        enabled: true,
-        spawnRate: 2500,
-        damage: 5
-      },
+    cucumbers: { 
+          enabled: true,
+          spawnRate: 2500,
+          damage: 5,
+          spawnZones: [
+            { start: 2200, end: 3900 },  
+            { start: 6000, end: 6800 },  
+            { start: 8000, end: 9500 }  
+          ]
+        },
       rats: { enabled: false },
+
       lasers: { enabled: false }
     },
+
+
+    milkBottlePosition: { x: 10765, y: 130 },
     items: {
       fishBones: { enabled: true, count: 2 },
       tunaCan: { enabled: true, count: 3 },
@@ -195,151 +127,84 @@ export const LEVELS = {
     playerHP: { start: 100, max: 100 },
     background: 'level1BG',
     levelMusic: 'PlatformerTrack2',
-    nextBoss: 'cucumberBoss'
+    nextBoss: 'cucumberBoss',
+    bossSprite: "bossCucumber", 
+
   },
 
-  level3: {
+  level3: { 
     id: 'level3',
     name: 'Level 3',
-    timeLimit: 90,
+    timeLimit: 900000,
     length: 12000,
     playerSpawn: { x: 1000, y: 300 },
+    GroundSegments: [
+  { x: -1000, y: 440, width: 3200, height: 50 },
+  { x: 3200, y: 440, width: 1400, height: 50 },
+  { x: 4900, y: 440, width: 1800, height: 50 },
+  { x: 7200, y: 440, width: 2100, height: 50 },
+  { x: 9050, y: 440, width: 2300, height: 50 },
+  { x: 11050, y: 440, width: 3200, height: 50 }
+],
+
     groundPlatform: { x: -1000, y: 440, width: 13000, height: 50 },
+    
     platforms: [
-{
-      "x": 287,
-      "y": 212,
-      "w": 288,
-      "h": 12
-    },
-    {
-      "x": 470,
-      "y": 220,
-      "w": 323,
-      "h": 12
-    },
-    {
-      "x": 650,
-      "y": 212,
-      "w": 360,
-      "h": 12
-    },
-    {
-      "x": 821,
-      "y": 219,
-      "w": 292,
-      "h": 12
-    },
-    {
-      "x": 993,
-      "y": 222,
-      "w": 278,
-      "h": 12
-    },
-    {
-      "x": 1163,
-      "y": 216,
-      "w": 344,
-      "h": 12
-    },
-    {
-      "x": 1344,
-      "y": 226,
-      "w": 372,
-      "h": 12
-    },
-    {
-      "x": 1524,
-      "y": 211,
-      "w": 351,
-      "h": 12
-    },
-    {
-      "x": 1689,
-      "y": 223,
-      "w": 359,
-      "h": 12
-    },
-    {
-      "x": 1860,
-      "y": 218,
-      "w": 341,
-      "h": 12
-    },
-    {
-      "x": 2034,
-      "y": 224,
-      "w": 274,
-      "h": 12
-    },
-    {
-      "x": 2214,
-      "y": 224,
-      "w": 338,
-      "h": 12
-    },
-    {
-      "x": 2395,
-      "y": 218,
-      "w": 244,
-      "h": 12
-    },
-    {
-      "x": 2574,
-      "y": 225,
-      "w": 312,
-      "h": 12
-    },
-    {
-      "x": 2752,
-      "y": 211,
-      "w": 303,
-      "h": 12
-    },
-    {
-      "x": 2929,
-      "y": 213,
-      "w": 313,
-      "h": 12
-    },
-    {
-      "x": 3096,
-      "y": 212,
-      "w": 267,
-      "h": 12
-    },
-    {
-      "x": 3274,
-      "y": 219,
-      "w": 328,
-      "h": 12
-    },
-    {
-      "x": 3442,
-      "y": 217,
-      "w": 375,
-      "h": 12
-    },
-    {
-      "x": 3604,
-      "y": 211,
-      "w": 374,
-      "h": 12
-    }
+    {x: 1300, y: 340, width: 250, height: 12}, 
+    {x: 1715, y: 300, width: 245, height: 12},  
+    {x: 2125, y: 355, width: 240, height: 12},  
+    {x: 2530, y: 290, width: 235, height: 12},  
+    {x: 2945, y: 340, width: 240, height: 12},  
+    {x: 3900, y: 320, width: 240, height: 12},  
+    {x: 4310, y: 355, width: 235, height: 12},  
+    {x: 4715, y: 270, width: 230, height: 12},
+    {x: 5135, y: 245, width: 225, height: 12},  
+    {x: 5530, y: 315, width: 240, height: 12},  
+    {x: 6400, y: 300, width: 245, height: 12},  
+    {x: 6820, y: 360, width: 240, height: 12}, 
+    {x: 7235, y: 340, width: 235, height: 12},  
+    {x: 7670, y: 295, width: 230, height: 12}, 
+    {x: 8075, y: 325, width: 240, height: 12},  
+    {x: 8900, y: 375, width: 235, height: 12}, 
+    {x: 9315, y: 295, width: 230, height: 12},
+    {x: 9725, y: 315, width: 225, height: 12}, 
+    {x: 10157, y: 278, width: 240, height: 12},
+    {x: 10680, y: 180, width: 220, height: 12}, 
     ],
-    cups: { enabled: true, count: 18 },
+    cups: { enabled: true, count: 15 },
+
+
+
     enemies: {
       cucumbers: { 
         enabled: true,
         spawnRate: 2000,
-        damage: 5
+        damage: 5,
+        spawnZones: [
+          { start: 3200, end: 3800 },   
+          { start: 6000, end: 6800 },   
+          { start: 9000, end: 9700 }   
+        ]
       },
-      rats: { 
-        enabled: true,
-        spawnRate: 4000
-      },
+    rats: { 
+      enabled: true,
+      spawnRate: 8000,
+      
+      spawnZones: [
+        { start: -1000, end: 2200 },   
+        { start: 3200, end: 4600 },   
+        { start: 4900, end: 6700 },   
+        { start: 7200, end: 9050 }
+      ]
+    },
       lasers: { enabled: false }
     },  
+    
+    
+    catnipZones: [
+        { x: 4600, y: 340 }, 
+        { x: 6900, y: 340 }, 
+        { x: 9000, y: 340 } ],
     items: {
       fishBones: { enabled: true, count: 3 },
       tunaCan: { enabled: true, count: 4 },
@@ -349,154 +214,85 @@ export const LEVELS = {
     playerHP: { start: 100, max: 100 },
     background: 'level1BG',
     levelMusic: 'PlatformerTrack3',
-    nextBoss: 'bossRatKing'
+    nextBoss: 'bossRatKing',
+    bossSprite: "bossRat", 
   },
 
   level4: {
     id: 'level4',
     name: 'Level 4',
-    timeLimit: 90,
+    timeLimit: 900000,
     length: 12000,
     playerSpawn: { x: 1000, y: 300 },
+    GroundSegments: [
+      { x: -1000, y: 440, width: 3000, height: 50 },
+      { x: 3000, y: 440, width: 1650, height: 50 },
+      { x: 4550, y: 440, width: 1990, height: 50 },
+      { x: 6700, y: 440, width: 2000, height: 50 },
+      { x: 8950, y: 440, width: 2150, height: 50 },
+      { x: 11350, y: 440, width: 3000, height: 50 }
+],
+
     groundPlatform: { x: -1000, y: 440, width: 13000, height: 50 },
     platforms: [
-      {
-      "x": 287,
-      "y": 212,
-      "w": 288,
-      "h": 12
-    },
-    {
-      "x": 470,
-      "y": 220,
-      "w": 323,
-      "h": 12
-    },
-    {
-      "x": 650,
-      "y": 212,
-      "w": 360,
-      "h": 12
-    },
-    {
-      "x": 821,
-      "y": 219,
-      "w": 292,
-      "h": 12
-    },
-    {
-      "x": 993,
-      "y": 222,
-      "w": 278,
-      "h": 12
-    },
-    {
-      "x": 1163,
-      "y": 216,
-      "w": 344,
-      "h": 12
-    },
-    {
-      "x": 1344,
-      "y": 226,
-      "w": 372,
-      "h": 12
-    },
-    {
-      "x": 1524,
-      "y": 211,
-      "w": 351,
-      "h": 12
-    },
-    {
-      "x": 1689,
-      "y": 223,
-      "w": 359,
-      "h": 12
-    },
-    {
-      "x": 1860,
-      "y": 218,
-      "w": 341,
-      "h": 12
-    },
-    {
-      "x": 2034,
-      "y": 224,
-      "w": 274,
-      "h": 12
-    },
-    {
-      "x": 2214,
-      "y": 224,
-      "w": 338,
-      "h": 12
-    },
-    {
-      "x": 2395,
-      "y": 218,
-      "w": 244,
-      "h": 12
-    },
-    {
-      "x": 2574,
-      "y": 225,
-      "w": 312,
-      "h": 12
-    },
-    {
-      "x": 2752,
-      "y": 211,
-      "w": 303,
-      "h": 12
-    },
-    {
-      "x": 2929,
-      "y": 213,
-      "w": 313,
-      "h": 12
-    },
-    {
-      "x": 3096,
-      "y": 212,
-      "w": 267,
-      "h": 12
-    },
-    {
-      "x": 3274,
-      "y": 219,
-      "w": 328,
-      "h": 12
-    },
-    {
-      "x": 3442,
-      "y": 217,
-      "w": 375,
-      "h": 12
-    },
-    {
-      "x": 3604,
-      "y": 211,
-      "w": 374,
-      "h": 12
-    },
-    ],
+    {x: 1300, y: 360, width: 220, height: 12},  
+    {x: 1750, y: 280, width: 210, height: 12},  
+    {x: 2195, y: 315, width: 230, height: 12}, 
+    {x: 2635, y: 265, width: 200, height: 12}, 
+    {x: 3100, y: 330, width: 230, height: 12},  
+    {x: 4200, y: 265, width: 190, height: 12}, 
+    {x: 4645, y: 290, width: 225, height: 12},  
+    {x: 5105, y: 320, width: 220, height: 12}, 
+    {x: 5550, y: 375, width: 215, height: 12}, 
+    {x: 6005, y: 255, width: 200, height: 12}, 
+    {x: 6900, y: 300, width: 190, height: 12}, 
+    {x: 7355, y: 325, width: 230, height: 12}, 
+    {x: 7830, y: 255, width: 200, height: 12},   
+    {x: 8275, y: 290, width: 210, height: 12}, 
+    {x: 8745, y: 320, width: 220, height: 12},
+    {x: 9600, y: 345, width: 220, height: 12},  
+    {x: 10032, y: 300, width: 200, height: 12},
+    {x: 10485, y: 248, width: 180, height: 12}, 
+    {x: 10928, y: 205, width: 160, height: 12}, 
+  ],
     cups: { enabled: true, count: 15 },
+
+
     enemies: {
       cucumbers: { 
         enabled: true,
         spawnRate: 1800,
-        damage: 5
+        damage: 5,
+        spawnZones: [
+          { start: 2500, end: 3500 },
+          { start: 5800, end: 6300 },
+          { start: 9200, end: 10800 }
+        ]
       },
-      rats: { 
-        enabled: true,
-        spawnRate: 3500
-      },
-      lasers: { 
-        enabled: true,
-        count: 3
-      }
+    rats: { 
+      enabled: true,
+      spawnRate: 3500,
+      spawnZones: [
+        { start: -1000, end: 2000 },
+        { start: 3000, end: 4550 },
+        { start: 4550, end: 6700 },
+        { start: 6700, end: 8950 },
+        { start: 8950, end: 11350 }
+      ]
     },
+
+    lasers: { 
+      enabled: true,
+      positions: [3800, 6400, 9200]
+    }
+    },
+
+
+  catnipZones: [
+    { x: 4300, y: 340 }, 
+    { x: 6500, y: 340 }, 
+    { x: 8800, y: 340 }  
+  ],
     items: {
       fishBones: { enabled: true, count: 3 },
       tunaCan: { enabled: true, count: 4 },
@@ -506,154 +302,119 @@ export const LEVELS = {
     playerHP: { start: 120, max: 120 },
     background: 'level1BG',
     levelMusic: 'PlatformerTrack4',
-    nextBoss: 'laserPointerBoss'
+    nextBoss: 'laserPointerBoss',
+    bossSprite: 'bossLaserPointer'
   },
 
   level5: {
     id: 'level5',
     name: 'Level 5',
-    timeLimit: 90,
+    timeLimit: 900000,
     length: 12000,
     playerSpawn: { x: 1000, y: 300 },
+    GroundSegments: [
+      { x: -1000, y: 440, width: 2600, height: 50 },
+      { x: 2600, y: 440, width: 1450, height: 50 },
+      { x: 4050, y: 440, width: 450, height: 50 },
+      { x: 4500, y: 440, width: 1600, height: 50 },
+      { x: 6100, y: 440, width: 1730, height: 50 },
+      { x: 8100, y: 440, width: 1500, height: 50 },
+      { x: 10000, y: 440, width: 2200, height: 50 },
+      { x: 12000, y: 440, width: 3500, height: 50 }
+],
+
     groundPlatform: { x: -1000, y: 440, width: 13000, height: 50 },
     platforms: [
-      {
-      "x": 287,
-      "y": 212,
-      "w": 288,
-      "h": 12
-    },
-    {
-      "x": 470,
-      "y": 220,
-      "w": 323,
-      "h": 12
-    },
-    {
-      "x": 650,
-      "y": 212,
-      "w": 360,
-      "h": 12
-    },
-    {
-      "x": 821,
-      "y": 219,
-      "w": 292,
-      "h": 12
-    },
-    {
-      "x": 993,
-      "y": 222,
-      "w": 278,
-      "h": 12
-    },
-    {
-      "x": 1163,
-      "y": 216,
-      "w": 344,
-      "h": 12
-    },
-    {
-      "x": 1344,
-      "y": 226,
-      "w": 372,
-      "h": 12
-    },
-    {
-      "x": 1524,
-      "y": 211,
-      "w": 351,
-      "h": 12
-    },
-    {
-      "x": 1689,
-      "y": 223,
-      "w": 359,
-      "h": 12
-    },
-    {
-      "x": 1860,
-      "y": 218,
-      "w": 341,
-      "h": 12
-    },
-    {
-      "x": 2034,
-      "y": 224,
-      "w": 274,
-      "h": 12
-    },
-    {
-      "x": 2214,
-      "y": 224,
-      "w": 338,
-      "h": 12
-    },
-    {
-      "x": 2395,
-      "y": 218,
-      "w": 244,
-      "h": 12
-    },
-    {
-      "x": 2574,
-      "y": 225,
-      "w": 312,
-      "h": 12
-    },
-    {
-      "x": 2752,
-      "y": 211,
-      "w": 303,
-      "h": 12
-    },
-    {
-      "x": 2929,
-      "y": 213,
-      "w": 313,
-      "h": 12
-    },
-    {
-      "x": 3096,
-      "y": 212,
-      "w": 267,
-      "h": 12
-    },
-    {
-      "x": 3274,
-      "y": 219,
-      "w": 328,
-      "h": 12
-    },
-    {
-      "x": 3442,
-      "y": 217,
-      "w": 375,
-      "h": 12
-    },
-    {
-      "x": 3604,
-      "y": 211,
-      "w": 374,
-      "h": 12
-    }
+    {x: 1300, y: 350, width: 200, height: 12},  
+    {x: 1740, y: 270, width: 180, height: 12},  
+    {x: 2165, y: 300, width: 190, height: 12},  
+    {x: 2610, y: 252, width: 170, height: 12},  
+    {x: 3060, y: 285, width: 185, height: 12}, 
+
+    {x: 4200, y: 258, width: 175, height: 12},  
+    {x: 4625, y: 285, width: 180, height: 12},  
+    {x: 5070, y: 310, width: 190, height: 12},  
+    {x: 5525, y: 365, width: 200, height: 12}, 
+    {x: 5995, y: 250, width: 165, height: 12}, 
+
+    {x: 6900, y: 295, width: 185, height: 12},  
+    {x: 7345, y: 320, width: 195, height: 12},  
+    {x: 7810, y: 248, width: 170, height: 12},  
+    {x: 8265, y: 280, width: 180, height: 12},  
+    {x: 8745, y: 310, width: 190, height: 12}, 
+
+    {x: 9600, y: 340, width: 195, height: 12},  
+    {x: 10035, y: 290, width: 175, height: 12}, 
+    {x: 10475, y: 242, width: 160, height: 12}, 
+    {x: 10905, y: 170, width: 150, height: 12}, 
+
+    //{x:1717,y:324,width:228,height:12},
+   // {x:2117,y:210,width:203,height:12},
+    //{x:2606,y:282,width:247,height:12},
+   // {x:3053,y:308,width:247,height:12},
+   // {x:3594,y:359,width:259,height:12},
+   // {x:4076,y:240,width:235,height:12},
+   // {x:4640,y:300,width:298,height:12},
+   // {x:5131,y:311,width:308,height:12},
+   // {x:5666,y:339,width:246,height:12},
+   // {x:6551,y:321,width:230,height:12},
+  //  {x:6975,y:385,width:324,height:12},
+   // {x:7484,y:277,width:248,height:12},
+  //  {x:7931,y:206,width:256,height:12},
+   // {x:8364,y:279,width:246,height:12},
+  //  {x:9082,y:322,width:225,height:12},
+   // {x:9485,y:194,width:248,height:12},
+   // {x:9929,y:221,width:317,height:12},
+   // {x:10450,y:304,width:279,height:12}
     ],
     cups: { enabled: true, count: 15 },
+
+
     enemies: {
-      cucumbers: { 
-        enabled: true,
-        spawnRate: 1500,
-        damage: 5
-      },
-      rats: { 
-        enabled: true,
-        spawnRate: 3000
-      },
-      lasers: { 
-        enabled: true,
-        count: 5
-      }
+        cucumbers: { 
+          enabled: true,
+          spawnRate: 1500,
+          damage: 5,
+          spawnZones: [
+            { start: 1600, end: 2500 },  
+            { start: 3200, end: 4100 },  
+            { start: 6200, end: 7800 },   
+            { start: 9100, end: 9900 },   
+            { start: 11200, end: 12200 }  
+          ]
+        },
+    rats: { 
+      enabled: true,
+      spawnRate: 6000, 
+  
+      spawnZones: [
+        { start: -1000, end: 1500 },   
+        { start: 2600, end: 3950 },    
+        { start: 4500, end: 6000 },   
+        { start: 6100, end: 7930 },    
+        { start: 8100, end: 9500 },    
+        { start: 10000, end: 11900 },  
+        { start: 12000, end: 14000 }   
+      ]
     },
+        lasers: { 
+          enabled: true,
+          
+          positions: [
+            2800,   
+            5200,  
+            7100,  
+            9700,   
+            10600   
+          ]
+        }
+    },
+
+    catnipZones: [
+      { x: 3900, y: 340 }, 
+      { x: 5950, y: 340 }, 
+      { x: 9850, y: 340 } ],
+    milkBottlePosition: { x: 10980, y: 100 },
     items: {
       fishBones: { enabled: true, count: 4 },
       tunaCan: { enabled: true, count: 4 },
@@ -663,7 +424,9 @@ export const LEVELS = {
     playerHP: { start: 120, max: 120 },
     background: 'level1BG',
     levelMusic: 'PlatformerTrack5',
-    nextBoss: 'observerBoss'
+    nextBoss: 'observerBoss',
+    bossSprite: 'observer'
+
   }
 };
 
