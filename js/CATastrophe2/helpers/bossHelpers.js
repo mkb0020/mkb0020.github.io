@@ -1,17 +1,12 @@
 // bossHelpers.js - BOSS BATTLE SETUP AND ANIMATIONS
 import { SCREEN_W, SCREEN_H, Colors } from '../config/gameConfig.js';
-import { createVolumeToggle } from '../utils/audioControls.js';
+import { createVolumeToggle, stopAllMusic, startBossMusic } from '../utils/audioControls.js';
 
 export function setupBossMusic() {
-  window.levelMusic = play("levelMusic", { volume: 0.4, loop: true });
-  
-  onSceneLeave(() => { 
-    if (window.levelMusic) {
-      window.levelMusic.stop();
-      window.levelMusic = null;
-    }
-  });
+  startBossMusic();
 }
+
+
 
 export function addBossBackground(bossConfig) {
   add([
@@ -25,7 +20,7 @@ export function addBossBackground(bossConfig) {
 export function addBattleSprites(character, bossConfig) {
   const playerGlow = add([
     sprite("glow"),
-    pos(260, 250),
+    pos(260, 240),
     anchor("center"),
     scale(1.05),
     opacity(1),
@@ -35,7 +30,7 @@ export function addBattleSprites(character, bossConfig) {
 
   const playerSprite = add([
     sprite(character.sprites.battle),
-    pos(260, 250),
+    pos(260, 240),
     anchor("center"),
     scale(1),
     opacity(1),
@@ -45,7 +40,7 @@ export function addBattleSprites(character, bossConfig) {
   
   const bossGlow = add([
     sprite(bossConfig.glowSprite || "glow"),
-    pos(725, 120),
+    pos(740, 120),
     anchor("center"),
     scale(1.05),
     opacity(1),
@@ -55,7 +50,7 @@ export function addBattleSprites(character, bossConfig) {
 
   const bossSprite = add([
     sprite(bossConfig.sprite),
-    pos(725, 120),
+    pos(740, 120),
     anchor("center"),
     scale(1),
     opacity(1),
@@ -68,74 +63,83 @@ export function addBattleSprites(character, bossConfig) {
 
 export function addPlayerHPPanel(player) {
   add([
-    rect(400, 85, { radius: 50 }),
-    pos(470, 250),
-    color(Color.fromHex(Colors.MutedGrey)),
+    rect(480, 85, { radius: 50 }),
+    pos(450, 250),
+    color(rgb(144,144,192)),
     opacity(1),
-    outline(4, Color.fromHex("#000000")),
+    outline(4, rgb(42,52,57)),
     z(10)
   ]);
 
   add([
-    rect(400, 85, { radius: 50 }),
-    pos(470, 250),
-    color(Color.fromHex(Colors.MutedGrey)),
+    rect(480, 85, { radius: 50 }),
+    pos(450, 250),
+    color(Color.fromHex(Colors.MintBlue)),
     opacity(1),
-    outline(15, Color.fromHex("#00FFFF")),
+    outline(9, rgb(101,115,131)),
     z(9)
   ]);
 
+
+  add([
+      rect(452, 75, { radius: 50 }),
+      pos(455, 251),
+      color(rgb(219,226,233)),
+      opacity(0.3),
+      z(11)
+    ]);
+
   add([
     text(player.name, { size: 23, font: "orbitronBold" }),
-    pos(540, 275),
-    anchor("center"),
+    pos(488, 271),
+    anchor("left"),
     color(0, 0, 0),
-    z(12)
+    z(13)
   ]);
 
   add([
     text(player.name, { size: 23, font: "orbitronBold" }),
-    pos(542, 277),
-    anchor("center"),
+    pos(489, 272),
+    anchor("left"),
     color(255, 255, 255),
-    z(11)
-  ]);
-
-  add([
-    text("HP:", { size: 20, font: "orbitronBold" }),
-    pos(520, 295),
-    color(Color.fromHex(Colors.NuclearFuscia)),
     z(12)
   ]);
 
   add([
     text("HP:", { size: 20, font: "orbitronBold" }),
-    pos(521, 296),
-    color(Color.fromHex('#000000')),
-    z(11)
+    pos(498, 287),
+    color(Color.fromHex(Colors.Black)),
+    z(13)
   ]);
 
   add([
-    rect(280, 20, { radius: 8 }),
-    pos(565, 295),
+    text("HP:", { size: 20, font: "orbitronBold" }),
+    pos(499, 288),
+    color(Color.fromHex('#FFFFFF')),
+    z(12)
+  ]);
+
+  add([
+    rect(350, 15, { radius: 8 }),
+    pos(545, 288 ),
     color(0, 0, 0),
     opacity(1),
     outline(10, Color.fromHex(Colors.DarCoolGrey)),
-    z(11)
+    z(12)
   ]);
 
   const playerHPBar = add([
-    rect(280, 20, { radius: 8 }),
-    pos(565, 295),
+    rect(350, 15, { radius: 8 }),
+    pos(545, 288),
     color(Color.fromHex(Colors.UraniumGreen)),
-    z(12),
+    z(13),
     "playerHPBar"
   ]);
 
   const playerHPText = add([
-    text(`${player.hp} / ${player.maxHP}`, { size: 16, font: "orbitron" }),
-    pos(785, 275),
-    anchor("center"),
+    text(`${player.hp} / ${player.maxHP}`, { size: 18, font: "orbitron" }),
+    pos(890, 320),
+    anchor("right"),
     color(0, 0, 0),
     z(13)
   ]);
@@ -144,104 +148,125 @@ export function addPlayerHPPanel(player) {
 }
 
 export function addBossHPPanel(boss) {
-  // Background panel (dark)
-  add([
-    rect(390, 85, { radius: 50 }),
-    pos(130, 20),
-    color(Color.fromHex(Colors.MutedGrey)),
+ add([
+    rect(480, 85, { radius: 50 }),
+    pos(70, 20),
+    color(rgb(144,144,192)),
     opacity(1),
-    outline(4, Color.fromHex("#000000")),
+    outline(4, rgb(42,52,57)),
     z(10)
   ]);
 
-  // Outline panel (mint/violet glow)
   add([
-    rect(390, 85, { radius: 50 }),
-    pos(130, 20),
+    rect(480, 85, { radius: 50 }),
+    pos(70, 20),
     color(Color.fromHex(Colors.MintBlue)),
     opacity(1),
-    outline(15, Color.fromHex(Colors.VortexViolet)),
+    outline(9, rgb(101,115,131)),
     z(9)
   ]);
 
-  // Boss name (shadow)
-  add([
-    text(boss.name, { size: 22, font: "orbitronBold" }),
-    pos(220, 45),
-    anchor("center"),
-    color(0, 0, 0),
-    z(12)
-  ]);
 
-  // Boss name (main)
+    add([
+      rect(452, 75, { radius: 50 }),
+      pos(75, 19),
+      color(rgb(219,226,233)),
+      opacity(0.3),
+      z(11)
+    ]);
+
+
   add([
     text(boss.name, { size: 22, font: "orbitronBold" }),
-    pos(222, 47),
-    anchor("center"),
+    pos(104, 42),
+    anchor("left"),
     color(255, 255, 255),
-    z(11)
-  ]);
-
-  // HP label (shadow)
-  add([
-    text("HP:", { size: 20, font: "orbitronBold" }),
-    pos(170, 65),
-    color(Color.fromHex(Colors.NuclearFuscia)),
     z(12)
   ]);
 
-  // HP label (main)
   add([
-    text("HP:", { size: 20, font: "orbitronBold" }),
-    pos(171, 66),
-    color(Color.fromHex('#000000')),
-    z(11)
+    text(boss.name, { size: 22, font: "orbitronBold" }),
+    pos(103, 41),
+    anchor("left"),
+    color(0, 0, 0),
+    z(13)
   ]);
 
-  // HP bar background
   add([
-    rect(280, 20, { radius: 8 }),
-    pos(215, 65),
+    text("HP:", { size: 20, font: "orbitronBold" }),
+    pos(116, 56),
+    color(Color.fromHex(Colors.White)),
+    z(12)
+  ]);
+
+  add([
+    text("HP:", { size: 20, font: "orbitronBold" }),
+    pos(115, 56),
+    color(Color.fromHex('#000000')),
+    z(13)
+  ]);
+
+  add([
+    rect(350, 15, { radius: 8 }),
+    pos(170, 58),
     color(0, 0, 0),
     opacity(1),
-    outline(10, Color.fromHex(Colors.DarCoolGrey)),
-    z(11)
+    outline(8, Color.fromHex(Colors.DarCoolGrey)),
+    z(12)
   ]);
 
-  // HP bar fill
+
+
   const bossHPBar = add([
-    rect(280, 20, { radius: 8 }),
-    pos(215, 65),
+    rect(350, 15, { radius: 8 }),
+    pos(170, 58),
     color(Color.fromHex(Colors.UraniumGreen)),
-    z(12),
+    z(13),
     "bossHPBar"
   ]);
 
-  // HP text
   const bossHPText = add([
-    text(`${boss.hp} / ${boss.maxHP}`, { size: 16, font: "orbitron" }),
-    pos(430, 45),
-    anchor("center"),
+    text(`${boss.hp} / ${boss.maxHP}`, { size: 18, font: "orbitron" }),
+    pos(500, 88),
+    anchor("right"),
     color(0, 0, 0),
-    z(13)
+    z(14)
+
   ]);
 
   return { bossHPBar, bossHPText };
 }
 
 export function addBattleLogPanel(initialMessage) {
+
   add([
-    rect(425, 115, { radius: 30 }),
-    pos(120, 360),
-    color(Color.fromHex(Colors.MutedGrey)),
+    rect(980, 125, { radius: 25 }),
+    pos(10, 350),
+    color(rgb(101,115,131)),
     opacity(1.0),
-    outline(1, Color.fromHex(Colors.DarCoolGrey)),
+    z(8)
+  ]);
+
+  add([
+    rect(570, 115, { radius: 30 }),
+    pos(25, 355),
+    color(rgb(144,144,192)),
+    opacity(1),
+    outline(1, rgb(42,52,57)),
+    z(9)
+  ]);
+
+    add([
+    rect(565, 110, { radius: 30 }),
+    pos(25, 355),
+    color(rgb(255,255,255)),
+    opacity(0.3),
     z(10)
   ]);
 
   const logText = add([
-    text(initialMessage, { size: 24, font: "narrow", width: 360 }),
-    pos(145, 375),
+    text(initialMessage, { size: 24, font: "narrow", width: 530 }),
+    pos(47, 370),
     color(0, 0, 0),
     z(11),
     "logText"
@@ -252,11 +277,20 @@ export function addBattleLogPanel(initialMessage) {
 
 export function addMoveButtonsPanel() {
   add([
-    rect(335, 115, { radius: 5 }),
-    pos(550, 360),
-    color(Color.fromHex(Colors.MutedGrey)),
+    rect(370, 115, { radius: 15 }),
+    pos(605, 355),
+    color(rgb(144,144,192)),
     opacity(1),
-    outline(2, Color.fromHex(Colors.DarCoolGrey)),
+    outline(1, rgb(42,52,57)),
+    z(9)
+  ]);
+
+
+  add([
+    rect(365, 110, { radius: 15 }),
+    pos(605, 355),
+    color(255,255,255),
+    opacity(0.3),
     z(10)
   ]);
 }
@@ -267,15 +301,15 @@ export function createMoveButtons(player, onMoveClick, gameStateGetter) {
 
   moveNames.forEach((moveName, i) => {
     const moveData = player.moves[moveName];
-    const x = i % 2 === 0 ? 555 : 720;
-    const y = i < 2 ? 370 : 420;
+    const x = i % 2 === 0 ? 607 : 791;
+    const y = i < 2 ? 365 : 415;
     
     const btn = add([
-      rect(160, 45, { radius: 25 }),
+      rect(182, 45, { radius: 15 }),
       pos(x, y),
-      color(Color.fromHex(Colors.MutedGrey)),
-      outline(1, Color.fromHex(Colors.MutedGrey)),
+      color(rgb(144,144,192)),
       area(),
+      opacity(0),
       z(11),
       {
         moveName: moveName,
@@ -286,8 +320,8 @@ export function createMoveButtons(player, onMoveClick, gameStateGetter) {
     ]);
 
     const btnText = btn.add([
-      text(`${moveName} (${moveData.uses})`, { size: 22, font: "narrowBold" }),
-      pos(75, 25),
+      text(`${moveName} (${moveData.uses})`, { size: 24, font: "narrowBold" }),
+      pos(85, 25),
       anchor("center"),
       color(0, 0, 0),
       z(12)
@@ -302,11 +336,13 @@ export function createMoveButtons(player, onMoveClick, gameStateGetter) {
     btn.onHover(() => {
       if (btn.enabled) {
         btn.color = Color.fromHex(Colors.VortexViolet);
+        btn.opacity = 1;
       }
     });
 
     btn.onHoverEnd(() => {
       btn.color = Color.fromHex(Colors.MutedGrey);
+      btn.opacity = 0;
     });
 
     moveButtons.push({ btn, btnText, moveName });
@@ -450,6 +486,68 @@ export function animateDefeat(sprite, glow, isPlayer) {
 // ============================================================================
 
 // ========================= GENERAL =========================
+export function animateKaBAM(target) {
+  shake(20);
+  const kabam = add([
+    sprite("bam", { anim: "glitch" }),
+    pos(target.pos),
+    scale(5),
+    anchor("center"),
+    z(40),
+    opacity(1)
+  ]);
+
+  wait(0.4, () => destroy(kabam))
+}
+
+
+export function animateGhostPoof(target) {
+  const pooooof = add([
+    sprite("poof", { anim: "burst" }),
+    pos(target.pos),
+    scale(2),
+    opacity(1),
+    z(12),
+    anchor("center")
+    ]);
+
+  wait(0.3, () => {
+    tween(pooooof.opacity, 0, 0.25, (o) => pooooof.opacity = o, easings.easeOutQuad)
+      .then(() => destroy(pooooof));
+    });
+
+  const ghost = add([
+        sprite("ghostRat"),
+        pos(target.pos),
+        scale(1),
+        opacity(0.8),
+        z(100),
+       anchor("center"),
+        rotate(0)
+      ]);
+      
+  tween(ghost.pos.y, 0, 1.5, (y) => ghost.pos.y = y, easings.easeOutQuad);
+  tween(ghost.opacity, 0, 1.5, (o) => ghost.opacity = o, easings.easeOutQuad);
+      
+  wait(1.5, () => destroy(ghost));
+}
+
+export function animatePoooof(target) {
+  const pooooof = add([
+    sprite("poof", { anim: "burst" }),
+    pos(target.pos),
+    scale(3),
+    opacity(1),
+    z(12),
+    anchor("center")
+    ]);
+
+  wait(0.3, () => {
+    tween(pooooof.opacity, 0, 0.25, (o) => pooooof.opacity = o, easings.easeOutQuad)
+      .then(() => destroy(pooooof));
+    });
+}
+
 export function animateRedBoom(target) {
   shake(30);
   const boom = add([
@@ -536,7 +634,7 @@ export function animateExplosion(target) {
   });
 }
 
-export function animateFireball(attacker, target) {
+export function animateFireball(hero, target) {
   const start = attacker.pos.add(0, -20);
   const end = target.pos.add(0, -10);
   const mid = start.lerp(end, 0.5).add(rand(-60, 60), rand(-50, -20));
@@ -718,13 +816,11 @@ export function animateZoomies(attacker, target) {
     opacity(1)
   ]);
   
-  // Rainbow cycle
   let colorUpdate = glitchCat.onUpdate(() => {
     const hue = (time() * 360) % 360;
     glitchCat.color = hsl2rgb(hue / 360, 1, 0.8);
   });
   
-  // Rapid zips around the screen
   const zips = [
     vec2(rand(100, 400), rand(150, 400)), 
     vec2(rand(600, 900), rand(100, 300)), 
@@ -742,7 +838,6 @@ export function animateZoomies(attacker, target) {
           zipNext();
         });
     } else {
-      // Final impact!
       shake(40);
       animateExplosion(target);
       const startScale = 1.5;
@@ -752,6 +847,34 @@ export function animateZoomies(attacker, target) {
     }
   }
   zipNext();
+}
+
+// SPECIAL UNLOCK MOVE
+ export function animateWhiskerWhip(attacker, target) {
+  const whipStart = attacker.pos.add(50, -60);
+  
+  const whip = add([
+    sprite("whip", { anim: "glitch" }),
+    pos(whipStart),
+    scale(3),
+    anchor("left"), 
+    z(90),
+    opacity(0)
+  ]);
+  
+  tween(whip.opacity, 1, 0.1, (o) => whip.opacity = o);
+  
+  whip.play("glitch");
+  
+  wait(0.2, () => {
+    shake(70);
+    animateShock(target);
+    
+    wait(0.2, () => {
+      tween(whip.opacity, 0, 0.2, (o) => whip.opacity = o)
+        .then(() => destroy(whip));
+    });
+  });
 }
 
 // ========================= LASER POINTER =========================
@@ -1095,7 +1218,6 @@ export function animateHydrogenHammer(boss, hero) {
 }
 
 export function animatePoisonAttack(boss, hero) {
-  // Phase 1: Open Schrödinger's Box
   const box = add([
     sprite("box", { frame: 0 }), 
     pos(boss.pos.add(-40, 20)),
@@ -1109,11 +1231,11 @@ export function animatePoisonAttack(boss, hero) {
   tween(box.pos.y, box.pos.y - 20, 0.3, (p) => box.pos.y = p, easings.easeOutQuad);
 
   wait(0.4, () => {
-    box.frame = 1; // Open box
+    box.frame = 1; 
   });
 
   wait(0.5, () => {
-    // Phase 2: Bottle rises from box
+    
     const bottle = add([
       sprite("bottle"),
       pos(box.pos.add(0, -20)),
@@ -1130,7 +1252,7 @@ export function animatePoisonAttack(boss, hero) {
       .then(() => destroy(box));
 
     wait(0.7, () => {
-      // Phase 3: Bottle enters superposition
+    
       const makeCopy = () => add([
         sprite("bottle"),
         pos(bottle.pos),
@@ -1173,7 +1295,7 @@ export function animatePoisonAttack(boss, hero) {
           } else {
             finished++;
             if (finished === 2) {
-              // Phase 4: Bottles merge and shatter
+              
               const mergePoint = hero.pos.add(0, -120);
               tween(A.pos, mergePoint, 0.12, (p) => A.pos = p);
               tween(B.pos, mergePoint, 0.12, (p) => B.pos = p);
@@ -1197,7 +1319,7 @@ export function animatePoisonAttack(boss, hero) {
                 wait(0.4, () => {
                   destroy(shatter);
                   
-                  // Phase 5: Poison drips down
+                  
                   const drip = add([
                     sprite("poison", { anim: "glitch" }), 
                     pos(hero.pos.add(0, -10)),
@@ -1227,3 +1349,551 @@ export function animatePoisonAttack(boss, hero) {
     });
   });
 }
+
+
+// ========================= FINISH HIM =========================
+
+// =================== CAT ARROW ===================
+
+  export function animateCatArrow(hero, boss) {
+    const lock = add([ // LOCK ON
+      sprite("lock", { anim: "glitch" }),
+      pos(boss.pos),
+      scale(2),
+      anchor("center"),
+      z(20),
+      opacity(0),
+    ]);
+
+    tween(lock.opacity, 1, 0.4, (o) => lock.opacity = o);
+
+    let t = 0;
+    lock.onUpdate(() => {
+      t += dt();
+      lock.pos = boss.pos.add(Math.sin(t * 20) * 6, Math.cos(t * 10) * 8);
+    });
+
+    wait(7, () => {
+      destroy(lock);
+      shake(8);
+
+      const arrow = add([
+        sprite("catArrow"),         
+        pos(boss.pos),
+        scale(1),
+        anchor("center"),
+        rotate(0),
+        z(30),
+      ]);
+
+      const dirToPlayer = hero.pos.sub(boss.pos).unit();
+      arrow.angle = dirToPlayer.angle() + 180;
+
+      
+      tween( // PULL BACK
+        arrow.pos,
+        hero.pos.add(dirToPlayer.scale(40)), // BEHIND PLAYER
+        0.2,
+        (p) => arrow.pos = p,
+        easings.easeInExpo
+      ).then(() => { // STRETCH + WOBBLE
+        arrow.scale = vec2(2, 2);
+        shake(4);
+
+      
+        let vibe = 0;  // VIBRATION
+        const vibeHandle = arrow.onUpdate(() => {
+          vibe += dt();
+          arrow.pos = arrow.pos.add(Math.sin(vibe * 50) * 2, Math.sin(vibe * 30) * 1);
+        });
+
+        wait(4, () => {                
+          vibeHandle.cancel();    // PAUSE TO SEE ARROW        
+          arrow.pos = hero.pos.add(dirToPlayer.scale(40))
+          tween(arrow.scale, vec2(0, 0), 0.08, (s) => arrow.scale = s) // WIND UP SQUISH
+            .then(() => {
+              // FWSSSHHHHHH — RELEASE!!!
+              tween(arrow.scale, vec2(1.5), 0.08, (s) => arrow.scale = s);
+
+              tween(
+                arrow.pos,
+                boss.pos,
+                0.15,    // FAST                               
+                (p) => arrow.pos = p,
+                easings.easeInCubic
+              ).then(() => {
+                tween(arrow.pos, boss.pos.add(dirToPlayer.scale(-15)), 0.06, (p) => arrow.pos = p, easings.easeOutCubic) // OVERSHOOT
+                  .then(() => {
+                    arrow.pos = boss.pos;
+                    animateKaBAM(boss);
+                    animatePoooof(boss);
+                    shake(20);
+
+                    destroy(arrow);
+                  });
+              });
+            });
+        });
+      });
+    });
+  }
+
+
+  export function animateCatCrossbow(hero, boss) {
+      const crossbow = add([
+        sprite("CrossBow"), 
+        pos(hero.pos.add(130, 20)),
+        scale(1.3),
+        anchor("center"),
+        z(25),
+        rotate(-35),
+        opacity(0),
+      ]);
+      crossbow.frame = 0;
+      tween(crossbow.opacity, 1, 0.25, (o) => crossbow.opacity = o);
+      wait(0.8, () => {
+        play("cupFinishHim");
+        const dirToTarget = boss.pos.sub(hero.pos).unit();
+        
+        const spriteWidth = crossbow.width * crossbow.scale.x; // CALCULATE OFFSET TO KEEP HANDLE IN SAME SPOT
+        const spriteHeight = crossbow.height * crossbow.scale.y; // HANDLE MOVES FROM TOP-LEFT TO BOTTOM-LEFT
+        
+        const handleOffset = vec2(20, spriteHeight * -0.3); // THIS ADJUSTS VERTICALLY // OFFEST TO COMPENSATE FOR HANDLE PLACEMENT ON SPRITE SHEET
+              crossbow.frame = 1; // FRAME 2 - TILT UP TO AIM
+        crossbow.pos = crossbow.pos.add(handleOffset);
+        crossbow.angle = dirToTarget.angle()+10;
+
+        const lock = add([ // LOCK ON TARGET
+          sprite("lock", { anim: "glitch" }),
+          pos(boss.pos),
+          scale(2),
+          anchor("center"),
+          z(20),
+          opacity(0),
+        ]);
+
+        tween(lock.opacity, 1, 0.4, (o) => lock.opacity = o);
+
+        let t = 0;
+        lock.onUpdate(() => {
+          t += dt();
+          lock.pos = boss.pos.add(Math.sin(t * 20) * 6, Math.cos(t * 10) * 8);
+        });
+
+        wait(1, () => {
+          const arrow = add([ // SPAWN ARROW ON THE BOW
+            sprite("catArrow"),         
+            pos(hero.pos.add(dirToTarget.scale(20))), // SLIGHTLY IN FRONT
+            scale(1.1),
+            anchor("center"),
+            rotate(dirToTarget.angle()),
+            z(30),
+          ]);
+
+          tween( // COCK IT BACK
+            arrow.pos,
+            hero.pos.add(dirToTarget.scale(-15)), // PULL BACK
+            0.3,
+            (p) => arrow.pos = p,
+            easings.easeOutQuad
+          ).then(() => {
+            crossbow.scale = vec2(1.2, 1.3); // SLIGHT TENSION SQUISH
+            
+            let vibe = 0; // VIBRATION - HOLDING THAT TENSION
+            const vibeHandle = arrow.onUpdate(() => {
+              vibe += dt();
+              arrow.pos = arrow.pos.add(Math.sin(vibe * 50) * 2, Math.sin(vibe * 30) * 1);
+              arrow.scale = vec2(1.3, 1.4); // SLIGHT TENSION SQUISH
+
+            });
+
+            wait(1, () => {
+              vibeHandle.cancel();
+              destroy(lock);
+              
+              tween(arrow.scale, vec2(0.3, 0.8), 0.08, (s) => arrow.scale = s)  // WIND UP SQUISH
+                .then(() => {
+                  shake(20);
+                  
+                  tween(arrow.scale, vec2(1.5), 0.08, (s) => arrow.scale = s); // FIRE!!!
+                  
+                  const recoilDir = dirToTarget.scale(-5);  // CROSSBOW RECOIL
+                  const originalPos = crossbow.pos;
+                  tween(
+                    crossbow.pos,
+                    originalPos.add(recoilDir.scale(20)),
+                    0.1,
+                    (p) => crossbow.pos = p,
+                    easings.easeOutQuad
+                  ).then(() => {
+                    tween(crossbow.pos, originalPos, 0.2, (p) => crossbow.pos = p, easings.easeInOutQuad);
+                  });
+                  
+                  crossbow.scale = vec2(2, 2); // RECOIL STRETCH
+
+                  tween( // ARROW FLIES
+                    arrow.pos,
+                    boss.pos,
+                    0.15,
+                    (p) => arrow.pos = p,
+                    easings.easeInCubic
+                  ).then(() => {
+                    tween(arrow.pos, boss.pos.add(dirToTarget.scale(15)), 0.06, (p) => arrow.pos = p, easings.easeOutCubic)
+                      .then(() => {
+                        arrow.pos = boss.pos;
+                        animateKaBAM(boss);
+                        animateSmoke(boss);
+                        shake(70);
+
+                        destroy(arrow);
+                        
+                        tween(crossbow.opacity, 0, 0.5, (o) => crossbow.opacity = o) // FADE OUT CROSSBOW
+                          .then(() => destroy(crossbow));
+                      });
+                  });
+                });
+            });
+          });
+        });
+      });
+    }
+
+// =================== MEOWLOTOV COCKTAIL ===================
+  export function animateMeowlotovCocktail(hero, boss) {
+      const lightPos = hero.pos.add(vec2(30, -150));
+      const cocktailLight = add([
+          sprite("CocktailLight", { anim: "glitch" }),
+          pos(lightPos),
+          scale(4.5), 
+          z(40),
+      ]);
+      cocktailLight.play("glitch", { loop: false });
+      play("laserFinishHim");
+
+      wait(0.6, () => { 
+          destroy(cocktailLight);
+
+          const startPos = lightPos;
+          const endPos = boss.pos.add(vec2(-30, -30)); 
+          const throwTime = 0.8;
+          const spin = add([
+              sprite("CocktailSpin", { anim: "glitch" }),
+              pos(startPos),
+              scale(3),
+              z(40),
+          ]);
+          spin.play("glitch", { loop: true });
+          const startY = startPos.y;
+          const endY = endPos.y;
+          const peakHeight = 150;
+          
+          tween(0, 1, throwTime, (t) => {
+              spin.pos.x = startPos.x + (endPos.x - startPos.x) * t;
+              const arcProgress = Math.sin(t * Math.PI);
+              spin.pos.y = startY + (endY - startY) * t - (peakHeight * arcProgress);
+          }, easings.easeInQuad);
+
+          wait(throwTime, () => {
+              destroy(spin);
+
+              animateKaBAM(boss, hero);
+              
+              for (let i = 0; i < 12; i++) {
+                  wait(i * 0.1, () => {
+                      const burnOffset = vec2(rand(-130, 2), rand(-110, 2));
+                      const burn = add([
+                          sprite("Burn", { anim: "glitch" }),
+                          pos(endPos.add(burnOffset)),
+                          scale(3.5 + rand(-0.6, 0.6)),
+                          opacity(0.7),
+                          z(35),
+                      ]);
+                      burn.play("glitch", { loop: false });
+                      wait(1, () => destroy(burn));
+                  });
+              }
+            wait(0.7, () => {animateSmoke(boss); } )
+          });
+      });
+  }
+
+// =================== FELINE FISSION ===================
+  export function animateFelineFission(boss) {
+      shake(30);
+      play("finalFinishHim");
+      const startPos = boss.pos.sub(vec2(250, -90));
+      const mushroom = add([
+          sprite("mushroom", { anim: "burst" }),
+          pos(startPos), 
+          scale(2),
+          z(50),
+          opacity(0.8),
+      ]);
+      
+      const startScale = 3; // GROW CLOUD UP
+      const endScale = 9;
+      tween(0, 1, 1.5, (t) => {
+          const currentScale = startScale + (endScale - startScale) * t;
+          mushroom.scale = vec2(currentScale, currentScale);
+          const scaleGrowth = currentScale - startScale; // KEEP BOTTOM ANCHORED
+          mushroom.pos.y = startPos.y - (scaleGrowth * 50); //  HEIGHT MULTIPLIER
+      }, easings.easeOutQuad);
+      
+      tween(mushroom.opacity, 0.7, 0.5, (o) => mushroom.opacity = o);
+      mushroom.play("burst", { loop: false });
+
+      wait(0.4, () => {
+          shake(70); // SHAKE BUILD UP
+          const flash1 = add([ // QUICK FLASH
+              rect(width(), height()),
+              pos(0, 0),
+              color(255, 255, 255), 
+              opacity(0),
+              fixed(),
+              z(10000),
+          ]);
+          
+          tween(flash1.opacity, 1, 0.15, (val) => flash1.opacity = val, easings.easeInQuad);
+          wait(0.15, () => {
+              tween(flash1.opacity, 0, 0.2, (val) => flash1.opacity = val, easings.easeOutQuad);
+              wait(0.2, () => destroy(flash1));
+          });
+          
+          wait(1.5, () => destroy(mushroom)); // DESTROY MUSHROOM AFTER FIRST FLASH
+          wait(0.6, () => { // CINEMATIC FLASH
+              shake(100);
+              const flash2 = add([
+                  rect(width(), height()),
+                  pos(0, 0),
+                  color(255, 255, 255), 
+                  opacity(0),
+                  fixed(),
+                  z(10000),
+              ]);
+              tween(flash2.opacity, 1, 0.3, (val) => flash2.opacity = val, easings.easeInQuad); // LINGERING FULL WHITE SCREEN 
+              
+             // wait(1.5, () => {
+              //    for (let i = 0; i < 12; i++) { // FILL SCREEN WITH SMOKE
+               //       const xPos = (i % 4) * (width() / 3) + rand(-50, 50);
+             //         const yPos = Math.floor(i / 4) * (height() / 2) + rand(-50, 50);
+              //        const poof = add([ // SMOKE
+              //            sprite("smoke", { anim: "puff" }),
+              //            pos(xPos, yPos),
+              //            scale(6 + rand(-1, 1)),
+              //            opacity(0),
+              //            z(9999),
+              //            anchor("center"),
+              //            fixed(),
+              //        ]);
+              //        poof.play("puff", { loop: true });
+                      
+              //        wait(i * 0.03, () => { // FILL SCREEN WITH SMOKE
+              //            tween(poof.opacity, 0.8, 0.3, (o) => poof.opacity = o);
+              //            tween(poof.pos.y, poof.pos.y + rand(-30, 30), 2, (y) => poof.pos.y = y, easings.easeOutQuad); // DRIFT SMOKE
+                          
+             //             wait(1.5, () => { // FADE OUT SMOKE
+              //                shake(10);
+                //              tween(poof.opacity, 0, 1.0, (o) => poof.opacity = o, easings.easeOutQuad)
+               //                   .then(() => destroy(poof));
+               //           });
+              //        });
+               //   }
+              //    wait(0.35, () => { // FADE WHITE OUT SLOWLY
+              //        tween(flash2.opacity, 0, 1.2, (val) => flash2.opacity = val, easings.easeOutQuad);
+              //        wait(1.2, () => destroy(flash2));
+                      
+              //    });
+         //     });
+          });
+      });
+  }
+
+// =================== BRASS TOE BEANS ===================
+
+  export function animateBrassToeBeans(hero, boss) {
+      const startPos = hero.pos.add(vec2(100, -100));
+      
+      // SHOW OFF THE KNUCKLES
+      const knuckles = add([
+          sprite("BrassToeBeans"),
+          pos(startPos),
+          scale(1),
+          rotate(0),
+          z(45),
+          opacity(0),
+          anchor("center"),
+      ]);
+      
+      tween(knuckles.opacity, 1, 0.2, (o) => knuckles.opacity = o);
+      play("cucumberFinishHim"); 
+
+      wait(0.2, () => {
+          tween(knuckles.scale, vec2(2, 2), 0.3, (s) => knuckles.scale = s, easings.easeOutBack);
+      });
+      
+      wait(0.7, () => {
+          const windUpPos = startPos.add(vec2(-100, 0));
+          tween(knuckles.pos, windUpPos, 0.25, (p) => knuckles.pos = p, easings.easeInQuad);
+          tween(knuckles.angle, 110, 0.25, (a) => knuckles.angle = a);
+          
+          wait(0.2, () => {
+              // EXPLOSIVE PUNCH
+              const punchTime = 0.1;
+              const endPos = boss.pos.add(vec2(50, 0));
+              
+              tween(knuckles.pos, endPos, punchTime, (p) => knuckles.pos = p, easings.easeInCubic);
+              tween(knuckles.scale, vec2(1.8, 1.8), punchTime * 0.5, (s) => knuckles.scale = s, easings.easeInQuad);
+              
+              wait(punchTime, () => {
+                  // IMPACT
+                  shake(70);
+                  
+                  for (let i = 0; i < 4; i++) {
+                      wait(i * 0.08, () => {
+                          const angle = (i * 90) + rand(-20, 20);
+                          const distance = rand(2, 2);
+                          const splatOffset = vec2(
+                              Math.cos(angle * Math.PI / 180) * distance,
+                              Math.sin(angle * Math.PI / 180) * distance
+                          );
+                          
+                          const splat = add([
+                              sprite("splat", { anim: "glitch" }),
+                              pos(boss.pos.add(splatOffset)),
+                              scale(1.2 + rand(-0.2, 0.3)),
+                              rotate(rand(0, 360)),
+                              z(40),
+                              opacity(0.6),
+                          ]);
+                          splat.play("glitch", { loop: false });
+                          wait(0.5, () => destroy(splat));
+                      });
+                  }
+                  
+                  wait(0.1, () => shake(30));
+                  
+                  wait(0.01, () => {
+                      const heroReturnPos = hero.pos.add(vec2(120, -20)); 
+                      tween(knuckles.pos, heroReturnPos, 0.25, (p) => knuckles.pos = p, easings.easeOutQuad);
+                      tween(knuckles.scale, vec2(1.5, 1.5), 0.25, (s) => knuckles.scale = s);
+                      tween(knuckles.angle, 90, 0.1, (a) => knuckles.angle = a, easings.easeInQuad);
+                      
+                      wait(0.45, () => {
+                          tween(knuckles.angle, 25, 0.1, (a) => knuckles.angle = a, easings.easeInQuad);
+                          
+                          wait(0.12, () => {
+                              tween(knuckles.angle, 115, 0.1, (a) => knuckles.angle = a, easings.easeOutQuad);
+                              
+                              wait(0.1, () => {
+                                  const flickAngle = 35; 
+                                  const flickSplat = add([
+                                      sprite("splat", { anim: "glitch" }),
+                                      pos(knuckles.pos),
+                                      scale(1.3),
+                                      rotate(rand(0, 360)),
+                                      z(46),
+                                      opacity(1),
+                                  ]);
+                                  flickSplat.play("glitch", { loop: false });
+                                  
+                                  const flickTarget = knuckles.pos.add(vec2(
+                                      Math.cos(flickAngle * Math.PI / 180) * 200,
+                                      Math.sin(flickAngle * Math.PI / 180) * 200
+                                  ));
+                                  tween(flickSplat.pos, flickTarget, 0.4, (p) => flickSplat.pos = p, easings.easeOutQuad);
+                                  tween(flickSplat.opacity, 0, 0.4, (o) => flickSplat.opacity = o);
+                                  wait(0.5, () => destroy(flickSplat));
+                              });
+                              
+                              wait(0.3, () => {
+                                  tween(knuckles.opacity, 0, 0.3, (o) => knuckles.opacity = o);
+                                  wait(0.3, () => destroy(knuckles));
+                              });
+                          });
+                      });
+                  });
+              });
+          });
+      });
+  }
+
+
+
+// =================== PURRCISION RIFLE ===================
+  export function animatePurrcisionRifle(hero, boss) {
+      const startPos = hero.pos.add(vec2(-90, 50));
+      const rifle = add([
+          sprite("rifle"),
+          pos(startPos),
+          scale(2.3),
+          rotate(-85), // START VERTICAL-ISH
+          z(100),
+          opacity(0),
+      ]);
+      tween(rifle.opacity, 1, 0.2, (o) => rifle.opacity = o);
+          wait(0.6, () => { // PAUSE TO SHOW OFF RIFLE
+          const aimingAngle = -15; // ROTATE TO AIMING POSITION
+          const aimingPos = hero.pos.add(vec2(-110, -120));
+          
+          tween(rifle.angle, aimingAngle, 0.8, (a) => rifle.angle = a, easings.easeInOutQuad);
+          tween(rifle.pos, aimingPos, 0.8, (p) => rifle.pos = p, easings.easeInOutQuad);
+          
+          const lock = add([ // LOCK ON TARGET
+              sprite("lock2", { anim: "glitch" }),
+              pos(boss.pos.add(vec2(-90, -70))),
+              scale(2),
+              opacity(0),
+              z(150),
+          ]);
+          
+          wait(0.6, () => {
+              tween(lock.opacity, 0.8, 0.2, (o) => lock.opacity = o);
+              lock.play("glitch", { loop: false, speed: 30 });
+          });
+          play("ratFinishHim");
+          wait(1.8, () => {
+              destroy(lock);
+              const flashPos = rifle.pos.add(vec2(340, -20)); // MUZZLE FLASH
+              const flash = add([
+                  sprite("MuzzleFlash", { anim: "burst" }),
+                  pos(flashPos),
+                  scale(3.5),
+                  rotate(-15),
+                  z(150),
+              ]);
+              flash.play("burst", { loop: false, speed: 20 });
+              shake(50);
+              
+              tween(rifle.angle, -45, 0.08, (a) => rifle.angle = a, easings.easeOutQuad); // RECOIL
+              tween(rifle.pos, aimingPos.add(vec2(-50, 15)), 0.08, (p) => rifle.pos = p, easings.easeOutQuad);
+              
+              wait(0.08, () => { // RETURN TO FIRING POSITION
+                  tween(rifle.angle, aimingAngle, 0.15, (a) => rifle.angle = a, easings.easeOutQuad);
+                  tween(rifle.pos, aimingPos, 0.15, (p) => rifle.pos = p, easings.easeOutQuad);
+              });
+              
+              wait(0.07, () => {
+                  //const boom = add([ // PINK BOOM ON boss
+                    //  sprite("pinkBoom", { anim: "burst" }),
+                      //pos(boss.pos.add(vec2(-150, -190))),
+                     // scale(0.6),
+                      //z(50),
+                  //]);
+                  
+                 // tween(boom.scale, vec2(8, 8), 0.4, (s) => boom.scale = s, easings.easeOutQuad); // GROW PINK BOOM
+                 // boom.play("burst", { loop: false, speed: 12 });
+                 animateKaBAM(boss);
+                  shake(45);
+                  wait(0.5, () => {
+                      destroy(flash);
+                     // destroy(boom);
+                      
+                      wait(0.2, () => {
+                          tween(rifle.opacity, 0, 0.3, (o) => rifle.opacity = o);
+                          wait(0.3, () => destroy(rifle));
+                      });
+                  });
+              });
+          });
+      });
+  }
