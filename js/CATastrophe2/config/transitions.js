@@ -1,5 +1,3 @@
-// Create this new file in your config folder
-
 export const TRANSITIONS = {
   Transition1: { // AFTER CHARACTER SELECT, BEFORE LEVEL 1
     Text1: ["Another purrfect morning at Schrödinger's Cat Café!"],
