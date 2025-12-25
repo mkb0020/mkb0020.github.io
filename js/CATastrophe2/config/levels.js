@@ -3,7 +3,7 @@ export const LEVELS = {
   level1: { 
     id: 'level1',
     name: 'Level 1',
-    timeLimit: 90000,
+    timeLimit: 90,
     length: 12000,
     playerSpawn: { x: 1000, y: 300 },
     GroundSegments: [
@@ -46,12 +46,12 @@ export const LEVELS = {
       lasers: { enabled: false }
     },
     items: {
-      fishBones: { enabled: true, count: 3 },
+      fishBones: { enabled: true, count: 2 },
       tunaCan: { enabled: false },
       milkBottle: { enabled: false },
       catnip: { enabled: false },
     },
-    playerHP: { start: 100, max: 100 },
+    playerHP: { start: 120, max: 120 },
     background: 'level1BG',
     levelMusic: 'PlatformerTrack1',
     nextBoss: 'cupBoss',
@@ -61,7 +61,7 @@ export const LEVELS = {
   level2: { 
     id: 'level2',
     name: 'Level 2',
-    timeLimit: 900000,
+    timeLimit: 90,
     length: 12000,
     playerSpawn: { x: 1000, y: 300 },
     GroundSegments: [
@@ -106,9 +106,8 @@ export const LEVELS = {
           spawnRate: 2500,
           damage: 5,
           spawnZones: [
-            { start: 2200, end: 3900 },  
-            { start: 6000, end: 6800 },  
-            { start: 8000, end: 9500 }  
+            { start: 3190, end: 4200 },  
+            { start: 6000, end: 6800 }
           ]
         },
       rats: { enabled: false },
@@ -120,12 +119,12 @@ export const LEVELS = {
     milkBottlePosition: { x: 10765, y: 130 },
     items: {
       fishBones: { enabled: true, count: 2 },
-      tunaCan: { enabled: true, count: 3 },
+      tunaCan: { enabled: true, count: 1 },
       milkBottle: { enabled: true, count: 1 },
       catnip: { enabled: false }
     },
-    playerHP: { start: 100, max: 100 },
-    background: 'level1BG',
+    playerHP: { start: 120, max: 120 },
+    background: 'l2BG',
     levelMusic: 'PlatformerTrack2',
     nextBoss: 'cucumberBoss',
     bossSprite: "bossCucumber", 
@@ -135,7 +134,7 @@ export const LEVELS = {
   level3: { 
     id: 'level3',
     name: 'Level 3',
-    timeLimit: 900000,
+    timeLimit: 90,
     length: 12000,
     playerSpawn: { x: 1000, y: 300 },
     GroundSegments: [
@@ -181,8 +180,8 @@ export const LEVELS = {
         spawnRate: 2000,
         damage: 5,
         spawnZones: [
-          { start: 3200, end: 3800 },   
-          { start: 6000, end: 6800 },   
+          { start: 3600, end: 4300 },   
+          { start: 6000, end: 6500 },   
           { start: 9000, end: 9700 }   
         ]
       },
@@ -191,7 +190,6 @@ export const LEVELS = {
       spawnRate: 8000,
       
       spawnZones: [
-        { start: -1000, end: 2200 },   
         { start: 3200, end: 4600 },   
         { start: 4900, end: 6700 },   
         { start: 7200, end: 9050 }
@@ -202,17 +200,17 @@ export const LEVELS = {
     
     
     catnipZones: [
-        { x: 4600, y: 340 }, 
-        { x: 6900, y: 340 }, 
-        { x: 9000, y: 340 } ],
+        { x: 4600, y: 270 }, 
+        { x: 6900, y: 270 }, 
+        { x: 9000, y: 270 } ],
     items: {
-      fishBones: { enabled: true, count: 3 },
-      tunaCan: { enabled: true, count: 4 },
+      fishBones: { enabled: true, count: 2 },
+      tunaCan: { enabled: true, count: 2 },
       milkBottle: { enabled: false },
       catnip: { enabled: true, count: 1 }
     },
-    playerHP: { start: 100, max: 100 },
-    background: 'level1BG',
+    playerHP: { start: 120, max: 120 },
+    background: 'l3BG',
     levelMusic: 'PlatformerTrack3',
     nextBoss: 'bossRatKing',
     bossSprite: "bossRat", 
@@ -221,7 +219,7 @@ export const LEVELS = {
   level4: {
     id: 'level4',
     name: 'Level 4',
-    timeLimit: 900000,
+    timeLimit: 90,
     length: 12000,
     playerSpawn: { x: 1000, y: 300 },
     GroundSegments: [
@@ -252,7 +250,7 @@ export const LEVELS = {
     {x: 8745, y: 320, width: 220, height: 12},
     {x: 9600, y: 345, width: 220, height: 12},  
     {x: 10032, y: 300, width: 200, height: 12},
-    {x: 10485, y: 248, width: 180, height: 12}, 
+    {x: 10465, y: 248, width: 200, height: 12}, 
     {x: 10928, y: 205, width: 160, height: 12}, 
   ],
     cups: { enabled: true, count: 15 },
@@ -264,7 +262,7 @@ export const LEVELS = {
         spawnRate: 1800,
         damage: 5,
         spawnZones: [
-          { start: 2500, end: 3500 },
+          { start: 3300, end: 4000 },
           { start: 5800, end: 6300 },
           { start: 9200, end: 10800 }
         ]
@@ -273,34 +271,33 @@ export const LEVELS = {
       enabled: true,
       spawnRate: 3500,
       spawnZones: [
-        { start: -1000, end: 2000 },
         { start: 3000, end: 4550 },
         { start: 4550, end: 6700 },
-        { start: 6700, end: 8950 },
+        { start: 6700, end: 8500 },
         { start: 8950, end: 11350 }
       ]
     },
 
     lasers: { 
       enabled: true,
-      positions: [3800, 6400, 9200]
+      positions: [3800, 6400, 9500]
     }
     },
 
 
   catnipZones: [
-    { x: 4300, y: 340 }, 
-    { x: 6500, y: 340 }, 
-    { x: 8800, y: 340 }  
+    { x: 4300, y: 270 }, 
+    { x: 6500, y: 270 }, 
+    { x: 8800, y: 270 }  
   ],
     items: {
-      fishBones: { enabled: true, count: 3 },
-      tunaCan: { enabled: true, count: 4 },
+      fishBones: { enabled: true, count: 2 },
+      tunaCan: { enabled: true, count: 2 },
       milkBottle: { enabled: false },
       catnip: { enabled: true, count: 1 }
     },
     playerHP: { start: 120, max: 120 },
-    background: 'level1BG',
+    background: 'l4BG',
     levelMusic: 'PlatformerTrack4',
     nextBoss: 'laserPointerBoss',
     bossSprite: 'bossLaserPointer'
@@ -309,7 +306,7 @@ export const LEVELS = {
   level5: {
     id: 'level5',
     name: 'Level 5',
-    timeLimit: 900000,
+    timeLimit: 90,
     length: 12000,
     playerSpawn: { x: 1000, y: 300 },
     GroundSegments: [
@@ -326,7 +323,7 @@ export const LEVELS = {
     groundPlatform: { x: -1000, y: 440, width: 13000, height: 50 },
     platforms: [
     {x: 1300, y: 350, width: 200, height: 12},  
-    {x: 1740, y: 270, width: 180, height: 12},  
+    {x: 1730, y: 270, width: 200, height: 12},  
     {x: 2165, y: 300, width: 190, height: 12},  
     {x: 2610, y: 252, width: 170, height: 12},  
     {x: 3060, y: 285, width: 185, height: 12}, 
@@ -335,7 +332,7 @@ export const LEVELS = {
     {x: 4625, y: 285, width: 180, height: 12},  
     {x: 5070, y: 310, width: 190, height: 12},  
     {x: 5525, y: 365, width: 200, height: 12}, 
-    {x: 5995, y: 250, width: 165, height: 12}, 
+    {x: 5895, y: 250, width: 165, height: 12}, 
 
     {x: 6900, y: 295, width: 185, height: 12},  
     {x: 7345, y: 320, width: 195, height: 12},  
@@ -376,11 +373,10 @@ export const LEVELS = {
           spawnRate: 1500,
           damage: 5,
           spawnZones: [
-            { start: 1600, end: 2500 },  
-            { start: 3200, end: 4100 },  
+            { start: 2900, end: 3800 },  
+            { start: 5100, end: 5400 },  
             { start: 6200, end: 7800 },   
-            { start: 9100, end: 9900 },   
-            { start: 11200, end: 12200 }  
+            { start: 8900, end: 9200 },   
           ]
         },
     rats: { 
@@ -388,7 +384,6 @@ export const LEVELS = {
       spawnRate: 6000, 
   
       spawnZones: [
-        { start: -1000, end: 1500 },   
         { start: 2600, end: 3950 },    
         { start: 4500, end: 6000 },   
         { start: 6100, end: 7930 },    
@@ -401,28 +396,28 @@ export const LEVELS = {
           enabled: true,
           
           positions: [
-            2800,   
+            3800,   
             5200,  
             7100,  
-            9700,   
+            9300,   
             10600   
           ]
         }
     },
 
     catnipZones: [
-      { x: 3900, y: 340 }, 
-      { x: 5950, y: 340 }, 
-      { x: 9850, y: 340 } ],
+      { x: 3900, y: 270 }, 
+      { x: 5950, y: 270 }, 
+      { x: 9850, y: 270 } ],
     milkBottlePosition: { x: 10980, y: 100 },
     items: {
-      fishBones: { enabled: true, count: 4 },
-      tunaCan: { enabled: true, count: 4 },
+      fishBones: { enabled: true, count: 2 },
+      tunaCan: { enabled: true, count: 3 },
       milkBottle: { enabled: true, count: 1 },
       catnip: { enabled: true, count: 1 }
     },
     playerHP: { start: 120, max: 120 },
-    background: 'level1BG',
+    background: 'l5BG',
     levelMusic: 'PlatformerTrack5',
     nextBoss: 'observerBoss',
     bossSprite: 'observer'
