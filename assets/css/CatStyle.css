@@ -1,87 +1,121 @@
-/* CSS STYLING FOR CATastrophe PAGE */
+/* ============================ COLOR PALETTE ============================ */
 :root {
-        --text: rgba(223,223,242);
-        --BosonBlue: #170032; /* FOR BACKGROUNDS  */
-        --BosonShadow: #0e001d4d;
-        --BosonShadow2: #0e001dc8;
-        --ProtonPurple: #37025a; /* FOR BACKGROUNDS */
-        --ProtonShadow: rgba(24, 1, 40, 0.116);
-        --ProtonShadow2: rgba(24, 1, 40, 0.758);
-        --VortexViolet: #830cde; /* FOR SHADOWS OR DEPTH  RGB 131,12,222 */
-        --VortexGlow1: rgba(131, 12, 222, 0.2);
-        --VortexGlow2: rgba(131,12,222, 0.5);
-        --VortexGlow3: rgba(131,12,222, 0.8);
-        --PlasmaPurple: #A55AFF; /* MAIN PURPLE  RGB 165,90,255*/
-        --plasmaGlow1: rgba(165,90,255,0.2);
-        --PlasmaGlow2:rgba(165,90,255,0.5);
-        --PlasmaGlow3: rgba(165,90,255,0.8);
-        --NuclearFuscia:#dc4ce8; /* FOR COLOR POPS  RGB 220,76,232*/
-        --NuclearGlow1: rgba(219, 76, 232, 0.2);
-        --NuclearGlow2: rgba(220,76,232, 0.5);
-        --NuclearGlow3: rgba(220,76,232, 0.6);
-        --ParticlePink: #FFC7FF; /* USE FOR HEADERS  RGB 255,199,255*/
-        --ParticleGlow1: rgba(255,199,255, 0.2);
-        --ParticleGlow2: rgba(255,199,255, 0.5);
-        --ParticleGlow3: rgba(255,199,255, 0.8);
-        --RadiationRed: #730132; /* USE FOR X BUTTONS OR ALERT/DANGER MESSAGES RGB 115,1,50 */
-        /* GREEN / AQUA FAMILY */
-        --AlphaAqua: #67FEBD; /* MAIN GREEN/AQUA FAMILY COLOR  RGB 103,254,189*/
-        --AlphaGlow1: rgba(103,254,189, 0.2);
-        --AlphaGlow2: rgba(103,254,189, 0.5);
-        --AlphaGlow3: rgba(103,254,189, 0.8);
-        --AquaAura: #00ffff;
-        --AuraGlow1: rgba(0,255,255, 0.2);
-        --AuraGlow2: rgba(0,255,255, 0.5);
-        --AuraGlow3: rgba(0,255,255, 0.8);
-        --AtomicAqua: #9EFF9E; /* USE FOR AQUA GLOWS RGB 158,255,158 */
-        --RadioactiveGreen: #58e84c; /* FOR SHADOWS OR DEPTH  RGB 88,232,76 */
-        --HalfLifeLime: #f3ffe5; /* USE FOR TEXT   */
-        --UraniumGreen: #75FB1E; /* FOR  COLOR POPS  RGB 117,251,30*/
-        /* NEUTRAL / GREY FAMILY*/
-        --White: #FFFFFF; 
-        --Black: #000000;
-        --DarkDarkGray: #2A3439;
-        --DarkCooGray: #657383;
-        --Gray: #8391A1;
-        --CoolGray: #9090C0;
-        --MutedGray: #C4C3D0;
-        --LightGray: #DBE2E9;
-      }
+  --text: rgba(223,223,242);
+  --BosonBlue: #170032;
+  --BosonShadow: #0e001d4d;
+  --BosonShadow2: #0e001dc8;
+  --ProtonPurple: #37025a;
+  --ProtonShadow: rgba(24, 1, 40, 0.116);
+  --ProtonShadow2: rgba(24, 1, 40, 0.758);
+  --VortexViolet: #830cde;
+  --VortexGlow1: rgba(131, 12, 222, 0.2);
+  --VortexGlow2: rgba(131,12,222, 0.5);
+  --VortexGlow3: rgba(95, 12, 158, 0.904);
+  --PlasmaPurple: #A55AFF;
+  --plasmaGlow1: rgba(165,90,255,0.2);
+  --PlasmaGlow2:rgba(165,90,255,0.5);
+  --PlasmaGlow3: rgba(165,90,255,0.8);
+  --EntangledEucalyptus: rgb(235,200,255);
+  --NuclearFuscia:#dc4ce8;
+  --NuclearGlow1: rgba(219, 76, 232, 0.2);
+  --NuclearGlow2: rgba(220,76,232, 0.5);
+  --NuclearGlow3: rgba(220,76,232, 0.6);
+  --ParticlePink: #FFC7FF;
+  --ParticleGlow1: rgba(255,199,255, 0.2);
+  --ParticleGlow2: rgba(255,199,255, 0.5);
+  --ParticleGlow3: rgba(255,199,255, 0.8);
+  --RadiationRed: #730132;
+  --AlphaAqua: #67FEBD;
+  --AlphaGlow1: rgba(103,254,189, 0.2);
+  --AlphaGlow2: rgba(103,254,189, 0.5);
+  --AlphaGlow3: rgba(103,254,189, 0.8);
+  --AquaAura: #00ffff;
+  --AuraGlow1: rgba(0,255,255, 0.2);
+  --AuraGlow2: rgba(0,255,255, 0.5);
+  --AuraGlow3: rgba(0,255,255, 0.8);
+  --AtomicAqua: #9EFF9E;
+  --RadioactiveGreen: #58e84c;
+  --HalfLifeLime: #f3ffe5;
+  --UraniumGreen: #75FB1E;
+  --White: #FFFFFF; 
+  --Black: #000000;
+  --DarkDarkGray: #2A3439;
+  --DarkCooGray: #657383;
+  --Gray: #8391A1;
+  --CoolGray: #9090C0;
+  --MutedGray: #C4C3D0;
+  --LightGray: #DBE2E9;
+}
 
-    @keyframes neonPulse {
-        from { 
-            text-shadow: 
-            0 0 10px var(--ParticleGlow2),
-            0 0 20px var(--ParticleGlow3),
-            0 0 30px var(--ParticleGlow3);
+/* ============================ FONTS ============================ */
+@font-face {
+  font-family: 'GothNerd'; 
+  src: url('../fonts/ScienceGothic.ttf') format('truetype'); 
+}
+
+@font-face {
+  font-family: 'SpaceLetters'; 
+  src: url('../fonts/Orbitron-Bold.ttf') format('truetype'); 
+}
+
+/* ============================ ANIMATIONS ============================ */
+@keyframes neonPulse {
+  from { 
+    text-shadow: 
+      0 0 10px var(--ParticleGlow2),
+      0 0 20px var(--ParticleGlow3),
+      0 0 30px var(--ParticleGlow3);
+  }
+  to { 
+    text-shadow: 
+      0 0 20px var(--ParticleGlow3),
+      0 0 30px var(--NuclearFuscia),
+      0 0 40px var(--NuclearFuscia);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px var(--NuclearFuscia); }
+  50% { box-shadow: 0 0 40px var(--NuclearFuscia); }
+}
+
+#stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
         }
-        to { 
-            text-shadow: 
-            0 0 20px var(--ParticleGlow3),
-            0 0 30px var(--NuclearFuscia),
-            0 0 40px var(--NuclearFuscia);
+.star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff;
+            animation: twinkle 4s infinite;
         }
+@keyframes twinkle {
+            0%,100% { opacity: 0.4; transform: scale(1); }
+            50%     { opacity: 1; transform: scale(1.4); }
         }
-/* ============================================= PAGE  ============================================= */
+
+/* ============================ BASE STYLES ============================ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html, body { 
-  height: 100%; 
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; 
+    height: 100%; 
+    color: #FFFFFF;
+    background: linear-gradient(to bottom, #000000, #0f001e, #270142);
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: url('../images/BG2.png') center/cover fixed;
-  color: var(--text);
-  align-items: center;
-}
-
-/* ============================================= NAV BAR  ============================================= */
+/* ============================ NAVBAR ============================ */
 .navbar {
   position: fixed;
-  font-family: 'Orbitron', 'Courier New', monospace;
   top: 0;
-  width: 100%;
+  width: 100vw;
   background: linear-gradient(135deg, var(--BosonShadow) 0%, var(--ProtonShadow) 50%, var(--BosonShadow) 100%);
   backdrop-filter: blur(50px);
   border-bottom: 1px solid var(--PlasmaGlow2);
@@ -94,115 +128,266 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
-  align-items: center; 
-  justify-content: space-between; 
-  padding: 0.5rem;
-  height: 40px; 
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-bottom:  1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  height: 40px;
+  max-height:40px;
 }
 
 .home-link {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0; 
+  gap: 0.5rem;
+  flex-shrink: 0;
+  text-decoration: none;
 }
 
 .home-icon {
-  width: 30px;
-  height: 30px;
-  background: var(--AquaAura);
-  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>') no-repeat center;
-  -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>') no-repeat center;
-  mask-size: contain;
+  width: 38px;
+  height: 38px;
+  top: 50%;
+  mask: none !important;
+  -webkit-mask: none !important;
   transition: all 0.3s ease;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
 .home-icon:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 20px var(--AquaAura);
+  transform: scale(1.5);
+  filter: drop-shadow(0 0 30px var(--AquaAura));
 }
 
 .logo {
-  position: absolute; 
+  position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
   font-size: 1.7rem;
-  font-weight: bold;
   background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-shadow: 0 0 30px var(--ParticleGlow3);
   animation: neonPulse 2s ease-in-out infinite alternate;
-  z-index: 2; 
-  flex-shrink: 0; 
+  font-family: 'SpaceLetters', sans-serif;
+  z-index: 900;
+  flex-shrink: 0;
 }
 
-.nav-spacer {
-  width: 40px; 
-  height: 40px;
-  flex-shrink: 0; 
+/* ============================ HELP DROPDOWN ============================ */
+.help-dropdown {
+  position: relative;
+  display: inline-block;
 }
+
 
 
 .help-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--AquaAura);
+  width: 38px;
+  height: 38px;
+  top: 50%;
+  background: transparent;
+  color: var(--AquaAura);
   border: none;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  justify-content: center;
   transition: all 0.3s ease;
   flex-shrink: 0;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  box-shadow: 0 0 15px var(--AuraGlow2);
 }
 
 .help-icon:hover {
-  transform: scale(1.2) rotate(180deg);
+  transform: scale(1.1) rotate(180deg);
   box-shadow: 
     0 0 25px var(--AquaAura),
     0 0 35px var(--AlphaAqua);
 }
 
+.help-dropdown.active .help-icon {
+  background: var(--AquaAura);
+  color: var(--Black);
+}
+
 .question-mark {
-  font-size: 24px;
-  font-weight: 900;
-  color: var(--BosonBlue);
-  text-shadow: 0 0 10px var(--ParticleGlow3);
+  font-size: 28px;
+  font-family: 'GothNerd';
+  color: var(--AquaAura);
+  text-shadow: 0 0 10px var(--AquaAura);
   z-index: 2;
+  margin: 0;                  
+  line-height: 1;            
+  display: flex;              
+  align-items: center;       
+  justify-content: center;    
+  height: 100%;
 }
 
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; 
-  padding: 0.5rem 1rem;
-  height: 40px;
-  gap: 0; 
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  border: 1px solid var(--AquaAura);
+  box-shadow: 0 3px 5px var(--AquaAura);
+  backdrop-filter: blur(15px);
+  min-width: 280px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  backdrop-filter: blur(10px);
 }
 
-.home-link {
+.dropdown-menu button {
+  width: 100%;
+  padding: 16px 20px;
+  background: transparent;
+  color: #ffffff;
+  border: none;
+  text-align: left;
+  font-family: 'GothNerd', sans-serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 1px solid var(--PlasmaGlow3);
+}
+
+.dropdown-menu button:hover {
+  background: rgba(101,115,131,0.25);
+  border-color: var(--PlasmaPurple);
+  box-shadow: 0 0 20px var(--VortexViolet);
+  text-shadow: none;
+  border-radius:12px;
+  padding-left: 30px;
+}
+
+.dropdown-menu button:last-child {
+  border-bottom: none;
+}
+
+.help-dropdown.active .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+/* ============================ LEFT DROPDOWN MENU ============================ */
+.left-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 1001;
+}
+
+.menu-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
   display: flex;
   align-items: center;
-  gap: 0.5rem; 
-  flex-shrink: 0;
+  justify-content: center;
 }
+
+.menu-trigger .home-icon {
+  transition: all 0.3s ease;
+}
+
+.menu-trigger:hover .home-icon {
+  transform: scale(1.5);
+  filter: drop-shadow(0 0 30px var(--AquaAura));
+}
+
+.left-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  border: 1px solid var(--AquaAura);
+  box-shadow: 0 3px 5px var(--AquaAura);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  min-width: 300px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  padding: 12px 0;
+  z-index: 9999;
+}
+
+.left-dropdown.active .left-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(5px);
+}
+
+.menu-item {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  color: var(--White);
+  text-align: left;
+  text-decoration: none;
+  font-family: 'GothNerd', sans-serif;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+}
+
+.menu-item:hover {
+  background: rgba(101,115,131,0.25);
+  color: white;
+  padding-left: 30px;
+  box-shadow: 0 0 20px var(--VortexViolet);
+}
+
+.social-links {
+  margin-top: 20px;
+  padding: 15px 20px 10px;
+  border-top: 1px solid var(--PlasmaGlow3);
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.social-icon:hover {
+  opacity: 1;
+  transform: scale(1.1) translateY(-1px);
+  filter: drop-shadow(0 0 15px var(--AquaAura)) brightness(0) invert(1);
+}
+
+p {
+  margin-bottom: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
+}
+
+
 
 .modal-header h1 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   font-family: 'Orbitron', 'Courier New', monospace;
   color: var(--ParticlePink);
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 
@@ -214,7 +399,7 @@ body {
   background: rgba(103, 254, 189, 0.1);
   border: 1px solid var(--AlphaGlow2);
   border-radius: 12px;
-  color: var(--ParticlePink);
+  color: var(--NuclearFuscia);
   font-weight: bold;
 }
 
@@ -238,13 +423,29 @@ cite {
 h3 {
   color: var(--NuclearFuscia);
   margin: 1.5rem 0 0.5rem 0;
-  font-size: 1.3rem;
+  font-size: 2rem;
   text-shadow: 0 0 10px var(--NuclearGlow2);
+  font-family: 'GothNerd';
+}
+
+
+h5 {
+  color: var(--AlphaAqua);
+  margin: 1.3rem 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-family: 'GothNerd';
+}
+
+h6 {
+  color: var(--ParticlePink);
+  margin: 1.3rem 0 0.5rem 0;
+  font-size: 1.3rem;
+  font-family: 'GothNerd';
 }
 
 /* ============================================= TYPOGRAPHY  ============================================= */
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   font-family: 'Orbitron', Arial, Helvetica, sans-serif;;
   text-align: center;
   margin-bottom: 0.1rem;
@@ -425,7 +626,7 @@ modal-header h1 {
 }
 
 .modal-body {
-  color: var(--MutedGray);
+  color: var(--White);
   line-height: 1.7;
   font-size: 1.1rem;
 }
@@ -439,6 +640,8 @@ modal-header h1 {
   padding: 0.5rem 0;
   padding-left: 1.5rem;
   position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
 }
 
 .modal-body li::before {
@@ -448,6 +651,14 @@ modal-header h1 {
   color: var(--AlphaAqua);
 }
 
+
+
+#guideModal .modal-content {
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; 
+  scroll-behavior: smooth; 
+}
 /* ============================================= JS  ============================================= */
     .JS-page {
       padding: 65px;
@@ -500,7 +711,6 @@ modal-header h1 {
             justify-content: center;
             align-items: center;
             min-height: calc(100vh - 60px);
-            background: url('assets/images/BG.png');
     }
         
     #gameCanvas {
