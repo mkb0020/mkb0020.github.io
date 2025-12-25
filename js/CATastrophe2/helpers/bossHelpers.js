@@ -356,14 +356,14 @@ export function updateHPBars(player, boss, playerHPBar, playerHPText, bossHPBar,
   const maxHP = parseInt(player.maxHP) || 1;
   const hpPercent = currentHP / maxHP;
   
-  playerHPBar.width = 280 * hpPercent;
+  playerHPBar.width = 350 * hpPercent;
   playerHPText.text = `${currentHP} / ${maxHP}`;
   
   const bossCurrentHP = parseInt(boss.hp) || 0;
   const bossMaxHP = parseInt(boss.maxHP) || 1;
   const bossHPPercent = bossCurrentHP / bossMaxHP;
   
-  bossHPBar.width = 280 * bossHPPercent;
+  bossHPBar.width = 350 * bossHPPercent;
   bossHPText.text = `${bossCurrentHP} / ${bossMaxHP}`;
 }
 
