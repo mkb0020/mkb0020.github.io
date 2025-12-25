@@ -653,9 +653,9 @@ function checkBattleEnd() {
                 go("transition", "Transition7", character, player.hp);
               } else {
                 animateDefeat(bossSprite, bossGlow, false);
-                updateLog(`${boss.name} has been defeated! Victory!`);
+                updateLog(`FLAWLESS VICTORY! THE ${boss.name} HAS BEEN DEFEATED!`);
                 
-                wait(2, () => {
+                wait(3, () => {
                   if (bossId === 'BossLaserPointer') {
                     go("bossDefeated", {
                       level: "laserPointerBoss",
