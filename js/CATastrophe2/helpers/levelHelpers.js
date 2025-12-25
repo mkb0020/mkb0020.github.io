@@ -6,6 +6,7 @@ import { setupPauseSystem } from '../utils/pauseSystem.js';
 import { animateGhostPoof } from '../helpers/bossHelpers.js';
 import { rainbowCat } from '../config/characters.js';
 
+
 function playBloodDripAnimation(gameStateSetter, scoreGetter, levelName, character) {
   console.log('☠️ No lives remaining - GAME OVER');
   console.log('☠️ Playing blood drip animation...');
@@ -110,28 +111,62 @@ export function addLevelEnvironment(levelConfig) {
 
 
   levelConfig.platforms.forEach(platform => {
-    const plat = add([
+    add([
+      rect(platform.width, platform.height, { radius: 5 }),
+      pos(platform.x, platform.y),
+      color(rgb(144, 144, 192)),
+      outline(3, rgb(144, 144, 192)),
+      z(0)
+    ]);
+
+    const topHeight = platform.height * 0.3;
+    add([
+      rect(platform.width, topHeight, { radius: [5, 5, 0, 0] }), 
+      pos(platform.x, platform.y),
+      color(rgb(103,254,189)),
+      z(1)
+    ]);
+
+    add([
       rect(platform.width, platform.height, { radius: 5 }),
       pos(platform.x, platform.y),
       area(),
-      color(rgb(196,195,208)),
-      outline(3, rgb(219,226,233)),
+      opacity(0),
       "platform",
-      "oneWayPlatform"
+      "oneWayPlatform",
+      z(2)
     ]);
+
   });
 
 
   levelConfig.GroundSegments.forEach(GroundSegment => {
     add([
-      rect(GroundSegment.width, GroundSegment.height, { radius: 0}),
+      rect(GroundSegment.width, GroundSegment.height, { radius: 0 }),
+      pos(GroundSegment.x, GroundSegment.y),
+      color(rgb(42, 52, 57)),
+      outline(5, rgb(42, 52, 57)),
+      z(0)
+    ]);
+
+    const topHeight = GroundSegment.height * 0.2;
+    add([
+      rect(GroundSegment.width, topHeight),
+      pos(GroundSegment.x, GroundSegment.y),
+      color(rgb(24, 20, 41)),
+      z(1)
+    ]);
+
+    add([
+      rect(GroundSegment.width, GroundSegment.height, { radius: 0 }),
       pos(GroundSegment.x, GroundSegment.y),
       area(),
       body({ isStatic: true }),
-      color(rgb(153, 0, 255)),
-      outline(3, rgb(153, 0, 255)),
-      "ground"
-    ]);
+      opacity(0),
+      "ground",
+      z(2)
+  ]);
+
   });
 
   //const ground = levelConfig.groundPlatform;
@@ -140,7 +175,7 @@ export function addLevelEnvironment(levelConfig) {
     rect(15000, 480),
     pos(-1000, 0),
     color(0, 0, 0),
-    opacity(0.2),
+    opacity(0.4),
     z(0)
   ]);
 
@@ -455,7 +490,9 @@ export function setupPlayerControls(player, gameStateGetter) {
 }
 
 
-export function createUnifiedHUD(player) {
+export function createUnifiedHUD(player, showDebug = true) {
+
+
 
   const scoreText = add([
     text(`Score: 0`, { size: 24, font: "science" }),
@@ -507,7 +544,19 @@ export function createUnifiedHUD(player) {
     "timerText"
   ]);
 
-  return { scoreText, hpText, livesText, timerText, clock };
+  let debugText = null;
+    if (showDebug) {
+      debugText = add([
+        text(`X: 0  Y: 0`, { size: 30, font: "monospace" }),
+        pos(10, 80),
+        fixed(),
+        z(100),
+        color(Color.fromHex("#00FFFF")),
+        "debugText"
+      ]);
+    }
+
+  return { scoreText, hpText, livesText, timerText, clock, debugText };
 }
 
 
@@ -520,6 +569,11 @@ export function updateUnifiedHUD(hudElements, score, timeLeft, player, lives) {
   if (timeLeft < 10) {
     hudElements.timerText.color = Color.fromHex(Colors.RadiationRed);
   }
+
+  if (hudElements.debugText) {
+    hudElements.debugText.text = `X: ${Math.round(player.pos.x)}  Y: ${Math.round(player.pos.y)}`;
+  }
+
 }
 
 
@@ -528,7 +582,7 @@ export function setupVictoryCollision(player, levelName, nextBoss, character, ga
     if (player.vel.y >= 0 && gameStateGetter()) {
       console.log('🏆 VICTORY!');
       gameStateSetter(false);
-      
+      stopAllMusic();
       if (nextBoss === "observerBoss" || nextBoss === "observer") {
         wait(0.5, () => {
           go("levelComplete", {
@@ -649,6 +703,7 @@ export function setupCupCollection(player, scoreGetter, scoreSetter) {
       cup.hasBeenKnocked = true;
       cup.rotationSpeed = rand(-360, 360);
       cup.fallSpeed = 200;
+      cup.z = 3;
       
       scoreSetter(scoreGetter() + 1);
       play("collectCup", { volume: 0.3 });
@@ -865,6 +920,7 @@ export function setupCucumberSpawner(levelConfig, gameStateGetter) {
           rotationSpeed: rand(2, 5),
           damage: levelConfig.enemies.cucumbers.damage
         },
+        z(3),
         "cucumber"
       ]);
       
@@ -936,17 +992,38 @@ export function setupRatSpawner(levelConfig, gameStateGetter, player) {
   loop(spawnRate, () => {
     if (gameStateGetter()) {
       const camX = camPos().x;
+      const camLeft = camX - SCREEN_W / 2;
+      const camRight = camX + SCREEN_W / 2;
       
       const activeZones = zones.filter(zone => 
-        zone.end > camX - SCREEN_W/2 && 
-        zone.start < camX + SCREEN_W
+        zone.end > camLeft - 200 && 
+        zone.start < camRight + 200
       );
       
       if (activeZones.length === 0) return;
       
       const zone = choose(activeZones);
       
-      const spawnX = rand(zone.start + 100, zone.end - 100);
+      const offScreenAreas = [];
+      
+      if (zone.start < camLeft - 100) {
+        offScreenAreas.push({
+          start: Math.max(zone.start + 100, zone.start),
+          end: Math.min(camLeft - 100, zone.end - 100)
+        });
+      }
+      
+      if (zone.end > camRight + 100) {
+        offScreenAreas.push({
+          start: Math.max(camRight + 100, zone.start + 100),
+          end: Math.min(zone.end - 100, zone.end)
+        });
+      }
+      
+      if (offScreenAreas.length === 0) return;
+      
+      const spawnArea = choose(offScreenAreas);
+      const spawnX = rand(spawnArea.start, spawnArea.end);
       const spawnY = 390;
       
       const rat = add([
@@ -967,13 +1044,13 @@ export function setupRatSpawner(levelConfig, gameStateGetter, player) {
           bobSpeed: rand(8, 12),
           bobAmount: rand(2, 4)
         },
+        z(3),
         "rat"
       ]);
       
       rat.onUpdate(() => {
         rat.move(rat.speed * rat.direction, 0);
         
-       
         rat.flipX = rat.direction === 1;
         
         rat.bobTimer += dt() * rat.bobSpeed;
@@ -1020,7 +1097,8 @@ export function setupRatSpawner(levelConfig, gameStateGetter, player) {
 export function setupRatCollision(player, levelConfig, gameStateGetter, gameStateSetter, levelName, scoreGetter, scoreSetter, livesGetter, livesSetter, characterGetter) {
   player.onCollide("rat", (rat) => {
     const playerBottom = player.pos.y + 40;
-    const ratTop = rat.pos.y - 15;
+    const ratTop = rat.baseY - 15;
+    rat.z = 3;
     
     if (player.vel.y > 100 && playerBottom < ratTop) {
       destroy(rat);
@@ -1066,9 +1144,6 @@ export function setupRatCollision(player, levelConfig, gameStateGetter, gameStat
           } else {
             playBloodDripAnimation(gameStateSetter, scoreGetter, levelName, character);
           }
-
-
-
         }
       }
     }
