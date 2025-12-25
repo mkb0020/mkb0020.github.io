@@ -491,7 +491,7 @@ export function animateKaBAM(target) {
   const kabam = add([
     sprite("bam", { anim: "glitch" }),
     pos(target.pos),
-    scale(5),
+    scale(6),
     anchor("center"),
     z(40),
     opacity(1)
@@ -1564,7 +1564,7 @@ export function animatePoisonAttack(boss, hero) {
       const cocktailLight = add([
           sprite("CocktailLight", { anim: "glitch" }),
           pos(lightPos),
-          scale(4.5), 
+          scale(5), 
           z(40),
       ]);
       cocktailLight.play("glitch", { loop: false });
@@ -1604,7 +1604,7 @@ export function animatePoisonAttack(boss, hero) {
                       const burn = add([
                           sprite("Burn", { anim: "glitch" }),
                           pos(endPos.add(burnOffset)),
-                          scale(3.5 + rand(-0.6, 0.6)),
+                          scale(5.5 + rand(-0.6, 0.6)),
                           opacity(0.7),
                           z(35),
                       ]);
