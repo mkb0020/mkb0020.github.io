@@ -2,14 +2,14 @@
 export const BOSSES = {
   BossCup: {
     name: "LARGE HADRON CUP (LHC)",  
-    maxHP: 150,
+    maxHP: 100,
     atk: 10,
     speed: 18,
     defense: 28,
     sprite: 'bossCup',
     glowSprite: 'CupGlow',
     background: 'battleBG1', 
-    introMessage: ["THE LARGE HADRON CUP WANTS TO FIGHT! CLICK ON A MOVE TO BEGIN."],
+    introMessage: ["A LARGE HADRON CUP WANTS TO FIGHT! CLICK ON A MOVE TO BEGIN."],
     nextState: 'Transition2',
     moves: {
       "STEAM BURN": { dmg: 20, uses: 99 },
@@ -21,7 +21,7 @@ export const BOSSES = {
 
   BossCucumber: {
     name: "UNSTABLE CUCUMBER", 
-    maxHP: 150,
+    maxHP: 110,
     atk: 22,
     speed: 18,
     defense: 28,
@@ -41,14 +41,14 @@ export const BOSSES = {
 
   BossRatKing: {
       name: "RADIOACTIVE RAT KING", 
-      maxHP: 150,
+      maxHP: 120,
       atk: 22,
       speed: 18,
       defense: 28,
       sprite: 'bossRat',
       glowSprite: 'RatGlow',
       background: 'battleBG1', 
-      introMessage: ["RADIOACTIVE RAT KING WANTS TO FIGHT! CLICK ON A MOVE TO BEGIN."],
+      introMessage: ["THE RADIOACTIVE RAT KING WANTS TO FIGHT! CLICK ON A MOVE TO BEGIN."],
       nextState: 'Transition4',
       moves: {
         "BITE": { dmg: 20, uses: 99 }, 
@@ -60,7 +60,7 @@ export const BOSSES = {
 
   BossLaserPointer: {
       name: "GAMMA LASER POINTER", 
-      maxHP: 150,
+      maxHP: 120,
       atk: 22,
       speed: 18,
       defense: 28,
@@ -78,7 +78,7 @@ export const BOSSES = {
 
   observerBoss: {
     name: "OBSERVER", 
-    maxHP: 150,
+    maxHP: 130,
     atk: 22,
     speed: 18,
     defense: 28,
