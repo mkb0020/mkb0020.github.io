@@ -255,7 +255,7 @@ export function createYouDiedScene(data) {
   add([
     rect(SCREEN_W, SCREEN_H),
     pos(0, 0),
-    color(94, 4, 2),
+    color(65, 3, 2),
     opacity(0.6),
     z(1)
   ]);
