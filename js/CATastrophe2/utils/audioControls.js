@@ -165,7 +165,7 @@ export function startVictoryMusic() {
   
   window.victoryMusic = play("VictoryTrack", { 
     volume: window.isMuted ? 0 : 0.5, 
-    loop: true 
+    loop: false 
   });
   console.log(' Victory music started');
   
