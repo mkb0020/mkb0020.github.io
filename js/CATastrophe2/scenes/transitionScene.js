@@ -407,7 +407,9 @@ function createStandardTransition(transitionKey, character, playerHP) {
     if (textIndex < textKeys.length - 1) {
       textIndex++;
       updateText();
-      play("flip", { volume: 0.3 });
+      if (transitionKey !== 'Transition6') {
+        play("flip", { volume: 0.3 });
+      }
     } else {
       const nextState = transition.nextState;
       
@@ -651,6 +653,7 @@ function createTransition7Cinematic(character, playerHP) {
         pos(rand(0, SCREEN_W), -20),
         color(choose(confettiColors)),
         rotate(rand(0, 360)),
+        opacity(0.6),
         z(15),
         { vel: rand(30, 100), rotSpeed: rand(-5, 5) }
       ]);
