@@ -11,7 +11,7 @@
 </head>
 
 <body>
-   <!-- NAVBAR -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
       
@@ -25,10 +25,22 @@
           <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
           <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
           <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <a href="https://ko-fi.com/mkb0020" class="menu-item">Feed the cats (Tip Jar)</a>
           <a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>
           <a href="https://mkb0020.onrender.com/review" class="menu-item">Review CATastrophe 2</a>
-          <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
           <a href="https://mkb0020.onrender.com/admin_login" class="menu-item">Admin</a>
+
+          <!--<div class="social-links">
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>-->
+            <!--<a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>-->
+          <!--</div>-->
         </div>
       </div>
 
@@ -44,7 +56,8 @@
         
         <div class="dropdown-menu" id="dropdownMenu">
           <button id="openMainHelp">About</button>
-          <button id="openGuide">Manual</button>
+	  <button id="openGuide">Detailed Guide</button>
+	  <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
         </div>
       </div>
     </div>
@@ -53,21 +66,21 @@
   <div id="helpModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title">ACOUSTIC KITTY - 4-IN-1 SPRITE TOOLKIT</h1>
+        <h1 class="modal-title">ACOUSTIC KITTY - SPRITE TOOLKIT</h1>
         <button class="modal-close" id="closeModal">X</button>
       </div>
       <div class="modal-body">
         <h3>What is this?</h3>
         <p>I originally built a smaller version of this tool in Python to help standardize sprites for CATastrophe2 (coming soon!). I made one grayscale cat sprite, then recolored it to create dozens of unique cats instantly!</p>
-        <p>Acoustic Kitty is a sprite sheet toolkit for game dev with FOUR powerful features...</p>
+        <p>Acoustic Kitty is a sprite sheet toolkit for game dev with FIVE powerful features...</p>
         
-        <h3>Four Tools in One:</h3>
+        <h3>Five Tools in One:</h3>
         <ul>
           <li><strong>Tab 1 - Sheet Builder:</strong> Combine multiple PNG frames into a single organized sprite sheet</li>
           <li><strong>Tab 2 - Recolor One:</strong> Take a sprite sheet and swap out specific colors to create variants</li>
           <li><strong>Tab 3 - Batch Recolor:</strong> Recolor multiple sprite sheets at once (walk, jump, attack, etc.)</li>
           <li><strong>Tab 4 - Batch Resize:</strong> Resize multiple images to the same width for consistent sprite sheets</li>
-          <li><strong>Tab 5 - Remove BG:</strong> Make the background of an image (or images) transparent</li>
+          <li><strong>(COMING SOON!) Tab 5 - Remove BG:</strong> Make the background of an image (or images) transparent</li>
 
         </ul>
 
@@ -154,7 +167,7 @@
         <p><strong>Note:</strong> Images are scaled proportionally and transparency is preserved. If "Uniform Height" is checked, shorter images get transparent pixels added at the top to match the tallest image.</p>
 
 
-                <h3>Tab 4: Remove Background</h3>
+                <h3>Tab 5: Remove Background (COMING SOON!)</h3>
         <p><strong>What it does:</strong> Makes the background pixels transparent.</p>
         <p><strong>Perfect for:</strong> Creating character sprite sheets that you can put anywhere in your game!</p>
         <p><strong>How to use:</strong></p>
@@ -182,14 +195,14 @@
 
   <div id="stars"></div>
 
-  <h2>SPRITE SHEET 4-IN-1 TOOLKIT</h2>
+  <h2>SPRITE SHEET 5-IN-1 TOOLKIT</h2>
 
   <div class="tab-container">
     <button class="tab-btn active" data-tab="tab1">Build Sheet</button>
     <button class="tab-btn" data-tab="tab2">Recolor One</button>
     <button class="tab-btn" data-tab="tab3">Batch Recolor</button>
     <button class="tab-btn" data-tab="tab4">Batch Resize</button>
-    <button class="tab-btn" data-tab="tab5">Remove BG</button>
+    <button class="tab-btn" >COMING SOON!</button> <!-- Remove BG data-tab="tab5" -->
   </div>
 
   <div id="tab1" class="tab-content active">
@@ -390,7 +403,7 @@
   </div>
 
 
-<div id="tab5" class="tab-content">
+<!--<div id="tab5" class="tab-content">
   <div class="wrap-single">
     <div class="card">
       <h3>Remove Background</h3>
@@ -414,11 +427,48 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
+
+
+
+  <div id="kofi-float">
+        <a href="https://ko-fi.com/mkb0020" target="_blank" rel="noopener noreferrer">
+            <img src="assets/images/tipjar.png" alt="Support me on Ko-fi">
+            <div class="hearts">
+                <div class="heart" style="--delay: 0s; --drift: -20px;">❤️</div>
+                <div class="heart" style="--delay: 0.5s; --drift: 15px;">💖</div>
+                <div class="heart" style="--delay: 1s; --drift: -10px;">💕</div>
+                <div class="heart" style="--delay: 1.5s; --drift: 20px;">❤️</div>
+                <div class="heart" style="--delay: 2s; --drift: -15px;">💗</div>
+                <div class="heart" style="--delay: 2.5s; --drift: 10px;">💖</div>
+            </div>
+        </a>
+    </div>
+
+
+<div id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        <a href="javascript:void(0);" class="button-container" aria-label="Scroll to top">
+            <img src="assets/images/top.png" alt="Scroll to top">
+ 
+        </a>
+    </div>
+
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="js/KittyCore.js"></script>
   <script src="js/AcousticKitty.js"></script>
+
+  <script>
+        const button = document.getElementById('kofi-float');
+        button.addEventListener('mouseenter', () => {
+            document.querySelectorAll('.heart').forEach(h => {
+                h.style.animation = 'none';
+                h.offsetHeight; 
+                h.style.animation = null;
+            });
+        });
+    </script>
 
   <script>
         const starsDiv = document.getElementById('stars');
