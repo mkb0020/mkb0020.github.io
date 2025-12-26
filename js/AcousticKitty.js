@@ -496,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return new Promise((resolve, reject) => {
       const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/dist/browser.js';
+      script.src = 'https://cdn.jsdelivr.net/npm/@imgly/background-removal/dist/browser.js';
       script.onload = () => {
         if (window.imglyRemoveBackground) {
           resolve(window.imglyRemoveBackground);
@@ -509,68 +509,97 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  bgremoveBtn.addEventListener('click', async () => {
-    const files = Array.from(bgremoveFilesEl.files || []);
-    
-    if (!files.length) {
-      alert('Please upload at least one image!');
-      return;
+
+
+
+
+bgremoveBtn.addEventListener('click', async () => {
+  const files = Array.from(bgremoveFilesEl.files || []);
+  
+  if (!files.length) {
+    alert('Please upload at least one image!');
+    return;
+  }
+
+  bgremoveBtn.textContent = 'Loading AI model...';
+  bgremoveBtn.disabled = true;
+  bgremoveStatus.classList.add('active');
+  bgremoveStatus.textContent = 'Loading library... (first time may take 30+ seconds)';
+
+  try {
+    let removeBackground;
+    try {
+      const lib = await loadBackgroundRemovalLibrary();
+      removeBackground = lib.removeBackground;
+    } catch (libError) {
+      throw new Error('Failed to load AI library. Try refreshing the page or use a different browser.');
     }
 
-    bgremoveBtn.textContent = 'Loading AI model...';
-    bgremoveBtn.disabled = true;
-    bgremoveStatus.classList.add('active');
-    bgremoveStatus.textContent = 'Loading library and model...';
+    const zip = new JSZip();
+    let processed = 0;
 
-    try {
-      const { removeBackground } = await loadBackgroundRemovalLibrary();
+    for (let file of files) {
+      bgremoveStatus.textContent = `Processing ${processed + 1}/${files.length}: ${file.name}`;
 
-      const zip = new JSZip();
-      let processed = 0;
-
-      for (let file of files) {
-        bgremoveStatus.textContent = `Processing ${processed + 1}/${files.length}: ${file.name}`;
-
-        const blob = await removeBackground(file, {
+      const blob = await Promise.race([
+        removeBackground(file, {
           progress: (key, current, total) => {
             const percent = ((current / total) * 100).toFixed(0);
             bgremoveStatus.textContent = `${key}: ${percent}% (Image ${processed + 1}/${files.length})`;
           }
-        });
+        }),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Processing timeout - image may be too large')), 120000)
+        )
+      ]);
 
-        if (processed === 0) {
-          const imgBitmap = await createImageBitmap(blob);
-          const maxDim = 600;
-          const scale = Math.min(maxDim / imgBitmap.width, maxDim / imgBitmap.height, 1);
-          const w = imgBitmap.width * scale;
-          const h = imgBitmap.height * scale;
-          bgremovePreview.width = w;
-          bgremovePreview.height = h;
-          bgremoveCtx.clearRect(0, 0, w, h);
-          bgremoveCtx.drawImage(imgBitmap, 0, 0, w, h);
-        }
-
-        const name = file.name.replace(/\.[^.]*$/, '') || 'image';
-        zip.file(`${name}.png`, blob);
-
-        processed++;
+      if (processed === 0) {
+        const imgBitmap = await createImageBitmap(blob);
+        const maxDim = 600;
+        const scale = Math.min(maxDim / imgBitmap.width, maxDim / imgBitmap.height, 1);
+        const w = imgBitmap.width * scale;
+        const h = imgBitmap.height * scale;
+        bgremovePreview.width = w;
+        bgremovePreview.height = h;
+        bgremoveCtx.clearRect(0, 0, w, h);
+        bgremoveCtx.drawImage(imgBitmap, 0, 0, w, h);
       }
 
-      bgremoveStatus.textContent = 'Creating zip file...';
-      const zipBlob = await zip.generateAsync({ type: 'blob' });
-      downloadZip(URL.createObjectURL(zipBlob), 'AcousticKitty_NoBackground.zip');
+      const name = file.name.replace(/\.[^.]*$/, '') || 'image';
+      zip.file(`${name}.png`, blob);
 
-      bgremoveStatus.textContent = `✅ Success! Processed ${processed} images. Downloaded as AcousticKitty_NoBackground.zip!`;
-
-    } catch (err) {
-      console.error('Background removal error:', err);
-      bgremoveStatus.textContent = `❌ Error: ${err.message || 'Failed'}`;
-      alert('Background removal failed.\n\n' + (err.message || err) + '\n\nMake sure you\'re using a modern browser (Chrome/Edge recommended).');
-    } finally {
-      bgremoveBtn.textContent = 'REMOVE BACKGROUND & DOWNLOAD';
-      bgremoveBtn.disabled = false;
+      processed++;
     }
-  });
+
+    bgremoveStatus.textContent = 'Creating zip file...';
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
+    downloadZip(URL.createObjectURL(zipBlob), 'AcousticKitty_NoBackground.zip');
+
+    bgremoveStatus.textContent = `✅ Success! Processed ${processed} images. Downloaded as AcousticKitty_NoBackground.zip!`;
+
+  } catch (err) {
+    console.error('Background removal error:', err);
+    bgremoveStatus.textContent = `❌ Error: ${err.message || 'Failed'}`;
+    
+    let helpText = 'Background removal failed.\n\n';
+    helpText += err.message || err;
+    helpText += '\n\nTroubleshooting tips:\n';
+    helpText += '• Make sure you have a stable internet connection\n';
+    helpText += '• First run downloads ~30MB of AI models\n';
+    helpText += '• Try with a smaller image first\n';
+    helpText += '• Make sure you\'re using Chrome or Edge\n';
+    helpText += '• Check browser console (F12) for detailed errors';
+    
+    alert(helpText);
+  } finally {
+    bgremoveBtn.textContent = 'REMOVE BACKGROUND & DOWNLOAD';
+    bgremoveBtn.disabled = false;
+  }
+});
+
+
+
+
 
   console.log('🐱 Acoustic Kitty loaded successfully — now with unbreakable branding!');
 });
