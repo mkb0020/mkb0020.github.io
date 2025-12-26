@@ -1,4 +1,3 @@
-
 // ========== UTILITY FUNCTIONS ==========
 function hexToRgb(hex) {
   hex = hex.replace('#', '').toUpperCase();
@@ -70,6 +69,28 @@ function recolorCanvas(srcCanvas, masterColors, newColors) {
   return canvas;
 }
 
+// ========== RESIZE FUNCTION (Tab 4) ==========
+async function resizeImage(file, targetWidth) {
+  const img = await createImageBitmap(file);
+  const originalWidth = img.width;
+  const originalHeight = img.height;
+  const aspectRatio = originalHeight / originalWidth;
+  
+  const scaledHeight = Math.round(targetWidth * aspectRatio);
+  
+  const canvas = document.createElement('canvas');
+  canvas.width = targetWidth;
+  canvas.height = scaledHeight;
+  
+  const ctx = canvas.getContext('2d');
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  ctx.drawImage(img, 0, 0, targetWidth, scaledHeight);
+  
+  return { canvas, scaledHeight };
+}
+
 // ========== WAIT FOR DOM ==========
 document.addEventListener('DOMContentLoaded', () => {
   console.log('🐱 Acoustic Kitty initializing...');
@@ -79,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const targetTab = btn.dataset.tab;
       
-
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
@@ -123,14 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const filesEl = document.getElementById('files');
   const colsEl = document.getElementById('cols');
   const padEl = document.getElementById('pad');
-  const outnameEl = document.getElementById('outname');
   const preview = document.getElementById('preview');
   const ctx = preview.getContext('2d');
   const buildBtn = document.getElementById('build');
   const downloadBtn = document.getElementById('download');
 
   let currentSheetCanvas = null;
-  let currentSheetFilename = 'sheet.png';
 
   async function buildSheet(files, cols, padding) {
     const bitmaps = [];
@@ -176,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cols = Math.max(1, parseInt(colsEl.value) || 1);
     const pad = Math.max(0, parseInt(padEl.value) || 0);
-    const out = outnameEl.value.trim() || 'sheet.png';
 
     buildBtn.textContent = 'Building...';
     buildBtn.disabled = true;
@@ -190,8 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.drawImage(canvas, 0, 0, preview.width, preview.height);
 
       currentSheetCanvas = canvas;
-      currentSheetFilename = out.endsWith('.png') ? out : out + '.png';
-      
       downloadBtn.disabled = false;
       alert(`✅ Sprite sheet built successfully! (${fileList.length} frames)`);
 
@@ -210,12 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     const data = currentSheetCanvas.toDataURL('image/png');
-    downloadDataUrl(data, currentSheetFilename);
+    downloadDataUrl(data, 'AcousticKitty_SpriteSheet.png');
   });
 
   // ========== TAB 2: RECOLOR SINGLE SHEET ==========
   const recolorInputEl = document.getElementById('recolor-input');
-  const recolorOutputEl = document.getElementById('recolor-output');
   const recolorBtn = document.getElementById('recolor-single');
   const recolorPreview = document.getElementById('recolor-preview');
   const recolorCtx = recolorPreview.getContext('2d');
@@ -231,13 +245,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const masterColors = [];
     for (let i = 1; i <= 5; i++) {
       const hex = document.getElementById(`recolor-master${i}-hex`).value.trim();
-      masterColors.push(hex);
+      if (hex) masterColors.push(hex);
     }
     
     const newColors = [];
     for (let i = 1; i <= 5; i++) {
       const hex = document.getElementById(`recolor-new${i}-hex`).value.trim();
-      newColors.push(hex);
+      if (hex) newColors.push(hex);
+    }
+    
+    if (masterColors.length !== newColors.length) {
+      alert('Please ensure every used master color has a corresponding new color!');
+      return;
     }
     
     const hexPattern = /^#[0-9A-Fa-f]{6}$/;
@@ -266,12 +285,10 @@ document.addEventListener('DOMContentLoaded', () => {
       recolorCtx.clearRect(0, 0, recolorPreview.width, recolorPreview.height);
       recolorCtx.drawImage(recoloredCanvas, 0, 0, recolorPreview.width, recolorPreview.height);
       
-      const outputName = recolorOutputEl.value.trim() || 'recolored.png';
-      const filename = outputName.endsWith('.png') ? outputName : outputName + '.png';
       const dataUrl = recoloredCanvas.toDataURL('image/png');
-      downloadDataUrl(dataUrl, filename);
+      downloadDataUrl(dataUrl, 'AcousticKitty_Recolored.png');
       
-      alert(`✅ Recolored sheet downloaded as: ${filename}`);
+      alert('✅ Recolored sheet downloaded as: AcousticKitty_Recolored.png');
       
     } catch (err) {
       console.error(err);
@@ -298,13 +315,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const masterColors = [];
     for (let i = 1; i <= 5; i++) {
       const hex = document.getElementById(`batch-master${i}-hex`).value.trim();
-      masterColors.push(hex);
+      if (hex) masterColors.push(hex);
     }
     
     const newColors = [];
     for (let i = 1; i <= 5; i++) {
       const hex = document.getElementById(`batch-new${i}-hex`).value.trim();
-      newColors.push(hex);
+      if (hex) newColors.push(hex);
+    }
+    
+    if (masterColors.length !== newColors.length) {
+      alert('Please ensure every used master color has a corresponding new color!');
+      return;
     }
     
     const hexPattern = /^#[0-9A-Fa-f]{6}$/;
@@ -335,8 +357,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const recoloredCanvas = recolorCanvas(srcCanvas, masterColors, newColors);
         
-        const originalName = file.name.replace('.png', '');
-        const newName = `recolor_${originalName}.png`;
+        const originalName = file.name.replace(/\.[^.]*$/, '') || 'image';
+        const newName = `AcousticKitty_Recolored_${originalName}.png`;
         const dataUrl = recoloredCanvas.toDataURL('image/png');
         downloadDataUrl(dataUrl, newName);
         
@@ -345,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await new Promise(resolve => setTimeout(resolve, 100));
       }
       
-      batchStatus.textContent = `✅ Success! Processed ${processed} sprite sheets. Check your downloads folder!`;
+      batchStatus.textContent = `✅ Success! Processed ${processed} sprite sheets as AcousticKitty_Recolored_*.png`;
       
     } catch (err) {
       console.error(err);
@@ -356,5 +378,199 @@ document.addEventListener('DOMContentLoaded', () => {
     batchBtn.disabled = false;
   });
 
-  console.log('🐱 Acoustic Kitty loaded successfully!');
+  // ========== TAB 4: BATCH RESIZE ==========
+  const resizeFilesEl = document.getElementById('resize-files');
+  const resizeWidthEl = document.getElementById('resize-width');
+  const resizeUniformEl = document.getElementById('resize-uniform');
+  const resizeBtn = document.getElementById('resize-batch');
+  const resizeStatus = document.getElementById('resize-status');
+
+  resizeBtn.addEventListener('click', async () => {
+    const files = Array.from(resizeFilesEl.files || []);
+    
+    if (!files.length) {
+      alert('Please upload images to resize!');
+      return;
+    }
+    
+    const targetWidth = parseInt(resizeWidthEl.value);
+    if (!targetWidth || targetWidth < 1) {
+      alert('Please enter a valid width (positive number)!');
+      return;
+    }
+
+    const uniformHeight = resizeUniformEl.checked;
+    
+    resizeBtn.textContent = 'Processing...';
+    resizeBtn.disabled = true;
+    resizeStatus.classList.add('active');
+    resizeStatus.textContent = 'Starting batch resize...';
+    
+    try {
+      let maxHeight = 0;
+      if (uniformHeight) {
+        for (let file of files) {
+          const { scaledHeight } = await resizeImage(file, targetWidth);
+          if (scaledHeight > maxHeight) {
+            maxHeight = scaledHeight;
+          }
+        }
+      }
+      
+      const zip = new JSZip();
+      let processed = 0;
+      
+      for (let file of files) {
+        resizeStatus.textContent = `Processing ${processed + 1} of ${files.length}: ${file.name}`;
+        
+        const { canvas, scaledHeight } = await resizeImage(file, targetWidth);
+        
+        let finalCanvas = canvas;
+        
+        if (uniformHeight && scaledHeight < maxHeight) {
+          const uniformCanvas = document.createElement('canvas');
+          uniformCanvas.width = targetWidth;
+          uniformCanvas.height = maxHeight;
+          const uniformCtx = uniformCanvas.getContext('2d');
+          
+          uniformCtx.fillStyle = '#FFFFFF';
+          uniformCtx.fillRect(0, 0, uniformCanvas.width, uniformCanvas.height);
+          
+          const yOffset = maxHeight - scaledHeight;
+          uniformCtx.drawImage(canvas, 0, yOffset);
+          
+          finalCanvas = uniformCanvas;
+        }
+        
+        const blob = await new Promise(resolve => finalCanvas.toBlob(resolve, 'image/png'));
+        const paddedNumber = processed.toString().padStart(2, '0');
+        zip.file(`${paddedNumber}.png`, blob);
+        
+        processed++;
+      }
+      
+      resizeStatus.textContent = 'Creating zip file...';
+      
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      const url = URL.createObjectURL(zipBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'AcousticKitty_Resized.zip';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      
+      resizeStatus.textContent = `✅ Success! Resized ${processed} images. Downloaded as AcousticKitty_Resized.zip!`;
+      
+    } catch (err) {
+      console.error(err);
+      resizeStatus.textContent = `❌ Error: ${err.message}`;
+    }
+    
+    resizeBtn.textContent = 'Batch Resize & Download All';
+    resizeBtn.disabled = false;
+  });
+
+  // ========== TAB 5: REMOVE BACKGROUND (AI-powered) ==========
+  const bgremoveFilesEl = document.getElementById('bgremove-files');
+  const bgremoveBtn = document.getElementById('bgremove-batch');
+  const bgremoveStatus = document.getElementById('bgremove-status');
+  const bgremovePreview = document.getElementById('bgremove-preview');
+  const bgremoveCtx = bgremovePreview.getContext('2d', { willReadFrequently: true });
+
+  function downloadZip(url, filename) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  async function loadBackgroundRemovalLibrary() {
+    if (window.imglyRemoveBackground) {
+      return window.imglyRemoveBackground;
+    }
+
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/dist/browser.js';
+      script.onload = () => {
+        if (window.imglyRemoveBackground) {
+          resolve(window.imglyRemoveBackground);
+        } else {
+          reject(new Error('Library loaded but not found on window object'));
+        }
+      };
+      script.onerror = () => reject(new Error('Failed to load background removal library'));
+      document.head.appendChild(script);
+    });
+  }
+
+  bgremoveBtn.addEventListener('click', async () => {
+    const files = Array.from(bgremoveFilesEl.files || []);
+    
+    if (!files.length) {
+      alert('Please upload at least one image!');
+      return;
+    }
+
+    bgremoveBtn.textContent = 'Loading AI model...';
+    bgremoveBtn.disabled = true;
+    bgremoveStatus.classList.add('active');
+    bgremoveStatus.textContent = 'Loading library and model...';
+
+    try {
+      const { removeBackground } = await loadBackgroundRemovalLibrary();
+
+      const zip = new JSZip();
+      let processed = 0;
+
+      for (let file of files) {
+        bgremoveStatus.textContent = `Processing ${processed + 1}/${files.length}: ${file.name}`;
+
+        const blob = await removeBackground(file, {
+          progress: (key, current, total) => {
+            const percent = ((current / total) * 100).toFixed(0);
+            bgremoveStatus.textContent = `${key}: ${percent}% (Image ${processed + 1}/${files.length})`;
+          }
+        });
+
+        if (processed === 0) {
+          const imgBitmap = await createImageBitmap(blob);
+          const maxDim = 600;
+          const scale = Math.min(maxDim / imgBitmap.width, maxDim / imgBitmap.height, 1);
+          const w = imgBitmap.width * scale;
+          const h = imgBitmap.height * scale;
+          bgremovePreview.width = w;
+          bgremovePreview.height = h;
+          bgremoveCtx.clearRect(0, 0, w, h);
+          bgremoveCtx.drawImage(imgBitmap, 0, 0, w, h);
+        }
+
+        const name = file.name.replace(/\.[^.]*$/, '') || 'image';
+        zip.file(`${name}.png`, blob);
+
+        processed++;
+      }
+
+      bgremoveStatus.textContent = 'Creating zip file...';
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      downloadZip(URL.createObjectURL(zipBlob), 'AcousticKitty_NoBackground.zip');
+
+      bgremoveStatus.textContent = `✅ Success! Processed ${processed} images. Downloaded as AcousticKitty_NoBackground.zip!`;
+
+    } catch (err) {
+      console.error('Background removal error:', err);
+      bgremoveStatus.textContent = `❌ Error: ${err.message || 'Failed'}`;
+      alert('Background removal failed.\n\n' + (err.message || err) + '\n\nMake sure you\'re using a modern browser (Chrome/Edge recommended).');
+    } finally {
+      bgremoveBtn.textContent = 'REMOVE BACKGROUND & DOWNLOAD';
+      bgremoveBtn.disabled = false;
+    }
+  });
+
+  console.log('🐱 Acoustic Kitty loaded successfully — now with unbreakable branding!');
 });
