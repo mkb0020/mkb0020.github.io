@@ -166,43 +166,52 @@
 
   <div id="stars"></div>
 
-  <!-- NAVBAR -->
+    <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
-      <div class="left-dropdown">
+      
+      <div class="left-dropdown"><!-- LEFT DROPDOWN MENU -->
         <button class="menu-trigger" aria-label="Menu">
           <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
         </button>
+
         <div class="left-menu">
           <a href="https://mkb0020.onrender.com" class="menu-item">Home</a>
           <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
           <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
           <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <a href="https://ko-fi.com/mkb0020" class="menu-item">Feed the cats</a>
           <a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>
           <a href="https://mkb0020.onrender.com/review" class="menu-item">Review CATastrophe 2</a>
-          <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
           <a href="https://mkb0020.onrender.com/admin_login" class="menu-item">Admin</a>
+
           <!--<div class="social-links">
             <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
               <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
             </a>
             <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
               <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
-            </a>
-          </div>-->
+            </a>-->
+            <!--<a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>-->
+          <!--</div>-->
         </div>
       </div>
 
-      <a href="https://mkb0020.github.io">
-        <div class="logo">♡ mkb0020</div>
-      </a>
-
-      <div class="help-dropdown">
+     
+       <a href="https://mkb0020.github.io">
+            <div class="logo">♡ mkb0020</div>  <!-- CENTER LOGO -->
+        </a>
+ 
+      <div class="help-dropdown"> <!-- RIGHT HELP DROPDOWN -->
         <button class="help-icon" id="helpBtn" aria-label="Help Menu">
           <div class="question-mark">?</div>
         </button>
+        
         <div class="dropdown-menu" id="dropdownMenu">
           <button id="openMainHelp">About</button>
+	  <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
         </div>
       </div>
     </div>
@@ -373,8 +382,43 @@
   </div>
 
 
+
+
+    <div id="kofi-float">
+        <a href="https://ko-fi.com/mkb0020" target="_blank" rel="noopener noreferrer">
+            <img src="assets/images/tipjar.png" alt="Support me on Ko-fi">
+            <div class="hearts">
+                <div class="heart" style="--delay: 0s; --drift: -20px;">❤️</div>
+                <div class="heart" style="--delay: 0.5s; --drift: 15px;">💖</div>
+                <div class="heart" style="--delay: 1s; --drift: -10px;">💕</div>
+                <div class="heart" style="--delay: 1.5s; --drift: 20px;">❤️</div>
+                <div class="heart" style="--delay: 2s; --drift: -15px;">💗</div>
+                <div class="heart" style="--delay: 2.5s; --drift: 10px;">💖</div>
+            </div>
+        </a>
+    </div>
+
+
+<div id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        <a href="javascript:void(0);" class="button-container" aria-label="Scroll to top">
+            <img src="assets/images/top.png" alt="Scroll to top">
+ 
+        </a>
+    </div>
+
   <script src="js/KittyCore.js"></script>
   <script src="js/PlatformKitty.js"></script>
+
+    <script>
+        const button = document.getElementById('kofi-float');
+        button.addEventListener('mouseenter', () => {
+            document.querySelectorAll('.heart').forEach(h => {
+                h.style.animation = 'none';
+                h.offsetHeight; 
+                h.style.animation = null;
+            });
+        });
+    </script>
 
 </body>
 </html>
