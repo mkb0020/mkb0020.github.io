@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>CATastrophe2 - COMING SOON!</title>
+  <link rel="stylesheet" href="assets/css/KittyStyle.css" />
+
+  <style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#storyboard-viewer {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--VortexViolet);
+  box-shadow: 0 0 40px var(--VortexGlow3);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1000px;
+  height: 480px;
+  margin: 1rem auto 0;
+  background: #000;
+}
+
+.trailer-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#stars {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff;
+  animation: twinkle 4s infinite;
+}
+
+blockquote {
+  background: rgba(165, 90, 255, 0.1);
+  border-left: 4px solid var(--PlasmaPurple);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--ParticlePink);
+}
+
+cite {
+  display: block;
+  text-align: right;
+  margin-top: 0.5rem;
+  color: var(--AlphaAqua);
+  font-weight: bold;
+}
+
+h3 {
+  color: var(--NuclearFuscia);
+  margin: 1.5rem 0 0.5rem 0;
+  font-size: 2rem;
+  text-shadow: 0 0 10px var(--NuclearGlow2);
+  font-family: 'GothNerd';
+}
+
+
+
+@keyframes twinkle {
+  0%,100% { opacity: 0.4; transform: scale(1); }
+  50%     { opacity: 1; transform: scale(1.4); }
+}
+
+@media (max-width: 768px) {
+  #storyboard-viewer {
+    height: 300px;
+  }
+}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      
+      <div class="left-dropdown">
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+
+        <div class="left-menu">
+          <a href="https://mkb0020.onrender.com" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
+          <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
+          <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <a href="https://ko-fi.com/mkb0020" class="menu-item">Feed the cats</a>
+          <a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>
+          <a href="https://mkb0020.onrender.com/review" class="menu-item">Review CATastrophe 2</a>
+          <a href="https://mkb0020.onrender.com/admin_login" class="menu-item">Admin</a>
+        </div>
+      </div>
+
+      <a href="https://mkb0020.github.io">
+        <div class="logo">♡ mkb0020</div>
+      </a>
+ 
+      <div class="help-dropdown">
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">About</button>
+          <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">CATastrophe2 - COMING SOON</h1>
+        <button class="modal-close" id="closeModal" onclick="document.getElementById('helpModal').style.display = 'none';">X</button>
+      </div>
+      <div class="modal-body">
+
+        <blockquote>
+          <p><em>"Nature has no reverence towards life. Nature treats life as though it were the most valueless thing in the world....<br>
+          Nature does not act by purposes."</em><br>
+          <cite>— Erwin Schrödinger</cite></p>
+        </blockquote>  
+
+        
+        <p><strong>Credits:</strong></p>
+        <ul>
+          <li>Concept: MK</li>
+            <li>Code: MK</li>
+            <li>Story: MK</li>
+            <li>Character Design: MK</li>
+           <li> Animations: MK</li>
+           <li> Music: MK </li>
+           <li> Chief Debugging Officer: Claude</li>
+            <li>Emotional Support: Chat GPT</li>
+            <li>Director of Chaos Department: Grok</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="page-content" style="text-align:center; padding: 0px 20px; max-width: 1200px; margin: 0 auto;">
+
+</div>
+
+<div id="storyboard-viewer">
+  <iframe 
+    id="trailerVideo"
+    class="trailer-video" 
+    src="https://www.youtube.com/embed/6MPJnOO0JAg?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1"
+    title="CATastrophe2 Trailer" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+<div id="kofi-float">
+  <a href="https://ko-fi.com/mkb0020" target="_blank" rel="noopener noreferrer">
+    <img src="assets/images/tipjar.png" alt="Support me on Ko-fi">
+    <div class="hearts">
+      <div class="heart" style="--delay: 0s; --drift: -20px;">❤️</div>
+      <div class="heart" style="--delay: 0.5s; --drift: 15px;">💖</div>
+      <div class="heart" style="--delay: 1s; --drift: -10px;">💕</div>
+      <div class="heart" style="--delay: 1.5s; --drift: 20px;">❤️</div>
+      <div class="heart" style="--delay: 2s; --drift: -15px;">💗</div>
+      <div class="heart" style="--delay: 2.5s; --drift: 10px;">💖</div>
+    </div>
+  </a>
+</div>
+
+<div id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+  <a href="javascript:void(0);" class="button-container" aria-label="Scroll to top">
+    <img src="assets/images/top.png" alt="Scroll to top">
+  </a>
+</div>
+
+<script src="js/KittyCore.js"></script>
+
+<script>
+  const button = document.getElementById('kofi-float');
+  button.addEventListener('mouseenter', () => {
+    document.querySelectorAll('.heart').forEach(h => {
+      h.style.animation = 'none';
+      h.offsetHeight; 
+      h.style.animation = null;
+    });
+  });
+</script>
+
+<script>
+  const starsDiv = document.getElementById('stars');
+  for (let i = 0; i < 200; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.width = star.style.height = Math.random() * 2 + 'px';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 4 + 's';
+    starsDiv.appendChild(star);
+  }
+</script>
+
+
+
+</body>
+</html>
