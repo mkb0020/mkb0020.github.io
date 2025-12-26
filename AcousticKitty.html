@@ -7,6 +7,7 @@
   
   <link rel="stylesheet" href="assets/css/KittyStyle.css">
   <link rel="stylesheet" href="assets/css/AcousticKitty-specific.css">
+
 </head>
 
 <body>
@@ -28,18 +29,6 @@
           <a href="https://mkb0020.onrender.com/review" class="menu-item">Review CATastrophe 2</a>
           <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
           <a href="https://mkb0020.onrender.com/admin_login" class="menu-item">Admin</a>
-
-         <!-- <div class="social-links">
-            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
-              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
-            </a>
-            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
-              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
-            </a>
-            <a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
-              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
-            </a>
-          </div>-->
         </div>
       </div>
 
@@ -64,19 +53,22 @@
   <div id="helpModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title">ACOUSTIC KITTY - 3-IN-1 SPRITE TOOLKIT</h1>
+        <h1 class="modal-title">ACOUSTIC KITTY - 4-IN-1 SPRITE TOOLKIT</h1>
         <button class="modal-close" id="closeModal">X</button>
       </div>
       <div class="modal-body">
         <h3>What is this?</h3>
-        <p>I originally built a Python version of this tool to help standardize sprites for CATastrophe2 (coming soon!). I made one grayscale cat sprite, then recolored it to create dozens of unique cats instantly!</p>
-        <p>Acoustic Kitty is a sprite sheet toolkit for game dev with THREE powerful features...</p>
+        <p>I originally built a smaller version of this tool in Python to help standardize sprites for CATastrophe2 (coming soon!). I made one grayscale cat sprite, then recolored it to create dozens of unique cats instantly!</p>
+        <p>Acoustic Kitty is a sprite sheet toolkit for game dev with FOUR powerful features...</p>
         
-        <h3>Three Tools in One:</h3>
+        <h3>Four Tools in One:</h3>
         <ul>
           <li><strong>Tab 1 - Sheet Builder:</strong> Combine multiple PNG frames into a single organized sprite sheet</li>
           <li><strong>Tab 2 - Recolor One:</strong> Take a sprite sheet and swap out specific colors to create variants</li>
           <li><strong>Tab 3 - Batch Recolor:</strong> Recolor multiple sprite sheets at once (walk, jump, attack, etc.)</li>
+          <li><strong>Tab 4 - Batch Resize:</strong> Resize multiple images to the same width for consistent sprite sheets</li>
+          <li><strong>Tab 5 - Remove BG:</strong> Make the background of an image (or images) transparent</li>
+
         </ul>
 
         <button id="openGuideBtn" class="btn-quantum-pulse">VIEW INSTRUCTIONS MANUAL</button>
@@ -126,6 +118,7 @@
           <li>Download all recolored sheets at once!</li>
         </ul>
 
+
         <h3>Master Colors Explained</h3>
         <p>The default master colors are:</p>
         <ul>
@@ -141,10 +134,42 @@
         <p>For CATastrophe2, I did this:</p>
         <ul>
           <li>Created ONE grayscale cat sprite with animations</li>
+          <li>Used Tab 4 to resize all frames to the same width</li>
           <li>Used Tab 1 to build sprite sheets from my frames</li>
           <li>Used Tab 3 to batch recolor ALL animations (walk, jump, attack, idle) to create orange cats, black cats, tuxedo cats, calico cats, etc.</li>
           <li>Boom! 20+ unique cat characters from one base sprite!</li>
         </ul>
+
+                <h3>Tab 4: Batch Resize</h3>
+        <p><strong>What it does:</strong> Resizes multiple images to the same width while maintaining aspect ratio.</p>
+        <p><strong>Perfect for:</strong> Preparing animation frames that need to be the same width for sprite sheets.</p>
+        <p><strong>How to use:</strong></p>
+        <ul>
+          <li>Upload multiple images (PNG, JPG, JPEG)</li>
+          <li>Enter the target width in pixels</li>
+          <li>Check "Uniform Height" to make all images the same height (adds white space at bottom)</li>
+          <li>Click "Batch Resize & Download All"</li>
+          <li>All resized images download automatically!</li>
+        </ul>
+        <p><strong>Note:</strong> Images are scaled proportionally and transparency is preserved. If "Uniform Height" is checked, shorter images get transparent pixels added at the top to match the tallest image.</p>
+
+
+                <h3>Tab 4: Remove Background</h3>
+        <p><strong>What it does:</strong> Makes the background pixels transparent.</p>
+        <p><strong>Perfect for:</strong> Creating character sprite sheets that you can put anywhere in your game!</p>
+        <p><strong>How to use:</strong></p>
+        <ul>
+          <li>Upload an image (or images) (PNG, JPG, JPEG)</li>
+          <li>Click "Remove Background & Download"</li>
+          <li>The new images with invisible backgrounds will automatically download into a zip file!</li>
+        </ul>
+        <p><strong>Note:</strong> 
+          <ul>
+            <li>Optimized for Chrome or Edge</li>
+            <li>The first run will most likely be a bit slower.  But any additional runs should be much faster!</li>
+          </ul>
+          </p>
+
 
         <div style="text-align:center; margin:30px 0;">
           <button id="closeGuideBottom" class="btn-quantum-pulse">Close Guide</button>
@@ -157,12 +182,14 @@
 
   <div id="stars"></div>
 
-  <h2>SPRITE SHEET 3-IN-1 TOOLKIT</h2>
+  <h2>SPRITE SHEET 4-IN-1 TOOLKIT</h2>
 
   <div class="tab-container">
     <button class="tab-btn active" data-tab="tab1">Build Sheet</button>
     <button class="tab-btn" data-tab="tab2">Recolor One</button>
     <button class="tab-btn" data-tab="tab3">Batch Recolor</button>
+    <button class="tab-btn" data-tab="tab4">Batch Resize</button>
+    <button class="tab-btn" data-tab="tab5">Remove BG</button>
   </div>
 
   <div id="tab1" class="tab-content active">
@@ -336,6 +363,60 @@
     </div>
   </div>
 
+  <div id="tab4" class="tab-content">
+    <div class="wrap-single">
+      <div class="card">
+        <h3>Batch Resize Images</h3>
+        <h1>Resize multiple images to the same width for consistent sprite sheets</h1>
+
+        <label>Upload multiple images (PNG, JPG, JPEG)</label>
+        <input id="resize-files" type="file" accept="image/png,image/jpeg,image/jpg" multiple />
+
+        <label>Target Width (pixels)</label>
+        <input id="resize-width" type="number" min="1" value="256" placeholder="Enter width in pixels"/>
+
+        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin-top: 16px;">
+          <input type="checkbox" id="resize-uniform" style="width: auto; margin: 0;">
+          <span>Make all images same height (adds transparent space to top)</span>
+        </label>
+
+        <h1 style="margin-top: 10px;">Images will be scaled proportionally to the target width while preserving transparency. If "Uniform Height" is checked, transparent pixels will be added to the top of shorter images to match the tallest one. All images will be downloaded as a zip file named "AcousticKitty.zip" with files numbered 00.png, 01.png, 02.png, etc.</h1>
+
+        <button id="resize-batch">BATCH RESIZE & DOWNLOAD ALL</button>
+
+        <div id="resize-status"></div>
+      </div>
+    </div>
+  </div>
+
+
+<div id="tab5" class="tab-content">
+  <div class="wrap-single">
+    <div class="card">
+      <h3>Remove Background</h3>
+      <h1>AI-powered background removal → transparent PNG</h1>
+
+      <label>Upload image(s) - PNG, JPG, JPEG</label>
+      <input id="bgremove-files" type="file" accept="image/png,image/jpeg,image/jpg" multiple />
+
+      <h1 style="margin-top: 16px; font-size: 1em;">
+        Fully client-side AI (no upload to servers!)<br>
+        Works best on people, pets, objects, and sprites.<br>
+        First run may take 10-30s to download model (~30MB).
+      </h1>
+
+      <button id="bgremove-batch">REMOVE BACKGROUND & DOWNLOAD</button>
+
+      <div id="bgremove-status"></div>
+
+      <div id="bgremove-preview-container" style="margin-top: 20px; text-align: center;">
+        <canvas id="bgremove-preview" width="600" height="600" style="max-width: 100%; height: auto; background: #333 url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZmZmZmZmIi8+PHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjZGRkZGRkIi8+PHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9IiNkZGRkZGQiLz48L3N2Zz4=') repeat;"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="js/KittyCore.js"></script>
   <script src="js/AcousticKitty.js"></script>
 
