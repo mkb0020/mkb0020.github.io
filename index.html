@@ -159,7 +159,64 @@
       position: relative;
       z-index: 10;
     }
+  .trailer-banner {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+    padding: 12px 0;
+    overflow: hidden;
+    z-index: 100; 
+    box-shadow: 0 4px 20px rgba(131,12,222,0.6);
+    border-bottom: 2px solid var(--VortexViolet, #830cde);
+    border-top: 2px solid var(--VortexViolet, #830cde);
 
+  }
+
+  .trailer-banner a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  .banner-text {
+    display: flex;
+    width: max-content; 
+    animation: scrollBanner 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  .banner-text span {
+    font-family: 'GothNerd', 'SpaceLetters', sans-serif; 
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--NuclearFuscia, #ff00aa);
+
+    padding-right: 300px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  @keyframes scrollBanner {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .trailer-banner:hover .banner-text {
+    animation-play-state: paused;
+  }
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-text {
+    animation: none;
+  }
+}
 
 
   @media (max-width: 767px) {
@@ -307,8 +364,21 @@
   </div>
 
 
+<div class="trailer-banner">
+  <a href="https://mkb0020.github.io/trailer.html" target="_blank" rel="noopener">
+    <div class="banner-text">
+      <span>WATCH THE TRAILER FOR CATastrophe2 ⚡️🐱⚛️</span>
+      <span>WATCH THE TRAILER FOR CATastrophe2 ⚡️🐱⚛️</span>
+      <span>WATCH THE TRAILER FOR CATastrophe2 ⚡️🐱⚛️</span>
+      <span>WATCH THE TRAILER FOR CATastrophe2 ⚡️🐱⚛️</span>
+
+    </div>
+  </a>
+</div>
+
   <div class="main-container">
     <div class="hero-section">
+      <p>.</p>
       <h4>♡</h4>
         <h4>WELCOME TO MY VIRTUAL PLAYGROUND!</h4>
         <h3>Click on the cards below to explore my interactive and visual creations!</h3>
@@ -327,8 +397,7 @@
         <p>Three.js experiment</p>
       </a>
 
-      <a href="COMING__SOON.html" class="project-card">
-        <div class="coming-soon">COMING SOON</div>
+      <a href="trailer.html" class="project-card">
         <h3>CATastrophe2</h3>
         <p>The sequel you've been waiting for...</p>
       </a>
