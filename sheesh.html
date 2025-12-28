@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JABLES MUSIC</title>
+    <style>
+
+@font-face {
+  font-family: 'CoolLetters'; 
+  src: url('../assets/fonts/CoolLetters.ttf') format('truetype'); 
+}
+
+@font-face {
+  font-family: 'GothNerd'; 
+  src: url('../assets/fonts/ScienceGothic.ttf') format('truetype'); 
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: #0a0a0a;
+    position: relative;
+    overflow-x: hidden; 
+}
+
+footer {
+  background: #000000;
+  max-height: 50px;
+  justify-content: center;
+  z-index: 100000;
+  width: 100vw;
+  color: #ffffff;
+  align-items: center;
+  font-family: 'GothNerd';
+  text-align: center;
+  font-size: 1rem;
+
+}
+
+/* ============================ NAVBAR ============================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background: linear-gradient(135deg, #010006ce 0%, #24003bc9 50%, #050026e6 100%);
+  backdrop-filter: blur(50px);
+  border-bottom: 1px solid #6c06e0;
+  box-shadow: 0 0 30px #6c06e0;
+  z-index: 1000;
+  padding: 0.5rem 0;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-bottom:  1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  height: 50px;
+  max-height:50px;
+}
+
+.home-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.home-icon {
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  mask: none !important;
+  -webkit-mask: none !important;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -48%);
+  font-size: 2.6rem;
+  color: linear-gradient(45deg, #343434, #484848, #343434);
+  text-shadow: 0px 5px 20px #67FEBD;
+  letter-spacing: 0.7rem;
+  font-family: 'CoolLetters';
+  z-index: 900;
+  flex-shrink: 0;
+}
+
+.logo2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -48%);
+  font-size: 2.4rem;
+  color: #FFFFFF;
+  font-family: 'CoolLetters';
+  text-shadow: 0px 5px 20px #67FEBD;
+  letter-spacing: 0.7rem;
+  z-index: 901;
+  flex-shrink: 0;
+}
+
+.logo3 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-48.5%, -48%);
+  font-size: 2.4rem;
+  color: #bcbfc56e;
+  font-family: 'CoolLetters';
+  letter-spacing: 0.7rem;
+  z-index: 902;
+  flex-shrink: 0;
+}
+
+
+
+/* ============================ HELP DROPDOWN ============================ */
+.help-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+
+.help-icon {
+  width: 38px;
+  height: 38px;
+  top: 50%;
+  background: transparent;
+  color: #67FEBD;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.help-icon:hover {
+  transform: scale(1.1) rotate(180deg);
+  box-shadow: 
+    0 0 25px #67FEBD,
+    0 0 35px #67FEBD;
+}
+
+.help-dropdown.active .help-icon {
+  background: #67FEBD;
+  color: #000000;
+}
+
+.question-mark {
+  font-size: 28px;
+  font-family: 'GothNerd';
+  color: #67FEBD;
+  text-shadow: 0 0 10px #67FEBD;
+  z-index: 2;
+  margin: 0;                  
+  line-height: 1;            
+  display: flex;              
+  align-items: center;       
+  justify-content: center;    
+  height: 100%;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  border: 1px solid #67FEBD;
+  box-shadow: 0 3px 5px #67FEBD;
+  backdrop-filter: blur(15px);
+  min-width: 280px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+}
+
+.dropdown-menu button {
+  width: 100%;
+  padding: 16px 20px;
+  background: transparent;
+  color: #ffffff;
+  border: none;
+  text-align: left;
+  font-family: 'GothNerd', sans-serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 1px solid #6c06e0;
+}
+
+.dropdown-menu button:hover {
+  background: rgba(101,115,131,0.25);
+  border-color: #6c06e0;
+  box-shadow: 0 0 20px #6c06e0;
+  text-shadow: none;
+  border-radius:12px;
+  padding-left: 30px;
+}
+
+.dropdown-menu button:last-child {
+  border-bottom: none;
+}
+
+.help-dropdown.active .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+/* ============================ LEFT DROPDOWN MENU ============================ */
+.left-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 1001;
+}
+
+.menu-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-trigger .home-icon {
+  transition: all 0.3s ease;
+}
+
+.menu-trigger:hover .home-icon {
+  transform: scale(1.5);
+  filter: drop-shadow(0 0 30px #67FEBD);
+}
+
+.left-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  border: 1px solid #67FEBD;
+  box-shadow: 0 3px 5px #67FEBD;
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  min-width: 300px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  padding: 10px 10px;
+  z-index: 9999;
+}
+
+.left-dropdown.active .left-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(5px);
+}
+
+.menu-item {
+  display: block;
+  width: 100%;
+  padding: 5px 5px;
+  color: #FFFFFF;
+  text-align: left;
+  text-decoration: none;
+  font-family: 'GothNerd', sans-serif;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+  max-width:300px;
+}
+
+.menu-item:hover {
+  color: #67FEBD;
+}
+
+.social-links {
+  margin-top: 20px;
+  padding: 15px 20px 10px;
+  border-top: 1px solid #6c06e0;
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.social-icon:hover {
+  opacity: 1;
+  transform: scale(1.1) translateY(-1px);
+  filter: drop-shadow(0 0 15px #67FEBD) brightness(0) invert(1);
+}
+
+
+
+/* ====================== */
+.trippy-wrapper {
+    position: relative;
+    min-height: 100vh;
+    z-index: 1;
+    margin-top: 100px;
+}
+
+.trippy-wrapper::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 200vmax;
+    background: conic-gradient(from 0deg, transparent 25%, #4a027ab5 25%, #54028a97 50%, transparent 50%, transparent 75%, #1504768e 75%);
+    backdrop-filter: blur(5px);
+    background-size: 40px 40px;
+    animation: rotateSlow 80s linear infinite;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+    z-index: -10;
+    pointer-events: none;
+}
+
+.trippy-wrapper::after {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 160vmax;
+    height: 160vmax;
+    border: 25px solid #67FEBD;
+    border-radius: 60px;
+    animation: rotateFast 50s linear infinite reverse;
+    transform: translate(-50%, -50%);
+    opacity: 0.12;
+    box-shadow: 0 0 60px #00ffff;
+    z-index: -2;
+    pointer-events: none;
+    
+}
+
+
+.glitch-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: 
+        linear-gradient(45deg, #000000b9 25%, transparent 25%),
+        linear-gradient(-45deg, #1d069cd4 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #6304a1b3 75%),
+        linear-gradient(-45deg, transparent 75%, #00000090 75%);
+    background-size: 50px 50px;
+    background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+    animation: bgGlitch 18s infinite linear;
+    opacity: 0.6;
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+@keyframes rotateSlow {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes rotateFast {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+@keyframes bgGlitch {
+    0% {
+        background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+    }
+    15% {
+        background-position: 20px 20px, 25px 50px, 50px -10px, -10px 20px;
+    }
+    30% {
+        background-position: -15px -15px, -20px 10px, 10px -45px, -45px -15px;
+    }
+    40% {
+        background-position: 40px 10px, 50px 60px, 70px -20px, -20px 40px; 
+    }
+    45% {
+        background-position: 0 0, 0 30px, 30px -30px, -30px 0px; 
+    }
+    60% {
+        background-position: 10px 30px, 15px 45px, 35px -25px, -25px 10px;
+    }
+    75% {
+        background-position: -30px 15px, -35px 40px, -10px -40px, -50px -20px;
+    }
+    85% {
+        background-position: 25px -20px, 30px 10px, 50px -50px, -15px 25px; 
+    }
+    100% {
+        background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+    }
+}
+
+section, header {
+                position: relative;
+                z-index: 1;
+            }
+
+header h1 {
+            font-size: 3em;
+            font-family: 'CoolLetters';
+            margin: 0;
+            color: #ffffff; 
+        }
+section {
+            max-width: 100vw;
+            margin: 0 auto;
+        }
+.container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            z-index: 10;
+            border: 2px solid #6c06e0;
+            box-shadow: 0 0 40px #250058a0;
+            backdrop-filter: blur(5px);
+            margin-top: 50px;
+        }
+
+#horizontal-row {
+    padding: 30px 0px 0px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.row-container1 {
+    display: grid;
+    grid-template-columns: 2fr 4fr; 
+    gap: 0;
+    align-items: stretch;
+    height: 80vh; 
+    max-width: 100vw;
+    margin: 0 auto;
+    border-top: 1px solid rgba(135, 6, 224, 0.3);
+    border-bottom: 1px solid rgba(135, 6, 224, 0.3);
+    box-shadow: 0 0 40px #6c06e0;
+    backdrop-filter: blur(15px);
+    margin-top: 70px;
+  
+
+}
+
+.row-container2 {
+    display: grid;
+    grid-template-columns: 4fr 2fr; 
+    gap: 0; 
+    align-items: stretch;
+    height: 80vh; 
+    max-width: 100vw;
+    margin: 0 auto;
+    border-top: 1px solid rgba(135, 6, 224, 0.3);
+    border-bottom: 1px solid rgba(135, 6, 224, 0.3);
+    box-shadow: 0 0 40px #6c06e0;
+    backdrop-filter: blur(15px);
+     margin-top: 70px;
+     margin-bottom: 100px;
+    
+}
+
+.row-card1 {
+    background: rgba(30, 20, 60, 0.03);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(135, 6, 224, 0.3);
+    border-bottom: 1px solid rgba(135, 6, 224, 0.3);
+    border-right: 4px dashed #6c06e0;
+    display: flex;
+    padding: 15px; 
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+.row-card2 {
+    background: rgba(30, 20, 60, 0.03);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border-left: 4px dashed #6c06e0;
+    display: flex;
+    padding: 15px; 
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+.row-card1 h2 {
+    color: #67FEBD;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'GothNerd';
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.row-card2 h2 {
+    color: #67FEBD;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'GothNerd';
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.left-card ul, .right-card {
+    font-size: 1.1rem;
+    font-family: 'GothNerd';
+    line-height: 2.2rem;
+    color: #ffffff;
+}
+
+.gallery-card {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-card h2 {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 10, 10, 0.167);
+    padding: 12px 30px;
+    border-radius: 30px;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(93, 254, 6, 0.4);
+}
+
+.carousel {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 100;
+}
+
+.right-card iframe {
+    flex-grow: 1;
+    min-height: 100%;
+}
+
+/* ================= MUSIC PLAYER ================= */
+    .player-container {
+      background: linear-gradient(135deg, rgba(23, 0, 50, 0.233), rgba(0, 0, 0, 0.164));
+      box-shadow: 0 0 40px #6c06e0;
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+      height: 80vh;
+    }
+
+    .player-container h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-family: 'GothNerd';
+      color: #67FEBD;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .now-playing {
+      text-align: center;
+      font-family:'GothNerd';
+      margin-bottom: 5px;
+      font-size: 1rem;
+      color: #DBE2E9;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-bottom: 5px;
+    }
+
+    .controls button {
+      background: linear-gradient(45deg, #6c06e0, #67FEBD);
+      border: 2px solid #6c06e0;
+      color: white;
+      padding: 10px 10px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px #6c06e0;
+      text-transform: uppercase;
+      text-align:center;
+    }
+
+    .controls button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px #6c06e0;
+    }
+
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 10px 0;
+      font-family: monospace;
+    }
+
+    .progress input {
+      flex: 1;
+    }
+
+    .volume {
+      margin-top: 10px;
+      text-align: center;
+      font-family: monospace;
+    }
+
+    .playlist {
+      margin-top: 5px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .playlist li {
+      padding: 5px 15px;
+      margin-bottom: 8px;
+      border: 1px solid #830cdea2;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: 'GothNerd';
+      font-size: 0.8rem;
+      text-align:center;
+    }
+
+    .playlist li:hover {
+      background: rgba(131,12,222,0.35);
+      box-shadow: 0 0 25px #67FEBD;
+      padding-left: 15px;
+    }
+
+@media (max-width: 700px) {
+    .row-container1 {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+        .row-container2 {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    #horizontal-row { padding: 40px 20px; }
+    .gallery-card h2 { position: relative; top: auto; transform: none; margin-bottom: 20px; }
+    .carousel { height: 70vh; }
+}
+
+    .card {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            flex: 1 1 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        .card h2 {
+            color: #67FEBD; 
+            font-family: 'GothNerd';
+        }
+       
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            text-align: center;
+        }
+        .calendar div {
+            background: #050024; 
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .calendar .header { background: #4b037a; } 
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.calendar-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+    margin: 30px 0;
+    font-size: 1rem;
+}
+
+.calendar-table thead th {
+    background: linear-gradient(90deg, rgba(25, 4, 141, 0.6), rgba(99, 2, 163, 0.5));
+    color: #ffffff;
+    padding: 18px;
+    text-align: center;
+    font-family: 'GothNerd';
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    font-size: 0.9rem;
+    border-bottom: 3px solid #67FEBD;
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-table th::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: glowSweep 6s infinite linear;
+    z-index: 1;
+}
+
+
+@keyframes glowSweep {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.calendar-table td {
+    padding: 20px;
+    background: rgba(48, 32, 95, 0.45);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(135, 6, 224, 0.4);
+    text-align: center;
+    font-family: 'GothNerd';
+    color: #e6d9ff;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.calendar-table td span {
+    display: block;
+    font-size: 0.8em;
+    margin-top: 6px;
+    font-weight: normal;
+}
+
+.calendar-table td.available span { color: #67FEBD; }
+.calendar-table td.booked span { color: #ff6bc0; opacity: 0.8; }
+
+.calendar-table tr:hover td {
+    background: rgba(64, 44, 110, 0.7);
+    border-color: #67FEBD;
+    box-shadow: 0 8px 30px rgba(93, 254, 6, 0.3);
+    transform: translateY(-4px);
+}
+
+
+
+
+@media (max-width: 700px) {
+    .calendar-table,
+    .calendar-table tbody,
+    .calendar-table tr,
+    .calendar-table td {
+        display: block;
+        width: 100%;
+    }
+    .calendar-table thead { display: none; }
+    .calendar-table tr {
+        margin-bottom: 20px;
+        border-radius: 16px;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    }
+    .calendar-table td {
+        padding: 16px;
+        border: none;
+        border-bottom: 1px solid rgba(135,6,224,0.4);
+        text-align: right;
+    }
+    .calendar-table td::before {
+        content: attr(data-day) " ";
+        float: left;
+        font-weight: bold;
+        color: #67FEBD;
+    }
+    .calendar-table td:last-child { border-bottom: none; }
+}
+
+
+    
+.carousel {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+        }
+.carousel img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+.carousel img.active { opacity: 1; }
+       
+.updates ul {
+            list-style: none;
+            padding: 0;
+        }
+ .updates li {
+            margin-bottom: 10px;
+        }
+.updates a {
+            color: #00FFFF; 
+            text-decoration: none;
+        }
+        .updates a:hover {
+            color: #58E84C; 
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="trippy-bg">
+
+ 
+  <nav class="navbar">
+    <div class="nav-container">
+      
+      <div class="left-dropdown"><!-- LEFT DROPDOWN MENU -->
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/glitch.gif" alt="Menu" class="home-icon">
+        </button>
+
+       <div class="left-menu">
+          <a href="Links" class="menu-item">Links to stuff</a>
+
+
+       <div class="social-links">
+            <a href="https://soundcloud.com/jablesatl" target="_blank" aria-label="Soundcloud">
+              <img src="/assets/images/Soundcloud.png" alt="Soundcloud" class="social-icon">
+            </a>
+            <a href="https://www.youtube.com/@jablesmusic4776" target="_blank" aria-label="Youtube">
+              <img src="/assets/images/Youtube.png" alt="Youtube" class="social-icon">
+            </a>
+            <a href="https://www.instagram.com/itsjables/?hl=en" target="_blank" aria-label="Instagram">
+              <img src="/assets/images/Insta.png" alt="Insta" class="social-icon">
+            </a>
+          </div>
+        </div>
+      </div>
+            <div class="logo"><h1>SHEESH</h1></div> 
+            <div class="logo2"><h1>SHEESH</h1></div> 
+            <div class="logo3"><h1>SHEESH</h1></div> 
+    </div>
+  </nav>
+
+
+      <div class="glitch-layer"></div>
+    <div class="trippy-wrapper">
+
+<section id="horizontal-row">
+    <div class="row-container1">
+        <div class="row-card1 left-card">
+            <h2>NEWS</h2>
+            <ul>
+                <li>NEW SHOW ANNOUNCEMENT: Jan 16, 2026 - The Rapture Ball @ Schrödinger's Cat Cafe, ATL</li>
+                <li>Collab with Niels Release Date: Feb 31, 2026</li>
+                <li>Tickets for Electric Chapel now SOLD OUT</li>
+            </ul>
+        </div>
+        <div class="gallery-card">
+<iframe width="100%" height="100%" src="https://www.youtube.com/watch?v=4VE-p_xWf2w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="horizontal-row">
+    <div class="row-container2">
+        <div class="gallery-card">
+            <div class="carousel">
+                <img src="/assets/images/sheesh00.jpg" alt="DJ Niels">
+                <img src="/assets/images/sheesh01.jpg"alt="Live Show 2">
+                <img src="/assets/images/sheesh02.jpg"alt="Live Show 2">
+                <img src="/assets/images/sheesh03.jpg"alt="Live Show 2">
+            </div>
+        </div>
+        <div class="row-card2 right-card">
+            <div class="player-container">
+                    <h1>Now Playing:</h1>
+                    <div class="now-playing" id="trackTitle">Select a track</div>
+
+                    <audio id="audio"></audio>
+
+                    <div class="controls">
+                    <button onclick="togglePlay()">Play / Pause</button>
+                    </div>
+
+                    <div class="progress">
+                    <span id="current">0:00</span>
+                    <input type="range" id="seek" value="0">
+                    <span id="duration">0:00</span>
+                    </div>
+
+                    <div class="volume">🔊 <input type="range" min="0" max="1" step="0.01" value="0.8" id="volume"></div>
+
+                    <ul class="playlist" id="playlist"></ul>
+                </div>
+            </div>
+        </div>
+</section>
+<footer>
+    <p>&copy; 2026 Jables Music. All Rights Reserved.</p>
+</footer>
+<section id="booking"><!--
+    <div class="container">
+        <div class="card">
+            <h2>Booking Availability</h2>
+            <div class="table-responsive">
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td>1</td></tr>
+                        <tr><td>2</td><td>3</td><td>4</td><td>5<br><span>Available</span></td><td>6</td><td>7<br><span>Booked</span></td><td>8</td></tr>
+                        <tr><td>9</td><td>10<br><span>Available</span></td><td>11</td><td>12</td><td>13<br><span>Booked</span></td><td>14</td><td>15<br><span>Available</span></td></tr>
+                        <tr><td>16</td><td>17</td><td>18<br><span>Available</span></td><td>19</td><td>20</td><td>21<br><span>Booked</span></td><td>22</td></tr>
+                        <tr><td>23<br><span>Available</span></td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td></tr>
+                        <tr><td>30</td><td>31<br><span>Available</span></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>-->
+</section>
+
+
+</div>
+
+<script src="js/KittyCore.js"></script>
+
+    <script>
+        const images = document.querySelectorAll('.carousel img');
+        let current = 0;
+        function fadeImages() {
+            images[current].classList.remove('active');
+            current = (current + 1) % images.length;
+            images[current].classList.add('active');
+        }
+        images[0].classList.add('active'); 
+        setInterval(fadeImages, 3000); 
+    </script>
+
+
+  <script>
+  const tracks = [
+  { title: 'SALOON TYPE BEAT', src: 'assets/sounds/SaloonTypeBeat.mp3', section: 'other' },
+  { title: 'STRING THEORY IN G MAJOR', src: 'assets/sounds/stringTheory.mp3', section: 'other' },
+  { title: 'LOBOTOMY LULLABY', src: 'assets/sounds/LobotomyLullaby.mp3', section: 'other' },
+
+  
+
+
+  ];
+
+  const audio = document.getElementById('audio');
+  const playlist = document.getElementById('playlist');
+  const title = document.getElementById('trackTitle');
+  const seek = document.getElementById('seek');
+  const volume = document.getElementById('volume');
+
+  let currentTrackIndex = -1;
+
+  tracks.forEach((t, i) => {
+    const li = document.createElement('li');
+
+    if (t.isHeader) {
+      li.className = 'section-header';
+      li.textContent = t.title;
+    } else {
+      li.textContent = t.title;
+      li.onclick = () => {
+        currentTrackIndex = i;
+        loadTrack(i);
+      };
+    }
+
+    playlist.appendChild(li);
+  });
+
+  function loadTrack(i) {
+    if (tracks[i].isHeader) return;
+
+    audio.src = tracks[i].src;
+    title.textContent = tracks[i].title;
+    audio.play();
+  }
+
+  function togglePlay() {
+    if (audio.src) {
+      audio.paused ? audio.play() : audio.pause();
+    }
+  }
+
+  audio.addEventListener('timeupdate', () => {
+    seek.max = audio.duration || 0;
+    seek.value = audio.currentTime;
+    document.getElementById('current').textContent = format(audio.currentTime);
+    document.getElementById('duration').textContent = format(audio.duration);
+  });
+
+  seek.addEventListener('input', () => audio.currentTime = seek.value);
+  volume.addEventListener('input', () => audio.volume = volume.value);
+
+  function format(t) {
+    if (!t) return '0:00';
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+
+  </script>
+
+
+
+</body>
+
+</html>
