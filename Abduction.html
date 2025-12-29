@@ -161,21 +161,21 @@
     
     .mute-btn {
       position: absolute;
-      top: 110px;
+      top: 90px;
       right: 20px;
       z-index: 20;
       background: rgba(0, 0, 0, 0.7);
       border: 2px solid #67FEBD;
       border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      font-size: 22px;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
       color: #67FEBD;
       cursor: pointer;
     }
 
     .mute-btn:active {
-      transform: scale(0.9);
+      transform: scale(0.8);
     }
 
 
@@ -207,6 +207,8 @@
     }
   </style>
 </head>
+
+
 <body>
   <div id="stars"></div>
 
@@ -272,7 +274,7 @@
           <li>Satisfaction meter (just for fun!)</li>
         </ul>
 
-        <p style="text-align: center; margin-top: 2rem; color: #67FEBD;">
+        <p style="text-align: center; margin-top: 2rem; color: #FFC7FF;">
           <strong>NOTE:</strong> No cows were harmed in the making of this game! 💚
         </p>
       </div>
@@ -281,14 +283,13 @@
 
   <button class="floating-back-to-top" id="floatingBackToTop">↑</button>
 
-  <!-- MAIN GAME CONTAINER -->
+  <button class="mute-btn" id="muteMobileBtn">🔊</button>
+
   <div class="main-container">
     <div class="game-container">
       
       <canvas id="canvas" width="1000" height="450"></canvas>
 
-
-      
       <!-- MOBILE -->
       <div class="mobile-controls" id="mobileControls">
         <div class="dpad">
@@ -302,7 +303,7 @@
       <div class="controls">
         <strong>WASD</strong> or <strong>Arrow Keys</strong> to fly · <strong>SPACE</strong> to abduct<br>
         <strong>Mobile:</strong> Use on-screen buttons below the canvas<br>
-        <strong>Mute/Unmute Music:</strong> Desktop: press "M" | Mobile: tap the butto in the top-right <br>
+        <strong>Mute/Unmute Music:</strong> Desktop: press "M" | Mobile: tap the button in the top-right <br>
         Fly over cows and beam them up! No pressure, just vibes ✨
       </div>
 
@@ -379,9 +380,7 @@
         bgMusic.play().catch(() => {});
         musicStarted = true;
       }
-}
-
-
+    }
 
     const satisfactionLevels = ['😐', '🙂', '😊', '😄', '🤩', '🥳', '✨'];
     
@@ -422,6 +421,13 @@
     const keys = {};
     let spaceJustPressed = false;
     
+    const muteButton = {
+      x: 920,
+      y: 10,
+      w: 40,
+      h: 40
+    };
+    
     const abductionMessages = [
       "Moo-velous! 🐄",
       "Udderly amazing! ✨",
@@ -444,26 +450,25 @@
       "Cows can smell things 6 miles away! 👃"
     ];
     
-window.addEventListener('keydown', e => {
-  startMusicIfNeeded();
+    window.addEventListener('keydown', e => {
+      startMusicIfNeeded();
 
-  if (e.code === 'Space') {
-    e.preventDefault();
-    if (!keys.space) spaceJustPressed = true;
-    keys.space = true;
-  } else {
-    keys[e.key] = true;
-  }
-});
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (!keys.space) spaceJustPressed = true;
+        keys.space = true;
+      } else {
+        keys[e.key.toLowerCase()] = true;
+      }
+    });
 
-window.addEventListener('keyup', e => {
-  if (e.code === 'Space') {
-    keys.space = false;
-  } else {
-    keys[e.key] = false;
-  }
-});
-
+    window.addEventListener('keyup', e => {
+      if (e.code === 'Space') {
+        keys.space = false;
+      } else {
+        keys[e.key.toLowerCase()] = false;
+      }
+    });
     
     // MOBILE CONTROLS
     const mobileButtons = document.querySelectorAll('.dpad-btn, .action-btn');
@@ -472,49 +477,75 @@ window.addEventListener('keyup', e => {
       const key = btn.dataset.key;
       
       btn.addEventListener('touchstart', (e) => {
-          startMusicIfNeeded();
+        startMusicIfNeeded();
         e.preventDefault();
         if (key === ' ') {
-          if (!keys[' ']) spaceJustPressed = true;
+          if (!keys.space) spaceJustPressed = true;
+          keys.space = true;
+        } else {
+          keys[key] = true;
         }
-        keys[key] = true;
       });
       
       btn.addEventListener('touchend', (e) => {
         e.preventDefault();
-        keys[key] = false;
+        if (key === ' ') {
+          keys.space = false;
+        } else {
+          keys[key] = false;
+        }
       });
       
       btn.addEventListener('mousedown', (e) => {
         e.preventDefault();
         if (key === ' ') {
-          if (!keys[' ']) spaceJustPressed = true;
+          if (!keys.space) spaceJustPressed = true;
+          keys.space = true;
+        } else {
+          keys[key] = true;
         }
-        keys[key] = true;
       });
       
       btn.addEventListener('mouseup', (e) => {
         e.preventDefault();
-        keys[key] = false;
+        if (key === ' ') {
+          keys.space = false;
+        } else {
+          keys[key] = false;
+        }
       });
       
       btn.addEventListener('mouseleave', (e) => {
-        keys[key] = false;
+        if (key === ' ') {
+          keys.space = false;
+        } else {
+          keys[key] = false;
+        }
       });
     });
-    
 
     window.addEventListener('keydown', e => {
-      if (e.key === 'm') {
+      if (e.key.toLowerCase() === 'm') {
         bgMusic.muted = !bgMusic.muted;
         showMessage(bgMusic.muted ? '🔇 Music Off' : '🎵 Music On');
       }
     });
 
-
-
-
-
+    const muteMobileBtn = document.getElementById('muteMobileBtn');
+    if (muteMobileBtn) {
+      function toggleMobileMute() {
+        bgMusic.muted = !bgMusic.muted;
+        muteMobileBtn.textContent = bgMusic.muted ? '🔇' : '🔊';
+        showMessage(bgMusic.muted ? '🔇 Music Off' : '🎵 Music On');
+      }
+      
+      muteMobileBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        toggleMobileMute();
+      });
+      
+      muteMobileBtn.addEventListener('click', toggleMobileMute);
+    }
   
     function showMessage(text) {
       currentMessage = text;
@@ -536,45 +567,42 @@ window.addEventListener('keyup', e => {
       }
     }
 
-
- const COW_MIN_SPACING = 140; 
+    const COW_MIN_SPACING = 140; 
     
-function spawnCows() {
-  cows = [];
-  const numCows = 8 + Math.floor(Math.random() * 5);
-  const usedPositions = [];
+    function spawnCows() {
+      cows = [];
+      const numCows = 8 + Math.floor(Math.random() * 5);
+      const usedPositions = [];
 
-  for (let i = 0; i < numCows; i++) {
-    let x;
-    let attempts = 0;
+      for (let i = 0; i < numCows; i++) {
+        let x;
+        let attempts = 0;
 
-    do {
-      x = 100 + Math.random() * (levelWidth - 200);
-      attempts++;
-    } while (
-      usedPositions.some(px => Math.abs(px - x) < COW_MIN_SPACING) &&
-      attempts < 50
-    );
+        do {
+          x = 100 + Math.random() * (levelWidth - 200);
+          attempts++;
+        } while (
+          usedPositions.some(px => Math.abs(px - x) < COW_MIN_SPACING) &&
+          attempts < 50
+        );
 
-    usedPositions.push(x);
+        usedPositions.push(x);
 
-    const vx = (Math.random() - 0.5) * 50;
+        const vx = (Math.random() - 0.5) * 50;
 
-    cows.push({
-      x,
-      y: groundY - COW_HEIGHT / 2,
-      vx,
-      state: 'idle',
-      frame: 0,
-      animTime: 0,
-      scared: false,
-      idleTime: Math.random() * 3,
-      facingRight: vx < 0
-    });
-  }
-}
-
-
+        cows.push({
+          x,
+          y: groundY - COW_HEIGHT / 2,
+          vx,
+          state: 'idle',
+          frame: 0,
+          animTime: 0,
+          scared: false,
+          idleTime: Math.random() * 3,
+          facingRight: vx < 0
+        });
+      }
+    }
 
     function drawCow(cow, x, y) {
       const isScared = cow.scared || cow.state === 'abducting';
@@ -672,10 +700,10 @@ function spawnCows() {
       const speed = 400;
       
       ufo.vx = ufo.vy = 0;
-      if (keys.a || keys.A || keys.ArrowLeft) ufo.vx = -speed;
-      if (keys.d || keys.D || keys.ArrowRight) ufo.vx = speed;
-      if (keys.w || keys.W || keys.ArrowUp) ufo.vy = -speed;
-      if (keys.s || keys.S || keys.ArrowDown) ufo.vy = speed;
+      if (keys.a || keys.arrowleft) ufo.vx = -speed;
+      if (keys.d || keys.arrowright) ufo.vx = speed;
+      if (keys.w || keys.arrowup) ufo.vy = -speed;
+      if (keys.s || keys.arrowdown) ufo.vy = speed;
       
       ufo.x += ufo.vx * dt;
       ufo.y += ufo.vy * dt;
@@ -698,7 +726,6 @@ function spawnCows() {
           const dx = Math.abs(ufo.x - cow.x);
           const dy = Math.abs(ufo.y - cow.y);
           
-         
           const distance = Math.sqrt(dx * dx + dy * dy);
           
           if (distance < 120 && ufo.y < cow.y) { 
@@ -738,7 +765,6 @@ function spawnCows() {
           
           cow.y -= 200 * dt;
           
-          // SPARKLES
           if (Math.random() < 0.3) {
             createParticles(cow.x, cow.y, '#ffffff');
           }
@@ -827,7 +853,7 @@ function spawnCows() {
         if (cow.state === 'abducting') {
           const beamTop = ufo.y + 30;
           const beamHeight = cow.y - beamTop;
-          const beamWidth = 100;
+          const beamWidth = 70;
           
           const glow = ctx.createLinearGradient(cow.x, beamTop, cow.x, cow.y);
           glow.addColorStop(0, 'rgba(103, 254, 189, 0.1)');
@@ -915,39 +941,8 @@ function spawnCows() {
       }
 
 
-      const muteButton = {
-        x: 920,
-        y: 10,
-        w: 40,
-        h: 40
-      };
-
-
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-      ctx.fillRect(muteButton.x, muteButton.y, muteButton.w, muteButton.h);
-
-      ctx.strokeStyle = '#67FEBD';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(muteButton.x, muteButton.y, muteButton.w, muteButton.h);
-
-      ctx.font = '22px Arial';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = '#67FEBD';
-      ctx.fillText(
-        bgMusic.muted ? '🔇' : '🔊',
-        muteButton.x + muteButton.w / 2,
-        muteButton.y + muteButton.h / 2
-      );
-
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'alphabetic';
-
-
     }
     
-
-
     canvas.addEventListener('click', (e) => {
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
@@ -967,6 +962,26 @@ function spawnCows() {
       }
     });
 
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+
+      const touch = e.touches[0];
+      const touchX = (touch.clientX - rect.left) * scaleX;
+      const touchY = (touch.clientY - rect.top) * scaleY;
+
+      if (
+        touchX >= muteButton.x &&
+        touchX <= muteButton.x + muteButton.w &&
+        touchY >= muteButton.y &&
+        touchY <= muteButton.y + muteButton.h
+      ) {
+        bgMusic.muted = !bgMusic.muted;
+        showMessage(bgMusic.muted ? '🔇 Music Off' : '🎵 Music On');
+      }
+    });
 
     let lastTime = Date.now();
     function loop() {
@@ -984,4 +999,7 @@ function spawnCows() {
     loop();
   </script>
 </body>
+
+
+
 </html>
