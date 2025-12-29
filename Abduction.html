@@ -17,7 +17,7 @@
     
     .main-container {
       min-height: 100vh;
-      padding: 100px 2rem 2rem;
+      padding: 10px 2rem 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -159,6 +159,27 @@
       box-shadow: 0 0 30px rgba(220, 76, 232, 0.8);
     }
     
+    .mute-btn {
+      position: absolute;
+      top: 110px;
+      right: 20px;
+      z-index: 20;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #67FEBD;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 22px;
+      color: #67FEBD;
+      cursor: pointer;
+    }
+
+    .mute-btn:active {
+      transform: scale(0.9);
+    }
+
+
+
     @media (max-width: 900px) {
       .title { font-size: 2rem; }
       .stats { 
@@ -265,7 +286,7 @@
     <div class="game-container">
       
       <canvas id="canvas" width="1000" height="450"></canvas>
-      
+
 
       
       <!-- MOBILE -->
@@ -281,6 +302,7 @@
       <div class="controls">
         <strong>WASD</strong> or <strong>Arrow Keys</strong> to fly · <strong>SPACE</strong> to abduct<br>
         <strong>Mobile:</strong> Use on-screen buttons below the canvas<br>
+        <strong>Mute/Unmute Music:</strong> Desktop: press "M" | Mobile: tap the butto in the top-right <br>
         Fly over cows and beam them up! No pressure, just vibes ✨
       </div>
 
@@ -347,6 +369,20 @@
     let messageTimer = 0;
     let camera = { x: 0 };
     
+    const bgMusic = new Audio('assets/sounds/decoherence.mp3');
+      bgMusic.loop = true;
+      bgMusic.volume = 0.4; 
+      let musicStarted = false;
+
+    function startMusicIfNeeded() {
+      if (!musicStarted) {
+        bgMusic.play().catch(() => {});
+        musicStarted = true;
+      }
+}
+
+
+
     const satisfactionLevels = ['😐', '🙂', '😊', '😄', '🤩', '🥳', '✨'];
     
     const ufoSprite = new Image();
@@ -409,6 +445,8 @@
     ];
     
 window.addEventListener('keydown', e => {
+  startMusicIfNeeded();
+
   if (e.code === 'Space') {
     e.preventDefault();
     if (!keys.space) spaceJustPressed = true;
@@ -434,6 +472,7 @@ window.addEventListener('keyup', e => {
       const key = btn.dataset.key;
       
       btn.addEventListener('touchstart', (e) => {
+          startMusicIfNeeded();
         e.preventDefault();
         if (key === ' ') {
           if (!keys[' ']) spaceJustPressed = true;
@@ -464,6 +503,18 @@ window.addEventListener('keyup', e => {
       });
     });
     
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'm') {
+        bgMusic.muted = !bgMusic.muted;
+        showMessage(bgMusic.muted ? '🔇 Music Off' : '🎵 Music On');
+      }
+    });
+
+
+
+
+
   
     function showMessage(text) {
       currentMessage = text;
@@ -862,8 +913,61 @@ function spawnCows() {
         ctx.globalAlpha = 1;
         ctx.textAlign = 'left';
       }
+
+
+      const muteButton = {
+        x: 920,
+        y: 10,
+        w: 40,
+        h: 40
+      };
+
+
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+      ctx.fillRect(muteButton.x, muteButton.y, muteButton.w, muteButton.h);
+
+      ctx.strokeStyle = '#67FEBD';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(muteButton.x, muteButton.y, muteButton.w, muteButton.h);
+
+      ctx.font = '22px Arial';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#67FEBD';
+      ctx.fillText(
+        bgMusic.muted ? '🔇' : '🔊',
+        muteButton.x + muteButton.w / 2,
+        muteButton.y + muteButton.h / 2
+      );
+
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+
+
     }
     
+
+
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+
+      const mouseX = (e.clientX - rect.left) * scaleX;
+      const mouseY = (e.clientY - rect.top) * scaleY;
+
+      if (
+        mouseX >= muteButton.x &&
+        mouseX <= muteButton.x + muteButton.w &&
+        mouseY >= muteButton.y &&
+        mouseY <= muteButton.y + muteButton.h
+      ) {
+        bgMusic.muted = !bgMusic.muted;
+        showMessage(bgMusic.muted ? '🔇 Music muted' : '🎵 Music on');
+      }
+    });
+
+
     let lastTime = Date.now();
     function loop() {
       const now = Date.now();
