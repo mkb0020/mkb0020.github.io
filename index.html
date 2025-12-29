@@ -38,6 +38,8 @@
     .hero-section {
       text-align: center;
       margin-bottom: 4rem;
+      padding-right: 30px;
+      padding-left: 30px;
     }
 
     .hero-section h4 {
@@ -108,6 +110,8 @@
       text-align: center;
       max-width: 100%;
       margin-bottom: 20px;
+      margin-left: 50px;
+      margin-right: 50px;
       z-index: 9;
     }
 
@@ -190,7 +194,7 @@
 
   .banner-text span {
     font-family: 'GothNerd', 'SpaceLetters', sans-serif; 
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: var(--NuclearFuscia, #ff00aa);
 
@@ -279,6 +283,119 @@
         margin-bottom: 2rem auto;
         
       }
+
+
+
+
+
+
+    .updates-section {
+      background: rgba(23, 0, 50, 0.594);
+      backdrop-filter: blur(15px);
+      border: 3px solid var(--VortexViolet);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px var(--NuclearGlow2);
+      margin-top: 60px;
+      margin-bottom: 30px;
+      margin-left: 60px;
+      margin-right: 60px;
+      position: relative;
+        }
+        
+        .updates-section h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--AlphaAqua);
+            font-family: 'GothNerd';
+        }
+        
+        .updates-section > p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        #loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .update-card {
+            background: #f9f9f933;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: #ffffff;
+            text-align: left;
+        }
+        
+        .update-card:hover {
+            box-shadow: 0 4px 12px rgba(219, 76, 232, 0.53);
+        }
+        
+        .update-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .update-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--ParticlePink);
+            flex: 1;
+            font-family: 'GothNerd';
+            text-align: left;
+        }
+        
+        .update-date {
+            font-size: 0.9em;
+            white-space: nowrap;
+            color: var(--AlphaAqua);
+            font-family: 'GothNerd';
+        }
+        
+        .update-body {
+            color: #ffffff;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .update-labels {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .label {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        
+        .error-message {
+            background: #fee;
+            border-left: 4px solid #f44;
+            padding: 20px;
+            border-radius: 5px;
+            color: #c00;
+        }
+        
+        .no-updates {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+
   </style>
   
 </head>
@@ -381,9 +498,19 @@
       <p>.</p>
       <h4>♡</h4>
         <h4>WELCOME TO MY VIRTUAL PLAYGROUND!</h4>
-        <h3>Click on the cards below to explore my interactive and visual creations!</h3>
+
+
+
+
+        <div class="updates-section">
+            <h2>WHAT'S NEW?</h2>
+            
+            <div id="loading">Loading updates...</div>
+            <div id="updates-container"></div>
+        </div>
 
         <img src="assets/images/cat_cup.gif" alt="meow!" class="cat-gif" id="cat">
+
 
     <!-- PROJECT GRID -->
       <a href="Toolkit.html" class="project-card">
@@ -435,7 +562,10 @@
         <h3>Side Quests</h3>
         <p><strong> Mini projects </strong></p>
       </a>
-      
+   
+
+
+
       <img src="assets/images/cat_hop.gif" class="cat2-gif"> 
 
      
@@ -500,5 +630,106 @@
             starsDiv.appendChild(star);
         }
   </script>
+
+
+    <script>
+        const GITHUB_USERNAME = 'mkb0020';  
+        const REPO_NAME = 'mkb0020.github.io';            
+        const LABEL_FILTER = 'update';            
+        
+        async function fetchUpdates() {
+            const loading = document.getElementById('loading');
+            const container = document.getElementById('updates-container');
+            
+            try {
+
+                let apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/issues?state=open&sort=created&direction=desc`;
+                if (LABEL_FILTER) {
+                    apiUrl += `&labels=${LABEL_FILTER}`;
+                }
+                
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`GitHub API returned ${response.status}`);
+                }
+                
+                const issues = await response.json();
+                
+                loading.style.display = 'none';
+                
+                if (issues.length === 0) {
+                    container.innerHTML = '<div class="no-updates">No updates yet. Create an issue to get started!</div>';
+                    return;
+                }
+                
+ 
+                issues.forEach(issue => {
+                    const card = createUpdateCard(issue);
+                    container.appendChild(card);
+                });
+                
+            } catch (error) {
+                loading.style.display = 'none';
+                container.innerHTML = `
+                    <div class="error-message">
+                        <strong>Error loading updates:</strong> ${error.message}
+                        <br><br>
+                        Make sure you've updated the GITHUB_USERNAME and REPO_NAME variables in the code!
+                    </div>
+                `;
+            }
+        }
+        
+        function createUpdateCard(issue) {
+            const card = document.createElement('div');
+            card.className = 'update-card';
+            
+            const date = new Date(issue.created_at);
+            const formattedDate = date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+            
+            card.innerHTML = `
+                <div class="update-header">
+                    <div class="update-title">${escapeHtml(issue.title)}</div>
+                    <div class="update-date">${formattedDate}</div>
+                </div>
+                <div class="update-body">${escapeHtml(issue.body || 'No description provided.')}</div>
+                ${issue.labels.length > 0 ? createLabelsHTML(issue.labels) : ''}
+            `;
+            
+            return card;
+        }
+        
+        function createLabelsHTML(labels) {
+            const labelsHTML = labels.map(label => {
+                const color = `#${label.color}`;
+                const textColor = getContrastColor(label.color);
+                return `<span class="label" style="background-color: ${color}; color: ${textColor};">${escapeHtml(label.name)}</span>`;
+            }).join('');
+            
+            return `<div class="update-labels">${labelsHTML}</div>`;
+        }
+        
+        function getContrastColor(hexColor) {
+            const r = parseInt(hexColor.substr(0, 2), 16);
+            const g = parseInt(hexColor.substr(2, 2), 16);
+            const b = parseInt(hexColor.substr(4, 2), 16);
+            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+            return brightness > 128 ? '#000000' : '#ffffff';
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        fetchUpdates();
+    </script>
+
 </body>
 </html>
