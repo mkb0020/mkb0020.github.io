@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>LEVEL PLANNER</title>
+  <meta name="description" content="Plan your platformer levels with custom platforms and holes" />
+  
+  <link rel="stylesheet" href="assets/css/KittyStyle.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+
+  <style>
+    .container { max-width: 1200px; padding: 30px; margin: auto; z-index: 10; justify-content: center; font-family: 'GothNerd';}
+    h1 { text-align: center; font-size: 2.5rem; color: var(--VortexViolet); margin: 0 0 2rem; text-shadow: 0 0 30px rgba(255,199,255,0.8); }
+
+    .canvas-container { margin-bottom: 40px; justify-content: center; align-items: center; text-align: center;}
+    canvas { background: #000; border: 3px solid transparent; border-image: linear-gradient(45deg, var(--AquaAura), var(--NuclearFuscia)) 1; border-radius: 10px; box-shadow: 0 10px 60px var(--PlasmaGlow3); width: 100%; height: auto; aspect-ratio: 1000 / 480; max-width: 1000px; }
+    .hint { text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 15px; line-height: 1.6; }
+
+    .inputs-wrapper { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
+    .input-box { background: rgba(21,21,28,0.95); padding: 25px; border: 3px solid transparent; border-image: linear-gradient(45deg, var(--AquaAura), var(--NuclearFuscia)) 1; border-radius: 10px; box-shadow: 0 10px 40px var(--VortexGlow3); flex: 1; min-width: 300px; max-width: 620px; }
+    .input-box h2 { font-size: 1.5rem; color: var(--ParticlePink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+
+    .row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .hole-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .label-header { font-weight: bold; color: var(--AlphaAqua); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; text-align: center; }
+
+    input[type="number"], select { width: 100%; padding: 10px; background: rgba(14,14,17,0.9); color: #C4C3D0; border: 2px solid rgba(144,144,192,0.527); border-radius: 5px; font-family: 'GothNerd', sans-serif; font-size: 1rem; transition: all 0.3s; }
+    input[type="number"]:focus, select:focus { outline: none; border-color: var(--NuclearFuscia); box-shadow: 0 0 15px var(--PlasmaGlow2); }
+
+    button { width: 100%; background: linear-gradient(45deg, var(--VortexViolet), var(--NuclearFuscia)); color: #fff; border: none; border-radius: 8px; font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; letter-spacing: 1px; }
+    button:hover { background: linear-gradient(45deg, var(--NuclearFuscia), var(--AlphaAqua)); transform: translateY(-2px); box-shadow: 0 5px 20px var(--PlasmaGlow3); }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .row { grid-template-columns: 1fr 1fr; }
+      .hole-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="stars"></div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="left-dropdown">
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+        <div class="left-menu">
+          <a href="https://mkb0020.onrender.com" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
+          <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
+          <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <a href="https://ko-fi.com/mkb0020" class="menu-item">Feed the cats</a>
+          <a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>
+          <a href="https://mkb0020.onrender.com/review" class="menu-item">Review CATastrophe 2</a>
+          <a href="https://mkb0020.onrender.com/admin_login" class="menu-item">Admin</a>
+        </div>
+      </div>
+      <a href="https://mkb0020.github.io"><div class="logo">♡ mkb0020</div></a>
+      <div class="help-dropdown">
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu"><div class="question-mark">?</div></button>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">About</button>
+          <a href="https://mkb0020.onrender.com/support" class="menu-item">Report an Issue</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">MAP IT OUT!</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+        <p><strong style="color:#00FFFF; font-family: 'GothNerd';">Map out the perfect platformer level!</strong></p>
+        <ul>
+          <li>In the left column, input your level length, number of platforms, and number of holes in the ground.</li>
+          <li>You can even pick what colors you'd like to use for your tests!</li>
+          <li>The right-side coumn will adjust with the number of platforms and ground holes</li>
+          <li>Fill in the X/Y coordinates and the Widths/Heights for each platform.</li>
+          <li>Set Start X and End X for each hole in the ground.</li>
+          <li>Click "Generate Level" to see if your map looks good in real time!</li>
+          <li>While you're at it, abduct the cows by pressing the SPACE key</li>
+          <li>Happy with the results? Click "Export JSON" to download your level file that will include your patform and ground coordinates and sizes that you can pop right into your game!</li>
+        </ul>
+        <p>Note: The X/Y coordinates of the UFO in the top-left reflect the CENTER of the UFO.</p>
+      </div>
+    </div>
+  </div>
+
+  <button class="floating-back-to-top" id="floatingBackToTop">↑</button>
+
+  <div class="container">
+
+    <div class="canvas-container">
+      <canvas id="canvas" width="1000" height="480"></canvas>
+      <div class="hint">
+        <strong>Controls:</strong><br>
+        W/A/S/D or Arrow Keys to zoom around the level  <br>SPACE key to abduct cows 
+      </div>
+    </div>
+
+    <div class="inputs-wrapper">
+      <div class="input-box">
+        <h2>Level Settings</h2>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+          <div><label for="levelLength" style="color:#67FEBD">Level Length (px)</label><input id="levelLength" type="number" value="10000" min="1000" step="100"></div>
+          <div><label for="numPlatforms" style="color:#67FEBD"># of Platforms</label><input id="numPlatforms" type="number" value="3" min="0"></div>
+          <div><label for="numHoles" style="color:#67FEBD"># of Holes</label><input id="numHoles" type="number" value="1" min="0"></div>
+          
+          
+          <div>
+            <label for="platformColor" style="color:#67FEBD">Platform Color</label>
+            <div style="position: relative;">
+              <select id="platformColor">
+                <option value="#830cde">Vortex Violet</option>
+                <option value="#830CDE">Plasma Purple</option>
+                <option value="#dc4ce8" selected>Nuclear Fuscia</option>
+                <option value="#FFC7FF">Particle Pink</option>
+                <option value="#67FEBD">Alpha Aqua</option>
+                <option value="#00ffff">Aqua Aura</option>
+                <option value="#58e84c">Radioactive Green</option>
+                <option value="#FFFFFF">White</option>
+                <option value="#37025a">Proton Purple</option>
+                <option value="#170032">Boson Blue</option>
+                <option value="#F3FFE5">Halflife Lime</option>
+                <option value="#9090C0">Grey-Blue Duality</option>
+                <option value="#DBE2E9">Gamma Grey</option>
+                <option value="#8391A1">Gravity Grey</option>
+                <option value="#2A3439">Dark Matter Grey</option>
+              </select>
+              <div id="platformSwatch" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 6px; background: #dc4ce8; border: 2px solid #fff; pointer-events: none; box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>
+            </div>
+          </div>
+
+          <div>
+            <label for="groundColor" style="color:#67FEBD">Ground Color</label>
+            <div style="position: relative;">
+              <select id="groundColor">
+                <option value="#830cde">Vortex Violet</option>
+                <option value="#830CDE">Plasma Purple</option>
+                <option value="#dc4ce8">Nuclear Fuscia</option>
+                <option value="#FFC7FF">Particle Pink</option>
+                <option value="#67FEBD" selected>Alpha Aqua</option>
+                <option value="#00ffff">Aqua Aura</option>
+                <option value="#58e84c">Radioactive Green</option>
+                <option value="#FFFFFF">White</option>
+                <option value="#37025a">Proton Purple</option>
+                <option value="#170032">Boson Blue</option>
+                <option value="#F3FFE5">Halflife Lime</option>
+                <option value="#9090C0">Grey-Blue Duality</option>
+                <option value="#DBE2E9">Gamma Grey</option>
+                <option value="#8391A1">Gravity Grey</option>
+                <option value="#2A3439">Dark Matter Grey</option>
+              </select>
+              <div id="groundSwatch" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 6px; background: #67FEBD; border: 2px solid #fff; pointer-events: none; box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <div class="input-box">
+        <h2>Platforms & Holes</h2>
+        <div id="dynamicInputs"></div>
+        <button id="generateLevel" style="margin-top: 20px; padding: 15px;">GENERATE LEVEL</button>
+        <button id="exportJson" style="margin-top: 20px; padding: 15px;">EXPORT JSON</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="kofi-float">
+    <a href="https://ko-fi.com/mkb0020" target="_blank" rel="noopener noreferrer">
+      <img src="assets/images/tipjar.png" alt="Support me on Ko-fi">
+      <div class="hearts">
+        <div class="heart" style="--delay: 0s; --drift: -20px;">❤️</div>
+        <div class="heart" style="--delay: 0.5s; --drift: 15px;">💖</div>
+        <div class="heart" style="--delay: 1s; --drift: -10px;">💕</div>
+        <div class="heart" style="--delay: 1.5s; --drift: 20px;">❤️</div>
+        <div class="heart" style="--delay: 2s; --drift: -15px;">💗</div>
+        <div class="heart" style="--delay: 2.5s; --drift: 10px;">💖</div>
+      </div>
+    </a>
+  </div>
+
+  <div id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+    <a href="javascript:void(0);" class="button-container" aria-label="Scroll to top">
+      <img src="assets/images/top.png" alt="Scroll to top">
+    </a>
+  </div>
+
+  <script src="js/KittyCore.js"></script>
+  <script src="js/MapKitty.js"></script>
+
+  <script>
+    const button = document.getElementById('kofi-float');
+    button.addEventListener('mouseenter', () => {
+      document.querySelectorAll('.heart').forEach(h => { h.style.animation = 'none'; h.offsetHeight; h.style.animation = null; });
+    });
+    const starsDiv = document.getElementById('stars');
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = star.style.height = Math.random() * 2 + 'px';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 4 + 's';
+      starsDiv.appendChild(star);
+    }
+  </script>
+
+<script>
+  const platformSelect = document.getElementById('platformColor');
+  const groundSelect = document.getElementById('groundColor');
+  const platformSwatch = document.getElementById('platformSwatch');
+  const groundSwatch = document.getElementById('groundSwatch');
+
+  function updateSwatch(select, swatch) {
+    swatch.style.background = select.value;
+  }
+
+  platformSelect.addEventListener('change', () => updateSwatch(platformSelect, platformSwatch));
+  groundSelect.addEventListener('change', () => updateSwatch(groundSelect, groundSwatch));
+
+  updateSwatch(platformSelect, platformSwatch);
+  updateSwatch(groundSelect, groundSwatch);
+</script>
+
+</body>
+</html>
