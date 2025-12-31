@@ -139,141 +139,6 @@ body {
   color: var(--text);
 }
 
-/* ============================================= NAV BAR  ============================================= */
-.navbar {
-  position: fixed;
-  font-family: 'Orbitron', 'Courier New', monospace;
-  top: 0;
-  width: 100%;
-  background: linear-gradient(135deg, var(--BosonShadow) 0%, var(--ProtonShadow) 50%, var(--BosonShadow) 100%);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--PlasmaGlow2);
-  box-shadow: 0 0 30px var(--PlasmaGlow2);
-  z-index: 1000;
-  padding: 0.8rem 0; 
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center; 
-  justify-content: space-between; 
-  padding: 0.5rem;
-  height: 50px; 
-}
-
-.home-link {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0; 
-}
-
-.home-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--AquaAura);
-  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>') no-repeat center;
-  -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>') no-repeat center;
-  mask-size: contain;
-  transition: all 0.3s ease;
-  flex-shrink: 0; /* DON'T SHRINK! */
-}
-
-.home-icon:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 20px var(--AquaAura);
-}
-
-.logo {
-  position: absolute; 
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%); 
-  font-size: 2rem;
-  font-weight: bold;
-  background: linear-gradient(45deg, var(--ParticlePink), var(--NuclearFuscia), var(--AlphaAqua));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 0 30px var(--ParticleGlow3);
-  animation: neonPulse 2s ease-in-out infinite alternate;
-  z-index: 2; 
-  flex-shrink: 0; 
-}
-
-.nav-spacer {
-  width: 40px; 
-  height: 40px;
-  flex-shrink: 0; 
-}
-
-.help-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--AquaAura);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 15px var(--AuraGlow2);
-}
-
-.help-icon:hover {
-  transform: scale(1.2) rotate(180deg);
-  box-shadow: 
-    0 0 25px var(--AquaAura),
-    0 0 35px var(--AlphaAqua);
-}
-
-.question-mark {
-  font-size: 24px;
-  font-weight: 900;
-  color: var(--BosonBlue);
-  text-shadow: 0 0 10px var(--ParticleGlow3);
-  z-index: 2;
-}
-
-@media (max-width: 767px) {
-  .nav-container {
-    position: relative; 
-    justify-content: center !important;
-    padding: 0 2rem !important; 
-  }
-
-  .home-icon {
-    position: absolute !important;
-    left: 1rem !important;    
-    z-index: 3 !important;     
-    transform: none !important; 
-  }
-
-  .logo {
-    position: relative !important;  
-    left: auto !important;          
-    top: auto !important;           
-    transform: none !important;     
-    margin: 0 !important;           
-    z-index: 2 !important;
-    font-size: 1.4rem !important;   
-  }
-
-  .nav-container::after {
-    content: '';
-    position: absolute;
-    right: 1rem;
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-  }
-}
 
 /* ============================================= TYPOGRAPHY  ============================================= */
 h1 {
@@ -1368,19 +1233,10 @@ modal-header h1 {
       font-size: 1.2rem;
     }
 
-
-.tracer-gif-container {
+/*.tracer-gif {
   position: relative;
-  width: 150px;  
-  height: 150px;
-  margin: 200px auto;
-  text-align: center;
-}
-
-.tracer-gif {
-  position: relative;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
   
 
@@ -1508,7 +1364,7 @@ modal-header h1 {
       drop-shadow(0 0 16px hsl(calc(var(--glow-color) + 360), 100%, 50%))
       drop-shadow(0 0 24px hsl(calc(var(--glow-color) + 360), 100%, 40%));
   }
-}
+} */
 
 /* ============================================= CIRCUIT BOARD ============================================= */
 #circuit-container {
