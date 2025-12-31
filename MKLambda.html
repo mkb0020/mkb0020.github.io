@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="assets/css/KittyStyle.css">
 
   <title>PROJECT MK:LAMBDA</title>
+
   <style>
     * { box-sizing: border-box; }
 
@@ -484,25 +485,23 @@
     }
 
     @media (max-width: 968px) {
-      /* Fix dark gap between sections */
       .row-container2 { 
         grid-template-columns: 1fr;
-        margin-top: 0px; /* Remove the gap */
-        margin-bottom: 0px; /* Remove bottom margin */
+        margin-top: 0px;
+        margin-bottom: 0px;
       }
       
       .row-container3 {
-        margin-top: 0px; /* Remove top margin to prevent gaps */
+        margin-top: 0px;
       }
       
-      /* Fix carousel getting cut off */
       .row-container5 {
-        min-height: 50vh; /* Reduce height on mobile */
+        min-height: 60vh;
         margin-top: 0px;
       }
       
       .row-container5 .gallery-card {
-        height: 50vh; /* Match the container height */
+        height: 60vh;
       }
       
       .row-container5 .carousel {
@@ -510,8 +509,9 @@
       }
       
       .carousel img {
-        object-fit: cover; /* Keep landscape orientation, just crop if needed */
-        object-position: center; /* Center the image */
+        object-fit: contain; 
+        object-position: center;
+        background: rgba(0, 0, 0, 0); 
       }
       
       .hero-content h1 { font-size: 3rem; }
@@ -523,6 +523,8 @@
       .show-date { margin-top: 15px; }
     }
   </style>
+
+
 </head>
 <body>
 
@@ -631,12 +633,12 @@
       <div class="row-container5">
         <div class="gallery-card">
           <div class="carousel">
-                    <img src="/assets/images/edm00.png" alt="Live Show 1" class="active">
+            <img src="/assets/images/edm00.png" alt="Live Show 1" class="active">
             <img src="/assets/images/edm01.png" alt="Live Show 2">
             <img src="/assets/images/edm02.png" alt="Live Show 3">
           </div>
         </div>
-      </div>
+        </div>
 
       <!-- SHOWS-->
       <div class="row-container4">
@@ -720,12 +722,13 @@
     <script src="js/KittyCore.js"></script>
 
   <script>
-    const carouselDivs = document.querySelectorAll('.carousel > div');
+    const images = document.querySelectorAll('.carousel img');
     let current = 0;
+    images[0].classList.add('active');
     setInterval(() => {
-      carouselDivs[current].style.opacity = '0';
-      current = (current + 1) % carouselDivs.length;
-      carouselDivs[current].style.opacity = '1';
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
     }, 4000);
 
     const tracks = [
