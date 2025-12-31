@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>FRACTAL VISUALIZER ♡ mkb0020</title>
   <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/KittyStyle.css">  
+
   <meta name="description" content="Infinite zoomable fractals – Mandelbrot, Julia, Burning Ship and more" />
 
 </head>
@@ -12,12 +14,62 @@
 
   <nav class="navbar">
     <div class="nav-container">
-      <a href="https://mkb0020.github.io">
-        <div class="home-icon"></div>
-        <div class="logo">♡ mkb0020</div>
-      </a>
+      
+      <div class="left-dropdown"><!-- LEFT DROPDOWN MENU -->
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+
+        <div class="left-menu">
+          <a href="https://mkb0020.vercel.app/" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
+          <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
+          <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <!--<a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>-->
+          <a href="https://mkb0020.vercel.app/comments" class="menu-item">Guestbook</a>
+          <a href="https://mkb0020.vercel.app/game-testing" class="menu-item">CATastrophe 2 Feedback</a>
+
+          <div class="social-links">
+            <a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>
+          
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+
+            <a href="https://mkb0020.github.io/MKLambda.html" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/music-icon.png" alt="YouTube" class="social-icon">
+            </a>
+
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>
+
+            <a href="https://mkb0020.itch.io" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/itchio-icon.png" alt="YouTube" class="social-icon">
+            </a>
+          </div>
+        </div>
+      </div>
+
+     
+       <a href="https://mkb0020.github.io">
+            <div class="logo">♡ mkb0020</div>  <!-- CENTER LOGO -->
+        </a>
+ 
+      <div class="help-dropdown"> <!-- RIGHT HELP DROPDOWN -->
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="https://mkb0020.vercel.app/support" class="menu-item">Report an Issue</a>
+        </div>
+      </div>
     </div>
   </nav>
+
 
 
 
@@ -132,6 +184,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="js/Fractals.js"></script>
+  <script src="js/KittyCore.js"></script>
+
 
   <script>
     function openModal(id) {
