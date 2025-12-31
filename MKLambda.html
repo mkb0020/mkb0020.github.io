@@ -12,7 +12,7 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
+      background: transparent;
       font-family: 'GothNerd', sans-serif;
       color: white;
       position: relative;
@@ -119,6 +119,36 @@
       height: 100%;
       object-fit: cover;
       z-index: 1;
+      border-bottom: 3px solid var(--VortexViolet);
+      border-top: 3px solid var(--VortexViolet);
+    }
+
+    
+    .row-container11 {
+      position: relative;
+      height: 60vh;                 
+      margin-top: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 70px;
+      margin-top: 40px;
+      border-bottom: 3px solid var(--VortexViolet);
+      border-top: 3px solid var(--VortexViolet);
+    }
+
+
+    .TopPic11 {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      border-bottom: 3px solid var(--VortexViolet);
+      border-top: 3px solid var(--VortexViolet);
+
     }
 
     .hero-content {
@@ -143,14 +173,14 @@
     }
 
     .row-container2 {
-      min-height: 90vh;
+      min-height: 110vh;
       display: grid;
       grid-template-columns: 3fr 2fr;
       backdrop-filter: blur(2px);
-      margin-top: 120px;
-      margin-bottom: 120px;
-      border-bottom: 2px solid rgba(137, 6, 224, 0.555);
-      border-top: 2px solid rgba(137, 6, 224, 0.555);
+      margin-top: 100px;
+      margin-bottom: 100px;
+      border-bottom: 3px solid var(--VortexViolet);
+      border-top: 3px solid var(--VortexViolet);
     }
 
     .row-container3 {
@@ -161,7 +191,9 @@
       justify-content: center;
       padding: 20px;
       margin-bottom: 0px;
-      margin-top: 20px;
+      margin-top: 0px;
+      border-bottom: 3px solid var(--VortexViolet);
+      border-top: 3px solid var(--VortexViolet);
     }
 
     .row-container4 {
@@ -171,6 +203,8 @@
       background: rgba(30, 10, 80, 0.126);
       margin-bottom: 0px;
       margin-top: 0px;
+      border-bottom: 3px solid var(--VortexViolet);
+      border-top: 3px solid var(--VortexViolet);
     }
 
     .row-container5 {
@@ -181,7 +215,9 @@
       align-items: center;
       justify-content: center;
       background: rgba(0, 0, 0, 0.3);
-      margin-top: 0px;
+      margin-top: 0px;      
+      border-bottom: 3px solid var(--VortexViolet);
+      border-top: 3px solid var(--VortexViolet);
     }
 
     .row-container5 .gallery-card {
@@ -269,14 +305,14 @@
       position: absolute;
       inset: 0;
       width: 100%;
-      height: 100%;
+      height: 110vh;
       object-fit: cover;
       z-index: 100;
     }
 
     .player-container {
       background: linear-gradient(135deg, rgba(165, 90, 255, 0.3), rgba(165, 90, 255, 0.3));
-      height: 90vh;
+      height: 110vh;
       display: flex;
       flex-direction: column;
       padding: 10px;
@@ -528,6 +564,33 @@
 </head>
 <body>
 
+
+
+  <div class="dreamy-overlay"></div>
+
+  <div class="content-wrapper">
+    <div class="background-gradient"></div>
+    <div class="waves">
+      <svg id="wave1" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 L3000,600 L0,600 Z" fill="#4b0082" opacity="0.9"/>
+      </svg>
+      <svg id="wave2" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 L3000,600 L0,600 Z" fill="#c71585" opacity="0.8"/>
+      </svg>
+      <svg id="wave3" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,400 Q333,200 666,400 T1333,400 T2000,400 T2333,400 T2666,400 T3000,400 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.75"/>
+      </svg>
+      <svg id="wave4" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,420 Q750,250 1500,420 T3000,420 L3000,600 L0,600 Z" fill="#db7093" opacity="0.7"/>
+      </svg>
+      <svg id="wave5" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.5"/>
+      </svg>
+      <svg id="wave6" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,250 Q600,100 1200,250 T2400,250 L3000,250 L3000,600 L0,600 Z" fill="#e066ff" opacity="0.4"/>
+      </svg>
+    </div>
+
  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
@@ -566,33 +629,15 @@
     </div>
   </nav>
 
-  <div class="dreamy-overlay"></div>
-  <div id="stars"></div>
-
-  <div class="content-wrapper">
-    <div class="background-gradient"></div>
-    <div class="waves">
-      <svg id="wave1" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 L3000,600 L0,600 Z" fill="#4b0082" opacity="0.9"/>
-      </svg>
-      <svg id="wave2" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 L3000,600 L0,600 Z" fill="#c71585" opacity="0.8"/>
-      </svg>
-      <svg id="wave3" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,400 Q333,200 666,400 T1333,400 T2000,400 T2333,400 T2666,400 T3000,400 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.75"/>
-      </svg>
-      <svg id="wave4" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,420 Q750,250 1500,420 T3000,420 L3000,600 L0,600 Z" fill="#db7093" opacity="0.7"/>
-      </svg>
-      <svg id="wave5" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.5"/>
-      </svg>
-      <svg id="wave6" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,250 Q600,100 1200,250 T2400,250 L3000,250 L3000,600 L0,600 Z" fill="#e066ff" opacity="0.4"/>
-      </svg>
-    </div>
-
     <section>
+
+
+      <div class="row-container11">
+                  <img src="/assets/images/lambda03.png" alt="Hero Background" class="TopPic11">
+        <div class="hero-content">
+                  </div>
+      </div>
+
       <!-- ALBUM -->
       <div class="row-container3">
         <img src="/assets/images/AlbumArt.png" alt="Album Background" class="BigAlbum">
@@ -607,7 +652,7 @@
       <!-- PLAYER-->
       <div class="row-container2">
         <div class="gallery-card2">
-          <img src="/assets/images/MeowMix01.png" alt="Player Background" class="PlayerPic">
+          <img src="/assets/images/lambda02.png" alt="Player Background" class="PlayerPic">
         </div>
         <div class="row-card">
           <div class="player-container">
