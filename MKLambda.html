@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/KittyStyle.css">
+
   <title>PROJECT MK:LAMBDA</title>
-  <link rel="stylesheet" href="assets/css/KittyStyle.css">
   <style>
     * { box-sizing: border-box; }
 
@@ -88,7 +89,6 @@
       max-width: 1400px;
       margin: 0 auto;
       padding: 0;
-
     }
 
     .row-container3,
@@ -100,27 +100,25 @@
       overflow: hidden;
     }
 
-.row-container1 {
-  position: relative;
-  height: 100vh;                 
-  min-height: 400px;             
-  margin-top: 0px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .row-container1 {
+      position: relative;
+      height: 100vh;                 
+      min-height: 400px;             
+      margin-top: 0px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-
-
-.TopPic {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
+    .TopPic {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
 
     .hero-content {
       position: relative;
@@ -152,7 +150,6 @@
       margin-bottom: 120px;
       border-bottom: 2px solid rgba(137, 6, 224, 0.555);
       border-top: 2px solid rgba(137, 6, 224, 0.555);
-
     }
 
     .row-container3 {
@@ -164,7 +161,6 @@
       padding: 20px;
       margin-bottom: 0px;
       margin-top: 20px;
-
     }
 
     .row-container4 {
@@ -288,7 +284,7 @@
     .player-container h1 {
       text-align: center;
       font-size: 2.2rem;
-      color: var(--AlphaAqua);
+      color: #67FEBD;
       margin-bottom: 0.5px;
       text-transform: uppercase;
       text-shadow: 0 0 7px #0000002f;
@@ -311,18 +307,18 @@
 
     .controls button {
       background: linear-gradient(-45deg, #2A3439, #657383);
-      border: 2px solid var(--NuclearFuscia);
+      border: 2px solid #ff69b4;
       color: white;
       padding: 7px 20px;
       font-size: 1rem;
       border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 0 10px var(--VortexViolet);
+      box-shadow: 0 0 10px #830CDE;
     }
 
     .controls button:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 20px var(--VortexViolet);
+      box-shadow: 0 0 20px #830CDE;
     }
 
     .progress {
@@ -347,7 +343,7 @@
     .playlist li {
       padding: 5px 15px;
       margin-bottom: 5px;
-      border: 1px solid var(--NuclearFuscia);
+      border: 1px solid #ff69b4;
       border-radius: 20px;
       background: #00000067;
       cursor: pointer;
@@ -358,42 +354,40 @@
 
     .playlist li:hover {
       background: #00000096;
-      box-shadow: 0 0 25px var(--PlasmaPurple);
+      box-shadow: 0 0 25px #830CDE;
     }
 
+    .playlist::-webkit-scrollbar {
+      width: 10px;                     
+    }
 
-  .playlist::-webkit-scrollbar {
-    width: 10px;                     
-  }
+    .playlist::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);    
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    }
 
-  .playlist::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);    
-    border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-  }
+    .playlist::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #ff69b4, #830CDE); 
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 
+        0 0 15px rgba(255, 105, 180, 0.8),
+        0 0 25px rgba(131, 12, 222, 0.6);
+    }
 
-  .playlist::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #ff69b4, #830CDE); 
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 
-      0 0 15px rgba(255, 105, 180, 0.8),
-      0 0 25px rgba(131, 12, 222, 0.6);
-  }
+    .playlist::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #ff69b4, #c71585);
+      box-shadow: 
+        0 0 20px rgba(255, 105, 180, 1),
+        0 0 35px rgba(199, 21, 133, 0.8);
+      transform: scale(1.05);
+    }
 
-  .playlist::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #ff69b4, #c71585);
-    box-shadow: 
-      0 0 20px rgba(255, 105, 180, 1),
-      0 0 35px rgba(199, 21, 133, 0.8);
-    transform: scale(1.05);
-  }
-
-  .playlist {
-    scrollbar-width: thin;
-    scrollbar-color: #ff69b4 #2a0038;
-  }
-
+    .playlist {
+      scrollbar-width: thin;
+      scrollbar-color: #ff69b4 #2a0038;
+    }
 
     .Niels {
       width: 90px;
@@ -490,7 +484,36 @@
     }
 
     @media (max-width: 968px) {
-      .row-container2 { grid-template-columns: 1fr; }
+      /* Fix dark gap between sections */
+      .row-container2 { 
+        grid-template-columns: 1fr;
+        margin-top: 0px; /* Remove the gap */
+        margin-bottom: 0px; /* Remove bottom margin */
+      }
+      
+      .row-container3 {
+        margin-top: 0px; /* Remove top margin to prevent gaps */
+      }
+      
+      /* Fix carousel getting cut off */
+      .row-container5 {
+        min-height: 50vh; /* Reduce height on mobile */
+        margin-top: 0px;
+      }
+      
+      .row-container5 .gallery-card {
+        height: 50vh; /* Match the container height */
+      }
+      
+      .row-container5 .carousel {
+        height: 100%;
+      }
+      
+      .carousel img {
+        object-fit: cover; /* Keep landscape orientation, just crop if needed */
+        object-position: center; /* Center the image */
+      }
+      
       .hero-content h1 { font-size: 3rem; }
       .hero-content p { font-size: 1.4rem; }
       .album-info-text h2 { font-size: 2.5rem; }
@@ -568,8 +591,6 @@
     </div>
 
     <section>
-
-
       <!-- ALBUM -->
       <div class="row-container3">
         <img src="/assets/images/AlbumArt.png" alt="Album Background" class="BigAlbum">
@@ -588,8 +609,7 @@
         </div>
         <div class="row-card">
           <div class="player-container">
-        <h1><img src="/assets/images/DJNiels.png" alt="DJ Niels" class="Niels"></h1>
-
+            <h1><img src="/assets/images/DJNiels.png" alt="DJ Niels" class="Niels"></h1>
             <h1>Now Playing:</h1>
             <div class="now-playing" id="trackTitle">Select a track</div>
             <audio id="audio"></audio>
@@ -607,11 +627,11 @@
         </div>
       </div>
 
-            <!--ROTATING IMAGES -->
+      <!-- ROTATING IMAGES -->
       <div class="row-container5">
         <div class="gallery-card">
           <div class="carousel">
-            <img src="/assets/images/edm00.png" alt="Live Show 1" class="active">
+                    <img src="/assets/images/edm00.png" alt="Live Show 1" class="active">
             <img src="/assets/images/edm01.png" alt="Live Show 2">
             <img src="/assets/images/edm02.png" alt="Live Show 3">
           </div>
@@ -643,21 +663,19 @@
         </div>
       </div>
 
-
-
-
       <div class="row-container1">
-        <img src="/assets/images/MeowMix000.png" alt="Hero Background" class="TopPic">
+                  <img src="/assets/images/MeowMix000.png" alt="Hero Background" class="TopPic">
         <div class="hero-content">
+
         </div>
       </div>
 
       <footer>
         <p>&copy; 2026 PROJECT MK:LAMBDA MUSIC. ALL RIGHTS RESERVED.</p>
       </footer>
+
     </section>
   </div>
-
 
 
  <div id="helpModal" class="modal">
@@ -675,7 +693,6 @@
       </div>
     </div>
   </div>
-
 
 
       <div id="kofi-float">
@@ -700,24 +717,25 @@
         </a>
 </div>
 
-  <script src="js/KittyCore.js"></script>
+    <script src="js/KittyCore.js"></script>
+
   <script>
-    const images = document.querySelectorAll('.carousel img');
+    const carouselDivs = document.querySelectorAll('.carousel > div');
     let current = 0;
-    images[0].classList.add('active');
     setInterval(() => {
-      images[current].classList.remove('active');
-      current = (current + 1) % images.length;
-      images[current].classList.add('active');
+      carouselDivs[current].style.opacity = '0';
+      current = (current + 1) % carouselDivs.length;
+      carouselDivs[current].style.opacity = '1';
     }, 4000);
 
     const tracks = [
     { title: 'SALOON TYPE BEAT', src: 'assets/sounds/SaloonTypeBeat.mp3', section: 'other' },
     { title: 'LOBOTOMY LULLABY', src: 'assets/sounds/LobotomyLullaby.mp3', section: 'other' },
     { title: 'STRING THEORY IN G MAJOR', src: 'assets/sounds/stringTheory.mp3', section: 'other' },
-    { title: 'STANDARD UNIT OF CHAOS', src: 'assets/sounds/standardUnit.mp3', section: 'other' },
     { title: 'LO-FI SONG TO DEBUG YOUR BRAIN', src: 'assets/sounds/DebuggingMyBrain.mp3', section: 'other' },
     { title: 'UNSTABLE ISOTOPES', src: 'assets/sounds/isotopes.mp3', section: 'other' },
+    { title: 'RICCI-FLAT MANDOLINS', src: 'assets/sounds/ricciFlat.mp3', section: 'other' },
+    { title: 'STANDARD UNIT OF CHAOS', src: 'assets/sounds/standardUnit.mp3', section: 'other' },
     { title: 'DECOHERENCE', src: 'assets/sounds/decoherence.mp3', section: 'other' },
     { title: 'SPOOKY ACTION AT A DISTANCE', src: 'assets/sounds/SpookyAction.mp3', section: 'other' },
     { title: 'LOOKING AT MY CONSOLES DEBUG LOGS', src: 'assets/sounds/ConsoleLog.mp3', section: 'other' },
