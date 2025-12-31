@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROJECT MK:LAMBDA</title>
+  <link rel="stylesheet" href="assets/css/KittyStyle.css">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'GothNerd', sans-serif;
+      color: white;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .background-gradient {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, #37025A 5%, #8a2be2 5%, #c71585 10%, #ff69b4 20%, #ff69b4 100%);
+      opacity: 0.85;
+      z-index: -2;
+    }
+
+    .waves {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    svg {
+      position: absolute;
+      bottom: 0;
+      width: 300%;
+      height: 90vh;
+      animation: wave-scroll linear infinite;
+    }
+
+    #wave1 { animation-duration: 60s; }
+    #wave2 { animation-duration: 50s; }
+    #wave3 { animation-duration: 40s; }
+    #wave4 { animation-duration: 70s; animation-direction: reverse; }
+    #wave5 { animation-duration: 30s; }
+    #wave6 { animation-duration: 45s; animation-direction: reverse; }
+
+    @keyframes wave-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-66.66%); }
+    }
+
+    .dreamy-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(80, 0, 150, 0.1);
+      backdrop-filter: blur(5px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 4s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .content-wrapper {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0;
+
+    }
+
+    .row-container3,
+    .row-container4,
+    .row-container5 {
+      border-top: 2px solid rgba(137, 6, 224, 0.548);
+      border-bottom: 2px solid rgba(137, 6, 224, 0.555);
+      margin: 80px -1px 0;
+      overflow: hidden;
+    }
+
+.row-container1 {
+  position: relative;
+  height: 100vh;                 
+  min-height: 400px;             
+  margin-top: 0px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.TopPic {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      font-family: 'Orbitron', monospace;
+      padding: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      color: #67FEBD;
+      text-shadow: 0 0 30px #67FEBD;
+      margin: 0 0 20px;
+    }
+
+    .hero-content p {
+      font-size: 2.7rem;
+      color: #ff69b4;
+      text-shadow: 0 0 15px #000000;
+    }
+
+    .row-container2 {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      backdrop-filter: blur(2px);
+      margin-top: 120px;
+      margin-bottom: 120px;
+      border-bottom: 2px solid rgba(137, 6, 224, 0.555);
+      border-top: 2px solid rgba(137, 6, 224, 0.555);
+
+    }
+
+    .row-container3 {
+      min-height: 80vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      margin-bottom: 0px;
+      margin-top: 20px;
+
+    }
+
+    .row-container4 {
+      min-height: 80vh;
+      padding: 60px 20px 100px;
+      backdrop-filter: blur(2px);
+      background: rgba(30, 10, 80, 0.126);
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+
+    .row-container5 {
+      min-height: 100vh;
+      margin: 80px -1px 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.3);
+      margin-top: 0px;
+    }
+
+    .row-container5 .gallery-card {
+      height: 100vh;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .row-container5 .carousel {
+      height: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 50px rgba(255, 105, 180, 0.6);
+      border: 2px solid rgba(137, 6, 224, 0.548);
+    }
+
+    .BigAlbum {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      filter: blur(1px) brightness(0.8);
+      z-index: 1;
+    }
+
+    .album-info-text {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      font-family: 'Orbitron', monospace;
+    }
+
+    .SmallAlbum {
+      width: 300px;
+      height: 300px;
+      border: 4px solid #ff69b4;
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.8), inset 0 0 30px rgba(255, 105, 180, 0.3);
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .album-info-text h2 {
+      font-size: 3.5rem;
+      color: #67FEBD;
+      text-shadow: 0 0 20px #67FEBD;
+      margin: 20px 0;
+    }
+
+    .album-info-text p {
+      font-size: 1.8rem;
+      color: #ffffff;
+      text-shadow: 0 0 15px #ff69b4;
+      margin: 12px 0;
+    }
+
+    .preorder-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 40px;
+      background: linear-gradient(45deg, #830CDE, #DC4CE8);
+      border: 2px solid #ff69b4;
+      border-radius: 50px;
+      color: white;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    .preorder-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 50px rgba(255, 105, 180, 0.9);
+    }
+
+    .gallery-card2 {
+      position: relative;
+      height: 90vh;
+    }
+
+    .PlayerPic {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 100;
+    }
+
+    .player-container {
+      background: linear-gradient(135deg, rgba(165, 90, 255, 0.3), rgba(165, 90, 255, 0.3));
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .player-container h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--AlphaAqua);
+      margin-bottom: 0.5px;
+      text-transform: uppercase;
+      text-shadow: 0 0 7px #0000002f;
+    }
+
+    .now-playing {
+      text-align: center;
+      margin-bottom: 7px;
+      font-size: 1.1rem;
+      color: #ffffff;
+      text-shadow: 0 0 5px #0000008a;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      margin: 7px 0;
+    }
+
+    .controls button {
+      background: linear-gradient(-45deg, #2A3439, #657383);
+      border: 2px solid var(--NuclearFuscia);
+      color: white;
+      padding: 7px 20px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--VortexViolet);
+    }
+
+    .controls button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px var(--VortexViolet);
+    }
+
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px;
+    }
+
+    .progress input { flex: 1; }
+
+    .volume { text-align: center; margin-top: 10px; }
+
+    .playlist {
+      margin-top: 5px;
+      padding: 5px;
+      list-style: none;
+      overflow-y: auto;
+      background: transparent;
+    }
+
+    .playlist li {
+      padding: 5px 15px;
+      margin-bottom: 5px;
+      border: 1px solid var(--NuclearFuscia);
+      border-radius: 20px;
+      background: #00000067;
+      cursor: pointer;
+      text-align: center;
+      font-size: 0.85rem;
+      transition: all 0.25s ease;
+    }
+
+    .playlist li:hover {
+      background: #00000096;
+      box-shadow: 0 0 25px var(--PlasmaPurple);
+    }
+
+
+  .playlist::-webkit-scrollbar {
+    width: 10px;                     
+  }
+
+  .playlist::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);    
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+
+  .playlist::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #ff69b4, #830CDE); 
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 0 15px rgba(255, 105, 180, 0.8),
+      0 0 25px rgba(131, 12, 222, 0.6);
+  }
+
+  .playlist::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #ff69b4, #c71585);
+    box-shadow: 
+      0 0 20px rgba(255, 105, 180, 1),
+      0 0 35px rgba(199, 21, 133, 0.8);
+    transform: scale(1.05);
+  }
+
+  .playlist {
+    scrollbar-width: thin;
+    scrollbar-color: #ff69b4 #2a0038;
+  }
+
+
+    .Niels {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin: 0px auto;
+      display: block;
+      margin-top: 10px;
+    }
+
+    .row-container4 h2 {
+      text-align: center;
+      font-size: 3rem;
+      color: #00FFFF;
+      margin: 0 0 40px 0;
+      text-shadow: 0 0 5px #00000082;
+    }
+
+    .shows-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
+      gap: 30px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .show-item {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 20px;
+      align-items: center;
+      background: rgba(24, 8, 63, 0.5);
+      padding: 20px;
+      border: 1px solid rgba(255, 105, 180, 0.4);
+      box-shadow: 0 0 25px rgba(131, 12, 222, 0.3);
+    }
+
+    .show-poster {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #ff69b4;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+    }
+
+    .show-details h3 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      color: #ff69b4;
+    }
+
+    .show-details p {
+      margin: 8px 0;
+      font-size: 1.3rem;
+      color: #DBE2E9;
+    }
+
+    .show-date {
+      text-align: center;
+      font-size: 2rem;
+      color: #67FEBD;
+      text-shadow: 0 0 15px #67FEBD;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .carousel img.active {
+      opacity: 1;
+    }
+
+    footer {
+      margin-top: 80px;
+      padding: 30px;
+      text-align: center;
+      font-size: 1rem;
+      background: rgba(0, 0, 0, 0.8);
+      border-top: 2px solid rgba(137, 6, 224, 0.548);
+    }
+
+    @media (max-width: 968px) {
+      .row-container2 { grid-template-columns: 1fr; }
+      .hero-content h1 { font-size: 3rem; }
+      .hero-content p { font-size: 1.4rem; }
+      .album-info-text h2 { font-size: 2.5rem; }
+      .SmallAlbum { width: 250px; height: 250px; margin-bottom: 20px; }
+      .shows-grid { grid-template-columns: 1fr; }
+      .show-item { grid-template-columns: 1fr; text-align: center; }
+      .show-date { margin-top: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+ <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      
+      <div class="left-dropdown">
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+
+        <div class="left-menu">
+          <a href="https://mkb0020.vercel.app/" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
+          <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
+          <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <a href="https://ko-fi.com/mkb0020" class="menu-item">Feed the cats</a>
+          <!--<a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>-->
+          <a href="https://mkb0020.vercel.app/comments" class="menu-item">Guestbook</a>
+          <a href="https://mkb0020.vercel.app/game-testing" class="menu-item">CATastrophe 2 Feedback</a>
+        </div>
+      </div>
+
+      <a href="https://mkb0020.github.io">
+        <div class="logo">♡ mkb0020</div>
+      </a>
+ 
+      <div class="help-dropdown">
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">About</button>
+          <a href="https://mkb0020.vercel.app/support" class="menu-item">Report an Issue</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dreamy-overlay"></div>
+  <div id="stars"></div>
+
+  <div class="content-wrapper">
+    <div class="background-gradient"></div>
+    <div class="waves">
+      <svg id="wave1" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 L3000,600 L0,600 Z" fill="#4b0082" opacity="0.9"/>
+      </svg>
+      <svg id="wave2" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 L3000,600 L0,600 Z" fill="#c71585" opacity="0.8"/>
+      </svg>
+      <svg id="wave3" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,400 Q333,200 666,400 T1333,400 T2000,400 T2333,400 T2666,400 T3000,400 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.75"/>
+      </svg>
+      <svg id="wave4" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,420 Q750,250 1500,420 T3000,420 L3000,600 L0,600 Z" fill="#db7093" opacity="0.7"/>
+      </svg>
+      <svg id="wave5" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.5"/>
+      </svg>
+      <svg id="wave6" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,250 Q600,100 1200,250 T2400,250 L3000,250 L3000,600 L0,600 Z" fill="#e066ff" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <section>
+
+
+      <!-- ALBUM -->
+      <div class="row-container3">
+        <img src="/assets/images/AlbumArt.png" alt="Album Background" class="BigAlbum">
+        <div class="album-info-text">
+          <img src="/assets/images/SmallAlbumArt.png" alt="Album Cover" class="SmallAlbum">
+          <h2>NO OBSERVATIONS</h2>
+          <p>2.31.2026</p>
+          <a href="#" class="preorder-btn">Pre-Order Now ♡</a>
+        </div>
+      </div>
+
+      <!-- PLAYER-->
+      <div class="row-container2">
+        <div class="gallery-card2">
+          <img src="/assets/images/MeowMix01.png" alt="Player Background" class="PlayerPic">
+        </div>
+        <div class="row-card">
+          <div class="player-container">
+        <h1><img src="/assets/images/DJNiels.png" alt="DJ Niels" class="Niels"></h1>
+
+            <h1>Now Playing:</h1>
+            <div class="now-playing" id="trackTitle">Select a track</div>
+            <audio id="audio"></audio>
+            <div class="controls">
+              <button onclick="togglePlay()">Play / Pause</button>
+            </div>
+            <div class="progress">
+              <span id="current">0:00</span>
+              <input type="range" id="seek" value="0">
+              <span id="duration">0:00</span>
+            </div>
+            <div class="volume">🔊 <input type="range" min="0" max="1" step="0.01" value="0.8" id="volume"></div>
+            <ul class="playlist" id="playlist"></ul>
+          </div>
+        </div>
+      </div>
+
+            <!--ROTATING IMAGES -->
+      <div class="row-container5">
+        <div class="gallery-card">
+          <div class="carousel">
+            <img src="/assets/images/edm00.png" alt="Live Show 1" class="active">
+            <img src="/assets/images/edm01.png" alt="Live Show 2">
+            <img src="/assets/images/edm02.png" alt="Live Show 3">
+          </div>
+        </div>
+      </div>
+
+      <!-- SHOWS-->
+      <div class="row-container4">
+        <h2>UPCOMING SHOWS</h2>
+        <div class="shows-grid">
+          <div class="show-item">
+            <img src="/assets/images/Entropy.png" alt="Concert Flyer" class="show-poster">
+            <div class="show-details">
+              <h3>THE ENTROPY BALL</h3>
+              <p>ATL, GA</p>
+              <p>Schrödinger's Cat Café</p>
+            </div>
+            <div class="show-date">02.31.2026</div>
+          </div>
+          <div class="show-item">
+            <img src="/assets/images/Spice.png" alt="Concert Flyer" class="show-poster">
+            <div class="show-details">
+              <h3>SPICE QUEENS - B2B SET WITH PRINCESS IRULEAN</h3>
+              <p>Arrakeen, Arrakis</p>
+              <p>Underground Sietch - Level 5</p>
+            </div>
+            <div class="show-date">03.25.2026</div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="row-container1">
+        <img src="/assets/images/MeowMix000.png" alt="Hero Background" class="TopPic">
+        <div class="hero-content">
+        </div>
+      </div>
+
+      <footer>
+        <p>&copy; 2026 PROJECT MK:LAMBDA MUSIC. ALL RIGHTS RESERVED.</p>
+      </footer>
+    </section>
+  </div>
+
+
+
+ <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">PROJECT MK:LAMBDA</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+        <p>Unfortunately, Project MK:Lambda is a <strong>fictional</strong> artist and there is no album called "No Observations" coming out on 2/31/2026.</p>
+        <p>I built this page to showcase my front-end design work.  </p>
+        <p>While the artist is fake, this page features original music by me!  But please note, I am not playing a show on Arrakis anytime soon.</p>
+        <p>If you’re a musician looking to build or refresh your digital presence, I’d love to create this kind of experience with you!</p>
+        <p>Note: The images of MK:Lambda are AI‑generated. </p>
+      </div>
+    </div>
+  </div>
+
+
+
+      <div id="kofi-float">
+        <a href="https://ko-fi.com/mkb0020" target="_blank" rel="noopener noreferrer">
+            <img src="assets/images/tipjar.png" alt="Support me on Ko-fi">
+            <div class="hearts">
+                <div class="heart" style="--delay: 0s; --drift: -20px;">❤️</div>
+                <div class="heart" style="--delay: 0.5s; --drift: 15px;">💖</div>
+                <div class="heart" style="--delay: 1s; --drift: -10px;">💕</div>
+                <div class="heart" style="--delay: 1.5s; --drift: 20px;">❤️</div>
+                <div class="heart" style="--delay: 2s; --drift: -15px;">💗</div>
+                <div class="heart" style="--delay: 2.5s; --drift: 10px;">💖</div>
+            </div>
+        </a>
+    </div>
+
+
+<div id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        <a href="javascript:void(0);" class="button-container" aria-label="Scroll to top">
+            <img src="assets/images/top.png" alt="Scroll to top">
+ 
+        </a>
+</div>
+
+  <script src="js/KittyCore.js"></script>
+  <script>
+    const images = document.querySelectorAll('.carousel img');
+    let current = 0;
+    images[0].classList.add('active');
+    setInterval(() => {
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
+    }, 4000);
+
+    const tracks = [
+    { title: 'SALOON TYPE BEAT', src: 'assets/sounds/SaloonTypeBeat.mp3', section: 'other' },
+    { title: 'LOBOTOMY LULLABY', src: 'assets/sounds/LobotomyLullaby.mp3', section: 'other' },
+    { title: 'STRING THEORY IN G MAJOR', src: 'assets/sounds/stringTheory.mp3', section: 'other' },
+    { title: 'STANDARD UNIT OF CHAOS', src: 'assets/sounds/standardUnit.mp3', section: 'other' },
+    { title: 'LO-FI SONG TO DEBUG YOUR BRAIN', src: 'assets/sounds/DebuggingMyBrain.mp3', section: 'other' },
+    { title: 'UNSTABLE ISOTOPES', src: 'assets/sounds/isotopes.mp3', section: 'other' },
+    { title: 'DECOHERENCE', src: 'assets/sounds/decoherence.mp3', section: 'other' },
+    { title: 'SPOOKY ACTION AT A DISTANCE', src: 'assets/sounds/SpookyAction.mp3', section: 'other' },
+    { title: 'LOOKING AT MY CONSOLES DEBUG LOGS', src: 'assets/sounds/ConsoleLog.mp3', section: 'other' },
+    { title: 'NIELS THEME', src: 'assets/sounds/NielsTheme.mp3', section: 'other' },
+    { title: 'PSYCHIC DRIVING', src: 'assets/sounds/PsychicDriving.mp3', section: 'other' },
+    ];
+
+    const audio = document.getElementById('audio');
+    const playlist = document.getElementById('playlist');
+    const title = document.getElementById('trackTitle');
+    const seek = document.getElementById('seek');
+    const volume = document.getElementById('volume');
+
+    tracks.forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = t.title;
+      li.onclick = () => {
+        audio.src = t.src;
+        title.textContent = t.title;
+        audio.play();
+      };
+      playlist.appendChild(li);
+    });
+
+    function togglePlay() {
+      audio.paused ? audio.play() : audio.pause();
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      seek.max = audio.duration || 0;
+      seek.value = audio.currentTime;
+      document.getElementById('current').textContent = format(audio.currentTime);
+      document.getElementById('duration').textContent = format(audio.duration);
+    });
+
+    seek.addEventListener('input', () => audio.currentTime = seek.value);
+    volume.addEventListener('input', () => audio.volume = volume.value);
+
+    function format(t) {
+      if (!t) return '0:00';
+      const m = Math.floor(t / 60);
+      const s = Math.floor(t % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    const starsDiv = document.getElementById('stars');
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = star.style.height = Math.random() * 2 + 1 + 'px';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 4 + 's';
+      starsDiv.appendChild(star);
+    }
+  </script>
+</body>
+</html>
