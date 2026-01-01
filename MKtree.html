@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MK | Links</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+@font-face {
+  font-family: 'GothNerd'; 
+  src: url('assets/fonts/ScienceGothic.ttf') format('truetype'); 
+}
+
+@font-face {
+  font-family: 'SpaceLetters'; 
+  src: url('assets/fonts/Orbitron-Bold.ttf') format('truetype'); 
+}
+
+
+
+#stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -10;
+        }
+.star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff;
+            animation: twinkle 4s infinite;
+        }
+@keyframes twinkle {
+            0%,100% { opacity: 0.4; transform: scale(1); }
+            50%     { opacity: 1; transform: scale(1.4); }
+        }
+
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background: linear-gradient(135deg, rgba(80, 1, 133, 0.55) 0%, rgba(79, 4, 149, 0.35) 50%, rgba(55, 2, 90, 0.409) 100%);
+  backdrop-filter: blur(50px);
+  border-bottom: 1px solid #8a2be2;
+  box-shadow: 0 0 30px #8a2be2;
+  z-index: 1000;
+  padding: 0.5rem 0;
+}
+
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-bottom:  1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  height: 25px;
+  max-height:25px;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.7rem;
+  color:#67FEBD;
+  font-family: 'SpaceLetters';
+  z-index: 10000;
+  flex-shrink: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+
+  display: flex;
+  justify-content: center;
+}
+
+
+
+body {
+      margin: 0;
+      min-height: 100vh;
+      background: transparent;
+      font-family: 'GothNerd', sans-serif;
+      color: white;
+      position: relative;
+      overflow-x: hidden;
+      
+  display: flex;
+  justify-content: center;
+    }
+
+    .background-gradient {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom,  
+  #2a0142 0%,
+  #5a189a 12%,
+  #8a2be2 28%,
+  #c71585 45%,
+  #ff69b4 70%,
+  #ff69b4 100%);
+      opacity: 0.85;
+      z-index: -3;
+    }
+
+    .waves {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    svg {
+      position: absolute;
+      bottom: 0;
+      width: 300%;
+      height: 90vh;
+      animation: wave-scroll linear infinite;
+    }
+
+    #wave1 { animation-duration: 60s; }
+    #wave2 { animation-duration: 50s; }
+    #wave3 { animation-duration: 40s; }
+    #wave4 { animation-duration: 70s; animation-direction: reverse; }
+    #wave5 { animation-duration: 30s; }
+    #wave6 { animation-duration: 45s; animation-direction: reverse; }
+
+    @keyframes wave-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-66.66%); }
+    }
+
+    .dreamy-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(80, 0, 150, 0.1);
+      backdrop-filter: blur(3px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+.top-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45vh;
+  background: radial-gradient(
+    ellipse at top,
+    rgba(186, 85, 255, 0.55) 0%,
+    rgba(138, 43, 226, 0.35) 35%,
+    rgba(55, 2, 90, 0.15) 60%,
+    transparent 75%
+  );
+  z-index: -2;
+  pointer-events: none;
+}
+
+
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px 16px 40px;
+}
+
+.profile {
+  text-align: center;
+  margin-bottom: 10px;
+  z-index:100;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 0px;
+  margin-top: 15px;
+  z-index:10;
+}
+
+
+
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+
+
+
+
+.link {
+background: linear-gradient(45deg,#830CDE, #c846d3);
+  color: #ffffff;
+  border: 1px solid #FFC7FF;
+  font-family: 'GothNerd', sans-serif;
+  font-size: 1rem;
+  padding: 7px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: block;
+  box-shadow: 0 0 20px #830CDE;
+  justify-content: center;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 5px;
+}
+
+.link:hover {
+  background: linear-gradient(45deg, #c846d3, #67FEBD);
+
+  box-shadow: 0 0 40px #c846d3;
+}
+
+
+
+
+
+
+
+</style>
+
+</head>
+
+<body>
+    <div class="dreamy-overlay"></div>
+
+
+
+  <nav class="navbar">
+    <div class="nav-container">
+      
+       <a href="https://mkb0020.github.io">
+            <div class="logo">♡ mkb0020</div>  <!-- CENTER LOGO -->
+        </a>
+    </div>
+  </nav>
+
+
+ <main class="container">
+
+    <div class="background-gradient"></div>
+    <div class="waves">
+      <svg id="wave1" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 L3000,600 L0,600 Z" fill="#4b0082" opacity="0.9"/>
+      </svg>
+      <svg id="wave2" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 L3000,600 L0,600 Z" fill="#c71585" opacity="0.8"/>
+      </svg>
+      <svg id="wave3" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,400 Q333,200 666,400 T1333,400 T2000,400 T2333,400 T2666,400 T3000,400 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.75"/>
+      </svg>
+      <svg id="wave4" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,420 Q750,250 1500,420 T3000,420 L3000,600 L0,600 Z" fill="#db7093" opacity="0.7"/>
+      </svg>
+      <svg id="wave5" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.5"/>
+      </svg>
+      <svg id="wave6" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,250 Q600,100 1200,250 T2400,250 L3000,250 L3000,600 L0,600 Z" fill="#e066ff" opacity="0.4"/>
+      </svg>
+    </div>
+
+
+ 
+
+    <header class="profile">
+      <img src="assets/images/cowboyNiels.png" alt="MK avatar" class="avatar" />
+
+    </header>
+
+    <section class="links">
+      <a class="link" href="https://mkb0020.vercel.app/">Website</a>
+      <a class="link" href="https://mkb0020.vercel.app/tester-signup">Sign up to test CATastrophe2</a>
+      <a class="link" href="https://mkb0020.github.io/trailer.html">CATastrophe2 Trailer</a>
+      <a class="link" href="https://mkb0020.itch.io/moonwalkerranch">Play MOOnwalker Ranch</a>
+      <a class="link" href="https://mkb0020.github.io/MKLambda.html">Music</a>
+      <a class="link" href="https://mkb0020.github.io/blobs.html">Play with blobs</a>
+    </section>
+
+    <footer class="socials">
+
+    </footer>
+
+
+  </main>
+  <script>
+
+document.querySelectorAll('.link').forEach(link => {
+  link.addEventListener('click', () => {
+    link.classList.add('clicked');
+    setTimeout(() => link.classList.remove('clicked'), 150);
+  });
+});
+
+  </script>
+</body>
+</html>
+
+
+
