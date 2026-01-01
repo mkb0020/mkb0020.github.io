@@ -41,6 +41,26 @@
             50%     { opacity: 1; transform: scale(1.4); }
         }
 
+.shooting-star {
+  position: fixed;
+  top: -10px;
+  left: -30%;
+  width: 150px;
+  height: 2px;
+  background: linear-gradient(90deg, #fff, transparent);
+  opacity: 0.8;
+  transform: rotate(15deg);
+  pointer-events: none;
+  z-index: -1;
+  animation: shoot 1.2s ease-out forwards;
+}
+
+@keyframes shoot {
+  to {
+    transform: translate(140vw, 120vh) rotate(15deg);
+    opacity: 0;
+  }
+}
 
 
 .navbar {
@@ -236,12 +256,6 @@ background: linear-gradient(45deg,#830CDE, #c846d3);
   box-shadow: 0 0 40px #c846d3;
 }
 
-
-
-
-
-
-
 </style>
 
 </head>
@@ -323,6 +337,19 @@ background: linear-gradient(45deg,#830CDE, #c846d3);
             starsDiv.appendChild(star);
         }
   </script>
+
+
+<script>
+setInterval(() => {
+  if (Math.random() < 0.35) {
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 1500);
+  }
+}, 1200);
+</script>
+
 
   <script>
 
