@@ -27,11 +27,11 @@
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            z-index: -10;
+            z-index: -1;
         }
 .star {
             position: absolute;
-            background: #fff;
+            background: #FFC7FF;
             border-radius: 50%;
             box-shadow: 0 0 10px #fff;
             animation: twinkle 4s infinite;
@@ -168,9 +168,9 @@ body {
   height: 45vh;
   background: radial-gradient(
     ellipse at top,
-    rgba(186, 85, 255, 0.55) 0%,
-    rgba(138, 43, 226, 0.35) 35%,
-    rgba(55, 2, 90, 0.15) 60%,
+    rgba(117, 14, 185, 0.55) 0%,
+    rgba(89, 17, 156, 0.35) 35%,
+    rgba(143, 1, 237, 0.486) 60%,
     transparent 75%
   );
   z-index: -2;
@@ -249,6 +249,7 @@ background: linear-gradient(45deg,#830CDE, #c846d3);
 <body>
     <div class="dreamy-overlay"></div>
 
+  <div id="stars"></div>
 
 
   <nav class="navbar">
@@ -271,16 +272,16 @@ background: linear-gradient(45deg,#830CDE, #c846d3);
       <svg id="wave2" viewBox="0 0 3000 600" preserveAspectRatio="none">
         <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 L3000,600 L0,600 Z" fill="#c71585" opacity="0.8"/>
       </svg>
-      <svg id="wave3" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,400 Q333,200 666,400 T1333,400 T2000,400 T2333,400 T2666,400 T3000,400 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.75"/>
-      </svg>
+      <!--<svg id="wave3" viewBox="0 0 3000 600" preserveAspectRatio="none"> 
+        <path d="M0,400 Q333,200 666,400 T1333,400 T2000,400 T2666,400 T3000,400 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.6"/>
+      </svg>-->
       <svg id="wave4" viewBox="0 0 3000 600" preserveAspectRatio="none">
         <path d="M0,420 Q750,250 1500,420 T3000,420 L3000,600 L0,600 Z" fill="#db7093" opacity="0.7"/>
       </svg>
       <svg id="wave5" viewBox="0 0 3000 600" preserveAspectRatio="none">
         <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.5"/>
       </svg>
-      <svg id="wave6" viewBox="0 0 3000 600" preserveAspectRatio="none">
+      <<svg id="wave6" viewBox="0 0 3000 600" preserveAspectRatio="none">
         <path d="M0,250 Q600,100 1200,250 T2400,250 L3000,250 L3000,600 L0,600 Z" fill="#e066ff" opacity="0.4"/>
       </svg>
     </div>
@@ -308,6 +309,21 @@ background: linear-gradient(45deg,#830CDE, #c846d3);
 
 
   </main>
+
+
+  <script>
+        const starsDiv = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = star.style.height = Math.random() * 2 + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 4 + 's';
+            starsDiv.appendChild(star);
+        }
+  </script>
+
   <script>
 
 document.querySelectorAll('.link').forEach(link => {
