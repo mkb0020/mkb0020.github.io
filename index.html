@@ -91,14 +91,41 @@
     padding: 0 1rem; 
 }
 
+    .project-group {
+      background: rgba(83, 3, 174, 0.683);
+      border: 1px solid var(--VortexViolet);
+      border-radius: 16px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 32px var(--VortexGlow1), inset 0 1px 0 var(--PlasmaGlow2);
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      max-width: 100%;
+      margin-bottom: 20px;
+      z-index: 9;
+    }
 
+    .project-group h2 {
+      text-shadow: 0 0 15px var(--ParticleGlow2);
+      position: relative;
+      z-index: 10;
+      text-align: left;
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      color: var(--NuclearFuscia);
+      font-size: 2.2rem;
+
+    }
 
     .project-card {
       background: rgba(23, 0, 50, 0.594);
       backdrop-filter: blur(15px);
       border: 1px solid var(--VortexViolet);
       border-radius: 16px;
-      padding: 2rem;
+      padding: 1rem;
       position: relative;
       overflow: hidden;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -110,7 +137,7 @@
       margin-bottom: 20px;
       margin-left: 50px;
       margin-right: 50px;
-      z-index: 9;
+      z-index: 10;
     }
 
     .project-card::before {
@@ -140,85 +167,29 @@
       margin-bottom: 1rem;
       font-family: 'Orbitron', 'Courier New', monospace;
       color: var(--AlphaAqua);
-      font-size: 2rem;
+      font-size: 1.5rem;
 
     }
 
     .project-card p {
       color: var(--MutedGray);
-      font-size: 1.5rem;
-      line-height: 1.5;
+      font-size: 1.2rem;
+      line-height: 1.2;
       position: relative;
       font-family: Arial, Helvetica, sans-serif;
-      z-index: 10;
+      z-index: 11;
     }
 
     .project-card strong {
       color: var(--ParticlePink);
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: bold;
-      line-height: 1.5;
+      line-height: 1.2;
       position: relative;
-      z-index: 10;
+      z-index: 11;
     }
-  .trailer-banner {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
-    padding: 12px 0;
-    overflow: hidden;
-    z-index: 100; 
-    box-shadow: 0 4px 20px rgba(131,12,222,0.6);
-    border-bottom: 2px solid var(--VortexViolet, #830cde);
-    border-top: 2px solid var(--VortexViolet, #830cde);
 
-  }
 
-  .trailer-banner a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-  }
-
-  .banner-text {
-    display: flex;
-    width: max-content; 
-    animation: scrollBanner 30s linear infinite;
-    white-space: nowrap;
-  }
-
-  .banner-text span {
-    font-family: 'GothNerd', 'SpaceLetters', sans-serif; 
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--NuclearFuscia, #ff00aa);
-
-    padding-right: 300px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  @keyframes scrollBanner {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-
-  .trailer-banner:hover .banner-text {
-    animation-play-state: paused;
-  }
-
-@media (prefers-reduced-motion: reduce) {
-  .banner-text {
-    animation: none;
-  }
-}
 
 
   @media (max-width: 767px) {
@@ -529,72 +500,84 @@
         <img src="assets/images/cat_cup.gif" alt="meow!" class="cat-gif" id="cat">
 
 
-    <!-- PROJECT GRID -->
-      <a href="Toolkit.html" class="project-card">
-        <h3>Schrödinger's Toolbox</h3>
-        <p>Game Dev Sandbox / Toolkit</p>
-      </a>
-
-      <a href="https://mkb0020.itch.io/moonwalkerranch" class="project-card">
-        <h3>Play "MOOnwalker Ranch!"</h3>
-        <p><strong> Fly around the pasture in a UFO and Abduct cows </strong></p>
-        <p>Mini Game with no objective... just vibes</p>
-      </a>
-
-      <a href="blobs.html" class="project-card">
-        <h3>Blobs</h3>
-        <p><strong> Play with blobs </strong></p>
-        <p>Three.js experiment</p>
-      </a>
+<div class="project-group">
+  <h2>Games & Simulations</h2>
 
       <a href="trailer.html" class="project-card">
         <h3>CATastrophe2</h3>
         <p>The sequel you've been waiting for...</p>
       </a>
 
+
+      <a href="https://mkb0020.itch.io/moonwalkerranch" class="project-card">
+        <h3>MOOnwalker Ranch</h3>
+        <p><strong> Fly around the pasture in a UFO and Abduct cows </strong></p>
+        <p>Mini Game with no objective... just vibes</p>
+      </a>
+
+      <a href="https://mkb0020.itch.io/pastelular-automata.html" class="project-card">
+        <h3>PASTELular Automata</h3>
+        <p><strong>Emerging complexity... but make it pretty</strong></p>
+      </a>
+
+      <a href="Toolkit.html" class="project-card">
+        <h3>Schrödinger's Toolbox</h3>
+        <p>Game Dev Sandbox / Toolkit</p>
+      </a>
+
+</div>        
+
+<div class="project-group">
+  <h2>Music</h2>
+        <a href="MeowMixTape.html" class="project-card">
+        <h3>MeowMixTape</h3>
+        <p><strong> Lsten to the sound track for CATastrophe2 and other original songs by me!</strong></p>
+      </a>
+
+    <a href="MKLambda.html" class="project-card">
+        <h3>PROJECT MK:LAMBDA</h3>
+        <p>Fictional Music Artist Landing Page</p>
+      </a>
+</div>
+
+<div class="project-group">
+  <h2>Three JS Experiments</h2>
+
+      <a href="blobs.html" class="project-card">
+        <h3>Blobs</h3>
+        <p><strong> Play with blobs </strong></p>
+      </a>
+
+      <a href="manifold.html" class="project-card">
+        <h3>Calabi-Yau Manifold</h3>
+        <p><strong> 6-dimensional Visualizer</strong></p>
+      </a>
+
       <a href="d20.html" class="project-card">
         <h3>D20 Roller</h3>
         <p><strong> Roll for Initiative... but make it pretty </strong></p>
-        <p>Three.js experiment</p>
       </a>
 
       <a href="fractals.html" class="project-card">
         <h3>Fractal Visualizer</h3>
         <p><strong>Get lost in Fractals</strong></p>
-        <p>Three.js experiment</p>
-      </a>
-      
-      <a href="manifold.html" class="project-card">
-        <h3>Calabi-Yau Manifold</h3>
-        <p><strong> 6-dimensional Visualizer</strong></p>
-        <p>Three.js experiment</p>
       </a>
 
-      <a href="MeowMixTape.html" class="project-card">
-        <h3>MeowMixTape</h3>
-        <p><strong> Lsten to the sound track for CATastrophe2 and other original songs by me!</strong></p>
-      </a>
+</div>
 
-      <a href="Sidequests.html" class="project-card">
+      <!--<a href="Sidequests.html" class="project-card">
         <h3>Side Quests</h3>
         <p><strong> Mini projects </strong></p>
-      </a>
+      </a>-->
    
-
-
-
       <img src="assets/images/cat_hop.gif" class="cat2-gif"> 
 
-     
-      <!--<a href="resume.html" class="project-card">
-        <h3>Resume</h3>
-        <p>View my professional background & experience</p>
-      </a>-->
-
+     <div class="project-group">
       <a href="https://github.com/mkb0020" class="project-card" target="_blank">
         <h3>GitHub</h3>
         <p>Check out my code repositories</p>
       </a>
+      </div>
     </div>
   </div>
 
