@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/ArcadeStyles.css">
+
+  <title>PROJECT MK:LAMBDA - ARCADE VIBE</title>
+
+</head>
+<body>
+
+  <div class="dreamy-overlay"></div>
+
+  <div class="content-wrapper">
+    <div class="background-gradient"></div>
+    <div class="waves">
+      <svg id="wave1" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 L3000,600 L0,600 Z" fill="#4b0082" opacity="0.9"/>
+      </svg>
+      <svg id="wave2" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 L3000,600 L0,600 Z" fill="#c71585" opacity="0.8"/>
+      </svg>
+      <svg id="wave3" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,400 Q333,200 666,400 T1333,400 T2000,400 T2333,400 T2666,400 T3000,400 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.75"/>
+      </svg>
+      <svg id="wave4" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,420 Q750,250 1500,420 T3000,420 L3000,600 L0,600 Z" fill="#db7093" opacity="0.7"/>
+      </svg>
+      <svg id="wave5" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.5"/>
+      </svg>
+      <svg id="wave6" viewBox="0 0 3000 600" preserveAspectRatio="none">
+        <path d="M0,250 Q600,100 1200,250 T2400,250 L3000,250 L3000,600 L0,600 Z" fill="#e066ff" opacity="0.4"/>
+      </svg>
+    </div>
+
+ <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      
+      <div class="left-dropdown"><!-- LEFT DROPDOWN MENU -->
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+
+        <div class="left-menu">
+          <a href="https://mkb0020.vercel.app/" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
+          <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
+          <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
+          <!--<a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>-->
+          <a href="https://mkb0020.vercel.app/comments" class="menu-item">Guestbook</a>
+          <a href="https://mkb0020.vercel.app/game-testing" class="menu-item">CATastrophe 2 Feedback</a>
+
+          <div class="social-links">
+            <a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>
+          
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+
+            <a href="https://mkb0020.github.io/MKLambda.html" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/music-icon.png" alt="YouTube" class="social-icon">
+            </a>
+
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>
+
+            <a href="https://mkb0020.itch.io" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/itchio-icon.png" alt="YouTube" class="social-icon">
+            </a>
+          </div>
+        </div>
+      </div>
+
+     
+       <a href="https://mkb0020.github.io">
+            <div class="logo">♡ mkb0020</div>  <!-- CENTER LOGO -->
+        </a>
+ 
+      <div class="help-dropdown"> <!-- RIGHT HELP DROPDOWN -->
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="https://mkb0020.vercel.app/support" class="menu-item">Report an Issue</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+    <section>
+
+      
+      <!-- ALBUM -->
+
+
+      <!-- PLAYER + CAROUSEL -->
+      <div class="row-container2">
+        <div class="gallery-card2">
+          <div class="carousel">
+           <!--<img src="/assets/images/lambda00.png" alt="MK:Lambda 1" class="active">-->
+            <img src="/assets/images/lambda04.png" alt="MK:Lambda" class="active"> <!-- THIS IMAGE GOES WITH ARCADE VIBES-->
+            <img src="/assets/images/lambda05.png" alt="MK:Lambda"> <!-- THIS IMAGE GOES WITH ARCADE VIBES-->
+          </div>
+        </div>
+        <div class="row-card">
+          <div class="player-container">
+            <h1><img src="/assets/images/DJNiels.png" alt="DJ Niels" class="Niels"></h1>
+            <div class="now-playing" id="trackTitle">Select a track</div>
+            <audio id="audio"></audio>
+            <div class="controls">
+              <button onclick="togglePlay()">Play / Pause</button>
+            </div>
+            <div class="progress">
+              <span id="current">0:00</span>
+              <input type="range" id="seek" value="0">
+              <span id="duration">0:00</span>
+            </div>
+            <div class="volume">🔊 <input type="range" min="0" max="1" step="0.01" value="0.8" id="volume"></div>
+            <ul class="playlist" id="playlist"></ul>
+          </div>
+        </div>
+      </div>
+
+
+      
+
+
+
+
+
+ 
+
+
+    </section>
+  </div>
+
+  <div id="kofi-float">
+    <a href="https://ko-fi.com/mkb0020" target="_blank" rel="noopener noreferrer">
+      <img src="assets/images/tipjar.png" alt="Support me on Ko-fi">
+      <div class="hearts">
+        <div class="heart" style="--delay: 0s; --drift: -20px;">❤️</div>
+        <div class="heart" style="--delay: 0.5s; --drift: 15px;">💖</div>
+        <div class="heart" style="--delay: 1s; --drift: -10px;">💕</div>
+        <div class="heart" style="--delay: 1.5s; --drift: 20px;">❤️</div>
+        <div class="heart" style="--delay: 2s; --drift: -15px;">💗</div>
+        <div class="heart" style="--delay: 2.5s; --drift: 10px;">💖</div>
+      </div>
+    </a>
+  </div>
+
+  <script src="js/KittyCore.js"></script>
+
+  <script>
+    const images2 = document.querySelectorAll('.gallery-card2 .carousel img');
+    let current2 = 0;
+    images2[0].classList.add('active');
+    setInterval(() => {
+      images2[current2].classList.remove('active');
+      current2 = (current2 + 1) % images2.length;
+      images2[current2].classList.add('active');
+    }, 4000);
+
+
+
+
+
+    const tracks = [
+      { title: 'ARCADE VIBE 01 - FULL TRACK', src: 'assets/sounds/arcadeVibe1.mp3', section: 'other' },
+      { title: 'ARCADE VIBE 01 - LOOP 1', src: 'assets/sounds/arcadeVibe1Loop1.mp3', section: 'other' },
+      { title: 'ARCADE VIBE 01 - LOOP 2', src: 'assets/sounds/arcadeVibe1Loop2.mp3', section: 'other' },
+      { title: 'ARCADE VIBE 01 - LOOP 3', src: 'assets/sounds/arcadeVibe1Loop3.mp3', section: 'other' },
+      { title: 'ARCADE VIBE 01 - LOOP 4', src: 'assets/sounds/arcadeVibe1Loop4.mp3', section: 'other' },
+      { title: 'ARCADE VIBE 02 - FULL TRACK', src: 'assets/sounds/arcadeVibe2.mp3', section: 'other' },
+      { title: 'ARCADE VIBE 02 - LOOP 1', src: 'assets/sounds/arcadeVibe2Loop1.mp3', section: 'other' },
+      { title: 'ARCADE VIBE 02 - LOOP 2', src: 'assets/sounds/arcadeVibe2Loop2.mp3', section: 'other' },
+      { title: 'ARCADE VIBE 02 - LOOP 3', src: 'assets/sounds/arcadeVibe2Loop3.mp3', section: 'other' },
+      { title: 'ARCADE VIBE 02 - LOOP 4', src: 'assets/sounds/arcadeVibe2Loop4.mp3', section: 'other' },
+      { title: 'ARCADE VIBE 02 - LOOP 5', src: 'assets/sounds/arcadeVibe2Loop5.mp3', section: 'other' },
+
+    ];
+
+    const audio = document.getElementById('audio');
+    const playlist = document.getElementById('playlist');
+    const title = document.getElementById('trackTitle');
+    const seek = document.getElementById('seek');
+    const volume = document.getElementById('volume');
+
+    tracks.forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = t.title;
+      li.onclick = () => {
+        audio.src = t.src;
+        title.textContent = t.title;
+        audio.play();
+      };
+      playlist.appendChild(li);
+    });
+
+    function togglePlay() {
+      audio.paused ? audio.play() : audio.pause();
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      seek.max = audio.duration || 0;
+      seek.value = audio.currentTime;
+      document.getElementById('current').textContent = format(audio.currentTime);
+      document.getElementById('duration').textContent = format(audio.duration);
+    });
+
+    seek.addEventListener('input', () => audio.currentTime = seek.value);
+    volume.addEventListener('input', () => audio.volume = volume.value);
+
+    function format(t) {
+      if (!t) return '0:00';
+      const m = Math.floor(t / 60);
+      const s = Math.floor(t % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    const starsDiv = document.getElementById('stars');
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = star.style.height = Math.random() * 2 + 1 + 'px';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 4 + 's';
+      starsDiv.appendChild(star);
+    }
+  </script>
+</body>
+</html>
