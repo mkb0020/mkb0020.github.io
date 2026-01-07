@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/ArcadeStyles.css">
+  <link rel="stylesheet" href="assets/css/ArcadeStyle.css">
 
-  <title>PROJECT MK:LAMBDA - ARCADE VIBE</title>
+  <title>PROJECT MK:LAMBDA</title>
+
 
 </head>
 <body>
@@ -88,6 +89,7 @@
         </button>
         
         <div class="dropdown-menu" id="dropdownMenu">
+          <!-- <button id="openMainHelp">About</button> -->
           <a href="https://mkb0020.vercel.app/support" class="menu-item">Report an Issue</a>
         </div>
       </div>
@@ -97,8 +99,15 @@
 
     <section>
 
-      
-      <!-- ALBUM -->
+      <div class="row-container3">
+        <img src="/assets/images/arcadeVibe3.png" alt="Album Background" class="BigAlbum">
+        <div class="album-info-text">
+          <img src="/assets/images/arcadeVibe2.png" alt="Album Cover" class="SmallAlbum">
+          <h2>ARCADE VIBE</h2>
+          <p>AVAILABLE ON ITCH.IO</p>
+          <a href="https://mkb0020.itch.io/arcade-vibe" class="preorder-btn">Download Now ♡</a>
+        </div>
+      </div>
 
 
       <!-- PLAYER + CAROUSEL -->
@@ -106,13 +115,15 @@
         <div class="gallery-card2">
           <div class="carousel">
            <!--<img src="/assets/images/lambda00.png" alt="MK:Lambda 1" class="active">-->
-            <img src="/assets/images/lambda04.png" alt="MK:Lambda" class="active"> <!-- THIS IMAGE GOES WITH ARCADE VIBES-->
-            <img src="/assets/images/lambda05.png" alt="MK:Lambda"> <!-- THIS IMAGE GOES WITH ARCADE VIBES-->
+            <img src="/assets/images/arcade01.png" alt="MK:Lambda" class="active"> <!-- THIS IMAGE GOES WITH ARCADE VIBES-->
+            <img src="/assets/images/arcade00.png" alt="MK:Lambda"> <!-- THIS IMAGE GOES WITH EXPERIMENTAL TRACK PLAYER-->
+
           </div>
         </div>
         <div class="row-card">
           <div class="player-container">
             <h1><img src="/assets/images/DJNiels.png" alt="DJ Niels" class="Niels"></h1>
+            <h1>Now Playing:</h1>
             <div class="now-playing" id="trackTitle">Select a track</div>
             <audio id="audio"></audio>
             <div class="controls">
@@ -130,16 +141,27 @@
       </div>
 
 
-      
 
 
 
 
 
- 
-
-
+      <footer>
+        <p>&copy; 2026 PROJECT MK:LAMBDA MUSIC. ALL RIGHTS RESERVED.</p>
+      </footer>
     </section>
+  </div>
+
+  <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">PROJECT MK:LAMBDA</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+          <!-- PLACEHOLDER-->
+      </div>
+    </div>
   </div>
 
   <div id="kofi-float">
@@ -156,9 +178,18 @@
     </a>
   </div>
 
+  <div id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+    <a href="javascript:void(0);" class="button-container" aria-label="Scroll to top">
+      <img src="assets/images/top.png" alt="Scroll to top">
+    </a>
+  </div>
+
   <script src="js/KittyCore.js"></script>
 
   <script>
+
+
+
     const images2 = document.querySelectorAll('.gallery-card2 .carousel img');
     let current2 = 0;
     images2[0].classList.add('active');
@@ -173,17 +204,23 @@
 
 
     const tracks = [
-      { title: 'ARCADE VIBE 01 - FULL TRACK', src: 'assets/sounds/arcadeVibe1.mp3', section: 'other' },
-      { title: 'ARCADE VIBE 01 - LOOP 1', src: 'assets/sounds/arcadeVibe1Loop1.mp3', section: 'other' },
-      { title: 'ARCADE VIBE 01 - LOOP 2', src: 'assets/sounds/arcadeVibe1Loop2.mp3', section: 'other' },
-      { title: 'ARCADE VIBE 01 - LOOP 3', src: 'assets/sounds/arcadeVibe1Loop3.mp3', section: 'other' },
-      { title: 'ARCADE VIBE 01 - LOOP 4', src: 'assets/sounds/arcadeVibe1Loop4.mp3', section: 'other' },
-      { title: 'ARCADE VIBE 02 - FULL TRACK', src: 'assets/sounds/arcadeVibe2.mp3', section: 'other' },
-      { title: 'ARCADE VIBE 02 - LOOP 1', src: 'assets/sounds/arcadeVibe2Loop1.mp3', section: 'other' },
-      { title: 'ARCADE VIBE 02 - LOOP 2', src: 'assets/sounds/arcadeVibe2Loop2.mp3', section: 'other' },
-      { title: 'ARCADE VIBE 02 - LOOP 3', src: 'assets/sounds/arcadeVibe2Loop3.mp3', section: 'other' },
-      { title: 'ARCADE VIBE 02 - LOOP 4', src: 'assets/sounds/arcadeVibe2Loop4.mp3', section: 'other' },
-      { title: 'ARCADE VIBE 02 - LOOP 5', src: 'assets/sounds/arcadeVibe2Loop5.mp3', section: 'other' },
+
+      { title: 'ARCADE VIBE BEAT 01 - FULL TRACK', src: 'assets/sounds/arcadeVibe1.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 02 - FULL TRACK', src: 'assets/sounds/arcadeVibe2.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 03 - FULL TRACK', src: 'assets/sounds/Arcade_Vibe_03_FULL.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 01 - LOOP A', src: 'assets/sounds/arcadeVibe1Loop1.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 01 - LOOP B', src: 'assets/sounds/arcadeVibe1Loop2.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 01 - LOOP C', src: 'assets/sounds/arcadeVibe1Loop3.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 01 - LOOP D', src: 'assets/sounds/arcadeVibe1Loop4.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 02 - LOOP A', src: 'assets/sounds/arcadeVibe2Loop1.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 02 - LOOP B', src: 'assets/sounds/arcadeVibe2Loop2.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 02 - LOOP C', src: 'assets/sounds/arcadeVibe2Loop3.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 02 - LOOP D', src: 'assets/sounds/arcadeVibe2Loop4.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 02 - LOOP E', src: 'assets/sounds/arcadeVibe2Loop5.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 03 - LOOP A', src: 'assets/sounds/Arcade_Vibe_03_Loop_A.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 03 - LOOP B', src: 'assets/sounds/Arcade_Vibe_03_Loop_B.mp3', section: 'other' },
+      { title: 'ARCADE VIBE BEAT 03 - LOOP C', src: 'assets/sounds/Arcade_Vibe_03_Loop_C.mp3', section: 'other' },
+
 
     ];
 
