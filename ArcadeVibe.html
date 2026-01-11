@@ -103,9 +103,9 @@
         <img src="/assets/images/arcadeVibe3.png" alt="Album Background" class="BigAlbum">
         <div class="album-info-text">
           <img src="/assets/images/arcadeVibe2.png" alt="Album Cover" class="SmallAlbum">
-          <h2>ARCADE VIBE</h2>
+          <h2>ARCADE VIBE VOLUME 1</h2>
           <p>AVAILABLE ON ITCH.IO</p>
-          <a href="https://mkb0020.itch.io/arcade-vibe" class="preorder-btn">Download Now ♡</a>
+          <a href="https://mkb0020.itch.io/arcade-vibe" class="preorder-btn">♡ Download Volume 1 ♡</a>
         </div>
       </div>
 
@@ -213,63 +213,83 @@
 
 
     const tracks = [
-
-      { title: 'ARCADE VIBE BEAT 01 - FULL TRACK', src: 'assets/sounds/arcadeVibe1.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 02 - FULL TRACK', src: 'assets/sounds/arcadeVibe2.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 03 - FULL TRACK', src: 'assets/sounds/Arcade_Vibe_03_FULL.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 01 - LOOP A', src: 'assets/sounds/arcadeVibe1Loop1.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 01 - LOOP B', src: 'assets/sounds/arcadeVibe1Loop2.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 01 - LOOP C', src: 'assets/sounds/arcadeVibe1Loop3.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 01 - LOOP D', src: 'assets/sounds/arcadeVibe1Loop4.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 02 - LOOP A', src: 'assets/sounds/arcadeVibe2Loop1.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 02 - LOOP B', src: 'assets/sounds/arcadeVibe2Loop2.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 02 - LOOP C', src: 'assets/sounds/arcadeVibe2Loop3.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 02 - LOOP D', src: 'assets/sounds/arcadeVibe2Loop4.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 02 - LOOP E', src: 'assets/sounds/arcadeVibe2Loop5.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 03 - LOOP A', src: 'assets/sounds/Arcade_Vibe_03_Loop_A.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 03 - LOOP B', src: 'assets/sounds/Arcade_Vibe_03_Loop_B.mp3', section: 'other' },
-      { title: 'ARCADE VIBE BEAT 03 - LOOP C', src: 'assets/sounds/Arcade_Vibe_03_Loop_C.mp3', section: 'other' },
-
-
+      { title: 'VOLUME 2 - FULL TRACKS - COMING SOON TO ITCH.IO', isHeader: true },
+        { title: 'ARCADE VIBE BEAT 05', src: 'assets/sounds/arcadeVibe5.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 04 - SLOW AND REVERB', src: 'assets/sounds/ArcadeVibe4.mp3', section: 'other' },
+      { title: 'VOLUME 1 - FULL TRACKS', isHeader: true },
+        { title: 'ARCADE VIBE BEAT 03', src: 'assets/sounds/Arcade_Vibe_03_FULL.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 02', src: 'assets/sounds/arcadeVibe2.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 01', src: 'assets/sounds/arcadeVibe1.mp3', section: 'other' },
+      { title: 'VOLUME 1 - LOOPS', isHeader: true },
+        { title: 'ARCADE VIBE BEAT 01 - LOOP A', src: 'assets/sounds/arcadeVibe1Loop1.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 01 - LOOP B', src: 'assets/sounds/arcadeVibe1Loop2.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 01 - LOOP C', src: 'assets/sounds/arcadeVibe1Loop3.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 01 - LOOP D', src: 'assets/sounds/arcadeVibe1Loop4.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 02 - LOOP A', src: 'assets/sounds/arcadeVibe2Loop1.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 02 - LOOP B', src: 'assets/sounds/arcadeVibe2Loop2.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 02 - LOOP C', src: 'assets/sounds/arcadeVibe2Loop3.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 02 - LOOP D', src: 'assets/sounds/arcadeVibe2Loop4.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 02 - LOOP E', src: 'assets/sounds/arcadeVibe2Loop5.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 03 - LOOP A', src: 'assets/sounds/Arcade_Vibe_03_Loop_A.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 03 - LOOP B', src: 'assets/sounds/Arcade_Vibe_03_Loop_B.mp3', section: 'other' },
+        { title: 'ARCADE VIBE BEAT 03 - LOOP C', src: 'assets/sounds/Arcade_Vibe_03_Loop_C.mp3', section: 'other' },
     ];
 
-    const audio = document.getElementById('audio');
-    const playlist = document.getElementById('playlist');
-    const title = document.getElementById('trackTitle');
-    const seek = document.getElementById('seek');
-    const volume = document.getElementById('volume');
+  const audio = document.getElementById('audio');
+  const playlist = document.getElementById('playlist');
+  const title = document.getElementById('trackTitle');
+  const seek = document.getElementById('seek');
+  const volume = document.getElementById('volume');
 
-    tracks.forEach(t => {
-      const li = document.createElement('li');
+  let currentTrackIndex = -1;
+
+  tracks.forEach((t, i) => {
+    const li = document.createElement('li');
+
+    if (t.isHeader) {
+      li.className = 'section-header';
+      li.textContent = t.title;
+    } else {
       li.textContent = t.title;
       li.onclick = () => {
-        audio.src = t.src;
-        title.textContent = t.title;
-        audio.play();
+        currentTrackIndex = i;
+        loadTrack(i);
       };
-      playlist.appendChild(li);
-    });
+    }
 
-    function togglePlay() {
+    playlist.appendChild(li);
+  });
+
+  function loadTrack(i) {
+    if (tracks[i].isHeader) return;
+
+    audio.src = tracks[i].src;
+    title.textContent = tracks[i].title;
+    audio.play();
+  }
+
+  function togglePlay() {
+    if (audio.src) {
       audio.paused ? audio.play() : audio.pause();
     }
+  }
 
-    audio.addEventListener('timeupdate', () => {
-      seek.max = audio.duration || 0;
-      seek.value = audio.currentTime;
-      document.getElementById('current').textContent = format(audio.currentTime);
-      document.getElementById('duration').textContent = format(audio.duration);
-    });
+  audio.addEventListener('timeupdate', () => {
+    seek.max = audio.duration || 0;
+    seek.value = audio.currentTime;
+    document.getElementById('current').textContent = format(audio.currentTime);
+    document.getElementById('duration').textContent = format(audio.duration);
+  });
 
-    seek.addEventListener('input', () => audio.currentTime = seek.value);
-    volume.addEventListener('input', () => audio.volume = volume.value);
+  seek.addEventListener('input', () => audio.currentTime = seek.value);
+  volume.addEventListener('input', () => audio.volume = volume.value);
 
-    function format(t) {
-      if (!t) return '0:00';
-      const m = Math.floor(t / 60);
-      const s = Math.floor(t % 60).toString().padStart(2, '0');
-      return `${m}:${s}`;
-    }
+  function format(t) {
+    if (!t) return '0:00';
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
 
     const starsDiv = document.getElementById('stars');
     for (let i = 0; i < 200; i++) {
