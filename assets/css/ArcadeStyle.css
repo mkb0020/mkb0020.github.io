@@ -1032,6 +1032,20 @@ body {
       box-shadow: 0 0 25px var(--AlphaAqua);
     }
 
+    .playlist .section-header {
+      background: linear-gradient(45deg, var(--DarkCooGray), var(--DarkCooGray));
+      color: white;
+      font-size: 1rem;
+      text-align: center;
+      padding: 7px;
+      margin: 7px 0 7px;
+      border-radius: 12px;
+      pointer-events: none;
+      box-shadow: 0 0 20px var(--VortexGlow2);
+      border: none;
+    }
+
+
     .playlist::-webkit-scrollbar {
       width: 10px;                     
     }
