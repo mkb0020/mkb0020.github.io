@@ -553,7 +553,6 @@ body, html {
         #scroll-top img {
             width: 35px;
             height: 45px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
             transition: transform 0.3s ease;
             animation: hue-shift-slow 8s linear infinite;
         }
@@ -601,7 +600,6 @@ body, html {
             width: 64px; 
             height: auto;
 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
 
