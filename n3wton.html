@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/n3wton.css">
+  <title>⚖️</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <meta name="description" content="BOSS BATTLE SIMULATOR" />
+</head>
+<body>
+  <div id="stars"></div>
+  
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="navbar-tabs" id="navbar-tabs">
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <div class="container">
+      <p class="subtitle">⚖️</p>
+      
+      <!-- React content will be rendered here -->
+      <div id="root"></div>
+    </div>
+  </main>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const BattleSimulator = () => {
+        const [simulating, setSimulating] = useState(false);
+        const [results, setResults] = useState(null);
+        const [activeTab, setActiveTab] = useState('characters');
+
+        const [characters, setCharacters] = useState({
+            NONA: { maxHP: 120, atk: 30, speed: 30, defense: 30 },
+            GATO: { maxHP: 125, atk: 30, speed: 29, defense: 30 },
+            NIELS: { maxHP: 115, atk: 31, speed: 30, defense: 30 },
+            NOVA: { maxHP: 120, atk: 30, speed: 30, defense: 30 },
+            AUBIE: { maxHP: 125, atk: 29, speed: 30, defense: 30 },
+            DOUG: { maxHP: 115, atk: 30, speed: 30, defense: 31 }
+        });
+
+        const [charMoves, setCharMoves] = useState({
+            SCRATCH: { dmg: 22, uses: 999 },
+            ZOOMIES: { dmg: 26, uses: 3 },
+            CATNIP_CLAW: { dmg: 32, uses: 2 },
+            MAKE_BISCUITS: { heal: 30, uses: 3 },
+            WHISKER_WHIP: { dmg: 40, uses: 2 }
+        });
+
+        const [bosses, setBosses] = useState({
+            CUP: {
+                maxHP: 120, atk: 29, speed: 29, defense: 29,
+                moves: {
+                    STEAM_BURN: { dmg: 24, uses: 99 },
+                    ESPRESSO_EMBER: { dmg: 26, uses: 3 },
+                    REFILL: { heal: 25, uses: 2 }
+                }
+            },
+            CUCUMBER: {
+                maxHP: 125, atk: 30, speed: 29, defense: 33,
+                moves: {
+                    CUCUMBER_CRUNCH: { dmg: 28, uses: 999 },
+                    CUCUMBER_CANNON: { dmg: 28, uses: 3 },
+                    GOURD_GUARD: { defenseBoost: true, duration: 2, uses: 1 },
+                    PICKLE: { heal: 30, uses: 2 }
+                }
+            },
+            RAT: {
+                maxHP: 115, atk: 33, speed: 26, defense: 27,
+                moves: {
+                    BITE: { dmg: 25, uses: 999 },
+                    RODENT_RAGE: { dmg: 25, speedBoost: true, uses: 3 },
+                    MOUSE_MISSILES: { dmg: 26, uses: 3 },
+                    SCURRY: { heal: 30, uses: 1 }
+                }
+            },
+            LASER: {
+                maxHP: 125, atk: 30, speed: 32, defense: 28,
+                moves: {
+                    ZAP: { dmg: 21, speedBoost: true, uses: 999 },
+                    FLASH: { dmg: 23, speedBoost: true, uses: 4 },
+                    LASER_BEAM: { dmg: 25, uses: 3 }
+                }
+            },
+            OBSERVER: {
+                maxHP: 130, atk: 28, speed: 25, defense: 29,
+                moves: {
+                    POISON: { dmg: 21, uses: 999 },
+                    SUPERPOSITION_SLAM: { dmg: 22, speedBoost: true, uses: 4 },
+                    HYDROGEN_HAMMER: { dmg: 24, uses: 3 },
+                    QUANTUM_RECOVER: { heal: 25, uses: 3 }
+                }
+            }
+        });
+
+        const updateCharStat = (charName, stat, value) => {
+            setCharacters(prev => ({
+                ...prev,
+                [charName]: { ...prev[charName], [stat]: parseInt(value) || 0 }
+            }));
+        };
+
+        const updateCharMove = (moveName, stat, value) => {
+            setCharMoves(prev => ({
+                ...prev,
+                [moveName]: { ...prev[moveName], [stat]: parseInt(value) || 0 }
+            }));
+        };
+
+        const updateBossStat = (bossName, stat, value) => {
+            setBosses(prev => ({
+                ...prev,
+                [bossName]: { ...prev[bossName], [stat]: parseInt(value) || 0 }
+            }));
+        };
+
+        const updateBossMove = (bossName, moveName, stat, value) => {
+            setBosses(prev => ({
+                ...prev,
+                [bossName]: {
+                    ...prev[bossName],
+                    moves: {
+                        ...prev[bossName].moves,
+                        [moveName]: { ...prev[bossName].moves[moveName], [stat]: parseInt(value) || 0 }
+                    }
+                }
+            }));
+        };
+
+        const getEffectiveDefense = (entity) => {
+            const buffMultiplier = entity.defenseBuffTurns > 0 ? 1.4 : 1.0;
+            return entity.defense * buffMultiplier;
+        };
+
+        const getEffectiveSpeed = (entity) => {
+            const buffMultiplier = entity.speedBuffTurns > 0 ? 1.35 : 1.0;
+            return Math.floor(entity.speed * buffMultiplier);
+        };
+
+        const calculateDamage = (attacker, defender, power) => {
+            const randomFactor = 0.92 + Math.random() * 0.16;
+            const isCrit = Math.random() < 0.12;
+            const critMult = isCrit ? 1.6 : 1.0;
+            
+            const defenderDefense = getEffectiveDefense(defender);
+            const defFactor = defenderDefense / (defenderDefense + 100);
+            
+            const base = (attacker.atk / (1 + defFactor)) * (power / 20) * randomFactor * critMult;
+            return Math.max(1, Math.floor(base));
+        };
+
+        const executePlayerTurn = (char, boss) => {
+            if (char.moves.WHISKER_WHIP && char.moves.WHISKER_WHIP.uses > 0) {
+                const move = char.moves.WHISKER_WHIP;
+                move.uses--;
+                const damage = calculateDamage(char, boss, move.dmg);
+                boss.hp -= damage;
+            } else if (char.moves.CATNIP_CLAW.uses > 0) {
+                const move = char.moves.CATNIP_CLAW;
+                move.uses--;
+                const damage = calculateDamage(char, boss, move.dmg);
+                boss.hp -= damage;
+            } else if (char.hp < char.maxHP * 0.4 && char.moves.MAKE_BISCUITS.uses > 0) {
+                const move = char.moves.MAKE_BISCUITS;
+                move.uses--;
+                char.hp = Math.min(char.maxHP, char.hp + move.heal);
+            } else if (char.moves.ZOOMIES.uses > 0) {
+                const move = char.moves.ZOOMIES;
+                move.uses--;
+                const damage = calculateDamage(char, boss, move.dmg);
+                boss.hp -= damage;
+                char.speedBuffTurns = 1;
+            } else {
+                const move = char.moves.SCRATCH;
+                const damage = calculateDamage(char, boss, move.dmg);
+                boss.hp -= damage;
+            }
+        };
+
+        const executeBossTurn = (boss, char) => {
+            const availableMoves = Object.entries(boss.moves)
+                .filter(([_, move]) => move.uses > 0);
+
+            if (availableMoves.length === 0) return;
+
+            const hpPercent = boss.hp / boss.maxHP;
+            
+            if (hpPercent < 0.3) {
+                const healMove = availableMoves.find(([_, move]) => move.heal);
+                if (healMove) {
+                    const [moveName, move] = healMove;
+                    move.uses--;
+                    boss.hp = Math.min(boss.maxHP, boss.hp + move.heal);
+                    return;
+                }
+            }
+            
+            const [moveName, move] = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+            move.uses--;
+            
+            if (move.dmg) {
+                const damage = calculateDamage(boss, char, move.dmg);
+                char.hp -= damage;
+                if (move.speedBoost) {
+                    boss.speedBuffTurns = 1;
+                }
+            } else if (move.heal) {
+                boss.hp = Math.min(boss.maxHP, boss.hp + move.heal);
+            } else if (move.defenseBoost) {
+                boss.defenseBuffTurns = move.duration || 2;
+            }
+        };
+
+        const simulateBattle = (character, boss, startingHPPercent, upgrades) => {
+            let modifiedChar = { ...character };
+            if (upgrades.statBoost) {
+                modifiedChar[upgrades.statBoost] = character[upgrades.statBoost] + upgrades.statBoostAmount;
+            }
+
+            const char = {
+                ...modifiedChar,
+                hp: Math.floor(modifiedChar.maxHP * startingHPPercent / 100),
+                speedBuffTurns: 0,
+                defenseBuffTurns: 0,
+                moves: JSON.parse(JSON.stringify(charMoves))
+            };
+
+            if (!upgrades.hasMegaMove) {
+                delete char.moves.WHISKER_WHIP;
+            }
+            
+            const bossState = {
+                ...boss,
+                hp: boss.maxHP,
+                speedBuffTurns: 0,
+                defenseBuffTurns: 0,
+                moves: JSON.parse(JSON.stringify(boss.moves))
+            };
+
+            let turns = 0;
+            const maxTurns = 100;
+
+            while (char.hp > 0 && bossState.hp > 0 && turns < maxTurns) {
+                turns++;
+
+                const charSpeed = getEffectiveSpeed(char);
+                const bossSpeed = getEffectiveSpeed(bossState);
+                const charGoesFirst = charSpeed >= bossSpeed;
+
+                if (charGoesFirst) {
+                    executePlayerTurn(char, bossState);
+                    if (bossState.hp <= 0) break;
+                    
+                    executeBossTurn(bossState, char);
+                    if (char.hp <= 0) break;
+                } else {
+                    executeBossTurn(bossState, char);
+                    if (char.hp <= 0) break;
+                    
+                    executePlayerTurn(char, bossState);
+                    if (bossState.hp <= 0) break;
+                }
+
+                if (char.speedBuffTurns > 0) char.speedBuffTurns--;
+                if (char.defenseBuffTurns > 0) char.defenseBuffTurns--;
+                if (bossState.speedBuffTurns > 0) bossState.speedBuffTurns--;
+                if (bossState.defenseBuffTurns > 0) bossState.defenseBuffTurns--;
+            }
+
+            return char.hp > 0;
+        };
+
+        const runSimulations = () => {
+            setSimulating(true);
+            
+            setTimeout(() => {
+                const numSims = 1000;
+                const resultsData = {};
+
+                const scenarios = [
+                    {
+                        key: 'noUpgrades_100hp',
+                        label: 'No Upgrades - Full HP',
+                        hpPercent: 100,
+                        upgrades: { hasMegaMove: false, statBoost: null, statBoostAmount: 0 }
+                    },
+                    {
+                        key: 'noUpgrades_70hp',
+                        label: 'No Upgrades - 70% HP',
+                        hpPercent: 70,
+                        upgrades: { hasMegaMove: false, statBoost: null, statBoostAmount: 0 }
+                    },
+                    {
+                        key: 'allUpgrades_100hp',
+                        label: 'All Upgrades - Full HP',
+                        hpPercent: 100,
+                        upgrades: { hasMegaMove: true, statBoost: 'atk', statBoostAmount: 2 }
+                    },
+                    {
+                        key: 'allUpgrades_70hp',
+                        label: 'All Upgrades - 70% HP',
+                        hpPercent: 70,
+                        upgrades: { hasMegaMove: true, statBoost: 'atk', statBoostAmount: 2 }
+                    }
+                ];
+
+                scenarios.forEach(scenario => {
+                    resultsData[scenario.key] = {
+                        label: scenario.label,
+                        data: {}
+                    };
+
+                    Object.keys(characters).forEach(charName => {
+                        resultsData[scenario.key].data[charName] = {};
+
+                        Object.keys(bosses).forEach(bossName => {
+                            let wins = 0;
+
+                            for (let i = 0; i < numSims; i++) {
+                                if (simulateBattle(
+                                    characters[charName], 
+                                    bosses[bossName], 
+                                    scenario.hpPercent,
+                                    scenario.upgrades
+                                )) {
+                                    wins++;
+                                }
+                            }
+
+                            resultsData[scenario.key].data[charName][bossName] = 
+                                Math.round((wins / numSims) * 100);
+                        });
+                    });
+                });
+
+                setResults(resultsData);
+                setSimulating(false);
+            }, 100);
+        };
+
+        const getWinRateClass = (rate) => {
+            if (rate >= 90) return 'win-90';
+            if (rate >= 70) return 'win-70';
+            if (rate >= 50) return 'win-50';
+            if (rate >= 30) return 'win-30';
+            return 'win-0';
+        };
+
+        const stars = [...Array(200)].map((_, i) => (
+            <div
+                key={i}
+                className="star"
+                style={{
+                    width: Math.random() * 2 + 1 + 'px',
+                    height: Math.random() * 2 + 1 + 'px',
+                    left: Math.random() * 100 + '%',
+                    top: Math.random() * 100 + '%',
+                    animationDelay: Math.random() * 4 + 's'
+                }}
+            />
+        ));
+
+        const tabs = (
+            <div className="tabs">
+                <button
+                    onClick={() => setActiveTab('characters')}
+                    className={`tab-btn ${activeTab === 'characters' ? 'active' : 'inactive'}`}
+                >
+                    Characters
+                </button>
+                <button
+                    onClick={() => setActiveTab('bosses')}
+                    className={`tab-btn ${activeTab === 'bosses' ? 'active' : 'inactive'}`}
+                >
+                    Bosses
+                </button>
+                <button
+                    onClick={() => setActiveTab('results')}
+                    className={`tab-btn ${activeTab === 'results' ? 'active' : 'inactive'}`}
+                >
+                    Results
+                </button>
+            </div>
+        );
+
+        return (
+            <>
+                {/* Render stars in the #stars div */}
+                {ReactDOM.createPortal(stars, document.getElementById('stars'))}
+                
+                {/* Render tabs in the navbar */}
+                {ReactDOM.createPortal(tabs, document.getElementById('navbar-tabs'))}
+
+                {/* Characters Tab */}
+                {activeTab === 'characters' && (
+                    <>
+                        <div className="section">
+                            <h2 className="section-title">🐈‍⬛Character Stats</h2>
+                            <div className="grid grid-3">
+                                {Object.entries(characters).map(([name, stats]) => (
+                                    <div key={name} className="card">
+                                        <div className="card-title">{name}</div>
+                                        {Object.entries(stats).map(([stat, value]) => (
+                                            <div key={stat} className="stat-row">
+                                                <label>{stat}:</label>
+                                                <input
+                                                    type="number"
+                                                    value={value}
+                                                    onChange={(e) => updateCharStat(name, stat, e.target.value)}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="section">
+                            <h2 className="section-title">🐾 Character Moves </h2>
+                            <div className="grid grid-4">
+                                {Object.entries(charMoves).map(([name, move]) => (
+                                    <div key={name} className="card">
+                                        <div className="card-title">{name}</div>
+                                        {Object.entries(move).map(([stat, value]) => (
+                                            <div key={stat} className="stat-row">
+                                                <label>{stat}:</label>
+                                                <input
+                                                    type="number"
+                                                    value={value}
+                                                    onChange={(e) => updateCharMove(name, stat, e.target.value)}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                {/* Bosses Tab */}
+                {activeTab === 'bosses' && (
+                    <>
+                        {Object.entries(bosses).map(([bossName, boss]) => (
+                            <div key={bossName} className="section">
+                                <h2 className="section-title">{bossName}</h2>
+                                
+                                <h3 className="subsection-title">Base Stats</h3>
+                                <div className="grid" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))'}}>
+                                    {['maxHP', 'atk', 'speed', 'defense'].map(stat => (
+                                        <div key={stat} className="stat-row">
+                                            <label>{stat}:</label>
+                                            <input
+                                                type="number"
+                                                value={boss[stat]}
+                                                onChange={(e) => updateBossStat(bossName, stat, e.target.value)}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <h3 className="subsection-title">💥Moves💥</h3>
+                                <div className="grid grid-3">
+                                    {Object.entries(boss.moves).map(([moveName, move]) => (
+                                        <div key={moveName} className="card">
+                                            <div className="card-title">{moveName}</div>
+                                            {Object.entries(move).map(([stat, value]) => (
+                                                <div key={stat} className="stat-row">
+                                                    <label>{stat}:</label>
+                                                    <input
+                                                        type="number"
+                                                        value={value}
+                                                        onChange={(e) => updateBossMove(bossName, moveName, stat, e.target.value)}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </>
+                )}
+
+                {/* Results Tab */}
+                {activeTab === 'results' && (
+                    <>
+                        <button
+                            onClick={runSimulations}
+                            disabled={simulating}
+                            className="run-btn"
+                        >
+                            {simulating ? '⏳ Simulating 1000 battles per matchup...' : '👾 Run Simulations 👾'}
+                        </button>
+
+                        {results && (
+                            <>
+                                {Object.entries(results).map(([scenarioKey, scenarioData]) => (
+                                    <div key={scenarioKey} className="section">
+                                        <h2 className="section-title">{scenarioData.label}</h2>
+                                        <div className="overflow-wrapper">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Character</th>
+                                                        {Object.keys(bosses).map(boss => (
+                                                            <th key={boss}>{boss}</th>
+                                                        ))}
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {Object.keys(characters).map(char => (
+                                                        <tr key={char}>
+                                                            <td className="char-name">{char}</td>
+                                                            {Object.keys(bosses).map(boss => (
+                                                                <td key={boss}>
+                                                                    <span className={`win-rate ${getWinRateClass(scenarioData.data[char][boss])}`}>
+                                                                        {scenarioData.data[char][boss]}%
+                                                                    </span>
+                                                                </td>
+                                                            ))}
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                ))}
+
+                                <div className="color-guide">
+                                    <h3>🌈 Color Guide</h3>
+                                    <p><span className="color-box win-90"></span>90–100% – Excellent balance</p>
+                                    <p><span className="color-box win-70"></span>70–89% – Good balance</p>
+                                    <p><span className="color-box win-50"></span>50–69% – Fair challenge</p>
+                                    <p><span className="color-box win-30"></span>30–49% – Difficult</p>
+                                    <p><span className="color-box win-0"></span>0–29% – Very difficult/unbalanced</p>
+                                </div>
+                            </>
+                        )}
+                    </>
+                )}
+            </>
+        );
+    };
+
+    ReactDOM.render(<BattleSimulator />, document.getElementById('root'));
+  </script>
+</body>
+</html>
