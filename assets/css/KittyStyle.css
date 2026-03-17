@@ -1,4 +1,5 @@
 /* ============================ COLOR PALETTE ============================ */
+/* ORANGE: ff6200*/
 :root {
   --text: rgba(223,223,242);
   --BosonBlue: #170032;
@@ -17,6 +18,8 @@
   --PlasmaGlow3: rgba(165,90,255,0.8);
   --EntangledEucalyptus: rgb(235,200,255);
   --NuclearFuscia:#dc4ce8;
+  --PlanksPink: #ff69b4;
+  --HiggsHotPink: #c71585;
   --NuclearGlow1: rgba(219, 76, 232, 0.2);
   --NuclearGlow2: rgba(220,76,232, 0.5);
   --NuclearGlow3: rgba(220,76,232, 0.6);
@@ -112,6 +115,72 @@ body, html {
     background-attachment: fixed;
 }
 
+* { box-sizing: border-box; }
+
+    body {
+      background: transparent;
+      font-family: 'GothNerd', sans-serif;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+.background-gradient {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #000000 25%, #601e9d 55%, #8a2be2 80%, var(--HiggsHotPink) 90%, var(--HiggsHotPink) 97%, var(--HiggsHotPink) 100%);
+  opacity: 1;
+  z-index: -3;
+}
+
+.waves {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh; 
+  pointer-events: none;
+  z-index: -2;
+  overflow: hidden; 
+}
+
+.waves svg {
+  position: absolute;
+  bottom: 0;
+  width: 400%;
+  height: 90vh;
+  height: 90dvh;
+  animation: wave-scroll linear infinite;
+}
+
+#wave1 { animation-duration: 60s; } /* DARK PURPLE-ISH BLUE */
+#wave2 { animation-duration: 50s; } /* DARK HOT PINK */
+#wave3 { animation-duration: 45s; } /* COOL-TONED PURPLE */
+#wave4 { animation-duration: 70s; } /* DARK PURPLE-ISH BLUE */
+#wave5 { animation-duration: 30s; } /* LIGHT HOT PINK */
+#wave6 { animation-duration: 55s; } /* DARK HOT PINK */
+
+@keyframes wave-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+@media screen and (max-width: 1024px) { /* HIDE WAVES ON MOBILE */
+  .waves {
+    display: none !important;
+  }
+}
+
+    .dreamy-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.1);
+      backdrop-filter: blur(30px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
 /* ============================ NAVBAR ============================ */
 .navbar {
   position: fixed;
@@ -172,8 +241,6 @@ body, html {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 30px var(--ParticleGlow3);
-  animation: neonPulse 2s ease-in-out infinite alternate;
   font-family: 'SpaceLetters', sans-serif;
   z-index: 900;
   flex-shrink: 0;
@@ -534,8 +601,8 @@ body, html {
 /* ============================ RAINBOW BACK TO TOP ============================ */
         #scroll-top {
             position: fixed;
-            bottom: 15px;
-            right: 15px;
+            bottom: 10px;
+            right: 10px;
             z-index: 1000;
             cursor: pointer;
             width: 35px;
@@ -590,8 +657,8 @@ body, html {
 /* ============================ TIP JAR ============================ */
         #kofi-float {
             position: fixed;
-            bottom: 15px;
-            left: 15px;
+            bottom: 5px;
+            left: 5px;
             z-index: 1000;
             cursor: pointer;
         }
