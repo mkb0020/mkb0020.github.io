@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>CATastrophe2 - COMING SOON!</title>
+  <link rel="stylesheet" href="assets/css/KittyStyle.css" />
+
+  <style>
+  body{
+      font-family: Arial, Helvetica, sans-serif;
+  }
+
+#storyboard-viewer {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--VortexViolet);
+  box-shadow: 0 0 40px var(--VortexGlow3);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1000px;
+  height: 480px;
+  margin: 1rem auto 0;
+  background: #000;
+}
+
+.trailer-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#stars {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff;
+  animation: twinkle 4s infinite;
+}
+
+
+
+h3 {
+  color: var(--NuclearFuscia);
+  margin: 1.5rem 0 0.5rem 0;
+  font-size: 2rem;
+  text-shadow: 0 0 10px var(--NuclearGlow2);
+  font-family: 'GothNerd';
+}
+
+
+
+@keyframes twinkle {
+  0%,100% { opacity: 0.4; transform: scale(1); }
+  50%     { opacity: 1; transform: scale(1.4); }
+}
+
+@media (max-width: 768px) {
+  #storyboard-viewer {
+    height: 300px;
+  }
+}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+<div class="background-gradient"></div>
+<div class="waves">
+  <svg id="wave1" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 T4000,350 L4000,600 L0,600 Z" fill="#4b0082" opacity="0.5"/> <!-- DARK PURPLE-ISH BLUE-->
+  </svg>
+  <svg id="wave2" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 T4000,380 L4000,600 L0,600 Z" fill="#c71585" opacity="0.5"/> <!-- DARK HOT PINK -->
+  </svg>
+<svg id="wave3" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,320 Q500,180 1000,320 T2000,320 T3000,320 T4000,320 L4000,600 L0,600 Z" fill="#8a2be2" opacity="0.2"/> <!-- COOL-TONED PURPLE -->
+</svg>
+<svg id="wave4" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,400 Q500,250 1000,400 T2000,400 T3000,400 T4000,400 L4000,600 L0,600 Z" fill="#4b0082" opacity="0.5"/>  <!-- DARK PURPLE-ISH BLUE-->
+</svg>
+  <svg id="wave5" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 T3500,300 T4000,300 L4000,600 L0,600 Z" fill="#ff69b4" opacity="0.6"/> <!--LIGHT HOT PINK -->
+  </svg>
+<svg id="wave6" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,420 Q500,300 1000,420 T2000,420 T3000,420 T4000,420 L4000,600 L0,600 Z" fill="#c71585" opacity="0.5"/> <!-- DARK HOT PINK -->
+</svg>
+</div>
+<div class="dreamy-overlay"> </div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="left-dropdown">
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+        <div class="left-menu">
+          <a href="https://mkb0020.vercel.app/" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Projects</a>
+          <a href="https://mkb0020.github.io/resume.html" class="menu-item">Resume</a>
+          <a href="https://mkb0020.vercel.app/comments" class="menu-item">Guestbook</a>
+          <div class="social-links">
+            <a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="https://soundcloud.com/mkb0020" target="_blank" aria-label="Soundcloud">
+              <img src="/assets/images/music-icon.png" alt="Soundcloud" class="social-icon">
+            </a>
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>
+            <a href="https://mkb0020.itch.io" target="_blank" aria-label="Itch.io">
+              <img src="/assets/images/itchio-icon.png" alt="Itch.io" class="social-icon">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://mkb0020.github.io">
+        <div class="logo">♡ mkb0020</div>
+      </a>
+
+      <div class="help-dropdown">
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">About</button>
+          <a href="https://mkb0020.vercel.app/support" class="menu-item">Report an Issue</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">WORMHOLES ALL THE WAY DOWN</h1>
+        <button class="modal-close" id="closeModal" onclick="document.getElementById('helpModal').style.display = 'none';">X</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>COMING SOON!</strong></p>
+        <p> A short arcade-style sci-fi shooter set inside a twisting wormhole filled with alien organisms, strange physics anomalies, and chaotic visual distortions.</p>
+
+        <p>Pilot your ship through waves of enemies while surviving increasingly bizarre attacks that warp your controls, your vision, and sometimes reality itself.</p>
+
+        <p><strong><a href="https://mkb0020.itch.io" target="_blank" aria-label="Itch.io">
+          Click here to check out my other games and game dev tools!
+        </a></strong></p>
+      </div>
+    </div>
+  </div>
+
+<div class="page-content" style="text-align:center; padding: 0px 20px; max-width: 1200px; margin: 0 auto;">
+
+</div>
+
+<div id="storyboard-viewer">
+  <iframe 
+    id="trailerVideo"
+    class="trailer-video" 
+    src="https://www.youtube.com/embed/qWGI5kHoGY8?si=GbVuhoxCTYlxtohm"
+    title="WORMHOLES ALL THE WAY DOWN TRAILER" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+<div id="kofi-float">
+  <a href="https://ko-fi.com/mkb0020" target="_blank" rel="noopener noreferrer">
+    <img src="assets/images/tipjar.png" alt="Support me on Ko-fi">
+    <div class="hearts">
+      <div class="heart" style="--delay: 0s; --drift: -20px;">❤️</div>
+      <div class="heart" style="--delay: 0.5s; --drift: 15px;">💖</div>
+      <div class="heart" style="--delay: 1s; --drift: -10px;">💕</div>
+      <div class="heart" style="--delay: 1.5s; --drift: 20px;">❤️</div>
+      <div class="heart" style="--delay: 2s; --drift: -15px;">💗</div>
+      <div class="heart" style="--delay: 2.5s; --drift: 10px;">💖</div>
+    </div>
+  </a>
+</div>
+
+<div id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+  <a href="javascript:void(0);" class="button-container" aria-label="Scroll to top">
+    <img src="assets/images/top.png" alt="Scroll to top">
+  </a>
+</div>
+
+<script src="js/KittyCore.js"></script>
+
+<script>
+  const button = document.getElementById('kofi-float');
+  button.addEventListener('mouseenter', () => {
+    document.querySelectorAll('.heart').forEach(h => {
+      h.style.animation = 'none';
+      h.offsetHeight; 
+      h.style.animation = null;
+    });
+  });
+</script>
+
+<script>
+  const starsDiv = document.getElementById('stars');
+  for (let i = 0; i < 200; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.width = star.style.height = Math.random() * 2 + 'px';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 4 + 's';
+    starsDiv.appendChild(star);
+  }
+</script>
+
+
+
+</body>
+</html>
