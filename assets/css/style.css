@@ -327,11 +327,11 @@ select#Dropdown {
   background: transparent;
   border: 3px solid var(--NuclearGlow2);
   color: var(--text);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   margin: 0.2rem;
   border-radius: 25px;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.4s;
   position: relative;
@@ -1413,7 +1413,7 @@ svg { width: 100%; height: 100%; }
 /* ============================================= GENERAL JS PAGE< CONTROLS AND CONTAINER ============================================= */
 .JS-page {
   display: grid;
-  grid-template-columns: 370px 1fr;
+  grid-template-columns: 390px 1fr;
   height: calc(100vh - 100px);
   margin-top: 90px;
   gap: 0;
@@ -1651,7 +1651,7 @@ svg { width: 100%; height: 100%; }
       box-shadow: 0 0 10px var(--ParticleGlow2);
     }
 
-/* ============================================= RESUME ============================================= */
+/* ============================================= RESUME ============================================= 
     .summary-section {
       background: var(--PlasmaGlow2);
       backdrop-filter: blur(5px);
@@ -1786,7 +1786,7 @@ svg { width: 100%; height: 100%; }
         align-items: center;
         text-align: center;
     }
-
+*/
 /* ============================================= FOR MOBILE DEVICES ============================================= */   
         @media (max-width: 900px) {
         body {
@@ -1811,8 +1811,8 @@ svg { width: 100%; height: 100%; }
         }
         
         .btn-neon-portal, .btn-quantum-pulse {
-            padding: 0.7rem 1rem !important;
-            font-size: 1rem !important;
+            padding: 1rem 0.7rem !important;
+            font-size: 0.8rem !important;
             min-height: 44px !important; 
         }
         
