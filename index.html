@@ -9,14 +9,23 @@
   <meta name="description" content="JAVASCRIPT PAYGROUND" />
   
   <style>
+
+    #stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1 !important;
+        }
+
+
     .main-container {
       min-height: 100vh;
-      padding: 80 1rem 1rem;
+      padding: 0px 1rem 4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      z-index:10;
+      z-index: 10;
     }
 
     .main-container h4 {
@@ -27,422 +36,231 @@
       font-size: 3rem;
     }
 
-    .main-container h3 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--AlphaAqua);
-      font-size: 2rem;
-    }
-
     .hero-section {
       text-align: center;
       margin-bottom: 4rem;
-      padding-right: 30px;
-      padding-left: 30px;
+      padding: 0 30px;
     }
 
     .hero-section h4 {
-      text-align: center;
       margin-bottom: 1rem;
-      font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--ParticlePink);
+      font-family: 'GothNerd', 'Courier New', monospace;
+      background: linear-gradient(135deg,  var(--PlasmaPurple), var(--PlasmaPurple), var(--AquaAura), var(--RadioactiveGreen), var(--RadioactiveGreen));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       font-size: 3rem;
     }
 
-    .hero-section h3 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--AlphaAqua);
-      font-size: 1.4rem;
-    }
-
-    .main-container {
-      min-height: 100vh;
-      padding: 100 1rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-top: 80px;
-    }
 
 
-    .subtitle-card {
-      background: rgba(23, 0, 50, 0.6);
-      backdrop-filter: blur(15px);
-      border: 1px solid var(--VortexViolet);
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      box-shadow: 0 8px 32px var(--VortexGlow2), inset 0 1px 0 var(--PlasmaGlow2);
-    }
-
-    /* PROJECT GRID */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 1rem; 
-}
 
     .project-group {
-      background: rgba(83, 3, 174, 0.683);
-      border: 1px solid var(--VortexViolet);
-      border-radius: 16px;
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 8px 32px var(--VortexGlow1), inset 0 1px 0 var(--PlasmaGlow2);
-      text-decoration: none;
-      display: block;
-      text-align: center;
-      max-width: 100%;
-      margin-bottom: 20px;
-      z-index: 9;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.8rem 2rem;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto 4rem auto;
+      padding: 1rem 4rem 2rem 4rem;
+      background: #6d09b900;
+      border: none;
+      border-radius: 15px;
+      box-shadow: none;
+      overflow: visible;
     }
 
     .project-group h2 {
-      text-shadow: 0 0 15px var(--ParticleGlow2);
-      position: relative;
-      z-index: 10;
-      text-align: left;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--NuclearFuscia);
-      font-size: 2.2rem;
-
+      grid-column: 1 / -1;           
+      text-align: center;
+      margin: 0 0 2.2rem 0;
+      font-family: 'GothNerd', 'Courier New', monospace;
+      background: linear-gradient(135deg, var(--AquaAura), var(--AquaAura), var(--CoolGray));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
     .project-card {
-      background: rgba(23, 0, 50, 0.594);
-      backdrop-filter: blur(15px);
-      border: 1px solid var(--VortexViolet);
-      border-radius: 16px;
-      padding: 1rem;
       position: relative;
+      background: rgba(21, 0, 42, 0.895);
+      backdrop-filter: blur(12px) saturate(1.3);
+      border: 1px solid var(--VortexViolet);
+      border-radius: 14px;
+      padding: 1.8rem 1.6rem;
       overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 8px 32px var(--VortexGlow1), inset 0 1px 0 var(--PlasmaGlow2);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.5),
+        inset 0 0 5px rgba(120, 80, 220, 0.15);
       text-decoration: none;
-      display: block;
-      text-align: center;
-      max-width: 100%;
-      margin-bottom: 20px;
-      margin-left: 50px;
-      margin-right: 50px;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 180px;
       z-index: 10;
     }
 
     .project-card::before {
       content: '';
       position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: conic-gradient(transparent, var(--NuclearGlow2), transparent 30%);
-      opacity: 0.1;
-      z-index: 9;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        rgba(180, 90, 255, 0.07) 20%,
+        transparent 40%,
+        rgba(0, 240, 255, 0.05) 60%,
+        transparent 80%
+      );
+      background-size: 200% 200%;
+      animation: holographicShimmer 12s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
     }
 
-
-   .project-card:hover {
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: 0 20px 40px var(--PlasmaGlow2), 0 0 60px var(--NuclearGlow3);
-      border-color: var(--NuclearFuscia);
-
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 0;
+      width: 100%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(120, 220, 255, 0.12) 48%,
+        rgba(220, 100, 255, 0.18) 50%,
+        rgba(120, 220, 255, 0.12) 52%,
+        transparent 100%
+      );
+      animation: scanline 9s linear infinite;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+      z-index: 0;
     }
 
+    .project-card:hover::after {
+      opacity: 0.7;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 
+        0 7px 10px rgba(0, 255, 255, 0.4),
+        0 0 15px rgba(0, 255, 255, 0.35),
+        inset 0 0 5px rgba(0, 255, 255, 0.25);
+      border-color: var(--HiggsHotPink);
+    }
 
     .project-card h3 {
-      text-shadow: 0 0 15px var(--ParticleGlow2);
       position: relative;
-      z-index: 10;
-      text-align: center;
-      margin-bottom: 1rem;
+      z-index: 2;
+      margin: 0 0 1rem 0;
       font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--AlphaAqua);
+      color: var(--ParticlePink);
       font-size: 1.5rem;
-
+      text-align: center;
     }
 
     .project-card p {
+      position: relative;
+      z-index: 2;
+      margin: 0;
       color: var(--MutedGray);
-      font-size: 1.2rem;
-      line-height: 1.2;
-      position: relative;
-      font-family: Arial, Helvetica, sans-serif;
-      z-index: 11;
+      line-height: 1.45;
+      font-size: 1.05rem;
+      text-align: center;
     }
 
-    .project-card strong {
-      color: var(--ParticlePink);
-      font-size: 1.2rem;
-      font-weight: bold;
-      line-height: 1.2;
-      position: relative;
-      z-index: 11;
+    @keyframes holographicShimmer {
+      0%   { background-position: 0% 0%; }
+      100% { background-position: -200% -200%; }
     }
 
-
-
-
-  @media (max-width: 767px) {
-  body {
-    font-size: 14px; /
-  }
-  .main-container {
-    padding: 1rem !important;
-    margin: 0 auto !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-    padding-top: 80px !important; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-   h1 {
-    font-size: 1.5rem !important; 
-  }
-
-  h2 {
-    font-size: 1.85rem !important;
-  }
-
-  h3 {
-    font-size: 1.5rem !important;
-  }
-
-  h4 {
-    font-size: 1.8rem !important;
-  }
-
-.project-card {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        margin-bottom: 1.5rem; 
-        max-width: 100%;
+    @keyframes scanline {
+      0%   { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
     }
 
-    .project-grid {
-        gap: 1.5rem;
-        padding: 0 0.5rem; 
-    }
-
-
-.updates-section {
-    margin-left: 1rem !important;
-    margin-right: 1rem !important;
-    padding: 1.5rem;
-}
-
-}
-
-  .cat2-gif {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
+    @media (max-width: 600px) {
+      .project-group {
+        gap: 1.4rem;
+        padding: 0 1rem;
       }
-
-  .coming-soon {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: var(--RadiationRed);
-        color: white;
-        padding: 0.3rem 0.8rem;
-        border-radius: 12px;
-        font-size: 0.75rem;
-        font-weight: bold;
-        box-shadow: 0 0 12px var(--NuclearGlow2);
-        z-index: 2;
+      .project-card {
+        min-height: 160px;
+        padding: 1.4rem 1.2rem;
       }
-
-  .cat-gif {
-        width: 250px;
-        height: 150px;
-        margin-bottom: 2rem auto;
-        
+      .project-card h3 {
+        font-size: 1.35rem;
       }
+    }
 
+    .cat2-gif {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      margin: 3rem auto;
+      display: block;
+    }
 
-
-
-
-
-    .updates-section {
-      background: rgba(23, 0, 50, 0.594);
-      backdrop-filter: blur(15px);
-      border: 3px solid var(--VortexViolet);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 12px var(--NuclearGlow2);
-      margin-top: 60px;
-      margin-bottom: 30px;
-      margin-left: 60px;
-      margin-right: 60px;
-      position: relative;
-        }
-        
-        .updates-section h2 {
-            font-size: 2em;
-            margin-bottom: 10px;
-            color: var(--AlphaAqua);
-            font-family: 'GothNerd';
-        }
-        
-        .updates-section > p {
-            color: #666;
-            margin-bottom: 30px;
-        }
-        
-        #loading {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-        
-        .update-card {
-            background: #f9f9f933;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            color: #ffffff;
-            text-align: left;
-        }
-        
-        .update-card:hover {
-            box-shadow: 0 4px 12px rgba(219, 76, 232, 0.53);
-        }
-        
-        .update-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .update-title {
-            font-size: 1.3em;
-            font-weight: 600;
-            color: var(--ParticlePink);
-            flex: 1;
-            font-family: 'GothNerd';
-            text-align: left;
-        }
-        
-        .update-date {
-            font-size: 0.9em;
-            white-space: nowrap;
-            color: var(--AlphaAqua);
-            font-family: 'GothNerd';
-        }
-        
-        .update-body {
-            color: #ffffff;
-            line-height: 1.8;
-            font-size: 1.1rem;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        
-        .update-labels {
-            margin-top: 12px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        
-        .label {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.85em;
-            font-weight: 500;
-        }
-        
-        .error-message {
-            background: #fee;
-            border-left: 4px solid #f44;
-            padding: 20px;
-            border-radius: 5px;
-            color: #c00;
-        }
-        
-        .no-updates {
-            text-align: center;
-            padding: 40px;
-            color: #888;
-        }
+    .cat-gif {
+      width: 250px;
+      height: 150px;
+      margin: 2rem auto;
+      display: block;
+    }
 
   </style>
-  
 </head>
 <body>
- 
 
-  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
-      
-      <div class="left-dropdown"><!-- LEFT DROPDOWN MENU -->
+      <div class="left-dropdown">
         <button class="menu-trigger" aria-label="Menu">
           <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
         </button>
-
         <div class="left-menu">
           <a href="https://mkb0020.vercel.app/" class="menu-item">Home</a>
-          <a href="https://mkb0020.github.io/" class="menu-item">Javascript Projects</a>
-          <a href="https://mkb0020.github.io/Toolkit.html" class="menu-item">Schrödinger's Toolbox</a>
-          <a href="https://mkb0020.onrender.com/resume" class="menu-item">Resume</a>
-          <!--<a href="https://mkb0020.onrender.com/contact" class="menu-item">Contact</a>-->
+          <a href="https://mkb0020.github.io/" class="menu-item">Projects</a>
+          <a href="https://mkb0020.github.io/resume.html" class="menu-item">Resume</a>
           <a href="https://mkb0020.vercel.app/comments" class="menu-item">Guestbook</a>
-          <a href="https://mkb0020.vercel.app/game-testing" class="menu-item">CATastrophe 2 Feedback</a>
-
           <div class="social-links">
             <a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
               <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
             </a>
-          
             <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
               <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
             </a>
-
-            <a href="https://mkb0020.github.io/MKLambda.html" target="_blank" aria-label="YouTube">
-              <img src="/assets/images/music-icon.png" alt="YouTube" class="social-icon">
+            <a href="https://soundcloud.com/mkb0020" target="_blank" aria-label="Soundcloud">
+              <img src="/assets/images/music-icon.png" alt="Soundcloud" class="social-icon">
             </a>
-
             <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
               <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
             </a>
-
-            <a href="https://mkb0020.itch.io" target="_blank" aria-label="YouTube">
-              <img src="/assets/images/itchio-icon.png" alt="YouTube" class="social-icon">
+            <a href="https://mkb0020.itch.io" target="_blank" aria-label="Itch.io">
+              <img src="/assets/images/itchio-icon.png" alt="Itch.io" class="social-icon">
             </a>
           </div>
         </div>
       </div>
 
-     
-       <a href="https://mkb0020.github.io">
-            <div class="logo">♡ mkb0020</div>  <!-- CENTER LOGO -->
-        </a>
- 
-      <div class="help-dropdown"> <!-- RIGHT HELP DROPDOWN -->
+      <a href="https://mkb0020.github.io">
+        <div class="logo">♡ mkb0020</div>
+      </a>
+
+      <div class="help-dropdown">
         <button class="help-icon" id="helpBtn" aria-label="Help Menu">
           <div class="question-mark">?</div>
         </button>
-        
         <div class="dropdown-menu" id="dropdownMenu">
           <button id="openMainHelp">About</button>
           <a href="https://mkb0020.vercel.app/support" class="menu-item">Report an Issue</a>
@@ -451,9 +269,7 @@
     </div>
   </nav>
 
-
-
- <div id="helpModal" class="modal">
+  <div id="helpModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title">WELCOME!</h1>
@@ -461,131 +277,136 @@
       </div>
       <div class="modal-body">
         <h3>Thanks for stopping by!</h3>
-                <p><strong>Click around and explore my creations, experiments, and pratical tools I’ve been working on throughout my coding journey!</strong></p>
-                <p>This segment of my portfolio is dedicated to my JavaScript creations!  Its designed to be  <strong>fun</strong> and <strong>interactive</strong> AND <strong>useful!</strong>!</p>   
-        
+        <p><strong>Click around and explore my creations, experiments, and practical tools I’ve been working on throughout my coding journey!</strong></p>
+        <p>This segment of my portfolio is dedicated to my JavaScript creations! Its designed to be <strong>fun</strong> and <strong>interactive</strong> and <strong>useful!</strong>!</p>   
         <h3>What you'll find here:</h3>
         <ul>
           <li><strong>Visual Experiences:</strong> Get lost in fractals or explore the structure of a 6D object! </li>
           <li><strong>Interactive Experiences:</strong> Roll for initiative with a virtual D20 dice or play with Blobs!! </li>
           <li><strong>Game Dev Tools:</strong> Test out your battle animations with Electric Kitty or generate sprite sheets with Acoustic Kitty! </li>
           <li><strong>COMING SOON:</strong> Play the iconic CATastrophe2! </li>
-
         </ul>
-
-       
       </div>
     </div>
   </div>
 
-
-
+<div class="background-gradient"></div>
+<div class="waves">
+  <svg id="wave1" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 T4000,350 L4000,600 L0,600 Z" fill="#4b0082" opacity="0.5"/> <!-- DARK PURPLE-ISH BLUE-->
+  </svg>
+  <svg id="wave2" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 T4000,380 L4000,600 L0,600 Z" fill="#c71585" opacity="0.5"/> <!-- DARK HOT PINK -->
+  </svg>
+<svg id="wave3" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,320 Q500,180 1000,320 T2000,320 T3000,320 T4000,320 L4000,600 L0,600 Z" fill="#8a2be2" opacity="0.2"/> <!-- COOL-TONED PURPLE -->
+</svg>
+<svg id="wave4" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,400 Q500,250 1000,400 T2000,400 T3000,400 T4000,400 L4000,600 L0,600 Z" fill="#4b0082" opacity="0.5"/>  <!-- DARK PURPLE-ISH BLUE-->
+</svg>
+  <svg id="wave5" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 T3500,300 T4000,300 L4000,600 L0,600 Z" fill="#ff69b4" opacity="0.6"/> <!--LIGHT HOT PINK -->
+  </svg>
+<svg id="wave6" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,420 Q500,300 1000,420 T2000,420 T3000,420 T4000,420 L4000,600 L0,600 Z" fill="#c71585" opacity="0.5"/> <!-- DARK HOT PINK -->
+</svg>
+</div>
+<div class="dreamy-overlay"> </div>
 
   <div class="main-container">
     <div class="hero-section">
-      <p>.</p>
       <h4>♡</h4>
-        <h4>WELCOME TO MY VIRTUAL PLAYGROUND!</h4>
+      <h4>WELCOME TO MY VIRTUAL PLAYGROUND!</h4>
 
+      <img src="assets/images/cat_cup.gif" alt="meow!" class="cat-gif" id="cat">
 
+      <div class="project-group">
+        <a href="https://mkb0020.itch.io/acoustic-kitty" class="project-card">
+        <h3>Acoustic Kitty</h3>
+        <p>Build and Recolor Sprite Sheets</p>
+      </a>      
 
+        <a href="blobs.html" class="project-card">
+          <h3>Blobs</h3>
+          <p><strong>Play with blobs</strong></p>
+        </a>
 
-       <!-- <div class="updates-section">
-            <h2>WHAT'S NEW?</h2>
-            
-            <div id="loading">Loading updates...</div>
-            <div id="updates-container"></div>
-        </div>-->
+        <a href="manifold.html" class="project-card">
+          <h3>Calabi-Yau Manifold</h3>
+          <p><strong>6-dimensional Visualizer</strong></p>
+        </a>
 
-        <img src="assets/images/cat_cup.gif" alt="meow!" class="cat-gif" id="cat">
+        <a href="trailer.html" class="project-card">
+          <h3>CATastrophe2</h3>
+          <p>The sequel you've been waiting for...</p>
+        </a>
+        <a href="https://mkb0020.itch.io/celestial-dreams" class="project-card">
+          <h3>Celestial Dreams</h3>
+          <p>An interactive ambient experience built for relaxation, focus, and sleep.</p>
+        </a>
 
+        <a href="d20.html" class="project-card">
+          <h3>D20 Roller</h3>
+          <p><strong>Roll for Initiative... but make it pretty</strong></p>
+        </a>
 
-<div class="project-group">
-  <h2>Games & Simulations</h2>
-
-      <a href="trailer.html" class="project-card">
-        <h3>CATastrophe2</h3>
-        <p>The sequel you've been waiting for...</p>
+      <a href="ElectricKitty.html" class="project-card">
+        <h3>Electric Kitty</h3>
+        <p>Sandbox for testing new game animations</p>
       </a>
 
+        <a href="fractals.html" class="project-card">
+          <h3>Fractal Visualizer</h3>
+          <p><strong>Get lost in Fractals</strong></p>
+        </a>
 
-      <a href="https://mkb0020.itch.io/moonwalkerranch" class="project-card">
-        <h3>MOOnwalker Ranch</h3>
-        <p><strong> Fly around the pasture in a UFO and Abduct cows </strong></p>
-        <p>Mini Game with no objective... just vibes</p>
+
+        <a href="https://mkb0020.itch.io/moonwalkerranch" class="project-card">
+          <h3>MOOnwalker Ranch</h3>
+          <p>Fly around the pasture in a UFO and Abduct cows</p>
+          <p>Mini Game with no objective... just vibes</p>
+        </a>
+
+      <a href="https://mkb0020.onrender.com/audio-converter" class="project-card">
+        <h3>mp3 Converter</h3>
+        <p>Convert weird audio formats into mp3 files</p>
       </a>
 
-      <a href="https://mkb0020.itch.io/pastelular-automata.html" class="project-card">
-        <h3>PASTELular Automata</h3>
-        <p><strong>Emerging complexity... but make it pretty</strong></p>
-      </a>
+        <a href="https://mkb0020.itch.io/platform-calculator" class="project-card">
+          <h3>Neurotic Level Design Calculator</h3>
+          <p>Design 2D side-scrolling platformer levels using custom physics</p>
+        </a>
 
-      <a href="Toolkit.html" class="project-card">
-        <h3>Schrödinger's Toolbox</h3>
-        <p>Game Dev Sandbox / Toolkit</p>
-      </a>
+        <a href="https://mkb0020.itch.io/pastelular-automata.html" class="project-card">
+          <h3>PASTELular Automata</h3>
+          <p>Emerging complexity... but make it pretty</p>
+        </a>
 
-</div>        
+        <a href="MKLambda.html" class="project-card">
+          <h3>Project MK:LAMBDA</h3>
+          <p>Fictional Music Artist Landing Page</p>
+        </a>
 
-<div class="project-group">
-  <h2>Music</h2>
-        <a href="MeowMixTape.html" class="project-card">
-        <h3>MeowMixTape</h3>
-        <p><strong> Lsten to the sound track for CATastrophe2 and other original songs by me!</strong></p>
-      </a>
-
-    <a href="MKLambda.html" class="project-card">
-        <h3>Project MK:LAMBDA</h3>
-        <p>Fictional Music Artist Landing Page</p>
-      </a>
-
-    <a href="ArcadeVibe.html" class="project-card">
-        <h3>Arcade Vibe Beats</h3>
-        <p>Game Music Pack (Tracks + Loops)</p>
-      </a>
-
-</div>
-
-<div class="project-group">
-  <h2>Three JS Experiments</h2>
-
-      <a href="blobs.html" class="project-card">
-        <h3>Blobs</h3>
-        <p><strong> Play with blobs </strong></p>
-      </a>
-
-      <a href="manifold.html" class="project-card">
-        <h3>Calabi-Yau Manifold</h3>
-        <p><strong> 6-dimensional Visualizer</strong></p>
-      </a>
-
-      <a href="d20.html" class="project-card">
-        <h3>D20 Roller</h3>
-        <p><strong> Roll for Initiative... but make it pretty </strong></p>
-      </a>
-
-      <a href="fractals.html" class="project-card">
-        <h3>Fractal Visualizer</h3>
-        <p><strong>Get lost in Fractals</strong></p>
-      </a>
-
-</div>
-
-      <!--<a href="Sidequests.html" class="project-card">
-        <h3>Side Quests</h3>
-        <p><strong> Mini projects </strong></p>
-      </a>-->
-   
-      <img src="assets/images/cat_hop.gif" class="cat2-gif"> 
-
-     <div class="project-group">
-      <a href="https://github.com/mkb0020" class="project-card" target="_blank">
-        <h3>GitHub</h3>
-        <p>Check out my code repositories</p>
-      </a>
+        <a href="https://mkb0020.itch.io/the-borg-unleashed" class="project-card">
+          <h3>THE BORG UNLEASHED</h3>
+          <p>8-bit style infinite platformer where you play as a very good (and very unleashed) Rottweiler.</p>
+        </a>
+        <a href="Wormholes.html" class="project-card">
+          <h3>WORMHOLES ALL THE WAY DOWN</h3>
+        </a>
       </div>
+
+
+
+
+      <img src="assets/images/cat_hop.gif" class="cat2-gif">
+
+    
+      
     </div>
   </div>
+
+
 
   <div id="kofi-float">
         <a href="https://ko-fi.com/mkb0020" target="_blank" rel="noopener noreferrer">
