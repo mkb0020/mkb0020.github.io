@@ -139,6 +139,27 @@
         </div>
     </div>
 
+    <div id="configModal" class="config-modal hidden">
+        <div class="config-modal-content">
+            <h2>Pricing Settings</h2>
+
+            <label>Pricing Type:</label>
+            <select id="pricingType">
+            <option value="markup">Markup %</option>
+            <option value="margin">Margin %</option>
+            <option value="holdback">Holdback %</option>
+            </select>
+
+            <label>Value (%):</label>
+            <input type="number" id="pricingValue" placeholder="Enter %" />
+
+            <label>Output File Name:</label>
+            <input type="text" id="fileName" placeholder="Quote_12345.xlsx" />
+
+            <button id="runCalc">Run Calculation</button>
+        </div>
+    </div>
+
   <div id="stars"></div>
   <script src="js/KittyCore.js"></script>
 
