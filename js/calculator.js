@@ -1,9 +1,87 @@
-document.getElementById("fileInput").addEventListener("change", handleFile);
+document.addEventListener("DOMContentLoaded", () => {
+  let uploadedFile = null;
 
-function handleFile(event) {
-  const file = event.target.files[0];
-  if (!file) return;
+  document.getElementById("fileInput").addEventListener("change", (event) => {
+    uploadedFile = event.target.files[0];
+    if (!uploadedFile) return;
 
+    document.getElementById("configModal").classList.remove("hidden");
+  });
+
+  document.getElementById("runCalc").addEventListener("click", () => {
+    const pricingType = document.getElementById("pricingType").value;
+    const pricingValue = Number(document.getElementById("pricingValue").value) || 0;
+    const fileNameInput = document.getElementById("fileName").value;
+
+    const outputFileName = fileNameInput || "Output.xlsx";
+
+    document.getElementById("configModal").classList.add("hidden");
+
+    processFile(uploadedFile, pricingType, pricingValue, outputFileName);
+  });
+});
+
+function getLineDiscount(pricingType, percent, lineDiscount, unitCost, unitList) {
+  const pct = percent / 100;
+  const baseDiscount = lineDiscount / 100;
+
+  switch (pricingType.toLowerCase()) {
+    case "holdback":
+      return baseDiscount - pct;
+
+    case "markup":
+      return 1 - ((unitCost * (pct + 1)) / unitList);
+
+    case "margin":
+      return 1 - ((unitCost / (1 - pct)) / unitList);
+
+    default:
+      return 0;
+  }
+}
+
+function getUnitNetPrice(pricingType, percent, lineDiscount, unitCost, unitList) {
+  const pct = percent / 100;
+  const baseDiscount = lineDiscount / 100;
+
+  switch (pricingType.toLowerCase()) {
+    case "holdback":
+      return unitList - (unitList * (baseDiscount - pct));
+
+    case "markup":
+      return unitCost * (pct + 1);
+
+    case "margin":
+      return unitCost / (1 - pct);
+
+    default:
+      return unitList;
+  }
+}
+
+function applyPricing(net, type, value) { // MARKUP, MARGIN, OR HOLDBACK CALCULATIONS
+  const pct = value / 100;
+
+  switch (type) {
+    case "markup":
+      return net * (1 + pct);
+
+    case "margin":
+      return net / (1 - pct);
+
+    case "holdback":
+      return net * (1 - pct);
+
+    default:
+      return net;
+  }
+}
+
+function round(num) {
+  return Math.round(num * 100) / 100;
+}
+
+function processFile(file, pricingType, pricingValue, outputFileName) {
   const reader = new FileReader();
 
   reader.onload = function (e) {
@@ -16,62 +94,65 @@ function handleFile(event) {
     let jsonData = XLSX.utils.sheet_to_json(worksheet);
 
     jsonData.forEach(row => {
-      const price = Number(row["MONTHLY_UNIT_MSRP"]) || 0;
-      const discount = Number(row["DISCOUNT"]) || 0;
-      const months = Number(row["MONTHS"]) || 0;
-      const qty = Number(row["QTY"]) || 0;
+    const unitList = Number(row["MONTHLY_UNIT_MSRP"]) || 0;
+    const discount = Number(row["DISCOUNT"]) || 0;
+    const months = Number(row["MONTHS"]) || 0;
+    const qty = Number(row["QTY"]) || 0;
 
-      const monthlyNet = price - (price * (discount / 100));
-      const extendedNet = monthlyNet * months * qty;
+    const unitCost = unitList * (1 - (discount / 100));
 
-      row["MONTHLY_UNIT_NET"] = monthlyNet;
-      row["EXTENDED_NET"] = extendedNet;
+    const resellerUnitPrice = getUnitNetPrice(
+        pricingType,
+        pricingValue,
+        discount,
+        unitCost,
+        unitList
+    );
+
+    const lineDiscount = getLineDiscount(
+        pricingType,
+        pricingValue,
+        discount,
+        unitCost,
+        unitList
+    );
+
+    const extendedNet = resellerUnitPrice * months * qty;
+
+    row["LINE_DISCOUNT"] = round(lineDiscount * 100);
+    row["MONTHLY_UNIT_NET_PRICE"] = round(resellerUnitPrice);
+    row["EXTENDED_NET_PRICE"] = round(extendedNet);
     });
 
     const newWorksheet = XLSX.utils.json_to_sheet(jsonData);
-    const range = XLSX.utils.decode_range(newWorksheet["!ref"]);
-
-    for (let col = range.s.c; col <= range.e.c; col++) {
-    const cellAddress = XLSX.utils.encode_cell({ r: 0, c: col });
-
-    if (!newWorksheet[cellAddress]) continue;
-
-    newWorksheet[cellAddress].s = {
-        font: {
-        bold: true,
-        color: { rgb: "000000" }
-        },
-        fill: {
-        patternType: "solid",
-        fgColor: { rgb: "C4B5FD" }
-        },
-        border: {
-        bottom: {
-            style: "double",
-            color: { rgb: "000000" }
-        }
-        },
-        alignment: {
-        horizontal: "center",
-        vertical: "center"
-        }
-    };
-    }
-
-    newWorksheet["!cols"] = [
-    { wch: 15 }, // SKU
-    { wch: 8 },  // QTY
-    { wch: 20 }, // MSRP
-    { wch: 10 }, // MONTHS
-    { wch: 12 }, // DISCOUNT
-    { wch: 20 }, // NET
-    { wch: 20 }  // EXTENDED
-    ];
 
     workbook.Sheets[sheetName] = newWorksheet;
-    XLSX.writeFile(workbook, "Output.xlsx");
+
+    XLSX.writeFile(workbook, outputFileName.endsWith(".xlsx") ? outputFileName : outputFileName + ".xlsx");
+
     alert("Calculation Complete 🚀");
   };
 
   reader.readAsArrayBuffer(file);
 }
+
+
+// ================= MODAL ==================
+
+document.getElementById('someTriggerBtn')?.addEventListener('click', () => {
+  const modal = document.getElementById('configModal');
+  modal.classList.remove('hidden');
+  setTimeout(() => document.getElementById('pricingType').focus(), 100);
+});
+
+document.getElementById('configModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) {
+    e.currentTarget.classList.add('hidden');
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('configModal')?.classList.add('hidden');
+  }
+});
