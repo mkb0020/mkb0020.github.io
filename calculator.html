@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PRICE CALCULATOR</title>
+  <link rel="stylesheet" href="assets/css/calculatorStyles.css" />
+</head>
+<body>
+
+<div class="background-gradient"></div>
+<div class="waves">
+  <svg id="wave1" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 T4000,350 L4000,600 L0,600 Z" fill="#4b0082" opacity="0.5"/> <!-- DARK PURPLE-ISH BLUE-->
+  </svg>
+  <svg id="wave2" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 T4000,380 L4000,600 L0,600 Z" fill="#c71585" opacity="0.5"/> <!-- DARK HOT PINK -->
+  </svg>
+<svg id="wave3" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,320 Q500,180 1000,320 T2000,320 T3000,320 T4000,320 L4000,600 L0,600 Z" fill="#8a2be2" opacity="0.2"/> <!-- COOL-TONED PURPLE -->
+</svg>
+<svg id="wave4" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,400 Q500,250 1000,400 T2000,400 T3000,400 T4000,400 L4000,600 L0,600 Z" fill="#4b0082" opacity="0.5"/>  <!-- DARK PURPLE-ISH BLUE-->
+</svg>
+  <svg id="wave5" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 T3500,300 T4000,300 L4000,600 L0,600 Z" fill="#ff69b4" opacity="0.6"/> <!--LIGHT HOT PINK -->
+  </svg>
+<svg id="wave6" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,420 Q500,300 1000,420 T2000,420 T3000,420 T4000,420 L4000,600 L0,600 Z" fill="#c71585" opacity="0.5"/> <!-- DARK HOT PINK -->
+</svg>
+</div>
+<div class="dreamy-overlay"> </div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="left-dropdown">
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+        <div class="left-menu">
+          <a href="https://mkb0020.vercel.app/" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Projects</a>
+          <a href="https://mkb0020.github.io/resume.html" class="menu-item">Resume</a>
+          <a href="https://mkb0020.vercel.app/comments" class="menu-item">Guestbook</a>
+          <div class="social-links">
+            <a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="https://soundcloud.com/mkb0020" target="_blank" aria-label="Soundcloud">
+              <img src="/assets/images/music-icon.png" alt="Soundcloud" class="social-icon">
+            </a>
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>
+            <a href="https://mkb0020.itch.io" target="_blank" aria-label="Itch.io">
+              <img src="/assets/images/itchio-icon.png" alt="Itch.io" class="social-icon">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://mkb0020.github.io">
+        <div class="logo">♡ mkb0020</div>
+      </a>
+
+      <div class="help-dropdown">
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">How to Use</button>
+          <a href="https://mkb0020.vercel.app/support" class="menu-item">Report an Issue</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Price Calculator</h1>
+
+    <!-- DOWNLOAD -->
+    <button id="downloadBtn">Download Template</button>
+
+    <!-- UPLOAD -->
+    <div class="drop-zone" id="dropZone">
+        <div class="drop-zone-content">
+            <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            <p class="drop-text">Drag & drop your file here</p>
+            <p class="or-text">or</p>
+            <label for="fileInput" class="upload-btn">
+            <span>Choose File</span>
+            </label>
+        </div>
+        <input type="file" id="fileInput" />
+    </div>
+
+  </div>
+
+
+  <div id="kofi-float">
+        <a href="https://ko-fi.com/mkb0020" target="_blank" rel="noopener noreferrer">
+            <img src="assets/images/tipjar.png" alt="Support me on Ko-fi">
+            <div class="hearts">
+                <div class="heart" style="--delay: 0s; --drift: -20px;">❤️</div>
+                <div class="heart" style="--delay: 0.5s; --drift: 15px;">💖</div>
+                <div class="heart" style="--delay: 1s; --drift: -10px;">💕</div>
+                <div class="heart" style="--delay: 1.5s; --drift: 20px;">❤️</div>
+                <div class="heart" style="--delay: 2s; --drift: -15px;">💗</div>
+                <div class="heart" style="--delay: 2.5s; --drift: 10px;">💖</div>
+            </div>
+        </a>
+    </div>
+
+
+<div id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        <a href="javascript:void(0);" class="button-container" aria-label="Scroll to top">
+            <img src="assets/images/top.png" alt="Scroll to top">
+ 
+        </a>
+    </div>
+
+      <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">How to use</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+        <h3>How to use</h3>
+
+  
+      </div>
+    </div>
+  </div>
+
+  <div id="stars"></div>
+  <script src="js/KittyCore.js"></script>
+
+  <script>
+        const button = document.getElementById('kofi-float');
+        button.addEventListener('mouseenter', () => {
+            document.querySelectorAll('.heart').forEach(h => {
+                h.style.animation = 'none';
+                h.offsetHeight; 
+                h.style.animation = null;
+            });
+        });
+    </script>
+
+  <script>
+        const starsDiv = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = star.style.height = Math.random() * 2 + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 4 + 's';
+            starsDiv.appendChild(star);
+        }
+  </script>
+
+  <script src="js/calculator.js"></script>
+</body>
+</html>
