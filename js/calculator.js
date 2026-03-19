@@ -1,3 +1,11 @@
+document.getElementById("downloadTemplate").addEventListener("click", () => {
+  const link = document.createElement("a");
+  link.href = "assets/templates/template.xlsx";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   let uploadedFile = null;
 
