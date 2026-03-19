@@ -45,7 +45,7 @@
     .hero-section h4 {
       margin-bottom: 1rem;
       font-family: 'GothNerd', 'Courier New', monospace;
-      background: linear-gradient(135deg,  var(--PlasmaPurple), var(--PlasmaPurple), var(--AquaAura), var(--RadioactiveGreen), var(--RadioactiveGreen));
+      background: linear-gradient(90deg, var(--ParticlePink) 0%, var(--BohrsBabyBlue) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -62,11 +62,15 @@
       max-width: 1400px;
       width: 100%;
       margin: 0 auto 4rem auto;
-      padding: 1rem 4rem 2rem 4rem;
-      background: #6d09b900;
-      border: none;
-      border-radius: 15px;
-      box-shadow: none;
+      padding: 3rem 3rem 3rem 3rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      box-shadow: 
+        0 20px 50px -15px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
       overflow: visible;
     }
 
@@ -86,22 +90,23 @@
 
     .project-card {
       position: relative;
-      background: rgba(21, 0, 42, 0.895);
-      backdrop-filter: blur(12px) saturate(1.3);
-      border: 1px solid var(--VortexViolet);
-      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
       padding: 1.8rem 1.6rem;
       overflow: hidden;
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 
-        0 4px 15px rgba(0, 0, 0, 0.5),
-        inset 0 0 5px rgba(120, 80, 220, 0.15);
+         0 20px 40px -15px rgba(0, 0, 0, 0.5),
+         inset 0 1px 0 rgba(255, 255, 255, 0.08);
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 180px;
+      min-height: 200px;
       z-index: 10;
     }
 
@@ -163,10 +168,13 @@
       position: relative;
       z-index: 2;
       margin: 0 0 1rem 0;
-      font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--ParticlePink);
+      font-family: 'GothNerd', 'Courier New', monospace;
+      background: linear-gradient(90deg, var(--AquaAura) 0%, var(--AlphaAqua) 100%);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
       font-size: 1.5rem;
       text-align: center;
+      text-transform: uppercase;
     }
 
     .project-card p {
@@ -211,12 +219,6 @@
       display: block;
     }
 
-    .cat-gif {
-      width: 250px;
-      height: 150px;
-      margin: 2rem auto;
-      display: block;
-    }
 
   </style>
 </head>
@@ -315,10 +317,8 @@
 
   <div class="main-container">
     <div class="hero-section">
-      <h4>♡</h4>
-      <h4>WELCOME TO MY VIRTUAL PLAYGROUND!</h4>
-
-      <img src="assets/images/cat_cup.gif" alt="meow!" class="cat-gif" id="cat">
+     <!--<h4>♡</h4>
+      <h4>WELCOME TO MY VIRTUAL PLAYGROUND!</h4>-->
 
       <div class="project-group">
         <a href="https://mkb0020.itch.io/acoustic-kitty" class="project-card">
@@ -326,14 +326,14 @@
         <p>Build and Recolor Sprite Sheets</p>
       </a>      
 
-        <a href="blobs.html" class="project-card">
+        <a href="https://mkb0020.itch.io/blobs" class="project-card">
           <h3>Blobs</h3>
-          <p><strong>Play with blobs</strong></p>
+          <p>Satisfying blob plops and jiggles</p>
         </a>
 
         <a href="manifold.html" class="project-card">
           <h3>Calabi-Yau Manifold</h3>
-          <p><strong>6-dimensional Visualizer</strong></p>
+          <p>6-dimensional Visualizer</p>
         </a>
 
         <a href="trailer.html" class="project-card">
@@ -347,7 +347,7 @@
 
         <a href="d20.html" class="project-card">
           <h3>D20 Roller</h3>
-          <p><strong>Roll for Initiative... but make it pretty</strong></p>
+          <p>Roll for Initiative</p>
         </a>
 
       <a href="ElectricKitty.html" class="project-card">
@@ -357,7 +357,7 @@
 
         <a href="fractals.html" class="project-card">
           <h3>Fractal Visualizer</h3>
-          <p><strong>Get lost in Fractals</strong></p>
+          <p>Get lost in Fractals</p>
         </a>
 
 
@@ -396,12 +396,7 @@
         </a>
       </div>
 
-
-
-
-      <img src="assets/images/cat_hop.gif" class="cat2-gif">
-
-    
+   
       
     </div>
   </div>
