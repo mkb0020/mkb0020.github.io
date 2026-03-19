@@ -1,20 +1,64 @@
-document.getElementById("downloadTemplate").addEventListener("click", () => {
-  const link = document.createElement("a");
-  link.href = "assets/templates/template.xlsx";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const tab = btn.dataset.tab;
+
+    // Hide all tab content
+    document.querySelectorAll(".tab-content").forEach(c => c.classList.add("hidden"));
+
+    // Remove active from ALL tabs
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+
+    // Show selected tab
+    document.getElementById(`tab-${tab}`).classList.remove("hidden");
+
+    // ✅ THIS LINE WAS MISSING
+    btn.classList.add("active");
+  });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+document.querySelectorAll(".downloadTemplate").forEach(button => {
+  button.addEventListener("click", () => {
+    const templateFile = button.dataset.template;
+
+    const link = document.createElement("a");
+    link.href = `assets/templates/${templateFile}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+});
+
+document.querySelectorAll(".tab-content").forEach(tab => {
   let uploadedFile = null;
 
-  document.getElementById("fileInput").addEventListener("change", (event) => {
+  const fileInput = tab.querySelector(".fileInput");
+  const modal = tab.querySelector(".configModal");
+
+  fileInput.addEventListener("change", (event) => {
     uploadedFile = event.target.files[0];
     if (!uploadedFile) return;
 
-    document.getElementById("configModal").classList.remove("hidden");
+    modal.classList.remove("hidden");
+
+    event.target.value = "";
   });
+
+  tab.querySelector(".runCalc")?.addEventListener("click", () => {
+    const pricingType = tab.querySelector(".pricingType").value;
+    const pricingValue = Number(tab.querySelector(".pricingValue").value) || 0;
+    const fileNameInput = tab.querySelector(".fileName").value;
+
+    const outputFileName = fileNameInput || "Output.xlsx";
+
+    modal.classList.add("hidden");
+
+    processFile(uploadedFile, pricingType, pricingValue, outputFileName);
+  });
+});
+    
+
+ 
 
   document.getElementById("runCalc").addEventListener("click", () => {
     const pricingType = document.getElementById("pricingType").value;
@@ -27,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     processFile(uploadedFile, pricingType, pricingValue, outputFileName);
   });
-});
+
 
 function getLineDiscount(pricingType, percent, lineDiscount, unitCost, unitList) {
   const pct = percent / 100;
@@ -153,14 +197,16 @@ document.getElementById('someTriggerBtn')?.addEventListener('click', () => {
   setTimeout(() => document.getElementById('pricingType').focus(), 100);
 });
 
-document.getElementById('configModal').addEventListener('click', e => {
-  if (e.target === e.currentTarget) {
-    e.currentTarget.classList.add('hidden');
-  }
+document.querySelectorAll(".configModal").forEach(modal => {
+  modal.addEventListener("click", e => {
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+    }
+  });
 });
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    document.getElementById('configModal')?.classList.add('hidden');
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    document.querySelectorAll(".configModal").forEach(m => m.classList.add("hidden"));
   }
 });
