@@ -12,6 +12,29 @@
 </head>
 <body>
 
+<div class="background-gradient"></div>
+<div class="waves">
+  <svg id="wave1" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 T4000,350 L4000,600 L0,600 Z" fill="#4b0082" opacity="0.5"/> <!-- DARK PURPLE-ISH BLUE-->
+  </svg>
+  <svg id="wave2" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 T4000,380 L4000,600 L0,600 Z" fill="#c71585" opacity="0.5"/> <!-- DARK HOT PINK -->
+  </svg>
+<svg id="wave3" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,320 Q500,180 1000,320 T2000,320 T3000,320 T4000,320 L4000,600 L0,600 Z" fill="#8a2be2" opacity="0.2"/> <!-- COOL-TONED PURPLE -->
+</svg>
+<svg id="wave4" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,400 Q500,250 1000,400 T2000,400 T3000,400 T4000,400 L4000,600 L0,600 Z" fill="#4b0082" opacity="0.5"/>  <!-- DARK PURPLE-ISH BLUE-->
+</svg>
+  <svg id="wave5" viewBox="0 0 4000 600" preserveAspectRatio="none">
+    <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 T3500,300 T4000,300 L4000,600 L0,600 Z" fill="#ff69b4" opacity="0.6"/> <!--LIGHT HOT PINK -->
+  </svg>
+<svg id="wave6" viewBox="0 0 4000 600" preserveAspectRatio="none">
+  <path d="M0,420 Q500,300 1000,420 T2000,420 T3000,420 T4000,420 L4000,600 L0,600 Z" fill="#c71585" opacity="0.5"/> <!-- DARK HOT PINK -->
+</svg>
+</div>
+<div class="dreamy-overlay"> </div>
+
   <nav class="navbar">
     <div class="nav-container">
       <div class="left-dropdown">
@@ -59,33 +82,33 @@
     </div>
   </nav>
 
+
+
   <div class="JS-page">
     <div class="JS-controls">
-      <h1>CALABI-YAU MANIFOLD</h1>
- 
+      <div class="glass-morphism-container">
+        <div class="holo-btn-group">
+          <button class="holo-btn" id="rotateBtn">⏸ Pause Rotation</button>
+          <button class="holo-btn" id="regenerateBtn" style="margin-top: 0.5rem;">Regenerate</button>
+        </div>
 
-
-      <div class="cyber-card">
-        <button class="cyber-btn2" id="rotateBtn"><h3>⏸ Pause Rotation</h3></button>
-        <button class="cyber-btn2" id="regenerateBtn" style="margin-top: 0.5rem;"><h3>Regenerate</h3></button>
-    
         <div class="slider-control">
-          <label for="complexitySlider">Mesh Complexity: <span id="complexityValue">30</span></label>
+          <label for="complexitySlider"><h3 style="color: #FFFFFF; font-size: 0.9rem; margin-bottom: 0.8rem;">Mesh Complexity:</h3> <span id="complexityValue">30</span></label>
           <input type="range" id="complexitySlider" min="10" max="60" value="30" step="5">
         </div>
  
-        <h3 style="font-size: 1rem; margin-bottom: 0.8rem;">Zoom Controls</h3>
+        <h3 style="font-size: 0.9rem; margin-bottom: 0.8rem;">Zoom Controls</h3>
         <div class="zoom-controls">
-          <button class="cyber-btn" id="zoomInBtn"><h1>+</h1></button>
-          <button class="cyber-btn" id="zoomOutBtn"><h1>-</h1></button>
-          <button class="cyber-btn" id="resetZoomBtn"><h3>Reset</h3></button>
+          <button class="holo-btn" id="zoomInBtn">+</button>
+          <button class="holo-btn" id="zoomOutBtn">-</button>
+          <button class="holo-btn" id="resetZoomBtn">Reset</button>
         </div>
       </div>
 
-      <div style="display: flex; gap: 1rem;">
+      <!--<div style="display: flex; gap: 1rem;">
         <button class="btn-quantum-pulse" onclick="openModal('aboutModal')">About</button>
         <button class="btn-quantum-pulse" onclick="openModal('controlsModal')">Controls</button>
-      </div>
+      </div>-->
 
 
     </div>
@@ -101,9 +124,13 @@
         <button class="btn-spinX" onclick="closeModal('aboutModal')">X</button>
       </div>
       <div class="modal-body">
-        <p><div class="NeonNote">
+
+
+        <div class="modal-section">
+          <p style="margin-bottom: 1rem;"><div class="holo-card">
           Tiny six-dimensional origami for the universe!
-        </div></p>
+          </div></p>
+        </div>
 
         <div class="modal-section">
           <p style="margin-bottom: 1rem;"><div class="holo-card">
@@ -152,6 +179,38 @@
           </div>
           </p>
         </div>
+      </div>
+    </div>
+  </div>
+
+    <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">A Calabi-What?</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+
+                <p><div class="NeonNote">
+          Tiny six-dimensional origami for the universe!
+        </div></p>
+
+        <div class="modal-section">
+          <p style="margin-bottom: 1rem;"><div class="holo-card">
+            A Calabi-Yau Manifold is a delicately curved, compact complex shape that's Ricci-flat and carries a holomorphic volume form, meaning it has the kind of internal symmetry mathematicians adore. It lives in six real dimensions (three complex dimensions), but we show it here as a 3D projection you can spin, zoom, and explore.
+          </div></p>
+        </div>
+
+        <div class="modal-section">
+          <p style="margin-bottom: 1rem;">
+          <div class="holo-card">
+            <ul style="margin-bottom: 1rem;">
+              <li><strong>In geometry</strong> - Calabi-Yau spaces are central examples in complex differential geometry and algebraic geometry</li>
+              <li><strong>In physics</strong> - They're the favorite hiding places for extra dimensions in string theory</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

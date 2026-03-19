@@ -62,18 +62,18 @@
 
   <div class="JS-page">
     <div class="JS-controls">
-      <h1>D20 ROLLER</h1>
-      
-      <div class="result-display">
+      <div class="glass-morphism-container">
+      <div class="holo-card" style="margin-bottom: 1rem; text-align: center;">
         <div style="color: var(--AlphaAqua); font-size: 1rem; margin-bottom: 0.5rem;">LAST ROLL</div>
         <div class="result-number" id="resultDisplay">--</div>
       </div>
 
 
 
-      <div class="cyber-card">
+      <div class="holo-card">
         <p style="margin-bottom: 0.5rem; text-align: center; font-size: 1.2rem;"><strong>PC:</strong> Press SPACE</p>
         <p style="margin-bottom: 0.5rem; text-align: center; font-size: 1.2rem;"><strong>MOBILE:</strong> TAP screen</p>
+      </div>
       </div>
 
     </div>
@@ -84,6 +84,39 @@
   </div>
 </body>
   
+
+
+    <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">🎲</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p style="margin-bottom: 1rem;"><div class="holo-card">
+        The D20 (20-sided die) is the most iconic die in tabletop gaming, used for everything from attack rolls to skill checks in games like Dungeons & Dragons.
+          </div></p>
+        </div>
+
+        <div class="modal-section">
+          <p style="margin-bottom: 1rem;">
+          <div class="holo-card">
+        <p><strong>Physics simulation</strong> using Three.js + Cannon.js</p>
+        <ul style="margin-top: 1rem;">
+          <li>20-sided icosahedron geometry</li>
+          <li>Collision detection & bouncing</li>
+          <li>Dice face detection for true random results</li>
+          <li>Orbit controls to inspect from any angle</li>
+        </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
 <!-- MODALS -->
   <div id="aboutModal" class="modal" onclick="closeModal('aboutModal', event)">
     <div class="modal-content" onclick="event.stopPropagation()">

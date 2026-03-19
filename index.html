@@ -220,6 +220,51 @@
     }
 
 
+        .holo-card {
+        font-family: Arial, Helvetica, sans-serif;
+        background: rgba(132, 132, 132, 0.096);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--CoolGray);
+        border-radius: 18px;
+        padding: 28px;
+        margin-bottom: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.575),
+            inset 0 0 20px rgba(0, 0, 0, 0.3) 0%, ;
+    }
+
+    .holo-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, 
+            rgba(0, 255, 255, 0.1) 0%, 
+            transparent 70%);
+        opacity: 0;
+        transition: opacity 0.6s;
+        pointer-events: none;
+    }
+
+    .holo-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--AquaAura);
+        box-shadow: 
+            0 20px 50px rgba(0, 255, 255, 0.1) 0%, 
+            0 0 40px rgba(0, 255, 255, 0.1) 0%;
+    }
+
+    .holo-card:hover::before {
+        opacity: 1;
+        animation: hologramPulse 3s infinite;
+    }
+
   </style>
 </head>
 <body>
@@ -278,10 +323,12 @@
         <button class="modal-close" id="closeModal">X</button>
       </div>
       <div class="modal-body">
+        <div class="holo-card">
         <h3>Thanks for stopping by!</h3>
         <p>Click around and explore my creations, experiments, and practical tools I’ve been working on throughout my coding journey!</p>
         <p>This segment of my portfolio is primarily dedicated to my JavaScript creations! Its designed to be fun and interactive and useful!!</p>   
-        <h3>What you'll find here:</h3>
+        </div>
+        <div class="holo-card"><h3>What you'll find here:</h3>
         <ul>
           <li><strong>Previews:</strong> Check out trailers for my upcoming games <strong>Wormholes All The Way Down</strong> and <strong>CATastrophe2</strong>. </li>
           <li><strong>Games:</strong> Abduct cows in <strong>MOOnwalker Ranch</strong> or hop along infinite platforms in <strong>The Borg Unleashed</strong>. </li>
@@ -289,6 +336,7 @@
           <li><strong>Interactive Experiences:</strong> Relax to ambient sounds and visuals of <strong>Celestial Dreams</strong>, enjoy emerging pastel complexity with <strong>PASTELular Automata</strong>, roll for initiative with a virtual <strong>D20</strong> dice, or play with <strong>Blobs</strong>. </li>
           <li><strong>Game Dev Tools:</strong> Design platformer levels with <strong>Neurotic Level Design Calculator</strong>, test out your battle animations with <strong>Electric Kitty</strong>, build sprite sheets with <strong>Acoustic Kitty</strong>. </li>
         </ul>
+        </div>
       </div>
     </div>
   </div>
