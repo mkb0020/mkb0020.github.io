@@ -234,9 +234,9 @@ select#Dropdown {
       width: 100%;
       padding: 0.8rem;
       margin: 1.5rem 0;
-      border: 2px solid var(--NuclearFuscia);
+      border: 1px solid var(--CoolGray);
       border-radius: 12px;
-      background: var(--ProtonPurple);
+      background: rgba(16, 16, 16, 0.463);
       color: var(--NuclearFuscia2);
       font-size: 1rem;
       font-weight: bold;
@@ -638,9 +638,10 @@ select#Dropdown {
     }
 
     .holo-card {
-        background: linear-gradient(135deg, 
-            var(--ProtonShadow), 
-            var(--BosonShadow));
+        font-family: Arial, Helvetica, sans-serif;
+        background: rgba(189, 189, 189, 0.096);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         border: 1px solid var(--VortexGlow3);
         border-radius: 18px;
         padding: 28px;
@@ -668,7 +669,6 @@ select#Dropdown {
     }
 
     .holo-card:hover {
-        transform: translateY(-8px);
         border-color: var(--AquaAura);
         box-shadow: 
             0 20px 50px var(--AuraGlow3)
@@ -735,6 +735,73 @@ select#Dropdown {
         font-weight: bold;
         font-size: 1.3em;
     }
+
+    .holo-card p {
+        color: #FFFFFF;
+        line-height: 1.8;
+        margin: 0;
+        font-size: 1rem;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+.holo-btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 20px;
+        align-items: center;
+        text-align: center;
+    }
+
+
+ .holo-btn {
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--AlphaAqua);
+        font-weight: bold;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        text-align: center;
+        background: rgba(181, 180, 180, 0.363);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid #667eea;
+        border-radius: 50px;
+        padding: 10px 20px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.4),
+            inset 0 0 20px rgba(0, 255, 255, 0.10);
+    }
+
+    .holo-btn::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, 
+           #667eea1d 0%, 
+            transparent 70%);
+        opacity: 0;
+        transition: opacity 0.6s;
+        pointer-events: none;
+    }
+
+    .holo-btn:hover {
+        border-color: #00ffff;
+        box-shadow: 
+            0 20px 50px #667eea71,
+            0 0 40px #667eea4c;
+    }
+
+    .holo-btn:hover::before {
+        opacity: 1;
+        animation: hologramPulse 3s infinite;
+    }
+
 
 /* ============================================= CYBER CARDS  ============================================= */
 .cyber-card {
@@ -1413,17 +1480,17 @@ svg { width: 100%; height: 100%; }
 /* ============================================= GENERAL JS PAGE< CONTROLS AND CONTAINER ============================================= */
 .JS-page {
   display: grid;
-  grid-template-columns: 390px 1fr;
+  grid-template-columns: 400px 1fr;
   height: calc(100vh - 100px);
-  margin-top: 90px;
+  margin-top: 0px;
   gap: 0;
-  padding: 15px;
+  padding: 0px;
 }
 
 .JS-controls {
   background: transparent;
   backdrop-filter: blur(20px);
-  padding: 2rem 1.5rem;
+  padding: 2rem 1rem;
   overflow-y: auto;
   box-shadow: 0 0 30px var(--PlasmaGlow2);
   display: flex;
@@ -1557,10 +1624,10 @@ svg { width: 100%; height: 100%; }
     select {
       width: 100%;
       padding: 0.7rem;
-      border: 2px solid var(--VortexViolet);
+      border: 1px solid var(--VortexViolet);
       border-radius: 12px;
-      background: rgba(23, 0, 50, 0.8);
-      color: var(--ParticlePink);
+      background: rgba(20, 20, 20, 0.308);
+      color: #c4b5fd;
       font-size: 1rem;
       font-family: inherit;
       cursor: pointer;
@@ -1942,4 +2009,34 @@ svg { width: 100%; height: 100%; }
     text-align: left !important; 
     hyphens: auto !important; 
   }
+}
+
+
+.glass-morphism-container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 3rem 1rem;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: 
+    0 20px 50px -15px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-morphism-container::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 30% 20%, rgba(236, 72, 153, 0.18), transparent 50%);
+  top: -150px;
+  left: -100px;
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.7;
 }
