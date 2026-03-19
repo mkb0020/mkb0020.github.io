@@ -34,28 +34,28 @@
     <div class="nav-container">
       <div class="left-dropdown">
         <button class="menu-trigger" aria-label="Menu">
-          <img src="/assets/images/Niels2.png" alt="Menu" class="home-icon">
+          <img src="assets/images/Niels2.png" alt="Menu" class="home-icon">
         </button>
         <div class="left-menu">
-          <a href="https://mkb0020.vercel.app/" class="menu-item">Home</a>
+          <!-- <a href="https://mkb0020.vercel.app/" class="menu-item">Home</a> -->
           <a href="https://mkb0020.github.io/" class="menu-item">Projects</a>
           <a href="https://mkb0020.github.io/resume.html" class="menu-item">Resume</a>
-          <a href="https://mkb0020.vercel.app/comments" class="menu-item">Guestbook</a>
+          <!-- <a href="https://mkb0020.vercel.app/comments" class="menu-item">Guestbook</a> -->
           <div class="social-links">
             <a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
-              <img src="/assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+              <img src="assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
             </a>
             <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
-              <img src="/assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+              <img src="assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
             </a>
             <a href="https://soundcloud.com/mkb0020" target="_blank" aria-label="Soundcloud">
-              <img src="/assets/images/music-icon.png" alt="Soundcloud" class="social-icon">
+              <img src="assets/images/music-icon.png" alt="Soundcloud" class="social-icon">
             </a>
             <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
-              <img src="/assets/images/github-icon.png" alt="GitHub" class="social-icon">
+              <img src="assets/images/github-icon.png" alt="GitHub" class="social-icon">
             </a>
             <a href="https://mkb0020.itch.io" target="_blank" aria-label="Itch.io">
-              <img src="/assets/images/itchio-icon.png" alt="Itch.io" class="social-icon">
+              <img src="assets/images/itchio-icon.png" alt="Itch.io" class="social-icon">
             </a>
           </div>
         </div>
@@ -78,13 +78,17 @@
   </nav>
 
   <div class="container">
-    <h1>Price Calculator</h1>
 
     <!-- DOWNLOAD -->
-    <button id="downloadTemplate">Download Template</button>
+<div class="tabs">
+  <button class="tab-btn tab-new" data-tab="new">New</button>
+  <button class="tab-btn tab-proration" data-tab="proration">Proration</button>
+  <button class="tab-btn tab-trueup" data-tab="trueup">True-Up</button>
+</div>
 
-    <!-- UPLOAD -->
-    <div class="drop-zone" id="dropZone">
+<div id="tab-new" class="tab-content">
+  <button class="downloadTemplate" data-template="template-new.xlsx">Download Template</button>
+      <div class="drop-zone" id="dropZone">
         <div class="drop-zone-content">
             <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -99,6 +103,50 @@
         </div>
         <input type="file" id="fileInput" />
     </div>
+  <div class="configModal hidden"></div>
+</div>
+
+<div id="tab-proration" class="tab-content hidden">
+  <button class="downloadTemplate" data-template="template-proration.xlsx">Download Template</button>
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-zone-content">
+            <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            <p class="drop-text">Drag & drop your file here</p>
+            <p class="or-text">or</p>
+            <label for="fileInput" class="upload-btn">
+            <span>Choose File</span>
+            </label>
+        </div>
+        <input type="file" id="fileInput" />
+    </div>
+  <div class="configModal hidden"></div>
+</div>
+
+<div id="tab-trueup" class="tab-content hidden">
+  <button class="downloadTemplate" data-template="template-trueup.xlsx">Download Template</button>
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-zone-content">
+            <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            <p class="drop-text">Drag & drop your file here</p>
+            <p class="or-text">or</p>
+            <label for="fileInput" class="upload-btn">
+            <span>Choose File</span>
+            </label>
+        </div>
+        <input type="file" id="fileInput" />
+    </div>
+  <div class="configModal hidden"></div>
+</div>
+
+
 
   </div>
 
