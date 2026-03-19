@@ -184,7 +184,7 @@ button, input[type="file"] {
   font-family: inherit;
 }
 
-#downloadBtn,
+#downloadTemplate,
 #fileInput {
   display: block;
   width: 100%;
@@ -201,17 +201,17 @@ button, input[type="file"] {
   overflow: hidden;
 }
 
-#downloadBtn {
+#downloadTemplate {
   background: linear-gradient(135deg, var(--OptimalOrange) 0%, var(--OrbitalOrange) 100%);
   color: white;
 }
 
-#downloadBtn:hover {
+#downloadTemplate:hover {
   transform: translateY(-4px) scale(1.04);
   box-shadow: 0 18px 40px rgba(255, 107, 107, 0.4);
 }
 
-#downloadBtn:active {
+#downloadTemplate:active {
   transform: translateY(-1px) scale(0.98);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
