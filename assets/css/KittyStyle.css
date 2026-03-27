@@ -116,7 +116,7 @@ body, html {
     min-height: 100vh; 
     height: 100%; 
     color: #FFFFFF;
-    background: linear-gradient(to bottom, #2c0050, #390072, #47017a);
+    background: linear-gradient(to bottom, #2c0050, #390072, #47017a, var(--HiggsHotPink), var(--OptimalOrange));
     background-repeat: no-repeat; 
     background-attachment: fixed;
 }
@@ -176,6 +176,15 @@ body, html {
   .waves {
     display: none !important;
   }
+
+  .background-gradient {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to bottom, #320156 10%, #47017a 55%, var(--HiggsHotPink) 90%, var(--OptimalOrange) 99%);
+    opacity: 1;
+    z-index: -3;
+  }
+
 }
 
     .dreamy-overlay {
