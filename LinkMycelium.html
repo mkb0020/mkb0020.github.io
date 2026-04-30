@@ -11,6 +11,18 @@
 
 <style>
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; 
+    height: 100%; 
+    background: linear-gradient(to bottom, #17002a, #180030, #1e0033);
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+}
+
 @font-face {
   font-family: 'GothNerd'; 
   src: url('assets/fonts/ScienceGothic.ttf') format('truetype'); 
@@ -67,10 +79,9 @@
   position: fixed;
   top: 0;
   width: 100vw;
-  background: linear-gradient(135deg, rgba(80, 1, 133, 0.55) 0%, rgba(79, 4, 149, 0.35) 50%, rgba(55, 2, 90, 0.409) 100%);
+  background: linear-gradient(135deg, #0e001d4d 0%, rgba(24, 1, 40, 0.116) 50%, #0e001d4d 100%);
   backdrop-filter: blur(50px);
-  border-bottom: 1px solid #8a2be2;
-  box-shadow: 0 0 30px #8a2be2;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.11);
   z-index: 1000;
   padding: 0.5rem 0;
 }
@@ -131,12 +142,12 @@ body {
       position: fixed;
       inset: 0;
       background: linear-gradient(to bottom,  
-  #2a0142 0%,
-  #5a189a 12%,
-  #8a2be2 28%,
-  #c71585 45%,
-  #ff69b4 70%,
-  #ff69b4 100%);
+  #1b0133 0%,
+  #2c0651 12%,
+  #33045f 28%,
+  #33045f 45%,
+  #c71585 70%,
+  #c71585 100%);
       opacity: 0.85;
       z-index: -3;
     }
@@ -174,8 +185,8 @@ body {
     .dreamy-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(80, 0, 150, 0.1);
-      backdrop-filter: blur(3px);
+      background: rgba(58, 0, 108, 0.158);
+      backdrop-filter: blur(10px);
       pointer-events: none;
       z-index: -1;
     }
@@ -188,9 +199,9 @@ body {
   height: 45vh;
   background: radial-gradient(
     ellipse at top,
-    rgba(117, 14, 185, 0.55) 0%,
-    rgba(89, 17, 156, 0.35) 35%,
-    rgba(143, 1, 237, 0.486) 60%,
+    rgba(117, 14, 185, 0) 0%,
+    rgba(89, 17, 156, 0) 35%,
+    rgba(143, 1, 237, 0) 60%,
     transparent 75%
   );
   z-index: -2;
@@ -233,28 +244,48 @@ body {
 
 
 .link {
-background: linear-gradient(45deg,#830CDE, #c846d3);
-  color: #ffffff;
-  border: 1px solid #FFC7FF;
-  font-family: 'GothNerd', sans-serif;
-  font-size: 1.1rem;
-  padding: 10px 10px;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s;
-  display: block;
-  box-shadow: 0 0 20px #830CDE;
-  justify-content: center;
-  text-align: center;
-  text-transform: uppercase;
-  margin: 5px;
-}
+          text-decoration: none;
+          position: relative;
+          overflow: hidden;
+          background: rgba(38, 0, 84, 0.473);
+          border: 1px solid #7b00ff37;
+          padding: 0.5rem 1.6rem;
+          cursor: pointer;
+          transition: background 0.2s, border-color 0.2s;
+          font-family: 'SpaceLetters';
+          color: #c4b5fd;
+          transition: border-color 0.2s, box-shadow 0.2s, color 0.2s, transform 0.15s;
+          box-shadow: 0 0 18px rgba(140, 60, 255, 0.15);
+          -webkit-tap-highlight-color: transparent;
+          text-transform: uppercase;
+          display: flex;
+        flex-direction: column;
+        z-index: 10;
+          border-radius: 30px;
+          backdrop-filter: blur(50px);
+          font-size: 0.85rem;
+        }
 
-.link:hover {
-  background: linear-gradient(45deg, #c846d3, #67FEBD);
+    .link::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+      transition: 0.4s;
+    }
 
-  box-shadow: 0 0 40px #c846d3;
-}
+    .link:hover::before,
+    .link:focus::before {
+      left: 100%;
+    }
+
+    .link:hover,
+    .link:focus {
+      border-color: rgba(0, 221, 255, 0.32);
+      box-shadow: 0 0 30px rgba(0, 200, 255, 0.1), 0 0 60px rgba(140, 60, 255, 0.15);
+      outline: none;
+    }
 
 </style>
 
@@ -293,7 +324,7 @@ background: linear-gradient(45deg,#830CDE, #c846d3);
         <path d="M0,420 Q750,250 1500,420 T3000,420 L3000,600 L0,600 Z" fill="#db7093" opacity="0.7"/>
       </svg>
       <svg id="wave5" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.5"/>
+        <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 L3000,600 L0,600 Z" fill="#c71585" opacity="0.5"/>
       </svg>
       <<svg id="wave6" viewBox="0 0 3000 600" preserveAspectRatio="none">
         <path d="M0,250 Q600,100 1200,250 T2400,250 L3000,250 L3000,600 L0,600 Z" fill="#e066ff" opacity="0.4"/>
@@ -309,13 +340,13 @@ background: linear-gradient(45deg,#830CDE, #c846d3);
     </header>
 
     <section class="links">
-      <a class="link" href="https://mkb0020.github.io/">Website</a>
+      <a class="link" href="https://mkb0020.github.io/">WEBSITE</a>
       <a class="link" href="https://mkb0020.github.io/Wormholes.html">WORMHOLES ALL THE WAY DOWN</a>
-      <a class="link" href="https://mkb0020.github.io/trailer.html">CATastrophe2 Trailer</a>
-      <a class="link" href="https://mkb0020.itch.io/prism-crawl">Play Prism Crawl</a>
-      <a class="link" href="https://mkb0020.itch.io/vibe-garden">Vibe Garden</a>
+      <a class="link" href="https://mkb0020.vercel.app/ai-dopamine">AI DOPAMINE</a>
+      <a class="link" href="https://mkb0020.itch.io/prism-crawl">PLAY PRISM CRAWL</a>
+      <a class="link" href="https://mkb0020.itch.io/vibe-garden">VIBE GARDEN</a>
       <a class="link" href="https://mkb0020.itch.io/moonwalkerranch">Play MOOnwalker Ranch</a>
-      <a class="link" href="https://soundcloud.com/mkb0020">Music</a>
+      <a class="link" href="https://soundcloud.com/mkb0020">MUSIC</a>
     </section>
 
     <footer class="socials">
