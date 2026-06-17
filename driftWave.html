@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+     <link rel="stylesheet" href="assets/css/driftStyles.css">
+    <title>∞ DRIFT WAVE</title>
+
+</head>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="left-dropdown">
+        <button class="menu-trigger" aria-label="Menu">
+          <img src="assets/images/Niels2.png" alt="Menu" class="home-icon">
+        </button>
+        <div class="left-menu">
+          <a href="https://mkb0020.vercel.app/" class="menu-item">Home</a>
+          <a href="https://mkb0020.github.io/" class="menu-item">Projects</a>
+          <a href="https://mkb0020.github.io/resume.html" class="menu-item">Resume</a>
+          <a href="https://mkb0020.vercel.app/comments" class="menu-item">Guestbook</a>
+          <div class="social-links">
+            <a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
+              <img src="assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
+            </a>
+            <a href="https://www.linkedin.com/in/mkb0020/" target="_blank" aria-label="LinkedIn">
+              <img src="assets/images/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="https://soundcloud.com/mkb0020" target="_blank" aria-label="Soundcloud">
+              <img src="assets/images/music-icon.png" alt="Soundcloud" class="social-icon">
+            </a>
+            <a href="https://github.com/mkb0020" target="_blank" aria-label="GitHub">
+              <img src="assets/images/github-icon.png" alt="GitHub" class="social-icon">
+            </a>
+            <a href="https://mkb0020.itch.io" target="_blank" aria-label="Itch.io">
+              <img src="assets/images/itchio-icon.png" alt="Itch.io" class="social-icon">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://mkb0020.github.io">
+        <div class="logo">♡ mkb0020</div>
+      </a>
+
+      <div class="help-dropdown">
+        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
+          <div class="question-mark">?</div>
+        </button>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <button id="openMainHelp">About</button>
+         <a href="https://mkb0020.vercel.app/support" class="menu-item">Report an Issue</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+<body>
+    <div class="player">
+        <div class="title-row">
+            <h2>∞ DRIFT WAVE</h2>
+        </div>
+        <div class="viz" id="viz"></div>
+        <div class="controls">
+            <button class="play-btn holo-btn" id="playBtn" aria-label="Play">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <span class="time-label" id="timeLabel">0:00</span>
+        </div>
+        <div class="tracks">
+            <div class="track"><div class="track-name">BASS</div><div class="track-dot" id="dot0"></div></div>
+            <div class="track"><div class="track-name">ARP</div><div class="track-dot" id="dot1"></div></div>
+            <div class="track"><div class="track-name">PADS</div><div class="track-dot" id="dot2"></div></div>
+            <div class="track"><div class="track-name">HATS</div><div class="track-dot" id="dot3"></div></div>
+            <div class="track"><div class="track-name">LEAD</div><div class="track-dot" id="dot4"></div></div>
+        </div>
+        <div class="knobs">
+            <div class="knob-wrap">
+                <div class="knob-label">REVERB</div>
+                <input type="range" min="0" max="100" value="72" id="reverbSlider">
+                <div class="knob-val" id="reverbVal">72%</div>
+            </div>
+            <div class="knob-wrap">
+                <div class="knob-label">DELAY</div>
+                <input type="range" min="0" max="100" value="45" id="delaySlider">
+                <div class="knob-val" id="delayVal">45%</div>
+            </div>
+            <div class="knob-wrap">
+                <div class="knob-label">WARMTH</div>
+                <input type="range" min="0" max="100" value="60" id="warmthSlider">
+                <div class="knob-val" id="warmthVal">60%</div>
+            </div>
+        </div>
+    </div>
+
+
+
+  <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Drift Wave</h1>
+        <button class="modal-close" id="closeModal">X</button>
+      </div>
+      <div class="modal-body">
+        <div class="holo-card">
+        <h3>Prodedural audio brought to you by Claude</h3>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/KittyCore.js"></script>
+
+
+    <script>
+        (function() {
+            // ─────────────────────────────────────
+            // DOM REFERENCES
+            // ─────────────────────────────────────
+            const BARS = 50;
+            const vizEl = document.getElementById('viz');
+            for (let i = 0; i < BARS; i++) {
+                const b = document.createElement('div');
+                b.className = 'bar';
+                b.style.height = '4px';
+                vizEl.appendChild(b);
+            }
+            const bars = [...vizEl.querySelectorAll('.bar')];
+            const playBtn = document.getElementById('playBtn');
+            const timeLabel = document.getElementById('timeLabel');
+            const dots = [0, 1, 2, 3, 4].map(i => document.getElementById('dot' + i));
+            const reverbSlider = document.getElementById('reverbSlider');
+            const delaySlider = document.getElementById('delaySlider');
+            const warmthSlider = document.getElementById('warmthSlider');
+            const reverbValEl = document.getElementById('reverbVal');
+            const delayValEl = document.getElementById('delayVal');
+            const warmthValEl = document.getElementById('warmthVal');
+
+            // ─────────────────────────────────────
+            // AUDIO STATE
+            // ─────────────────────────────────────
+            let ctx = null;
+            let playing = false;
+            let startTime = 0;
+            let animId = null;
+            let schedulerTimer = null;
+            let nextScheduleTime = 0;
+            let currentBar = 0;
+            let scheduledOscNodes = [];
+
+            // Persistent audio nodes
+            let masterGain, warmthNode, reverbNode, reverbGainNode;
+            let dryGain, delayNode, delayGainNode, delayFeedback;
+
+            // Current slider values
+            let rVal = 0.72;
+            let dVal = 0.45;
+            let wVal = 0.60;
+
+            // Current phrase melody cache
+            let currentPhraseMelody = null;
+            let currentPhraseIndex = -1;
+
+            // ─────────────────────────────────────
+            // CONSTANTS
+            // ─────────────────────────────────────
+            const BPM = 88;
+            const BEAT_DUR = 60 / BPM;
+            const BAR_DUR = 4 * BEAT_DUR;
+            const PHRASE_BARS = 4;
+            const PHRASE_DUR = PHRASE_BARS * BAR_DUR;
+            const SCHEDULE_AHEAD = 12; // seconds
+            const MAX_BARS_PER_TICK = 20;
+
+            const C_MINOR_SCALE = [48, 50, 51, 53, 55, 56, 58];
+            const MELODY_SCALE = [...C_MINOR_SCALE, ...C_MINOR_SCALE.map(n => n + 12), 72];
+
+            const PROGRESSIONS = [
+                [ { root: 36, type: 'm7' }, { root: 46, type: 'maj7' }, { root: 44, type: 'maj7' }, { root: 43, type: 'm7' } ],
+                [ { root: 36, type: 'm7' }, { root: 44, type: 'maj7' }, { root: 46, type: 'maj7' }, { root: 41, type: 'm7' } ],
+                [ { root: 39, type: 'maj7' }, { root: 46, type: 'maj7' }, { root: 36, type: 'm7' }, { root: 44, type: 'maj7' } ],
+                [ { root: 36, type: 'm7' }, { root: 39, type: 'maj7' }, { root: 41, type: 'm7' }, { root: 43, type: 'm7' } ],
+            ];
+
+            const CHORD_INTERVALS = {
+                'm7': [0, 3, 7, 10],
+                'maj7': [0, 4, 7, 11],
+            };
+
+            // ─────────────────────────────────────
+            // HELPERS
+            // ─────────────────────────────────────
+            function midiToFreq(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+
+            function getChordTones(rootMidi, type) {
+                const intervals = CHORD_INTERVALS[type] || CHORD_INTERVALS['m7'];
+                return intervals.map(i => rootMidi + i);
+            }
+
+            function getScaleIndex(midiNote, scale) {
+                const noteInRange = ((midiNote % 12) + 12) % 12;
+                let best = 0;
+                let bestDist = 999;
+                for (let i = 0; i < scale.length; i++) {
+                    const sn = ((scale[i] % 12) + 12) % 12;
+                    const dist = Math.min(Math.abs(noteInRange - sn), 12 - Math.abs(noteInRange - sn));
+                    if (dist < bestDist) { bestDist = dist; best = i; }
+                }
+                return best;
+            }
+
+            // ─────────────────────────────────────
+            // PERSISTENT AUDIO CHAIN
+            // ─────────────────────────────────────
+            function makeReverb(ac, secs, decay) {
+                const len = Math.floor(ac.sampleRate * secs);
+                const buf = ac.createBuffer(2, len, ac.sampleRate);
+                for (let c = 0; c < 2; c++) {
+                    const d = buf.getChannelData(c);
+                    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
+                }
+                const conv = ac.createConvolver();
+                conv.buffer = buf;
+                return conv;
+            }
+
+            function buildPersistentChain(ac) {
+                masterGain = ac.createGain();
+                masterGain.gain.value = 0.78;
+                masterGain.connect(ac.destination);
+
+                warmthNode = ac.createBiquadFilter();
+                warmthNode.type = 'lowpass';
+                warmthNode.frequency.value = 400 + wVal * 2400;
+                warmthNode.Q.value = 0.6;
+
+                reverbNode = makeReverb(ac, 5.5, 2.5);
+                reverbGainNode = ac.createGain();
+                reverbGainNode.gain.value = rVal * 1.4;
+
+                dryGain = ac.createGain();
+                dryGain.gain.value = 0.5;
+
+                delayNode = ac.createDelay(2.0);
+                delayNode.delayTime.value = BEAT_DUR * 0.75;
+                delayGainNode = ac.createGain();
+                delayGainNode.gain.value = dVal * 0.55;
+                delayFeedback = ac.createGain();
+                delayFeedback.gain.value = 0.4;
+
+                warmthNode.connect(dryGain);
+                dryGain.connect(masterGain);
+
+                warmthNode.connect(reverbNode);
+                reverbNode.connect(reverbGainNode);
+                reverbGainNode.connect(masterGain);
+
+                warmthNode.connect(delayNode);
+                delayNode.connect(delayFeedback);
+                delayFeedback.connect(delayNode);
+                delayNode.connect(delayGainNode);
+                delayGainNode.connect(reverbNode);
+            }
+
+            function updatePersistentParams() {
+                if (reverbGainNode) reverbGainNode.gain.setTargetAtTime(rVal * 1.4, ctx.currentTime, 0.05);
+                if (delayGainNode) delayGainNode.gain.setTargetAtTime(dVal * 0.55, ctx.currentTime, 0.05);
+                if (warmthNode) warmthNode.frequency.setTargetAtTime(400 + wVal * 2400, ctx.currentTime, 0.05);
+            }
+
+            // ─────────────────────────────────────
+            // NOTE SCHEDULING HELPERS
+            // ─────────────────────────────────────
+            function scheduleOsc(type, freq, start, dur, vol, det = 0) {
+                const o = ctx.createOscillator();
+                const g = ctx.createGain();
+                o.type = type;
+                o.frequency.value = freq;
+                o.detune.value = det;
+                g.gain.setValueAtTime(0, start);
+                g.gain.linearRampToValueAtTime(vol, start + 0.06);
+                g.gain.setValueAtTime(vol, start + dur * 0.65);
+                g.gain.exponentialRampToValueAtTime(0.0001, start + dur + 0.05);
+                o.connect(g);
+                g.connect(warmthNode);
+                o.start(start);
+                o.stop(start + dur + 0.1);
+                scheduledOscNodes.push({ osc: o, gain: g, stopTime: start + dur + 0.1 });
+            }
+
+            function scheduleKick(start) {
+                const o = ctx.createOscillator();
+                const g = ctx.createGain();
+                o.type = 'sine';
+                o.frequency.setValueAtTime(85, start);
+                o.frequency.exponentialRampToValueAtTime(26, start + 0.28);
+                g.gain.setValueAtTime(0.65, start);
+                g.gain.exponentialRampToValueAtTime(0.001, start + 0.38);
+                o.connect(g);
+                g.connect(warmthNode);
+                o.start(start);
+                o.stop(start + 0.45);
+                scheduledOscNodes.push({ osc: o, gain: g, stopTime: start + 0.45 });
+            }
+
+            function scheduleHat(start, vol) {
+                const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.09), ctx.sampleRate);
+                const d = buf.getChannelData(0);
+                for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 1.8);
+                const s = ctx.createBufferSource();
+                const hpf = ctx.createBiquadFilter();
+                const g = ctx.createGain();
+                hpf.type = 'highpass';
+                hpf.frequency.value = 7000;
+                g.gain.setValueAtTime(vol, start);
+                g.gain.exponentialRampToValueAtTime(0.001, start + 0.09);
+                s.buffer = buf;
+                s.connect(hpf);
+                hpf.connect(g);
+                g.connect(warmthNode);
+                s.start(start);
+                scheduledOscNodes.push({ osc: s, gain: g, stopTime: start + 0.1, extra: hpf });
+            }
+
+            // ─────────────────────────────────────
+            // MELODY GENERATION
+            // ─────────────────────────────────────
+            function generateMelodyForPhrase(scale, chordTonesThisPhrase, numBeats, startScaleIdx) {
+                const notes = [];
+                let beat = 0;
+                let currentIdx = startScaleIdx;
+                const allChordTones = chordTonesThisPhrase.flat();
+                const preferredIndices = allChordTones.map(ct => getScaleIndex(ct, scale));
+
+                while (beat < numBeats) {
+                    const durOptions = [0.5, 0.75, 1, 1.5, 2, 2.5];
+                    let dur = durOptions[Math.floor(Math.random() * durOptions.length)];
+                    dur = Math.min(dur, numBeats - beat);
+                    if (dur < 0.25) break;
+
+                    if (Math.random() < 0.14 && beat > 0 && notes.length > 0) {
+                        beat += dur;
+                        continue;
+                    }
+
+                    const moveOptions = [0, 0, 0, 1, -1, 1, -1, 2, -2, 1, -1, 3, -3];
+                    if (Math.random() < 0.25 && preferredIndices.length > 0) {
+                        const target = preferredIndices[Math.floor(Math.random() * preferredIndices.length)];
+                        moveOptions.push(target - currentIdx, target - currentIdx);
+                    }
+                    const move = moveOptions[Math.floor(Math.random() * moveOptions.length)];
+                    currentIdx = Math.max(0, Math.min(scale.length - 1, currentIdx + move));
+
+                    notes.push({ midi: scale[currentIdx], startBeat: beat, durationBeats: dur * 0.88 });
+                    beat += dur;
+                }
+                return notes;
+            }
+
+            // ─────────────────────────────────────
+            // BAR SCHEDULING
+            // ─────────────────────────────────────
+            function scheduleBar(barTime, barNum) {
+                const phraseNum = Math.floor(barNum / PHRASE_BARS);
+                const barInPhrase = barNum % PHRASE_BARS;
+                const progIdx = phraseNum % PROGRESSIONS.length;
+                const progression = PROGRESSIONS[progIdx];
+                const chordDef = progression[barInPhrase];
+                const chordTones = getChordTones(chordDef.root, chordDef.type);
+
+                // ── BASS ─────────────────────────
+                const bassRoot = chordDef.root;
+                const bassFifth = chordTones[2];
+                const bassSeventh = chordTones[3];
+                const bassPattern = [
+                    { note: bassRoot, dur: 1.5 }, { note: bassRoot, dur: 0.5 },
+                    { note: bassFifth, dur: 0.75 }, { note: bassSeventh, dur: 1.25 },
+                ];
+                let bassBeat = 0;
+                for (const bn of bassPattern) {
+                    const t = barTime + bassBeat * BEAT_DUR;
+                    const d = bn.dur * BEAT_DUR * 0.95;
+                    scheduleOsc('sine', midiToFreq(bn.note), t, d, 0.52);
+                    scheduleOsc('triangle', midiToFreq(bn.note), t, d, 0.16, 3);
+                    bassBeat += bn.dur;
+                }
+
+                // ── ARP ──────────────────────────
+                const arpOrders = [
+                    [0, 1, 2, 3, 2, 1, 0, 1], [0, 2, 3, 1, 0, 2, 3, 1],
+                    [0, 3, 1, 2, 3, 1, 0, 2], [3, 2, 1, 0, 1, 2, 3, 1],
+                ];
+                const arpOrder = arpOrders[barNum % arpOrders.length];
+                const arpTones = [chordTones[0], chordTones[1] + 12, chordTones[2] + 12, chordTones[3] + 12];
+                for (let i = 0; i < 8; i++) {
+                    const t = barTime + i * BEAT_DUR * 0.5;
+                    const tone = arpTones[arpOrder[i]];
+                    scheduleOsc('triangle', midiToFreq(tone), t, BEAT_DUR * 0.5 * 0.85, 0.17);
+                    scheduleOsc('sine', midiToFreq(tone) * 2, t, BEAT_DUR * 0.5 * 0.5, 0.06);
+                }
+
+                // ── PADS ─────────────────────────
+                for (const ct of chordTones) {
+                    const padNote = ct + 12;
+                    scheduleOsc('sine', midiToFreq(padNote), barTime, BAR_DUR * 0.98, 0.15);
+                    scheduleOsc('triangle', midiToFreq(padNote), barTime, BAR_DUR * 0.98, 0.07, 4);
+                }
+
+                // ── HATS ─────────────────────────
+                for (let i = 0; i < 8; i++) {
+                    const t = barTime + i * BEAT_DUR * 0.5;
+                    const vol = i % 2 === 0 ? 0.07 : 0.04;
+                    scheduleHat(t, vol);
+                }
+
+                // ── KICKS ────────────────────────
+                scheduleKick(barTime);
+                scheduleKick(barTime + 2 * BEAT_DUR);
+
+                // ── LEAD MELODY ─────────────────
+                if (barInPhrase === 0 && currentPhraseIndex !== phraseNum) {
+                    currentPhraseIndex = phraseNum;
+                    const phraseChordTones = progression.map(cd => getChordTones(cd.root, cd.type));
+                    const startIdx = Math.floor(Math.random() * MELODY_SCALE.length);
+                    currentPhraseMelody = generateMelodyForPhrase(MELODY_SCALE, phraseChordTones, PHRASE_BARS * 4, startIdx);
+                }
+                if (currentPhraseMelody) {
+                    const phraseStartBeat = barInPhrase * 4;
+                    const phraseEndBeat = phraseStartBeat + 4;
+                    for (const mn of currentPhraseMelody) {
+                        if (mn.startBeat >= phraseStartBeat && mn.startBeat < phraseEndBeat) {
+                            const localBeat = mn.startBeat - phraseStartBeat;
+                            const t = barTime + localBeat * BEAT_DUR;
+                            const d = mn.durationBeats * BEAT_DUR * 0.92;
+                            scheduleOsc('sine', midiToFreq(mn.midi), t, d, 0.3);
+                            scheduleOsc('triangle', midiToFreq(mn.midi), t, d, 0.11, 6);
+                        }
+                    }
+                }
+            }
+
+            // ─────────────────────────────────────
+            // SCHEDULER
+            // ─────────────────────────────────────
+            function schedulerLoop() {
+                if (!playing) return;
+                let barsScheduled = 0;
+                while (nextScheduleTime < ctx.currentTime + SCHEDULE_AHEAD && barsScheduled < MAX_BARS_PER_TICK) {
+                    scheduleBar(nextScheduleTime, currentBar);
+                    nextScheduleTime += BAR_DUR;
+                    currentBar++;
+                    barsScheduled++;
+                }
+                if (scheduledOscNodes.length > 600) {
+                    const now = ctx.currentTime;
+                    scheduledOscNodes = scheduledOscNodes.filter(n => n.stopTime > now - 0.5);
+                }
+            }
+
+            function startScheduler() {
+                if (schedulerTimer) clearInterval(schedulerTimer);
+                schedulerLoop();
+                schedulerTimer = setInterval(schedulerLoop, 100);
+            }
+
+            function stopScheduler() {
+                if (schedulerTimer) { clearInterval(schedulerTimer); schedulerTimer = null; }
+            }
+
+            // ─────────────────────────────────────
+            // CLEANUP
+            // ─────────────────────────────────────
+            function stopAllScheduledNodes() {
+                for (const n of scheduledOscNodes) {
+                    try { n.osc.stop(); } catch (e) {}
+                    try { n.gain.disconnect(); } catch (e) {}
+                    if (n.extra) try { n.extra.disconnect(); } catch (e) {}
+                }
+                scheduledOscNodes = [];
+            }
+
+            function disconnectPersistentChain() {
+                const nodes = [masterGain, warmthNode, reverbNode, reverbGainNode, dryGain, delayNode, delayGainNode, delayFeedback];
+                for (const n of nodes) { if (n) try { n.disconnect(); } catch (e) {} }
+            }
+
+            // ─────────────────────────────────────
+            // VISUALIZATION
+            // ─────────────────────────────────────
+            function vizFrame() {
+                if (!playing) return;
+                const elapsed = ctx.currentTime - startTime;
+                const beatPos = (elapsed % BAR_DUR) / BAR_DUR;
+
+                const sec = Math.floor(elapsed);
+                timeLabel.textContent = Math.floor(sec / 60) + ':' + (sec % 60 < 10 ? '0' : '') + sec % 60;
+
+                // Cyan to Pink/Purple gradient logic
+                bars.forEach((b, i) => {
+                    const ph = i / BARS;
+                    const s = 0.5 + 0.5 * Math.sin(elapsed * 3.2 + ph * Math.PI * 2);
+                    const dr = 0.5 + 0.5 * Math.sin(elapsed * 1.6 + ph * Math.PI * 4 + 1.5);
+                    const v = s * 0.55 + dr * 0.45;
+                    b.style.height = Math.max(4, v * 60) + 'px';
+                    
+                    const r = Math.floor(0 + v * 165); 
+                    const g = Math.floor(255 - v * 165); 
+                    b.style.background = `rgb(${r},${g},255)`; 
+                });
+
+                const bp = beatPos;
+                dots[0].classList.toggle('active', bp < 0.2 || (bp > 0.48 && bp < 0.62));
+                dots[1].classList.toggle('active', bp > 0.2 && bp < 0.55);
+                dots[2].classList.toggle('active', true);
+                dots[3].classList.toggle('active', bp < 0.12 || (bp > 0.48 && bp < 0.58));
+                dots[4].classList.toggle('active', bp > 0.35 && bp < 0.85);
+
+                animId = requestAnimationFrame(vizFrame);
+            }
+
+            // ─────────────────────────────────────
+            // PLAY / PAUSE
+            // ─────────────────────────────────────
+            function stopPlayback() {
+                playing = false;
+                stopScheduler();
+                stopAllScheduledNodes();
+                if (animId) { cancelAnimationFrame(animId); animId = null; }
+                currentPhraseMelody = null;
+                currentPhraseIndex = -1;
+                
+                playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+                timeLabel.textContent = '0:00';
+                bars.forEach(b => { b.style.height = '4px'; b.style.background = '#830cde'; });
+                dots.forEach(d => d.classList.remove('active'));
+            }
+
+            function startPlayback() {
+                if (!ctx) {
+                    ctx = new(window.AudioContext || window.webkitAudioContext)();
+                    buildPersistentChain(ctx);
+                }
+                if (ctx.state === 'suspended') ctx.resume();
+
+                stopAllScheduledNodes();
+                scheduledOscNodes = [];
+                currentPhraseMelody = null;
+                currentPhraseIndex = -1;
+                updatePersistentParams();
+
+                startTime = ctx.currentTime;
+                nextScheduleTime = startTime + 0.15;
+                currentBar = 0;
+                playing = true;
+
+                playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+
+                startScheduler();
+                animId = requestAnimationFrame(vizFrame);
+            }
+
+            playBtn.onclick = function() {
+                if (playing) stopPlayback();
+                else startPlayback();
+            };
+
+            // ─────────────────────────────────────
+            // SLIDER HANDLERS
+            // ─────────────────────────────────────
+            reverbSlider.oninput = function() {
+                rVal = this.value / 100;
+                reverbValEl.textContent = this.value + '%';
+                if (reverbGainNode && ctx) reverbGainNode.gain.setTargetAtTime(rVal * 1.4, ctx.currentTime, 0.05);
+            };
+            delaySlider.oninput = function() {
+                dVal = this.value / 100;
+                delayValEl.textContent = this.value + '%';
+                if (delayGainNode && ctx) delayGainNode.gain.setTargetAtTime(dVal * 0.55, ctx.currentTime, 0.05);
+            };
+            warmthSlider.oninput = function() {
+                wVal = this.value / 100;
+                warmthValEl.textContent = this.value + '%';
+                if (warmthNode && ctx) warmthNode.frequency.setTargetAtTime(400 + wVal * 2400, ctx.currentTime, 0.05);
+            };
+
+            // ─────────────────────────────────────
+            // INITIAL UI SETUP
+            // ─────────────────────────────────────
+            reverbValEl.textContent = '72%';
+            delayValEl.textContent = '45%';
+            warmthValEl.textContent = '60%';
+            timeLabel.textContent = '0:00';
+            dots.forEach(d => d.classList.remove('active'));
+
+            console.log('🌊 DRIFT WAVE — Infinite Chillwave Generator ready');
+        })();
+    </script>
+</body>
+</html>
