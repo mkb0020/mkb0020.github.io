@@ -16,29 +16,19 @@
 body, html {
     min-height: 100vh; 
     height: 100%; 
-    background: #170032; /* Deep dark base */
+    background: #170032;
     background: radial-gradient(circle at 50% 0%, #37025a 0%, #170032 70%);
     background-repeat: no-repeat; 
     background-attachment: fixed;
     font-family: 'GothNerd', 'Inter', sans-serif;
     color: #c4b5fd;
-    overflow: hidden; /* Hides the default page scrollbar entirely */
+    overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items: center; /* Centers the short container vertically */
+    align-items: center;
 }
 
-@font-face {
-  font-family: 'GothNerd'; 
-  src: url('assets/fonts/ScienceGothic.ttf') format('truetype'); 
-}
-
-@font-face {
-  font-family: 'SpaceLetters'; 
-  src: url('assets/fonts/Orbitron-Bold.ttf') format('truetype'); 
-}
-
-/* Custom Scrollbar applied to the Container */
+/* Custom Scrollbar on the Container */
 .container::-webkit-scrollbar {
   width: 13px;
   height: 14px;
@@ -74,7 +64,6 @@ body, html {
     neonFlow 8s ease-in-out infinite alternate; 
 }
 
-/* Keyframes for the scrollbar animations */
 @keyframes hueCycle {
     0% { filter: hue-rotate(0deg); }
     100% { filter: hue-rotate(360deg); }
@@ -85,7 +74,17 @@ body, html {
     100% { background-position: 100% 50%; }
 }
 
-/* Cyber Effects (Scanlines & Grid) */
+@font-face {
+  font-family: 'GothNerd'; 
+  src: url('assets/fonts/ScienceGothic.ttf') format('truetype'); 
+}
+
+@font-face {
+  font-family: 'SpaceLetters'; 
+  src: url('assets/fonts/Orbitron-Bold.ttf') format('truetype'); 
+}
+
+/* Cyber Effects */
 .scanlines {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
@@ -129,7 +128,6 @@ body, html {
     50%     { opacity: 1; transform: scale(1.2); }
 }
 
-/* New bounding box that matches your main container */
 #star-bounds {
     position: fixed;
     top: 0;
@@ -143,7 +141,6 @@ body, html {
     z-index: 1;
 }
 
-/* Upgraded Shooting Star Math */
 .shooting-star {
   position: absolute;
   top: 10%;
@@ -158,20 +155,10 @@ body, html {
 }
 
 @keyframes shoot {
-  0% {
-    transform: rotate(75deg) translateX(-150px);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.8;
-  }
-  90% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: rotate(75deg) translateX(150vh); 
-    opacity: 0;
-  }
+  0% { transform: rotate(75deg) translateX(-150px); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: rotate(75deg) translateX(150vh); opacity: 0; }
 }
 
 /* Character Background Layer */
@@ -181,11 +168,11 @@ body, html {
     bottom: 10px;
     right: 0;
     height: calc(100vh - 70px);
-    z-index: 2; /* Puts her above background elements but cleanly behind the link UI panel */
-    pointer-events: none; /* Keeps her from intercepting taps or clicks on mobile */
+    z-index: 2;
+    pointer-events: none;
     display: flex;
     justify-content: flex-end;
-    opacity: 0.8; /* Keeps her highly visible while blending into the sci-fi environment */
+    opacity: 0.8;
 }
 
 .bg-character img {
@@ -229,19 +216,17 @@ body, html {
 }
 .logo a { text-decoration: none; color: inherit; }
 
-/* Main Container - Updated for dynamic centering */
+/* Main Container */
 .container {
   width: 100%;
   max-width: 420px;
-  max-height: 100vh; /* Replaced height with max-height so short screens center vertically */
-  overflow-y: auto; /* Enable scrolling purely within the container when necessary */
-  padding: 30px 16px 40px; /* Top padding to clear navbar */
+  height: calc(100vh - 50px); /* full viewport minus navbar */
+  overflow-y: auto;
+  padding: 30px 16px 40px;
   display: flex;
   flex-direction: column;
-  z-index: 10; /* Sits completely on top of Nova so links are fully readable/clickable */
-  margin: auto 0; /* Balances the box vertically when it doesn't span 100vh */
+  z-index: 10;
   margin-top: 50px;
-  margin-bottom: 20px;
 }
 
 /* Profile Header */
@@ -256,7 +241,6 @@ body, html {
   padding: 20px 0; 
 }
 
-/* Unclipped Avatar CSS */
 .avatar {
   width: 35px;
   height: auto;
@@ -278,7 +262,7 @@ body, html {
 .link {
     text-decoration: none;
     position: relative;
-    background: rgba(54, 0, 115, 0.386); /* Semi-transparent so Nova subtly peeks through them */
+    background: rgba(54, 0, 115, 0.386);
     border: 1px solid #764ba2;
     border-left: 4px solid #A55AFF; 
     padding: 1rem 1.2rem;
@@ -323,12 +307,11 @@ body, html {
 /* Icon Grids */
 .icon-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Fits 4 in a row perfectly */
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
   margin-top: 20px;
 }
 
-/* Matching Cyberpunk Tile Aesthetics */
 .icon-tile {
     background: rgba(54, 0, 115, 0.386);
     border: 1px solid #764ba2;
@@ -365,7 +348,6 @@ body, html {
 .icon-tile:hover img, .icon-tile:focus img {
     transform: scale(1.1);
 }
-
 </style>
 </head>
 <body>
@@ -431,12 +413,10 @@ body, html {
       </a>
     </section>
 
-    <footer class="socials">
-    </footer>
+    <footer class="socials"></footer>
   </main>
 
   <script>
-    // Starfield Generator
     const starsDiv = document.getElementById('stars');
     const colors = ['#00ffff', '#A55AFF', '#FFC7FF']; 
     for (let i = 0; i < 150; i++) {
@@ -450,18 +430,16 @@ body, html {
         starsDiv.appendChild(star);
     }
 
-    // Shooting Stars constrained to bounds
     const starBounds = document.getElementById('star-bounds');
     setInterval(() => {
       if (Math.random() < 0.4) {
         const star = document.createElement('div');
         star.className = 'shooting-star';
-        starBounds.appendChild(star); // Appends to the clipped box
+        starBounds.appendChild(star);
         setTimeout(() => star.remove(), 1000);
       }
     }, 6000);
 
-    // Mobile Click Feedback for Main Links AND Grid Tiles
     document.querySelectorAll('.link, .icon-tile').forEach(link => {
       link.addEventListener('click', () => {
         link.classList.add('clicked');
