@@ -10,17 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
+/* Reset & Base */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body, html {
-    margin: 0;
-    padding: 0;
     min-height: 100vh; 
     height: 100%; 
-    background: linear-gradient(to bottom, #17002a, #180030, #1e0033);
+    background: #170032; /* Deep dark base */
+    background: radial-gradient(circle at 50% 0%, #37025a 0%, #170032 70%);
     background-repeat: no-repeat; 
     background-attachment: fixed;
+    font-family: 'GothNerd', 'Inter', sans-serif;
+    color: #c4b5fd;
+    overflow: hidden; /* Hides the default page scrollbar entirely */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers the short container vertically */
 }
 
 @font-face {
@@ -33,375 +38,435 @@ body, html {
   src: url('assets/fonts/Orbitron-Bold.ttf') format('truetype'); 
 }
 
+/* Custom Scrollbar applied to the Container */
+.container::-webkit-scrollbar {
+  width: 13px;
+  height: 14px;
+}
 
+.container::-webkit-scrollbar-track {
+  background: #0a0015;
+  border: 1px solid #830cdea2;
+  border-radius: 8px; 
+  box-shadow: inset 0 0 12px #000000cc;
+}
 
+.container::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    145deg,
+    #ff69b4 0%,
+    #c71585 5%,
+    #dc4ce8 10%,
+    #830cde 15%,
+    #00ffff 20%,
+    #67FEBD 25%
+  );
+  border-radius: 8px;          
+  border: 2px solid #000000;
+  box-shadow:
+    0 0 10px #000000,
+    0 0 20px #000000,
+    inset 0 0 6px #ffffff33;
+  background-size: 300% 300%;    
+  filter: hue-rotate(0deg);
+  animation: 
+    hueCycle 18s linear infinite,    
+    neonFlow 8s ease-in-out infinite alternate; 
+}
+
+/* Keyframes for the scrollbar animations */
+@keyframes hueCycle {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes neonFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Cyber Effects (Scanlines & Grid) */
+.scanlines {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15));
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.cyber-grid {
+    position: fixed;
+    bottom: 0; left: 0; width: 100%; height: 50vh;
+    background-image: 
+        linear-gradient(transparent 65%, rgba(165, 90, 255, 0.4) 66%, rgba(165, 90, 255, 0.6) 100%),
+        linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.15) 25%, transparent 26%, transparent 74%, rgba(0, 255, 255, 0.15) 75%, transparent 76%);
+    background-size: 100% 30px, 40px 100%;
+    transform: perspective(400px) rotateX(60deg);
+    transform-origin: bottom;
+    z-index: -2;
+    opacity: 0.6;
+}
+
+/* Starfield */
 #stars {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: -1;
-        }
-.star {
-            position: absolute;
-            background: #FFC7FF;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #fff;
-            animation: twinkle 4s infinite;
-        }
-@keyframes twinkle {
-            0%,100% { opacity: 0.4; transform: scale(1); }
-            50%     { opacity: 1; transform: scale(1.4); }
-        }
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: -1;
+}
 
+.star {
+    position: absolute;
+    background: #FFC7FF;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #A55AFF;
+    animation: twinkle 4s infinite;
+}
+
+@keyframes twinkle {
+    0%,100% { opacity: 0.2; transform: scale(0.8); }
+    50%     { opacity: 1; transform: scale(1.2); }
+}
+
+/* New bounding box that matches your main container */
+#star-bounds {
+    position: fixed;
+    top: 0;
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Upgraded Shooting Star Math */
 .shooting-star {
-  position: fixed;
-  top: -10px;
-  left: -30%;
-  width: 150px;
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 120px;
   height: 2px;
-  background: linear-gradient(90deg, #fff, transparent);
-  opacity: 0.8;
-  transform: rotate(30deg);
-  pointer-events: none;
-  z-index: -1;
-  animation: shoot 1.2s ease-out forwards;
+  background: linear-gradient(90deg, #00ffff, transparent);
+  box-shadow: 0 0 10px #00ffff;
+  opacity: 0;
+  transform: rotate(75deg) translateX(-150px); 
+  animation: shoot 1s ease-out forwards;
 }
 
 @keyframes shoot {
-  to {
-    transform: translate(160vw, 90vh) rotate(30deg);
+  0% {
+    transform: rotate(75deg) translateX(-150px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(75deg) translateX(150vh); 
     opacity: 0;
   }
 }
 
+/* Character Background Layer */
+.bg-character {
+    position: fixed;
+    top: 80px;
+    bottom: 10px;
+    right: 0;
+    height: calc(100vh - 70px);
+    z-index: 2; /* Puts her above background elements but cleanly behind the link UI panel */
+    pointer-events: none; /* Keeps her from intercepting taps or clicks on mobile */
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0.8; /* Keeps her highly visible while blending into the sci-fi environment */
+}
 
+.bg-character img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
   width: 100vw;
-  background: linear-gradient(135deg, #0e001d4d 0%, rgba(24, 1, 40, 0.116) 50%, #0e001d4d 100%);
-  backdrop-filter: blur(50px);
-  border-bottom: 1px solid rgba(0, 255, 255, 0.11);
+  background: rgba(23, 0, 50, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #830cde;
+  box-shadow: 0 4px 20px rgba(131, 12, 222, 0.3);
   z-index: 1000;
-  padding: 0.5rem 0;
 }
-
 
 .nav-container {
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-top: 0.5rem;
-  padding-bottom:  1rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  height: 30px;
-  max-height:30px;
+  justify-content: center;
+  height: 50px;
 }
 
 .logo {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.7rem;
-  color:#67FEBD;
-  font-family: 'SpaceLetters';
-  z-index: 10000;
-  flex-shrink: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-
+  font-size: 1.4rem;
+  color: #00ffff;
+  font-family: 'SpaceLetters', sans-serif;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(103, 254, 189, 0.6);
+  letter-spacing: 2px;
+  text-decoration: none;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
+.logo a { text-decoration: none; color: inherit; }
 
-
-
-body {
-      margin: 0;
-      min-height: 100vh;
-      background: transparent;
-      font-family: 'GothNerd', sans-serif;
-      color: white;
-      position: relative;
-      overflow-x: hidden;
-      
-  display: flex;
-  justify-content: center;
-    }
-
-    .background-gradient {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(to bottom,  
-  #1b0133 0%,
-  #2c0651 12%,
-  #33045f 28%,
-  #33045f 45%,
-  #c71585 70%,
-  #c71585 100%);
-      opacity: 0.85;
-      z-index: -3;
-    }
-
-    .waves {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      pointer-events: none;
-      z-index: -2;
-    }
-
-    svg {
-      position: absolute;
-      bottom: 0;
-      width: 300%;
-      height: 90vh;
-      animation: wave-scroll linear infinite;
-    }
-
-    #wave1 { animation-duration: 60s; }
-    #wave2 { animation-duration: 50s; }
-    #wave3 { animation-duration: 40s; }
-    #wave4 { animation-duration: 70s; animation-direction: reverse; }
-    #wave5 { animation-duration: 30s; }
-    #wave6 { animation-duration: 45s; animation-direction: reverse; }
-
-    @keyframes wave-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-66.66%); }
-    }
-
-    .dreamy-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(58, 0, 108, 0.158);
-      backdrop-filter: blur(10px);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-.top-glow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 45vh;
-  background: radial-gradient(
-    ellipse at top,
-    rgba(117, 14, 185, 0) 0%,
-    rgba(89, 17, 156, 0) 35%,
-    rgba(143, 1, 237, 0) 60%,
-    transparent 75%
-  );
-  z-index: -2;
-  pointer-events: none;
-}
-
-
-
+/* Main Container - Updated for dynamic centering */
 .container {
   width: 100%;
   max-width: 420px;
-  padding: 24px 16px 40px;
+  max-height: 100vh; /* Replaced height with max-height so short screens center vertically */
+  overflow-y: auto; /* Enable scrolling purely within the container when necessary */
+  padding: 30px 16px 40px; /* Top padding to clear navbar */
+  display: flex;
+  flex-direction: column;
+  z-index: 10; /* Sits completely on top of Nova so links are fully readable/clickable */
+  margin: auto 0; /* Balances the box vertically when it doesn't span 100vh */
+  margin-top: 80px;
 }
 
+/* Profile Header */
 .profile {
   text-align: center;
-  margin-bottom: 10px;
-  z-index:100;
+  margin-bottom: 30px;
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative; 
+  padding: 20px 0; 
 }
 
+/* Unclipped Avatar CSS */
 .avatar {
-  width: 110px;
-  height: 110px;
-  margin-bottom: 0px;
-  margin-top: 40px;
-  z-index:10;
+  width: 35px;
+  height: auto;
+  border: none; 
+  box-shadow: none; 
+  clip-path: none; 
+  object-fit: cover;
+  z-index: 2; 
 }
 
-
-
-
+/* Links List */
 .links {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
 }
 
-
-
-
-
+/* Cyberpunk Buttons */
 .link {
-          text-decoration: none;
-          position: relative;
-          overflow: hidden;
-          background: rgba(38, 0, 84, 0.473);
-          border: 1px solid #7b00ff37;
-          padding: 0.5rem 1.6rem;
-          cursor: pointer;
-          transition: background 0.2s, border-color 0.2s;
-          font-family: 'SpaceLetters';
-          color: #c4b5fd;
-          transition: border-color 0.2s, box-shadow 0.2s, color 0.2s, transform 0.15s;
-          box-shadow: 0 0 18px rgba(140, 60, 255, 0.15);
-          -webkit-tap-highlight-color: transparent;
-          text-transform: uppercase;
-          display: flex;
-        flex-direction: column;
-        z-index: 10;
-          border-radius: 30px;
-          backdrop-filter: blur(50px);
-          font-size: 0.85rem;
-        }
+    text-decoration: none;
+    position: relative;
+    background: rgba(54, 0, 115, 0.386); /* Semi-transparent so Nova subtly peeks through them */
+    border: 1px solid #764ba2;
+    border-left: 4px solid #A55AFF; 
+    padding: 1rem 1.2rem;
+    font-family: 'SpaceLetters', sans-serif;
+    color: #00FFFF;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+    -webkit-tap-highlight-color: transparent;
+}
 
-    .link::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 50%; height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
-      transition: 0.4s;
-    }
+.link::before {
+    content: '>>';
+    position: absolute;
+    left: 15px;
+    color: #67FEBD;
+    opacity: 0;
+    transition: 0.2s ease;
+}
 
-    .link:hover::before,
-    .link:focus::before {
-      left: 100%;
-    }
+.link:hover, .link:focus, .link.clicked {
+    background: rgba(55, 2, 90, 0.9);
+    border-color: #ff69b4;
+    border-left-color: #00ffff;
+    color: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1);
+    transform: translateX(5px);
+    outline: none;
+}
 
-    .link:hover,
-    .link:focus {
-      border-color: rgba(0, 221, 255, 0.32);
-      box-shadow: 0 0 30px rgba(0, 200, 255, 0.1), 0 0 60px rgba(140, 60, 255, 0.15);
-      outline: none;
-    }
+.link:hover::before, .link:focus::before, .link.clicked::before {
+    opacity: 1;
+}
+
+/* Icon Grids */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Fits 4 in a row perfectly */
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Matching Cyberpunk Tile Aesthetics */
+.icon-tile {
+    background: rgba(54, 0, 115, 0.386);
+    border: 1px solid #764ba2;
+    border-bottom: 3px solid #A55AFF;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.icon-tile img {
+  width: 45%;
+  height: 45%;
+  object-fit: contain;
+  transition: transform 0.2s ease-in-out;
+  filter: brightness(0) saturate(100%) invert(84%) sepia(97%) saturate(3966%) hue-rotate(130deg);
+}
+
+.icon-tile:hover, .icon-tile:focus, .icon-tile.clicked {
+    background: rgba(55, 2, 90, 0.9);
+    border-color: #ff69b4;
+    border-bottom-color: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1);
+    transform: translateY(-5px);
+    outline: none;
+}
+
+.icon-tile:hover img, .icon-tile:focus img {
+    transform: scale(1.1);
+}
 
 </style>
-
 </head>
-
 <body>
-    <div class="dreamy-overlay"></div>
 
+  <div class="scanlines"></div>
+  <div class="cyber-grid"></div>
   <div id="stars"></div>
 
+  <div class="bg-character">
+      <img src="assets/images/nova.png" alt="Nova Background Artwork" />
+  </div>
 
   <nav class="navbar">
     <div class="nav-container">
-      
-       <a href="https://mkb0020.github.io">
-            <div class="logo">♡ mkb0020</div>  <!-- CENTER LOGO -->
+       <a href="https://mkb0020.github.io" class="logo">
+            <img src="assets/images/cowboyNiels.png" alt="MK avatar" class="avatar" /> mkb0020
         </a>
     </div>
   </nav>
 
+  <div id="star-bounds"></div>
 
- <main class="container">
-
-    <div class="background-gradient"></div>
-    <div class="waves">
-      <svg id="wave1" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 L3000,600 L0,600 Z" fill="#4b0082" opacity="0.9"/>
-      </svg>
-      <svg id="wave2" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 L3000,600 L0,600 Z" fill="#c71585" opacity="0.8"/>
-      </svg>
-      <!--<svg id="wave3" viewBox="0 0 3000 600" preserveAspectRatio="none"> 
-        <path d="M0,400 Q333,200 666,400 T1333,400 T2000,400 T2666,400 T3000,400 L3000,600 L0,600 Z" fill="#ff69b4" opacity="0.6"/>
-      </svg>-->
-      <svg id="wave4" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,420 Q750,250 1500,420 T3000,420 L3000,600 L0,600 Z" fill="#db7093" opacity="0.7"/>
-      </svg>
-      <svg id="wave5" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 L3000,600 L0,600 Z" fill="#c71585" opacity="0.5"/>
-      </svg>
-      <<svg id="wave6" viewBox="0 0 3000 600" preserveAspectRatio="none">
-        <path d="M0,250 Q600,100 1200,250 T2400,250 L3000,250 L3000,600 L0,600 Z" fill="#e066ff" opacity="0.4"/>
-      </svg>
-    </div>
-
-
- 
-
-    <header class="profile">
-      <img src="assets/images/cowboyNiels.png" alt="MK avatar" class="avatar" />
-
-    </header>
+  <main class="container">
 
     <section class="links">
-      <a class="link" href="https://mkb0020.github.io/">WEBSITE</a>
-      <a class="link" href="https://mkb0020.github.io/Wormholes.html">WORMHOLES ALL THE WAY DOWN</a>
-      <a class="link" href="https://itch.io/c/7665254/context-kit">CONTEXT KIT</a>
-      <a class="link" href="https://mkb0020.itch.io/prism-crawl">PLAY PRISM CRAWL</a>
-      <a class="link" href="https://mkb0020.itch.io/vibe-garden">VIBE GARDEN</a>
+      <a class="link" href="https://mkb0020.github.io/Wormholes.html">Wormholes All The Way Down</a>
+      <a class="link" href="https://itch.io/c/7665254/context-kit">Context Kit</a>
+      <a class="link" href="https://mkb0020.itch.io/meowmix-radio">meowMIX Radio</a>
+      <a class="link" href="https://mkb0020.itch.io/first-ca">My First Cellular Automata</a>
+      <a class="link" href="https://mkb0020.itch.io/branchforge">BranchForge</a>
+      <a class="link" href="https://mkb0020.itch.io/prism-crawl">Play Prism Crawl</a>
+      <a class="link" href="https://mkb0020.itch.io/vibe-garden">Vibe Garden</a>
       <a class="link" href="https://mkb0020.itch.io/moonwalkerranch">Play MOOnwalker Ranch</a>
-      <a class="link" href="https://soundcloud.com/mkb0020">MUSIC</a>
+    </section>
+
+    <section class="icon-grid">
+      <a href="https://mkb0020.itch.io/" class="icon-tile" target="_blank">
+        <img src="assets/images/itchio-icon.png" alt="Itch.io" />
+      </a>
+      <a href="https://www.instagram.com/lil.bear.kate/" class="icon-tile" target="_blank">
+        <img src="assets/images/Insta.png" alt="Instagram" />
+      </a>
+      <a href="https://www.cash.app/$mkb0020" class="icon-tile" target="_blank">
+        <img src="assets/images/cash-app.png" alt="Cash App" />
+      </a>
+      <a href="https://soundcloud.com/mkb0020" class="icon-tile" target="_blank">
+        <img src="assets/images/Soundcloud.png" alt="Soundcloud" />
+      </a>
+    </section>
+
+    <section class="icon-grid" style="margin-top: 15px;">
+      <a href="https://www.tiktok.com/@lil.bear.kate" class="icon-tile" target="_blank">
+        <img src="assets/images/tiktok-icon.png" alt="TikTok" />
+      </a>
+      <a href="https://x.com/home" class="icon-tile" target="_blank">
+        <img src="assets/images/x-icon.png" alt="X (Twitter)" />
+      </a>
+      <a href="https://www.youtube.com/@mkb0020" class="icon-tile" target="_blank">
+        <img src="assets/images/youtube-icon.png" alt="YouTube" />
+      </a>
+      <a href="https://github.com/mkb0020" class="icon-tile" target="_blank">
+        <img src="assets/images/github-icon.png" alt="GitHub" />
+      </a>
     </section>
 
     <footer class="socials">
-
     </footer>
-
-
   </main>
 
-
   <script>
-        const starsDiv = document.getElementById('stars');
-        for (let i = 0; i < 200; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.width = star.style.height = Math.random() * 2 + 'px';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 4 + 's';
-            starsDiv.appendChild(star);
-        }
-  </script>
-
-
-<!--<script>
-  function isMobile() {
-    return window.matchMedia("(max-width: 768px)").matches;
-  }
-
-  setInterval(() => {
-    if (!isMobile()) return;  
-    if (Math.random() < 0.35) {
-      const star = document.createElement('div');
-      star.className = 'shooting-star';
-      document.body.appendChild(star);
-      setTimeout(() => star.remove(), 1500);
+    // Starfield Generator
+    const starsDiv = document.getElementById('stars');
+    const colors = ['#00ffff', '#A55AFF', '#FFC7FF']; 
+    for (let i = 0; i < 150; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = star.style.height = Math.random() * 2.5 + 'px';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.background = colors[Math.floor(Math.random() * colors.length)];
+        star.style.animationDelay = Math.random() * 4 + 's';
+        starsDiv.appendChild(star);
     }
-  }, 8000);
-</script>-->
 
-</script>
+    // Shooting Stars constrained to bounds
+    const starBounds = document.getElementById('star-bounds');
+    setInterval(() => {
+      if (Math.random() < 0.4) {
+        const star = document.createElement('div');
+        star.className = 'shooting-star';
+        starBounds.appendChild(star); // Appends to the clipped box
+        setTimeout(() => star.remove(), 1000);
+      }
+    }, 6000);
 
-
-  <script>
-
-document.querySelectorAll('.link').forEach(link => {
-  link.addEventListener('click', () => {
-    link.classList.add('clicked');
-    setTimeout(() => link.classList.remove('clicked'), 150);
-  });
-});
-
+    // Mobile Click Feedback for Main Links AND Grid Tiles
+    document.querySelectorAll('.link, .icon-tile').forEach(link => {
+      link.addEventListener('click', () => {
+        link.classList.add('clicked');
+        setTimeout(() => link.classList.remove('clicked'), 150);
+      });
+    });
   </script>
 </body>
 </html>
-
-
-
