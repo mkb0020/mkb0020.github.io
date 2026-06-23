@@ -3,314 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <link rel="stylesheet" href="assets/css/KittyStyle.css">
+  <link rel="stylesheet" href="assets/css/newStyles.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <title>mkb0020</title>
   <meta name="description" content="JAVASCRIPT PAYGROUND" />
   
-  <style>
 
-    #stars {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: -1 !important;
-        }
-
-
-    .main-container {
-      min-height: 100vh;
-      padding: 0px 1rem 4rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-    }
-
-    .main-container h4 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', 'Courier New', monospace;
-      color: var(--ParticlePink);
-      font-size: 3rem;
-    }
-
-    .hero-section {
-      text-align: center;
-      margin-bottom: 4rem;
-      padding: 0 30px;
-    }
-
-    .hero-section h4 {
-      margin-bottom: 1rem;
-      font-family: 'GothNerd', 'Courier New', monospace;
-      background: linear-gradient(90deg, var(--ParticlePink) 0%, var(--BohrsBabyBlue) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size: 3rem;
-    }
-
-
-  .project-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.8rem 2rem;
-    max-width: 1400px;
-    width: 100%;
-    margin: 0 auto 4rem auto;
-    padding: 3rem 3rem 3rem 3rem;
-    background: rgba(37, 0, 73, 0.473);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 24px;
-    box-shadow: 
-      0 20px 50px -15px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    overflow: visible;
-  }
-
-    .project-group h2 {
-      grid-column: 1 / -1;           
-      text-align: center;
-      margin: 0 0 2.2rem 0;
-      font-family: 'GothNerd', 'Courier New', monospace;
-      background: linear-gradient(135deg, var(--AquaAura), var(--AquaAura), var(--CoolGray));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .project-card {
-          text-decoration: none;
-          position: relative;
-          overflow: hidden;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid #7b00ff37;
-          padding: 1.8rem 1.6rem;
-          cursor: pointer;
-          transition: background 0.2s, border-color 0.2s;
-          font-family: 'SpaceLetters';
-          color: var(--BohrsBabyBlue);
-          transition: border-color 0.2s, box-shadow 0.2s, color 0.2s, transform 0.15s;
-          box-shadow: 0 0 18px rgba(140, 60, 255, 0.15);
-          -webkit-tap-highlight-color: transparent;
-          text-transform: uppercase;
-          display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: 220px;
-        z-index: 10;
-          border-radius: 16px;
-          margin-bottom: 1.5rem;
-          backdrop-filter: blur(50px);
-        }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 50%; height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
-      transition: 0.4s;
-    }
-
-    .project-card:hover::before,
-    .project-card:focus::before {
-      left: 100%;
-    }
-
-    .project-card:hover,
-    .project-card:focus {
-      border-color: rgba(0, 221, 255, 0.32);
-      box-shadow: 0 0 30px rgba(0, 200, 255, 0.1), 0 0 60px rgba(140, 60, 255, 0.15);
-      outline: none;
-    }
-
-
-    .project-card h3 {
-      position: relative;
-      z-index: 2;
-      margin: 0 0 1rem 0;
-      font-family: 'GothNerd', 'Courier New', monospace;
-      background: linear-gradient(90deg, var(--AquaAura) 0%, var(--AlphaAqua) 100%);
-       -webkit-background-clip: text;
-       -webkit-text-fill-color: transparent;
-      font-size: 1.5rem;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    .project-card p {
-      position: relative;
-      z-index: 2;
-      margin: 0;
-      color: var(--MutedGray);
-      line-height: 1.45;
-      font-size: 1.05rem;
-      text-align: center;
-    }
-
-    @keyframes holographicShimmer {
-      0%   { background-position: 0% 0%; }
-      100% { background-position: -200% -200%; }
-    }
-
-    @keyframes scanline {
-      0%   { transform: translateY(-100%); }
-      100% { transform: translateY(100%); }
-    }
-
-    @media (max-width: 980px) {
-      .project-group {
-        display: grid;
-          grid-template-columns: 1fr 1fr;           
-        gap: 1.4rem;
-        padding: 1.5rem 1rem;  
-        gap: 1.8rem 2rem;
-        max-width: 960px;
-        width: 100%;
-        margin: 0 auto 4rem auto;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 24px;
-        box-shadow: 
-          0 20px 50px -15px rgba(0, 0, 0, 0.5),
-          inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        overflow: visible;
-      }
-
-      .project-card {
-        position: relative;
-        background: rgba(130, 130, 130, 0.28);           
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        border-radius: 24px;
-        padding: 1.8rem 1.6rem;
-        overflow: hidden;
-        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 
-          0 20px 40px -15px rgba(0, 0, 0, 0.6),
-          inset 0 1px 0 rgba(255, 255, 255, 0.15);
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: 160px;
-        z-index: 10;
-        transform: translateZ(0);                        
-      }
-
-    }
-
-    @media (max-width: 600px) {
-    .project-group {
-        grid-template-columns: 1fr;           
-        gap: 1.4rem;
-        padding: 1.5rem 1rem;                 
-      }
-
-      .project-card {
-        min-height: 160px;
-        padding: 1.4rem 1.2rem;
-        background: rgba(255, 255, 255, 0.18);    
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        box-shadow: 
-          0 15px 35px -10px rgba(0, 0, 0, 0.5),
-          inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      }
-
-      .project-card h3 {
-            font-size: 1.35rem;
-          }
-    }
-
-@supports not (backdrop-filter: blur(20px)) { /*FALLBACK*/
-  .project-card {
-    background: rgba(35, 35, 65, 0.92) !important;   
-    border-color: rgba(180, 100, 255, 0.4);
-  }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .project-card {
-    background: rgba(30, 20, 55, 0.95) !important;
-    border-color: rgba(180, 100, 255, 0.6) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-}
-    .cat2-gif {
-      width: 200px;
-      height: 200px;
-      object-fit: contain;
-      margin: 3rem auto;
-      display: block;
-    }
-
-
-        .holo-card {
-        font-family: Arial, Helvetica, sans-serif;
-        background: rgba(132, 132, 132, 0.096);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid var(--CoolGray);
-        border-radius: 18px;
-        padding: 28px;
-        margin-bottom: 1.5rem;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.4s ease;
-        box-shadow: 
-            0 10px 30px rgba(0, 0, 0, 0.575),
-            inset 0 0 20px rgba(0, 0, 0, 0.3) 0%, ;
-    }
-
-    .holo-card::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, 
-            rgba(0, 255, 255, 0.1) 0%, 
-            transparent 70%);
-        opacity: 0;
-        transition: opacity 0.6s;
-        pointer-events: none;
-    }
-
-    .holo-card:hover {
-        transform: translateY(-8px);
-        border-color: var(--AquaAura);
-        box-shadow: 
-            0 20px 50px rgba(0, 255, 255, 0.1) 0%, 
-            0 0 40px rgba(0, 255, 255, 0.1) 0%;
-    }
-
-    .holo-card:hover::before {
-        opacity: 1;
-        animation: hologramPulse 3s infinite;
-    }
-
-    @media screen and (max-width: 1024px) {
-      .holo-card {
-        background: rgb(15, 0, 28);
-        box-shadow: none;
-    }
-  }
-
-  </style>
 </head>
 <body>
 
@@ -325,6 +23,8 @@
           <a href="https://mkb0020.github.io/" class="menu-item">Projects</a>
           <a href="https://mkb0020.github.io/resume.html" class="menu-item">Resume</a>
           <a href="https://mkb0020.vercel.app/comments" class="menu-item">Guestbook</a>
+          <button id="openMainHelp">About</button>
+          <a href="https://mkb0020.vercel.app/support" class="menu-item">Report an Issue</a>
           <div class="social-links">
             <a href="https://www.youtube.com/@mkb0020" target="_blank" aria-label="YouTube">
               <img src="assets/images/youtube-icon.png" alt="YouTube" class="social-icon">
@@ -346,17 +46,11 @@
       </div>
 
       <a href="https://mkb0020.github.io">
-        <div class="logo">♡ mkb0020</div>
+        <div class="logo">mkb0020</div>
       </a>
 
       <div class="help-dropdown">
-        <button class="help-icon" id="helpBtn" aria-label="Help Menu">
-          <div class="question-mark">?</div>
-        </button>
-        <div class="dropdown-menu" id="dropdownMenu">
-          <button id="openMainHelp">About</button>
-         <a href="https://mkb0020.vercel.app/support" class="menu-item">Report an Issue</a>
-        </div>
+
       </div>
     </div>
   </nav>
@@ -386,45 +80,20 @@
     </div>
   </div>
 
-<div class="background-gradient"></div>
-<div class="waves">
-  <svg id="wave1" viewBox="0 0 4000 600" preserveAspectRatio="none">
-    <path d="M0,350 Q500,150 1000,350 T2000,350 T3000,350 T4000,350 L4000,600 L0,600 Z" fill="#4b0082" opacity="0.5"/> <!-- DARK PURPLE-ISH BLUE-->
-  </svg>
-  <svg id="wave2" viewBox="0 0 4000 600" preserveAspectRatio="none">
-    <path d="M0,380 Q500,200 1000,380 T2000,380 T3000,380 T4000,380 L4000,600 L0,600 Z" fill="#c71585" opacity="0.5"/> <!-- DARK HOT PINK -->
-  </svg>
-<svg id="wave3" viewBox="0 0 4000 600" preserveAspectRatio="none">
-  <path d="M0,320 Q500,180 1000,320 T2000,320 T3000,320 T4000,320 L4000,600 L0,600 Z" fill="#8a2be2" opacity="0.2"/> <!-- COOL-TONED PURPLE -->
-</svg>
-<svg id="wave4" viewBox="0 0 4000 600" preserveAspectRatio="none">
-  <path d="M0,400 Q500,250 1000,400 T2000,400 T3000,400 T4000,400 L4000,600 L0,600 Z" fill="#4b0082" opacity="0.5"/>  <!-- DARK PURPLE-ISH BLUE-->
-</svg>
-  <svg id="wave5" viewBox="0 0 4000 600" preserveAspectRatio="none">
-    <path d="M0,300 Q250,150 500,300 T1000,300 T1500,300 T2000,300 T2500,300 T3000,300 T3500,300 T4000,300 L4000,600 L0,600 Z" fill="#ff69b4" opacity="0.6"/> <!--LIGHT HOT PINK -->
-  </svg>
-<svg id="wave6" viewBox="0 0 4000 600" preserveAspectRatio="none">
-  <path d="M0,420 Q500,300 1000,420 T2000,420 T3000,420 T4000,420 L4000,600 L0,600 Z" fill="#c71585" opacity="0.5"/> <!-- DARK HOT PINK -->
-</svg>
-</div>
-<div class="dreamy-overlay"> </div>
+  <div class="background-gradient"></div>
 
   <div class="main-container">
     <div class="hero-section">
-     <!--<h4>♡</h4>
-      <h4>WELCOME TO MY VIRTUAL PLAYGROUND!</h4>-->
-
       <div class="project-group">
         <a href="https://mkb0020.itch.io/acoustic-kitty" class="project-card">
         <h3>Acoustic Kitty</h3>
         <p>Build and Recolor Sprite Sheets</p>
-      </a>  
-      
-      <a href="https://mkb0020.vercel.app/ai-dopamine" class="project-card">
+        </a>  
+        
+        <a href="https://mkb0020.vercel.app/ai-dopamine" class="project-card">
         <h3>AI Dopamine</h3>
         <p>On-going Mini RLHF Pipeline Simulation</p>
-      </a> 
-       
+        </a> 
 
         <a href="https://mkb0020.itch.io/blobs" class="project-card">
           <h3>Blobs</h3>
@@ -436,20 +105,16 @@
           <p>Visual tool for managing non-linear narratives</p>
         </a>
 
-        <!--<a href="manifold.html" class="project-card">
-          <h3>Calabi-Yau Manifold</h3>
-          <p>6-dimensional Visualizer</p>
-        </a>-->
-
-       <a href="https://mkb0020.itch.io/briefme" class="project-card">
+        <a href="https://mkb0020.itch.io/briefme" class="project-card">
           <h3>BriefME</h3>
-          <p> AI Project Context Manager for ChatGPT, Claude & Coding Assistants</p>
+          <p>AI Project Context Manager for ChatGPT, Claude & Coding Assistants</p>
         </a> 
 
         <a href="trailer.html" class="project-card">
           <h3>CATastrophe2</h3>
           <p>The sequel you've been waiting for...</p>
         </a>
+        
         <a href="https://mkb0020.itch.io/celestial-dreams" class="project-card">
           <h3>Celestial Dreams</h3>
           <p>An interactive ambient experience built for relaxation, focus, and sleep.</p>
@@ -463,19 +128,16 @@
         <a href="driftWave.html" class="project-card">
         <h3>Drift Wave</h3>
         <p>Procedural Audio Engine by Claude</p>
-      </a>  
+        </a>  
 
-      <a href="ElectricKitty.html" class="project-card">
+        <a href="ElectricKitty.html" class="project-card">
         <h3>Electric Kitty</h3>
         <p>Sandbox for testing new game animations</p>
-      </a>
+        </a>
 
-        <!--<a href="fractals.html" class="project-card">
-          <h3>Fractal Visualizer</h3>
-          <p>Get lost in Fractals</p>
-        </a>-->
 
-       <a href="https://mkb0020.itch.io/mapme" class="project-card">
+
+        <a href="https://mkb0020.itch.io/mapme" class="project-card">
           <h3>MapME</h3>
           <p>Turn Source Files Into LLM-Ready Function Maps</p>
         </a> 
@@ -491,35 +153,25 @@
           <p>Mini Game with no objective... just vibes</p>
         </a>
 
-      <!--<a href="https://mkb0020.onrender.com/audio-converter" class="project-card">
-        <h3>mp3 Converter</h3>
-        <p>Convert weird audio formats into mp3 files</p>
-      </a>-->
-
         <a href="https://mkb0020.itch.io/platform-calculator" class="project-card">
           <h3>Neurotic Level Design Calculator</h3>
           <p>Design 2D side-scrolling platformer levels using custom physics</p>
         </a>
 
-       <a href="https://mkb0020.itch.io/onion-studio-pro" class="project-card">
+        <a href="https://mkb0020.itch.io/onion-studio-pro" class="project-card">
           <h3>Onion Studio Pro</h3>
-          <p> Coming soon.</p>
-        </a>         
+          <p>Coming soon.</p>
+        </a>        
 
         <a href="https://mkb0020.itch.io/pastelular-automata.html" class="project-card">
           <h3>PASTELular Automata</h3>
           <p>Emerging complexity... but make it pretty</p>
         </a>
 
-        <a href="https://mkb0020.itch.io/prism-crawl"" class="project-card">
+        <a href="https://mkb0020.itch.io/prism-crawl" class="project-card">
           <h3>Prism Crawl</h3>
           <p>Guide your centipede pal to the prisms. But only the correct prisms!</p>
         </a>
-
-        <!--<a href="MKLambda.html" class="project-card">
-          <h3>Project MK:LAMBDA</h3>
-          <p>Fictional Music Artist Landing Page</p>
-        </a>-->
 
         <a href="https://mkb0020.vercel.app/steam-analysis" class="project-card">
           <h3>Steam Game Data Analysis</h3>
@@ -528,7 +180,7 @@
 
         <a href="https://mkb0020.itch.io/tesseract-vision" class="project-card">
           <h3>Tesseract Vision</h3>
-          <p>An interactive  thought experiment exploring what a three-dimensional object *might* look like to a hypothetical four-dimensional observer.</p>
+          <p>An interactive thought experiment exploring what a three-dimensional object *might* look like to a hypothetical four-dimensional observer.</p>
         </a>  
 
         <a href="https://mkb0020.itch.io/the-borg-unleashed" class="project-card">
@@ -560,170 +212,160 @@
           <p>Data Analysis project - Balancing Game Stats</p>
         </a>
 
-       <a href="https://mkb0020.itch.io/writeme" class="project-card">
+        <a href="https://mkb0020.itch.io/writeme" class="project-card">
           <h3>WriteME</h3>
-          <p> Markdown. But make it pretty.</p>
+          <p>Markdown. But make it pretty.</p>
         </a> 
-
-
       </div>
-
-   
-      
     </div>
   </div>
 
 
 
-  <div id="kofi-float">
-        <a href="https://ko-fi.com/mkb0020" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/tipjar.png" alt="Support me on Ko-fi">
-            <div class="hearts">
-                <div class="heart" style="--delay: 0s; --drift: -20px;">❤️</div>
-                <div class="heart" style="--delay: 0.5s; --drift: 15px;">💖</div>
-                <div class="heart" style="--delay: 1s; --drift: -10px;">💕</div>
-                <div class="heart" style="--delay: 1.5s; --drift: 20px;">❤️</div>
-                <div class="heart" style="--delay: 2s; --drift: -15px;">💗</div>
-                <div class="heart" style="--delay: 2.5s; --drift: 10px;">💖</div>
-            </div>
-        </a>
-    </div>
-
-
-<div id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-        <a href="javascript:void(0);" class="button-container" aria-label="Scroll to top">
-            <img src="assets/images/top.png" alt="Scroll to top">
- 
-        </a>
-    </div>
-
 
   <div id="stars"></div>
-  <script src="js/KittyCore.js"></script>
+
+<div id="scroll-top">
+  <a href="javascript:void(0);" class="button-container" aria-label="Scroll to top">
+      <img src="assets/images/top.png" alt="Scroll to top">
+  </a>
+</div>
+
+<script src="js/KittyCore.js"></script>
+
+<script>
+  // --- BACK TO TOP ENGINE BYPASS ---
+  document.getElementById('scroll-top').addEventListener('click', (event) => {
+      event.preventDefault();
+      
+      const flightPlan = { top: 0, behavior: 'smooth' };
+      
+      // Target all three potential scroll vectors simultaneously to override the height:100% trap
+      window.scrollTo(flightPlan);                  // Global viewport vector
+      document.documentElement.scrollTo(flightPlan); // HTML element vector
+      document.body.scrollTo(flightPlan);            // Body element vector
+  });
+
+  // --- KO-FI FLOAT HOVER DETECTOR ---
+  const button = document.getElementById('kofi-float');
+  if (button) {
+      button.addEventListener('mouseenter', () => {
+          document.querySelectorAll('.heart').forEach(h => {
+              h.style.animation = 'none';
+              h.offsetHeight; // Forces DOM reflow calculation matrix
+              h.style.animation = null;
+          });
+      });
+  }
+</script>
 
   <script>
-        const button = document.getElementById('kofi-float');
-        button.addEventListener('mouseenter', () => {
-            document.querySelectorAll('.heart').forEach(h => {
-                h.style.animation = 'none';
-                h.offsetHeight; 
-                h.style.animation = null;
-            });
-        });
-    </script>
-
-  <script>
-        const starsDiv = document.getElementById('stars');
-        for (let i = 0; i < 200; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.width = star.style.height = Math.random() * 2 + 'px';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 4 + 's';
-            starsDiv.appendChild(star);
-        }
+    const starsDiv = document.getElementById('stars');
+    for (let i = 0; i < 200; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = star.style.height = Math.random() * 2 + 'px';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 4 + 's';
+        starsDiv.appendChild(star);
+    }
   </script>
 
-
-    <script>
-        const GITHUB_USERNAME = 'mkb0020';  
-        const REPO_NAME = 'mkb0020.github.io';            
-        const LABEL_FILTER = 'update';            
+  <script>
+    const GITHUB_USERNAME = 'mkb0020';  
+    const REPO_NAME = 'mkb0020.github.io';            
+    const LABEL_FILTER = 'update';            
+    
+    async function fetchUpdates() {
+        const loading = document.getElementById('loading');
+        const container = document.getElementById('updates-container');
         
-        async function fetchUpdates() {
-            const loading = document.getElementById('loading');
-            const container = document.getElementById('updates-container');
-            
-            try {
-
-                let apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/issues?state=open&sort=created&direction=desc`;
-                if (LABEL_FILTER) {
-                    apiUrl += `&labels=${LABEL_FILTER}`;
-                }
-                
-                const response = await fetch(apiUrl);
-                
-                if (!response.ok) {
-                    throw new Error(`GitHub API returned ${response.status}`);
-                }
-                
-                const issues = await response.json();
-                
-                loading.style.display = 'none';
-                
-                if (issues.length === 0) {
-                    container.innerHTML = '<div class="no-updates">No updates yet. Create an issue to get started!</div>';
-                    return;
-                }
-                
- 
-                issues.forEach(issue => {
-                    const card = createUpdateCard(issue);
-                    container.appendChild(card);
-                });
-                
-            } catch (error) {
-                loading.style.display = 'none';
-                container.innerHTML = `
-                    <div class="error-message">
-                        <strong>Error loading updates:</strong> ${error.message}
-                        <br><br>
-                        Make sure you've updated the GITHUB_USERNAME and REPO_NAME variables in the code!
-                    </div>
-                `;
+        try {
+            let apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/issues?state=open&sort=created&direction=desc`;
+            if (LABEL_FILTER) {
+                apiUrl += `&labels=${LABEL_FILTER}`;
             }
-        }
-        
-        function createUpdateCard(issue) {
-            const card = document.createElement('div');
-            card.className = 'update-card';
             
-            const date = new Date(issue.created_at);
-            const formattedDate = date.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric' 
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`GitHub API returned ${response.status}`);
+            }
+            
+            const issues = await response.json();
+            loading.style.display = 'none';
+            
+            if (issues.length === 0) {
+                container.innerHTML = '<div class="no-updates">No updates yet. Create an issue to get started!</div>';
+                return;
+            }
+            
+            issues.forEach(issue => {
+                const card = createUpdateCard(issue);
+                container.appendChild(card);
             });
             
-            card.innerHTML = `
-                <div class="update-header">
-                    <div class="update-title">${escapeHtml(issue.title)}</div>
-                    <div class="update-date">${formattedDate}</div>
+        } catch (error) {
+            loading.style.display = 'none';
+            container.innerHTML = `
+                <div class="error-message">
+                    <strong>Error loading updates:</strong> ${error.message}
+                    <br><br>
+                    Make sure you've updated the GITHUB_USERNAME and REPO_NAME variables in the code!
                 </div>
-                <div class="update-body">${escapeHtml(issue.body || 'No description provided.')}</div>
-                ${issue.labels.length > 0 ? createLabelsHTML(issue.labels) : ''}
             `;
-            
-            return card;
         }
+    }
+    
+    function createUpdateCard(issue) {
+        const card = document.createElement('div');
+        card.className = 'update-card';
         
-        function createLabelsHTML(labels) {
-            const labelsHTML = labels.map(label => {
-                const color = `#${label.color}`;
-                const textColor = getContrastColor(label.color);
-                return `<span class="label" style="background-color: ${color}; color: ${textColor};">${escapeHtml(label.name)}</span>`;
-            }).join('');
-            
-            return `<div class="update-labels">${labelsHTML}</div>`;
-        }
+        const date = new Date(issue.created_at);
+        const formattedDate = date.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+        });
         
-        function getContrastColor(hexColor) {
-            const r = parseInt(hexColor.substr(0, 2), 16);
-            const g = parseInt(hexColor.substr(2, 2), 16);
-            const b = parseInt(hexColor.substr(4, 2), 16);
-            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-            return brightness > 128 ? '#000000' : '#ffffff';
-        }
+        card.innerHTML = `
+            <div class="update-header">
+                <div class="update-title">${escapeHtml(issue.title)}</div>
+                <div class="update-date">${formattedDate}</div>
+            </div>
+            <div class="update-body">${escapeHtml(issue.body || 'No description provided.')}</div>
+            ${issue.labels.length > 0 ? createLabelsHTML(issue.labels) : ''}
+        `;
         
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
+        return card;
+    }
+    
+    function createLabelsHTML(labels) {
+        const labelsHTML = labels.map(label => {
+            const color = `#${label.color}`;
+            const textColor = getContrastColor(label.color);
+            return `<span class="label" style="background-color: ${color}; color: ${textColor};">${escapeHtml(label.name)}</span>`;
+        }).join('');
         
-        fetchUpdates();
-    </script>
+        return `<div class="update-labels">${labelsHTML}</div>`;
+    }
+    
+    function getContrastColor(hexColor) {
+        const r = parseInt(hexColor.substr(0, 2), 16);
+        const g = parseInt(hexColor.substr(2, 2), 16);
+        const b = parseInt(hexColor.substr(4, 2), 16);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness > 128 ? '#000000' : '#ffffff';
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    fetchUpdates();
+  </script>
 
 </body>
 </html>
