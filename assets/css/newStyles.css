@@ -245,7 +245,7 @@ body::-webkit-scrollbar-thumb,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 0;
   height: 30px;
 }
 
@@ -311,7 +311,7 @@ body::-webkit-scrollbar-thumb,
   border: 1px solid var(--CyberNeonPurple);
   box-shadow: 0 0 20px var(--CyberNeonPurple);
   border-radius: 12px;
-  min-width: 220px;
+  min-width: 300px;
   padding: 10px 0;
   z-index: 9999;
 }
