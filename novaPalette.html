@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NOVA PALETTE</title>
+  
+  <!-- Web Fonts for Sci-Fi / Cyberpunk Aesthetics -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #05050a;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.15);
+      --accent-cyan: #00ffff;
+      --accent-pink: #dc4ce8;
+      --accent-green: #75fb1e;
+      --accent-purple: #830cde;
+      --font-title: 'Orbitron', sans-serif;
+      --font-body: 'Rajdhani', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(131, 12, 222, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 40%);
+      font-family: var(--font-body);
+      color: #FFFFFF;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Header Styling */
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 1rem 0;
+      position: relative;
+    }
+
+    h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.8),
+        0 0 20px rgba(220, 76, 232, 0.6),
+        0 0 40px rgba(131, 12, 222, 0.4);
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Category Section Styling */
+    .category-section {
+      margin-bottom: 0.5rem;
+    }
+
+    .category-title {
+      font-family: var(--font-title);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+      padding-bottom: 0.5rem;
+    }
+
+    .category-title::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent-pink);
+      box-shadow: 0 0 8px var(--accent-pink);
+      transform: rotate(45deg);
+    }
+
+    /* Palette Grid */
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .color-tile {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      backdrop-filter: blur(8px);
+    }
+
+    .color-tile:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.25), inset 0 0 15px rgba(220, 76, 232, 0.3);
+      border-color: var(--accent-pink);
+    }
+
+    .swatch {
+      height: 50px;
+      width: 100%;
+      position: relative;
+      transition: filter 0.3s ease;
+    }
+
+    .color-tile:hover .swatch {
+      filter: brightness(1.08);
+    }
+
+    .info {
+      padding: 1rem;
+      background: rgba(10, 10, 20, 0.65);
+    }
+
+    .name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .codes-wrapper {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .code {
+      background: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.9);
+      padding: 0.3rem 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: all 0.25s ease;
+      user-select: all;
+      border: 1px solid transparent;
+    }
+
+    .code:hover {
+      background: #FFFFFF;
+      color: #000000;
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px #FFFFFF;
+    }
+
+    /* Notification Toast */
+    .copied {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background: var(--accent-green);
+      color: #000000;
+      padding: 0.9rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-family: var(--font-title);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      box-shadow: 0 0 25px var(--accent-green);
+      opacity: 0;
+      z-index: 1000;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(20px);
+      pointer-events: none;
+    }
+
+    .copied.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive adjustment */
+    @media (max-width: 600px) {
+      body { padding: 1.5rem 0.75rem; }
+      h1 { letter-spacing: 0.2em; }
+      .palette { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+      .copied { right: 50%; transform: translate(50%, 20px); }
+      .copied.show { transform: translate(50%, 0); }
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="container" id="palette-container">
+  </div>
+
+  <div class="copied" id="copied">COPIED TO CLIPBOARD!</div>
+
+  <script>
+    const paletteData = [
+    // BODY SUIT
+      {
+        category: "Body Suit",
+        colors: [
+          { hex: "450080", name: "Deep Royal Purple" },
+          { hex: "2b006b", name: "Midnight Violet" }
+        ]
+      },
+        // CAPE 
+      {
+        category: "Cape",
+        colors: [
+          { hex: "1e87fc", name: "Celestial Blue" },
+          { hex: "1e59f2", name: "Cobalt Ray" },
+          { hex: "02197e", name: "Abyss Navy" },
+          { hex: "166afb", name: "Plasma Blue" },
+          { hex: "1a7ff7", name: "Azure Spark" },
+          { hex: "891bf6", name: "Neon Orchid" },
+          { hex: "6408bf", name: "Dark Imperial Purple" },
+          { hex: "8a3efa", name: "Electric Violet" },
+          { hex: "2994fa", name: "Sky Cyber Blue" },
+          { hex: "151e95", name: "Deep Ultramarine" },
+          { hex: "3af5fc", name: "High-Glow Cyan" },
+          { hex: "14259c", name: "Midnight Sapphire" },
+          { hex: "672ff7", name: "Glowing Lavender-Violet" },
+          { hex: "9c40fb", name: "Bright Spectrum Violet" },
+          { hex: "6543f9", name: "Deep Blurple" }
+        ]
+      },
+     // SHOES 
+      {
+        category: "Shoes",
+        colors: [
+          { hex: "9519c7", name: "Electric Plum (Accents)" },
+          { hex: "00fbfe", name: "Cyber Turquoise (Soles)" },
+          { hex: "5a07b8", name: "Deep Violet (Socks)" },
+          { hex: "350066", name: "Void Purple (Main)" }
+        ]
+      },
+      // EAR DETAILS 
+      {
+        category: "Ear",
+        colors: [
+          { hex: "fb4cfb", name: "Hot Neon Pink" },
+          { hex: "023838", name: "Dark Teal Shadow" },
+          { hex: "dc4ce8", name: "Vivid Magenta" }
+        ]
+      },
+   
+  
+           // ACCESSORIES
+      {
+        category: "Accessories",
+        colors: [
+          { hex: "70789b", name: "Slate Lavender" },
+          { hex: "5c47a8", name: "Dusk Plum" },
+          { hex: "575a99", name: "Muted Steel Violet" }
+        ]
+      },
+   
+
+    // EYES 
+    {
+        category: "Eyes",
+        colors: [
+          { hex: "4843f9", name: "Electric Indigo" },
+          { hex: "00ffff", name: "Neon Cyan" }
+        ]
+      },
+     
+    
+      // JEWELRY  
+      {
+        category: "Jewel",
+        colors: [
+          { hex: "830cde", name: "Vivid Amethyst" },
+          { hex: "00ffff", name: "Bright Aquamarine" },
+          { hex: "5b48a9", name: "Muted Iris" }
+        ]
+      },
+   
+     
+
+      //  WRIST CUFFS 
+      {
+        category: "Wrist Cuff",
+        colors: [
+          { hex: "b880fa", name: "Soft Lilac" },
+          { hex: "8b4bf5", name: "Bright Lavender Pulse" }
+        ]
+      }
+    ];
+
+    function hexToRgb(hex) {
+      const cleanHex = hex.replace('#', '');
+      const r = parseInt(cleanHex.substring(0, 2), 16);
+      const g = parseInt(cleanHex.substring(2, 4), 16);
+      const b = parseInt(cleanHex.substring(4, 6), 16);
+      return `rgb(${r},${g},${b})`;
+    }
+
+    function renderPalette() {
+      const container = document.getElementById('palette-container');
+      
+      paletteData.forEach(section => {
+        const secDiv = document.createElement('div');
+        secDiv.className = 'category-section';
+
+        const title = document.createElement('h2');
+        title.className = 'category-title';
+        title.textContent = section.category;
+        secDiv.appendChild(title);
+
+        const grid = document.createElement('div');
+        grid.className = 'palette';
+
+        section.colors.forEach(item => {
+          const rgbVal = hexToRgb(item.hex);
+          const hexDisplay = `#${item.hex}`;
+          
+          const tile = document.createElement('div');
+          tile.className = 'color-tile';
+          tile.innerHTML = `
+            <div class="swatch" style="background:${hexDisplay}"></div>
+            <div class="info">
+              <div class="name">${item.name}</div>
+              <div class="codes-wrapper">
+                <span class="code" onclick="copy(this, '${item.hex}')">${hexDisplay}</span>
+                <span class="code" onclick="copy(this, '${rgbVal}')">${rgbVal}</span>
+              </div>
+            </div>
+          `;
+          grid.appendChild(tile);
+        });
+
+        secDiv.appendChild(grid);
+        container.appendChild(secDiv);
+      });
+    }
+
+    let toastTimeout;
+    function copy(el, text) {
+      let copyText = text;
+      if (text.startsWith('rgb(') && text.endsWith(')')) {
+        copyText = text.slice(4, -1);
+      } else if (!text.startsWith('#')) {
+        copyText = text;
+      }
+      
+      // Fallback-friendly copy logic
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(copyText);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = copyText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+
+      const toast = document.getElementById('copied');
+      toast.classList.add('show');
+      
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 1200);
+    }
+
+    // Initialize application on page load
+    window.onload = renderPalette;
+  </script>
+
+</body>
+</html>
